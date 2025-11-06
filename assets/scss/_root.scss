@@ -1,0 +1,111 @@
+:root {
+    // =============================================================================
+    // COLORS - Convert SCSS variables to CSS custom properties
+    // =============================================================================
+    --color-blue-sky: #{color('blue-sky')};
+    --color-blue: #{color('blue')};
+    --color-yellow: #{color('yellow')};
+    --color-brand: #{color('brand')};
+    --color-green: #{color('green')};
+    --color-red: #{color('red')};
+    --color-navy: #{color('navy')};
+    --color-pink: #{color('pink')};
+    --color-pink-light: #{color('pink-light')};
+    --color-white: #{color('white')};
+    --color-black: #{color('black')};
+    --color-dark: #{color('dark')};
+    --color-light-gray: #{color('light-gray')};
+    --color-gray: #{color('gray')};
+    --color-gray-light: #{color('gray-light')};
+    --color-gray-900: #{color('gray-900')};
+    --color-paragraph: #{color('paragraph')};
+
+    --wp--preset--spacing--wide-size: 1500px;
+    
+    // Legacy color names (backward compatibility)
+    --Gray-gray: var(--color-gray);
+    --yellow: var(--color-yellow);
+    --gray-light: var(--color-gray-light);
+    --Light-blue: var(--color-blue);
+    --Paragraph-color: var(--color-paragraph);
+    --Gray-gray-900: var(--color-gray-900);
+
+    // =============================================================================
+    // GRADIENTS
+    // =============================================================================
+    --gradient-blue-hover: linear-gradient(94deg, var(--color-blue) 0%, var(--color-blue-sky) 40%, var(--color-blue-sky) 60%, var(--color-blue) 100%);
+    --gradient-blue: linear-gradient(273deg, var(--color-blue-sky) 26.9%, var(--color-blue) 83.08%);
+    
+    // Legacy gradient names
+    --Gradient-blue-hover: var(--gradient-blue-hover);
+    --Gradient-blue: var(--gradient-blue);
+
+    // =============================================================================
+    // TYPOGRAPHY
+    // =============================================================================
+    --font-family-primary: #{$font-family-primary};
+    --font-weight-light: #{font-weight('light')};
+    --font-weight-regular: #{font-weight('regular')};
+    --font-weight-bold: #{font-weight('bold')};
+    --font-weight-extrabold: #{font-weight('extrabold')};
+
+    // =============================================================================
+    // SPACING & LAYOUT
+    // =============================================================================
+    --spacing-xs: #{spacing('xs')};
+    --spacing-sm: #{spacing('sm')};
+    --spacing-md: #{spacing('md')};
+    --spacing-lg: #{spacing('lg')};
+    --spacing-xl: #{spacing('xl')};
+    --spacing-2xl: #{spacing('2xl')};
+    --spacing-3xl: #{spacing('3xl')};
+    --spacing-4xl: #{spacing('4xl')};
+    --spacing-5xl: #{spacing('5xl')};
+
+    // =============================================================================
+    // BORDER RADIUS
+    // =============================================================================
+    --border-radius-xs: #{border-radius('xs')};
+    --border-radius-sm: #{border-radius('sm')};
+    --border-radius-md: #{border-radius('md')};
+    --border-radius-lg: #{border-radius('lg')};
+    --border-radius-xl: #{border-radius('xl')};
+    --border-radius-full: #{border-radius('full')};
+    
+    // Legacy values
+    --border-radius: 12px;
+    --border-radius-xs: #{border-radius('xs')};
+
+    // =============================================================================
+    // EFFECTS
+    // =============================================================================
+    --transition: all 300ms linear;
+    --transition-fast: all 150ms ease-in-out;
+    --transition-slow: all 500ms ease-in-out;
+    --box-shadow: 0 4px 40px 0 rgba(0, 0, 0, 0.10);
+    --box-shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+    --box-shadow-lg: 0 10px 25px 0 rgba(0, 0, 0, 0.15);
+
+    // =============================================================================
+    // LAYOUT SECTIONS
+    // =============================================================================
+    --section-pt: #{spacing('5xl')};
+    --section-pb: #{spacing('5xl')};
+    
+    // Legacy gap values
+    --gap-0: 0px;
+    --gap-30: 35px 30px;
+    --gap-50: #{spacing('2xl')};
+    
+    // WordPress content size
+    --wp--style--global--content-size: 1689px;
+    
+    @include desktop-lg {
+        --wp--style--global--content-size: 1280px;
+    }
+
+    @include mobile {
+        --section-pt: #{spacing('4xl')};
+        --section-pb: #{spacing('4xl')};
+    }
+}

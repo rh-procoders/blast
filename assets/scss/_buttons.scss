@@ -1,0 +1,96 @@
+@import "_variable";
+.wp-block-button .wp-element-button, .btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 10px 10px 20px;
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: var(--transition);
+    border-radius: 20px;
+    flex-direction: row;
+    align-items: center;
+    gap: 22px;
+    width: fit-content;
+    text-decoration: none;
+    border: 1px solid;
+    &.has-dark-blue-background-color{
+        border-color: var(--wp--preset--color--dark-blue);
+    }
+    &.has-coral-background-color{
+        border-color: var(--wp--preset--color--coral);
+    }
+
+    .button-text {
+        font-size: 16px;
+        line-height: 110%;
+        text-decoration: none;
+        display: block;
+        font-weight: 400;
+        font-family: 'NeuePlak', sans-serif;
+        margin-top: -2px;
+        position: relative;
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        
+        &::before {
+            content: attr(data-hover-text);
+            position: absolute;
+            top: -0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(-400%);
+        }
+    }
+
+     &:hover {
+        .button-text {
+            transform: translateY(300%);
+            
+            &::before {
+                transform: translateY(-300%);
+            }
+        }
+    }
+
+    .button-arrow-wrapper {
+        transition: transform 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        background-color: var(--color-white);
+        color: var(--wp--preset--color--dark-blue);
+        border-radius: 13px;
+    }    
+}
+
+.wp-block-button.is-style-outline{
+    .button-arrow-wrapper{
+        background-color: var(--wp--preset--color--dark-blue);
+        color: var(--color-white);
+    }
+    .has-dark-blue-color{
+        .button-arrow-wrapper{
+            background-color: var(--wp--preset--color--dark-blue);
+            color: var(--wp--preset--color--dark-blue);
+        }
+    }
+    .has-dark-blue-color{
+        .button-arrow-wrapper{
+            background-color: var(--wp--preset--color--dark-blue);
+            color: var(--color-white);
+        }
+    }
+    .has-coral-color{
+        .button-arrow-wrapper{
+            background-color: var(--wp--preset--color--coral);
+            color: var(--color-white);
+        }
+    }
+}

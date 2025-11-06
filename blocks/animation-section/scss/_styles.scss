@@ -1,0 +1,81 @@
+@import "../../../assets/scss/variable";
+
+.animation-section {
+    position: relative;
+    padding: 0; // Remove padding to let aspect ratio control height
+    overflow: hidden; // Prevent animation from overflowing
+    // Aspect ratio 1920x680 (approximately 2.82:1)
+    aspect-ratio: 1920 / 680;
+    border-radius: 70px;
+
+    @include mobile{
+        aspect-ratio: 375 / 726; // Adjust aspect ratio for mobile
+    }
+    
+    // Fallback for browsers that don't support aspect-ratio
+    @supports not (aspect-ratio: 1920 / 680) {
+        &::before {
+            content: '';
+            display: block;
+            padding-top: calc(680 / 1920 * 100%); // 35.42%
+            @include mobile{
+                padding-top: calc(726 / 375 * 100%); // Adjust padding for mobile
+            }
+        }
+    }
+    
+    &__lottie {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none; // Allow clicks to pass through to content
+        
+        lottie-player {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover;
+        }
+        
+        // Desktop Lottie - show on tablets and up (768px+)
+        .lottie-desktop {
+            display: block;
+
+            @include mobile{
+                display: none;
+            }
+        }
+        
+        // Mobile Lottie - show on mobile only (below 768px)
+        .lottie-mobile {
+            display: none;
+            @include mobile{
+                display: block;
+            }
+        }
+    }
+    
+    &__container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-start; // Align content to the top
+        z-index: 2; // Ensure content is above the animation
+        padding: 120px 30px 60px!important; // Add padding back to container for content spacing
+        left: 50%;
+        transform: translateX(-50%);
+        min-height: 450px;
+    }
+    
+    &__content {
+        max-width: 864px;
+        position: relative;
+        z-index: 3; // Ensure text content is above everything
+        width: 100%;
+    }
+}

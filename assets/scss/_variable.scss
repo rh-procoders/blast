@@ -1,0 +1,147 @@
+@use "sass:map";
+@import "_mixins";
+
+// =============================================================================
+// COLOR PALETTE
+// =============================================================================
+$colors: (
+  // Primary Colors
+  'blue-sky': #14AAE2,
+  'blue': #203F86,
+  'yellow': #FFCC03,
+  'brand': #68B32F,
+  
+  // Secondary Colors
+  'green': #68B32F,
+  'red': #f08701,
+  'navy': #224067,
+  
+  // Pink Variants
+  'pink': #FFDEF1,
+  'pink-light': #F9CADD,
+  
+  // Neutrals
+  'white': #FFFFFF,
+  'black': #000000,
+  'dark': #363636,
+  'light-gray': #ECECEC,
+  'gray': #525D63,
+  'gray-light': #e5e9eb,
+  'gray-900': #1A202C,
+  'paragraph': #4A5568
+);
+
+// Individual color variables (backward compatibility)
+$c-blue-sky: map.get($colors, 'blue-sky');
+$c-yellow: map.get($colors, 'yellow');
+$c-blue: map.get($colors, 'blue');
+$c-dark: map.get($colors, 'dark');
+$c-green: map.get($colors, 'green');
+$c-pink: map.get($colors, 'pink');
+$c-pink-2: map.get($colors, 'pink-light');
+$c-navy: map.get($colors, 'navy');
+$c-text-dark: map.get($colors, 'gray');
+$c-light-gray: map.get($colors, 'light-gray');
+$c-white: map.get($colors, 'white');
+$c-black: map.get($colors, 'black');
+$c-brand: map.get($colors, 'brand');
+$c-red: map.get($colors, 'red');
+
+// =============================================================================
+// SPACING & LAYOUT
+// =============================================================================
+$spacing: (
+  'xs': 4px,
+  'sm': 8px,
+  'md': 16px,
+  'lg': 24px,
+  'xl': 32px,
+  '2xl': 48px,
+  '3xl': 64px,
+  '4xl': 80px,
+  '5xl': 120px
+);
+
+$border-radius: (
+  'xxs': 10px,
+  'xs': 14px,
+  'xsm': 20px,
+  'sm': 30px,
+  'md': 40px,
+  'lg': 50px,
+  'xl': 70px,
+  'full': 9999px
+);
+
+// Legacy variable (backward compatibility)
+$border-rad: map.get($border-radius, 'md');
+
+// =============================================================================
+// TYPOGRAPHY
+// =============================================================================
+
+$font-family-primary: 'NeuePlak', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+$font-family-secondary: 'WixMadeforText', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+$font-family-tertiary: 'Tomorrow', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+
+$font-weights: (
+  'light': 300,
+  'regular': 400,
+  'medium': 500,
+  'semibold': 600,
+  'bold': 700,
+  'extrabold': 800
+);
+
+// Individual font weight variables (backward compatibility)
+$font-weight-light: map.get($font-weights, 'light');
+$font-weight-regular: map.get($font-weights, 'regular');
+$font-weight-semibold: map.get($font-weights, 'semibold');
+$font-weight-bold: map.get($font-weights, 'bold');
+$font-weight-extrabold: map.get($font-weights, 'extrabold');
+
+$font-sizes: (
+  'xs': 12px,
+  'sm': 14px,
+  'base': 16px,
+  'xl': 18px,
+  '2xl': 20px,
+  '3xl': 30px,
+  '4xl': 50px,
+  '5xl': 100px
+);
+
+// =============================================================================
+// BREAKPOINTS
+// =============================================================================
+$breakpoints: (
+  'mobile-sm': 575px,
+  'mobile': 768px,
+  'tablet': 1024px,
+  'tablet-lg': 1280px,
+  'desktop': 1400px,
+  'desktop-lg': 1800px
+);
+
+// =============================================================================
+// HELPER FUNCTIONS
+// =============================================================================
+@function color($name) {
+  @return map.get($colors, $name);
+}
+
+@function spacing($name) {
+  @return map.get($spacing, $name);
+}
+
+@function font-size($name) {
+  @return map.get($font-sizes, $name);
+}
+
+@function font-weight($name) {
+  @return map.get($font-weights, $name);
+}
+
+@function border-radius($name) {
+  @return map.get($border-radius, $name);
+}

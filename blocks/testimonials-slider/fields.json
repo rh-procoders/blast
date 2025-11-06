@@ -1,0 +1,275 @@
+{
+    "key": "group_testimonials_slider",
+    "title": "Testimonials Slider Block Fields",
+    "fields": [
+        {
+            "key": "field_section_heading",
+            "label": "Section Heading",
+            "name": "section_heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Enter the main heading for the testimonials section",
+            "required": 1,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Trusted by teams who build securely - at scale.",
+            "placeholder": "Section heading...",
+            "maxlength": 200,
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_testimonials",
+            "label": "Testimonials",
+            "name": "testimonials",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Add testimonials with quotes, company info, and logos",
+            "required": 1,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min": 1,
+            "max": 10,
+            "layout": "block",
+            "button_label": "Add Testimonial",
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_testimonial_quote",
+                    "label": "Quote",
+                    "name": "quote",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Enter the testimonial quote",
+                    "required": 0,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "rows": 4,
+                    "maxlength": 900,
+                    "placeholder": "At Viu, we see the shift from alert-chasing to prevention as a strategic program to strengthen control across defense. Blast enables us to enforce preventive guardrails at scale...",
+                    "default_value": "",
+                    "new_lines": "",
+                    "parent_repeater": "field_testimonials"
+                },
+                {
+                    "key": "field_testimonial_author",
+                    "label": "Author Name",
+                    "name": "author",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Name of the person giving the testimonial",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "rows": 2,
+                    "placeholder": "",
+                    "new_lines": "br",
+                    "parent_repeater": "field_testimonials"
+                },
+                {
+                    "key": "field_testimonial_image",
+                    "label": "Author Image",
+                    "name": "image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Image of the author",
+                    "required": 0,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": 0,
+                    "min_height": 0,
+                    "min_size": 0,
+                    "max_width": 0,
+                    "max_height": 0,
+                    "max_size": 0,
+                    "mime_types": "",
+                    "parent_repeater": "field_testimonials"
+                },
+                {
+                    "key": "field_testimonial_logo",
+                    "label": "Company Logo",
+                    "name": "logo",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Upload the company logo (recommended: SVG or PNG with transparent background)",
+                    "required": 0,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": 0,
+                    "min_height": 0,
+                    "min_size": 0,
+                    "max_width": 0,
+                    "max_height": 0,
+                    "max_size": 0,
+                    "mime_types": "",
+                    "parent_repeater": "field_testimonials"
+                },
+                {
+                    "key": "field_testimonial_highlight",
+                    "label": "Highlight Words",
+                    "name": "highlight_words",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Words to highlight in bold (comma separated, optional)",
+                    "required": 0,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "maxlength": 200,
+                    "placeholder": "enables, strategic, guardrails",
+                    "default_value": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_testimonials"
+                }
+            ]
+        },
+        {
+            "key": "field_slider_settings",
+            "label": "Slider Settings",
+            "name": "slider_settings",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "Configure the slider behavior",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_autoplay",
+                    "label": "Autoplay",
+                    "name": "autoplay",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "Enable automatic sliding",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 1,
+                    "message": "",
+                    "ui": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_autoplay_interval",
+                    "label": "Autoplay Interval (seconds)",
+                    "name": "autoplay_interval",
+                    "aria-label": "",
+                    "type": "number",
+                    "instructions": "Time between slides in seconds",
+                    "required": false,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_autoplay",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 5,
+                    "min": 2,
+                    "max": 10,
+                    "step": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_slides_per_view",
+                    "label": "Slides Per View (Desktop)",
+                    "name": "slides_per_view",
+                    "aria-label": "",
+                    "type": "number",
+                    "instructions": "Number of slides visible at once on desktop (decimals allowed for partial slides, e.g., 2.5)",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 2.5,
+                    "min": 1,
+                    "max": 5,
+                    "step": 0.10000000000000001,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/testimonials-slider"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1762399243
+}

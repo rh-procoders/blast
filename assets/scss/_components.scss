@@ -1,0 +1,187 @@
+@import "_variable";
+
+.has-max-container {
+  .container {
+    max-width: 1440px !important;
+  }
+}
+
+.has-wide-container {
+  .container {
+    max-width: 1680px !important;
+  }
+}
+
+.has-content-container {
+  .container {
+    max-width: 1260px !important;
+  }
+}
+
+.radius {
+  border-radius: 12px;
+  @include mobile {
+    border-radius: 10px;
+  }
+}
+
+ul.nostyle {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.responsive-embed {
+  border-radius: 10px;
+  overflow: clip;
+}
+
+.position-sticky {
+  position: sticky;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.desktop-only {
+  @include tablet {
+    display: none !important;
+  }
+}
+
+.mobile-only {
+  @include mf-desktop {
+    display: none !important;
+  }
+}
+
+@include mobile {
+  .mobile-order-1 {
+    order: 1;
+  }
+  .mobile-order-2 {
+    order: 2;
+  }
+  .mobile-order-3 {
+    order: 3;
+  }
+}
+
+.breadcrumbs{
+  &-list{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    font-weight: 700;
+    gap: 9px;
+    a{
+      color: var(--global-color-main);
+    }
+    .title{
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      max-width: 444px;
+      display: inline-block;
+      @include tablet{
+        max-width: 390px;
+      }
+      @include mobile-sm{
+        max-width: 210px;
+      }
+    }
+  }
+}
+
+.pagination, .wp-block-query-pagination{
+  margin: 40px 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  .nav-links{
+      @include tablet{
+          display: flex;
+          justify-content: center;
+      }
+  }
+  .page-numbers{
+      display: inline-block;
+      margin: 0 5px;
+      background-color: #fff;
+      border: 1px solid var(--global-color-main);
+      color: var(--global-color-main);
+      text-decoration: none;
+      padding: 5px 10px;
+      @include mobile{
+          padding: 4px 8px;
+          margin: 0 3px;
+          font-size: 10px;
+          &.prev, &.next{
+              color: transparent;
+              width: 25px;
+              height: 25px;
+              font-size: 1px;
+              overflow: hidden;
+              position: relative;
+              &:after{
+                  content: '';
+                  position: absolute;
+                  left: 0px;
+                  top: 2px;
+                  width: 20px;
+                  height: 20px;
+                  background-size: contain;
+                  background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIj48cGF0aCBkPSJNMzUyIDExNS40IDMzMS4zIDk2IDE2MCAyNTZsMTcxLjMgMTYwIDIwLjctMTkuM0wyMDEuNSAyNTZ6IiBmaWxsPSIjMWU4YWE4IiBjbGFzcz0iZmlsbC0wMDAwMDAiPjwvcGF0aD48L3N2Zz4=);
+              }
+          }
+          &.next{
+              &:after{
+                  transform: rotate(180deg);
+                  left: 2px;
+              }
+          }
+      }
+      &.current, &:hover{
+          background-color: $c-brand;
+          color: #fff;
+          @include mobile{
+              &.prev, &.next{
+                  color: transparent;
+                  &:after{
+                      background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIj48cGF0aCBkPSJNMzUyIDExNS40IDMzMS4zIDk2IDE2MCAyNTZsMTcxLjMgMTYwIDIwLjctMTkuM0wyMDEuNSAyNTZ6IiBmaWxsPSIjZmZmZmZmIiBjbGFzcz0iZmlsbC0wMDAwMDAgZmlsbC0xZThhYTgiPjwvcGF0aD48L3N2Zz4=);
+
+                  }
+              }
+          }
+      } 
+  }
+}
+
+.no-results.not-found{
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+
+.page-title{
+  text-align: center;
+  font-size: clamp(40px, 3vw + 30px, 70px);
+  line-height: 1.125;
+  letter-spacing: -3.5px;
+  font-weight: 800;
+  margin: 40px 0px 85px 0px;
+}
+
+.wp-block-image.aligncenter{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wp-block-separator{
+  border-top: 2px solid;
+}
+.wp-block-separator.is-style-default{
+  max-width: 60px!important;
+}

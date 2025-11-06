@@ -1,0 +1,84 @@
+// Open Sans Font Family
+// Path relative to the compiled CSS file location
+
+// NeuePlak Regular (400)
+@font-face {
+  font-family: 'NeuePlak';
+  src: url('../fonts/NeuePlak/NeuePlakRegular/font.woff2') format('woff2'),
+       url('../fonts/NeuePlak/NeuePlakRegular/font.woff') format('woff'),
+       url('../fonts/NeuePlak/NeuePlakRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+// NeuePlakSemiBold (700)
+@font-face {
+  font-family: 'NeuePlak';
+  src: url('../fonts/NeuePlak/NeuePlakSemiBold/font.woff2') format('woff2'),
+       url('../fonts/NeuePlak/NeuePlakSemiBold/font.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+// NeuePlak (700)
+@font-face {
+  font-family: 'NeuePlak';
+  src: url('../fonts/NeuePlak/NeuePlakBold/font.woff2') format('woff2'),
+       url('../fonts/NeuePlak/NeuePlakBold/font.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Tomorrow BoldItalic (700)
+@font-face {
+  font-family: 'Tomorrow';
+  src: url('../fonts/Tomorrow/Tomorrow-BoldItalic.woff2') format('woff2'),
+       url('../fonts/Tomorrow/Tomorrow-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Tomorrow MediumItalic (500)
+@font-face {
+  font-family: 'Tomorrow';
+  src: url('../fonts/Tomorrow/Tomorrow-MediumItalic.woff2') format('woff2'),
+       url('../fonts/Tomorrow/Tomorrow-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Tomorrow SemiBoldItalic (600)
+@font-face {
+  font-family: 'Tomorrow';
+  src: url('../fonts/Tomorrow/Tomorrow-SemiBoldItalic.woff2') format('woff2'),
+       url('../fonts/Tomorrow/Tomorrow-SemiBoldItalic.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+// WixMadeforText-Bold (600)
+@font-face {
+  font-family: 'WixMadeforText';
+  src: url('../fonts/Wix_Madefor_Text/WixMadeforText-Bold.woff2') format('woff2'),
+       url('../fonts/Wix_Madefor_Text/WixMadeforText-Bold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+// WixMadeforText-Regular (400)
+@font-face {
+  font-family: 'WixMadeforText';
+  src: url('../fonts/Wix_Madefor_Text/WixMadeforText-Regular.woff2') format('woff2'),
+       url('../fonts/Wix_Madefor_Text/WixMadeforText-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+

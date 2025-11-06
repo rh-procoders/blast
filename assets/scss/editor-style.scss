@@ -1,0 +1,31 @@
+// Import root CSS custom properties for block editor
+@import "variable";
+@import "root";
+
+.editor-styles-wrapper {
+    @import "style";
+    .aligncenter.wp-block-image img{
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+}  
+html :where(.editor-styles-wrapper){
+    font-family: "open sans", sans-serif;
+}
+body :where(.editor-styles-wrapper) .is-layout-flex{
+    .wp-block-button {
+        display: inherit;
+    }
+}
+
+.dashicons-custom-site-icon{
+    background-image: url('../../img/general/easy-learn-icon.png');
+    background-size: contain;
+}
+
+.is-desktop-preview .acf-block-preview{
+    a{
+        pointer-events: none;
+    }
+}

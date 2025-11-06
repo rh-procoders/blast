@@ -1,0 +1,86 @@
+@import "_variable";
+.post{
+    padding-top: 118px;
+    padding-bottom: 60px;
+    &-title{
+        color: #525D63;
+        text-align: center;
+        font-size: clamp(40px, 3vw + 30px, 70px);
+        line-height: 1.125;
+        letter-spacing: -3.5px;
+        font-weight: 800;
+        margin: 0px 0px 85px 0px;
+    }
+    &-featured-image{
+        width: 100%;
+        height: auto;
+        margin-top: 0px;
+        margin-bottom: 60px;
+        border-radius: 30px;
+        display: block;
+        box-shadow: 0px 2px 21px -4px rgba(0, 0, 0, .5);
+    }
+    h2{
+        font-size: 43px;
+        line-height: 1.1;
+    }
+    .wp-block-heading{
+        color: #525D63;
+        margin-bottom: 20px;
+    }
+    .wp-block-gallery{
+        margin:60px 0px;
+        a{
+            border-radius: 12px;
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+             box-shadow: 0px 2px 21px -4px rgba(0, 0, 0, .2);
+
+            border-radius: 12px;
+            img{
+                transition: transform .3s ease;
+            }
+            &:hover{
+                img{
+                    transform: scale(1.05);
+                }
+            }
+        }
+        img{
+           
+            &.is-selected{
+                border: 2px solid #68b32f;
+            }
+        }
+    }
+    .wp-block-list{
+        list-style: none;
+        padding: 0px;
+        margin: 30px 0px;
+        li{
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            font-size: 18px;
+            letter-spacing: .36px;
+            line-height: 1.4;
+            margin: 0px 0px 12px;
+            &::before{
+                content: '';
+                width: 20px;
+                height: 20px;
+                border: 2px solid #68b32f;
+                border-radius: 50%;
+                position: absolute;
+                left: 0;
+                top: 3px;
+            }
+        }
+    }
+    .entry-content{ 
+        a{
+            color: var(--color-brand, #FFBD59);
+        }
+    }
+}

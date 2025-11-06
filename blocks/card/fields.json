@@ -1,0 +1,77 @@
+{
+    "key": "group_card_block",
+    "title": "Card Block Fields",
+    "fields": [
+        {
+            "key": "field_card_image",
+            "label": "Card Image",
+            "name": "card_image",
+            "type": "image",
+            "instructions": "Upload an image for the card (recommended: 600x320px)",
+            "required": 1,
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_card_tag",
+            "label": "Card Tag",
+            "name": "card_tag",
+            "type": "text",
+            "instructions": "Enter a small tag/category text",
+            "required": 0,
+            "default_value": "",
+            "placeholder": "Feature",
+            "maxlength": 50
+        },
+        {
+            "key": "field_card_heading",
+            "label": "Card Heading",
+            "name": "card_heading",
+            "type": "text",
+            "instructions": "Enter the main heading for the card",
+            "required": 1,
+            "default_value": "",
+            "placeholder": "Card Heading",
+            "maxlength": 100
+        },
+        {
+            "key": "field_card_description",
+            "label": "Card Description",
+            "name": "card_description",
+            "type": "textarea",
+            "instructions": "Enter the description text for the card",
+            "required": 0,
+            "default_value": "",
+            "placeholder": "Card description...",
+            "maxlength": 300,
+            "rows": 4
+        },
+        {
+            "key": "field_card_link",
+            "label": "Card Link",
+            "name": "card_link",
+            "type": "link",
+            "instructions": "Add a link for the entire card (optional)",
+            "required": 0,
+            "return_format": "array"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/card"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": ""
+}

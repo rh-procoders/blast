@@ -1,0 +1,133 @@
+@mixin desktop-lg {
+	@media only screen and (max-width: 1700px) {
+		@content;
+	}
+}
+@mixin desktop {
+	@media only screen and (max-width: 1400px) {
+		@content;
+	}
+}
+@mixin tablet-lg {
+	@media only screen and (max-width: 1280px) {
+		@content;
+	}
+}
+@mixin tablet {
+	@media only screen and (max-width: 1024px) {
+		@content;
+	}
+}
+
+@mixin mobile {
+	@media only screen and (max-width: 768px) {
+		@content;
+	}
+}
+@mixin mobile-sm {
+	@media only screen and (max-width: 575px) {
+		@content;
+	}
+}
+@mixin height-sm {
+	@media only screen and (max-height: 630px) {
+		@content;
+	}
+}
+
+@mixin mf-desktop {
+	@media only screen and (min-width: 1025px) {
+		@content;
+	}
+}
+@mixin mf-tablet {
+	@media only screen and (min-width: 768px) {
+		@content;
+	}
+}
+
+$margin-sizes: (
+  180: 90,
+  120: 60,
+  100: 50,
+  80: 30,
+  60: 20,
+  40: 16,
+  30: 16,
+  20: 16
+);
+
+// Function to generate margin classes
+@mixin generate-margin-classes($type) {
+	@each $size, $mobile-size in $margin-sizes {
+		.#{$type}--#{$size} {
+		@if $type == 'mt' {
+			margin-top: #{$size}px;
+			@include mobile {
+			margin-top: #{$mobile-size}px;
+			}
+		} @else if $type == 'mb' {
+			margin-bottom: #{$size}px;
+			@include mobile {
+			margin-bottom: #{$mobile-size}px;
+			}
+		}
+		}
+	}
+}
+
+
+// Grid configuration
+$grid-columns: 12;
+
+// Mixin to generate grid column classes
+@mixin generate-grid-columns($suffix: '', $breakpoint: null) {
+  @for $i from 1 through $grid-columns {
+    &#{$suffix}--#{$i} {
+      @if $breakpoint == 'tablet' {
+        @include tablet {
+          grid-column: span #{$i};
+        }
+      } @else if $breakpoint == 'mobile' {
+        @include mobile {
+          grid-column: span #{$i};
+        }
+      } @else if $breakpoint == 'mobile-sm' {
+        @include mobile-sm {
+          grid-column: span #{$i};
+        }
+      } @else {
+        grid-column: span #{$i};
+      }
+    }
+  }
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: repeat($grid-columns, 1fr);
+  grid-gap: 0 30px;
+  
+  @include mobile-sm {
+    grid-gap: 0 20px;
+  }
+}
+
+// Classname usage: grid-col grid-col--3 grid-col-lg--6 grid-col-sm--12
+.grid-col {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  // Generate default grid columns (1-12)
+  @include generate-grid-columns();
+
+  // Generate tablet breakpoint columns
+  @include generate-grid-columns('-lg', 'tablet');
+
+  // Generate mobile breakpoint columns
+  @include generate-grid-columns('-sm', 'mobile');
+
+  // Generate small mobile breakpoint columns
+  @include generate-grid-columns('-xs', 'mobile-sm');
+}

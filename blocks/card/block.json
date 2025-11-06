@@ -1,0 +1,49 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acf/card",
+    "title": "Card",
+    "description": "A customizable card component with icon, heading, description, and button",
+    "category": "theme",
+    "icon": "id-alt",
+    "keywords": ["card", "feature", "service", "grid"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "align": false,
+        "anchor": true,
+        "customClassName": true,
+        "spacing": {
+            "margin": ["top", "bottom", "left", "right"],
+            "padding": ["top", "bottom", "left", "right"]
+        },
+        "color": {
+            "background": true,
+            "gradients": true,
+            "text": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true
+        }
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "card_icon": "shield",
+                "card_heading": "Make Prevention Standard Across Every Cloud",
+                "card_description": "Blast compiles and enforces native controls across every cloud, account, and workload, turning fragmented defenses into one unified, preemptive fabric.",
+                "button_text": "Unified Defense Fabric",
+                "button_link": "#"
+            }
+        }
+    },
+    "usesContext": ["postId", "postType"],
+    "textdomain": "blast-2025",
+    "editorStyle": "file:./css/editor-style.css",
+    "style": "file:./css/view-style.css"
+}

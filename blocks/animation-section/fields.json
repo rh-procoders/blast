@@ -1,0 +1,68 @@
+{
+    "key": "group_animation_section_fields",
+    "title": "Animation Section Settings",
+    "fields": [
+        {
+            "key": "field_lottie_animation",
+            "label": "Lottie Animation URL",
+            "name": "lottie_animation",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "Enter the URL of the Lottie animation JSON file",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_690bf1ce08aeb",
+            "label": "Lottie Animation Mobile",
+            "name": "lottie_animation_mobile",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "Enter the URL of the Lottie animation JSON file",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/animation-section"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Custom fields for the Animation Section block with enhanced V3 features",
+    "show_in_rest": 1,
+    "display_title": "",
+    "modified": 1762390952
+}

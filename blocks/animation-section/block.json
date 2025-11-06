@@ -1,0 +1,45 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acf/animation-section",
+    "title": "Animation Section",
+    "description": "A custom animation section block",
+    "category": "theme",
+    "icon": "cover-image",
+    "keywords": ["animation", "section", "floating", "shapes"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "customClassName": true,
+        "spacing": {
+            "margin": ["top", "bottom"],
+            "padding": ["top", "bottom"]
+        },
+        "color": {
+            "background": true,
+            "gradients": true,
+            "text": true
+        },
+        "typography": {
+            "fontSize": false,
+            "lineHeight": false
+        },
+        "jsx": true
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview"
+        }
+    },
+    "usesContext": ["postId", "postType", "queryId"],
+    "textdomain": "blast-2025",
+    "editorScript": "file:./js/editor.js",
+    "editorStyle": "file:./css/editor-style.css",
+    "style": "file:./css/view-style.css",
+    "viewScript": "file:./js/view.js"
+}

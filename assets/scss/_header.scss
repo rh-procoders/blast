@@ -1,0 +1,272 @@
+body:has(~ #site-navigation.active) {
+  overflow: hidden;
+}
+
+header.site-header {
+  position: absolute;
+  z-index: 9;
+  width: 100%;
+  top: 20px;
+  left: 0;
+  background-color: transparent;
+
+  @include tablet {
+    padding: 18px 0;
+  }
+
+  .content-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 860px;
+    margin: 0 auto;
+    background-color: var(--color-white);
+    padding: 14px 14px 14px 30px;
+    border-radius: 23px;
+    .custom-logo-link{
+      display: block;
+      margin: 0px;
+      .custom-logo{
+        max-width: 230px;
+        width: 100%;
+        height: auto;
+        @include tablet {
+          max-width: 180px;
+        }
+      }
+    }
+
+    .menu-toggle {
+      display: none;
+
+      @include tablet {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 10;
+        padding: 10px 12px;
+        border-radius: 50%;
+        background-color: #525D63;
+        transition: .3s all;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        justify-content: center;
+        .toggle-text {
+          font-size: 18px;
+          font-weight: 700;
+          color: $c-blue;
+          display: none;
+        }
+
+        .toggle-icon {
+          position: relative;
+          display: block;
+          width: 25px;
+          height: 17px;
+          border-bottom: 3px solid $c-white;
+          transition: .3s all;
+
+          &:before,
+          &:after {
+            content: '';
+            height: 3px;
+            background: $c-white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: .3s all;
+          }
+
+          &:after {
+            bottom: -3px;
+            margin: auto;
+          }
+        }
+      }
+    }
+    .site-navigation{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+
+      @include tablet {
+        position: absolute;
+        height: 100vh;
+        overflow: scroll;
+        top: 0;
+        right: 0;
+        width: 0vw;
+        overflow: hidden;
+        background: var(--color-gray);
+        transition: .3s all;
+        z-index: 9;
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+
+        .menu-main-menu-container{
+          padding: 150px 35px 35px;
+        }
+      }
+    }
+    nav {
+      @include tablet {
+          position: absolute;
+          height: 100vh;
+          overflow: scroll;
+          top: 0;
+          right: 0;
+          width: 0vw;
+          overflow: hidden;
+          background: var(--color-gray);
+          transition: .3s all;
+          z-index: 9;
+          transform: translateX(100%);
+          opacity: 0;
+          visibility: hidden;
+
+          .menu-main-menu-container{
+            padding: 150px 35px 35px;
+          }
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 32px;
+        font-size: 16px;
+
+        @include tablet {
+          flex-direction: column;
+          height: calc(100vh - 80px);
+          margin-top: 80px;
+          overflow: auto;
+          padding-bottom: 60px;
+        }
+        li {
+          margin: -7px 0px 0px;
+          a {
+            color: var(--wp--preset--color--dark-blue);
+            padding: 0px;
+            transition: all 400ms linear;
+            @include tablet {
+              background-color: transparent;
+              font-size: 20px;
+              display: block;
+              margin-left: 0px;
+              margin-right: auto;
+              text-align: left;
+              width: 100%;
+            }
+  
+            &:hover {
+              text-decoration: none;
+              color: var(--wp--preset--color--coral);
+            }
+          }
+          &.menu-item-has-children{
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='7' viewBox='0 0 12 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.636353 0.636719L5.63635 5.63672L10.6364 0.636719' stroke='%23000B40' stroke-width='1.8'/%3E%3C/svg%3E%0A");
+            background-size: 12px 7px;
+            background-repeat: no-repeat;
+            background-position: center right;
+            padding-right: 20px;
+          }
+          &.current-menu-item{
+              a{ 
+                color: var(--color-brand);
+              }
+
+            }
+        }       
+
+
+        .sub-menu{
+          position: absolute;
+          left: 0px;
+          top: 36px;
+          width: 280px;
+          background-color: transparent;
+          padding: 20px 0px 0px 0px;
+          display: none;
+          
+          li{
+            border-bottom: 1px solid #E5E5E5;
+            a{
+              padding: 11px 20px;
+              border-radius: 0px;
+              display: block;
+            }
+          }
+          @include tablet{
+            padding-top: 0;
+            position: relative;
+            top: 0;
+            width: 90%;
+            height: fit-content;
+            margin-top: 10px;
+            left: 5%;
+            li{
+                a{
+                  font-size: 16px;
+                }
+            }
+          }
+        }
+      }
+    }
+  }
+  &.active{
+    .site-navigation{
+      width: 100vw!important;
+      transform: translateX(0px)!important;
+      opacity: 1;
+      visibility: visible;
+      overflow: auto;
+      background-repeat: no-repeat;
+    }
+    .menu-toggle{
+      background-color: transparent;
+      border-color: transparent;
+    }
+    .toggle-icon:after {
+      bottom: -1px!important;
+    }
+    .toggle-icon:before, .toggle-icon:after {
+      background: #fff!important;
+    }
+    .toggle-text{
+      opacity: 0;
+    }
+    .toggle-icon {
+      opacity: 1;
+      border-color: transparent!important;
+      border-bottom: 0;
+
+      &:before,
+      &:after {
+        background: $c-white;
+        bottom: 0;
+        margin: auto;
+      }
+
+      &:before {
+        transform: rotate(135deg);
+      }
+
+      &:after {
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+.sub-menu__opener{
+  display: none;
+}

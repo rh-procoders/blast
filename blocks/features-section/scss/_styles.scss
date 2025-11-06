@@ -1,0 +1,195 @@
+@import "../../../assets/scss/variable";
+
+.features-section {
+    padding: 270px 0 200px; // 120px top/bottom
+    position: relative;
+    border-radius: 0px 0px border-radius('xl') border-radius('xl'); // 70px
+    overflow: hidden;
+    margin-top: -70px;
+    position: relative;
+    z-index: 0;
+
+    &__bg-image-bottom{
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        pointer-events: none;
+        user-select: none;
+        z-index: 1;
+    }
+    &__bg-image-top{
+        position: absolute;
+        top: 0;
+        right: 0;
+        pointer-events: none;
+        user-select: none;
+        z-index: 1;
+        height: 60%;
+        width: 60%;
+        object-fit: contain;
+        object-position: right;
+    }
+    
+    &__container {
+        position: relative;
+        z-index: 3;
+    }
+    
+    &__header {
+        text-align: left;
+        max-width: 710px;
+        margin-bottom: spacing('4xl'); // 80px on mobile
+        
+    }
+    
+    &__heading {
+        font-family: $font-family-primary; // NeuePlak
+        line-height: 110%;
+    }
+    
+    &__grid {
+        display: grid;
+        gap: 160px; // 48px gap between cards
+    }
+    
+    // Column variations
+    &--cols-2 &__grid {
+        grid-template-columns: repeat(2, 1fr);
+        
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    &--cols-3 &__grid {
+        grid-template-columns: repeat(3, 1fr);
+        
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    &--cols-4 &__grid {
+        grid-template-columns: repeat(4, 1fr);
+        
+        @media (max-width: 1200px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        @media (max-width: 900px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        @media (max-width: 600px) {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    &__card {
+        background: transparent;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        transition: transform 0.3s ease;
+        max-width: 300px;
+    }
+    
+    &__icon {
+        margin-bottom: 40px;
+        
+        img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px; // 14px
+            object-fit: contain;
+        }
+    }
+    
+    &__content {
+        flex: 1;
+    }
+    
+    &__title {
+        font-family: $font-family-primary; // NeuePlak
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 120%;
+        margin-bottom: 20px;
+        letter-spacing: -0.6px;
+    }
+    
+    &__description {
+        font-family: $font-family-secondary; // WixMadeforText
+        font-size: font-size('sm'); // 14px
+        font-weight: font-weight('regular'); // 400
+        color: color('dark');
+        line-height: 1.5;
+        margin: 0;
+        opacity: 0.9;
+        
+        @media (min-width: 768px) {
+            font-size: font-size('base'); // 16px on desktop
+        }
+    }
+    
+    &__placeholder {
+        font-family: $font-family-secondary; // WixMadeforText
+        font-size: 20px;
+        line-height: 150%;
+    }
+}
+
+// Enhanced mobile responsiveness
+@media (max-width: 480px) {
+    .features-section {
+        padding: spacing('3xl') 0; // 64px on small mobile
+        
+        &__header {
+            margin-bottom: spacing('3xl'); // 64px on small mobile
+        }
+        
+        &__grid {
+            gap: spacing('lg'); // 24px on small mobile
+        }
+        
+        &__icon i {
+            width: 36px;
+            height: 36px;
+            font-size: font-size('sm'); // 14px on small mobile
+        }
+        
+        &__title {
+            font-size: font-size('base'); // 16px on small mobile
+        }
+        
+        &__description {
+            font-size: font-size('sm'); // 14px on small mobile
+        }
+    }
+}
+
+// Print styles
+@media print {
+    .features-section {
+        background: color('white') !important;
+        color: color('dark') !important;
+        
+        &__heading,
+        &__title,
+        &__description {
+            color: color('dark') !important;
+        }
+        
+        &__icon i {
+            background: color('light-gray') !important;
+            color: color('dark') !important;
+        }
+    }
+}

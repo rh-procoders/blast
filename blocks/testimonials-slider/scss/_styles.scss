@@ -1,0 +1,279 @@
+@import "../../../assets/scss/variable";
+
+.testimonials-slider {
+    padding: spacing('5xl') 0; // 120px top/bottom
+    background: #fff;
+    border-radius: 70px;
+    position: relative;
+    z-index: 1;
+    
+    
+    &__container {
+        max-width: calc(100% - ((100% - 1520px) / 2));
+        margin-left:auto;
+        overflow: hidden;
+    }
+    
+    &__header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    
+    &__heading {
+        font-family: $font-family-primary; // NeuePlak
+        font-weight: font-weight('regular'); // 700
+        color: color('dark');
+        line-height: 1.2;
+        max-width: 690px;
+        margin: 0 auto;
+        
+        @media (max-width: 1024px) {
+            font-size: font-size('3xl'); // 30px on tablet
+        }
+        
+        @media (max-width: 767px) {
+            font-size: font-size('2xl'); // 20px on mobile
+        }
+        
+        strong {
+            font-weight: font-weight('extrabold'); // 800
+            font-family: $font-family-tertiary; // Tomorrow
+        }
+    }
+    
+    &__wrapper {
+        position: relative;
+    }
+    
+    &__splide {
+        .splide__track {
+            // overflow: visible;
+        }
+        
+        .splide__list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .splide__slide {
+   
+        }
+    }
+    
+    &__card {
+        background-color: color('white');
+        background-image: url('../../../img/slider-card-bg-desktop.svg');
+        background-size: cover;
+        background-position: bottom left;
+        border-radius: 40px;
+        padding: 40px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 44px;
+        
+        @media (max-width: 767px) {
+            padding: spacing('xl'); // 32px on mobile
+        }
+        
+    }
+    
+    &__quote {
+        flex: 1;
+        margin-bottom:0px;
+        
+        blockquote {
+            font-family: $font-family-primary; // WixMadeforText
+            font-size: 24px;
+            line-height: 130%;
+            font-weight: font-weight('regular'); // 400
+            color: var(--wp--preset--color--dark-blue);
+            margin: 0;
+            font-style: italic;            
+            strong {
+                font-family: $font-family-tertiary; // Tomorrow
+                font-style: normal;
+            }
+        }
+    }
+
+    &__bottom-icon{
+        position: absolute;
+        bottom: 30px;
+        left: 25px;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: calc(100% - 134px);
+        width: 100%;
+        margin-left: auto;
+    }
+    
+    &__logo {
+        margin-bottom: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 60px;
+        
+        img {
+            max-width: 120px;
+            max-height: 60px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+    }
+    
+    &__author {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    &__author-image {
+        img{
+            border-radius: 20px;
+            border: 2px solid #FFF;
+            width: 62px;
+            height: 62px;
+            object-fit: cover;
+        }
+    }
+    
+    &__author-name {
+        font-family: $font-family-secondary; // WixMadeforText
+        font-size: font-size('base'); // 16px
+        line-height: 120%;
+        font-weight: 500;
+        color: var(--wp--preset--color--dark-blue);
+        margin-bottom: 0px;
+    }
+    
+    &__author-title {
+        font-family: $font-family-secondary; // WixMadeforText
+        font-size: font-size('sm'); // 14px
+        font-weight: font-weight('regular'); // 400
+        color: color('gray');
+    }
+    
+    // Splide Navigation Styling
+    .splide__arrows {
+        position: relative;
+        margin-top: spacing('xl'); // 32px
+        display: flex;
+        justify-content: center;
+        gap: spacing('lg'); // 24px
+    }
+    
+    .splide__arrow {
+        background: color('white');
+        border: 2px solid color('light-gray');
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        
+        &:hover {
+            background: color('blue');
+            border-color: color('blue');
+            transform: scale(1.1);
+            
+            .splide__arrow-icon {
+                fill: color('white');
+            }
+        }
+        
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            
+            &:hover {
+                transform: none;
+                background: color('white');
+                border-color: color('light-gray');
+                
+                .splide__arrow-icon {
+                    fill: color('gray');
+                }
+            }
+        }
+    }
+    
+    .splide__arrow-icon {
+        width: 20px;
+        height: 20px;
+        fill: color('gray');
+        transition: fill 0.3s ease;
+    }
+    
+    // Splide Pagination Styling
+    .splide__pagination {
+        display: flex;
+        justify-content: center;
+        gap: spacing('sm'); // 8px
+        margin-top: spacing('lg'); // 24px
+        list-style: none;
+        padding: 0;
+        margin-left: 0;
+        margin-right: 0;
+        
+        .splide__pagination__page {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: color('light-gray');
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+            &.is-active {
+                background: color('blue');
+                transform: scale(1.2);
+            }
+            
+            &:hover {
+                background: color('blue');
+            }
+        }
+    }
+    
+    &__placeholder {
+        text-align: center;
+        padding: spacing('5xl') spacing('xl'); // 120px 32px
+        color: color('gray');
+        font-style: italic;
+    }
+}
+
+// Responsive breakpoints for Splide
+@media (max-width: 1200px) {
+    .testimonials-slider__splide {
+        // 2 slides on tablet-large
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonials-slider__splide {
+        // 1 slide on mobile
+        .splide__slide {
+            padding: 0; // Remove side padding on mobile
+        }
+    }
+}
+
+// Hide arrows on mobile if needed
+@media (max-width: 480px) {
+    .testimonials-slider .splide__arrows {
+        display: none;
+    }
+}

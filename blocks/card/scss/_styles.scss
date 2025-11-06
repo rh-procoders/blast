@@ -1,0 +1,128 @@
+@import "../../../assets/scss/variable";
+
+.card-block {
+    background: color('white');
+    border-radius: 40px;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    padding: 40px;
+    // Hover effects
+    &:hover {
+        box-shadow: 36px 30px 74.9px 0 rgba(255, 108, 102, 0.18);
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    // Image section with aspect ratio 600x320
+    &__image {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 600 / 320; // 1.875:1 ratio
+        overflow: hidden;
+        border-radius: 30px;
+        margin-bottom: 30px;
+        
+        // Fallback for browsers that don't support aspect-ratio
+        @supports not (aspect-ratio: 600 / 320) {
+            &::before {
+                content: '';
+                display: block;
+                padding-top: calc(320 / 600 * 100%); // 53.33%
+            }
+            
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+    }
+    
+    &:hover &__image img {
+        transform: scale(1.05);
+    }
+    
+    // Content wrapper
+    &__content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-bottom: 20px;
+    }
+    
+    // Tag
+    &__tag {
+        padding: 10px 14px;
+        border-radius: 20px;
+        background: #FF654A;
+        font-family: var(--wp--preset--font-family--Tomorrow);
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 500;
+        line-height: 110%;
+        width: fit-content;
+        color: #fff;
+    }
+    
+    // Heading
+    &__heading {   
+        font-weight: font-weight('bold'); // 700
+        color: var(--wp--preset--color--dark-blue);
+        line-height: 120%; /* 40.8px */
+        letter-spacing: -0.68px;
+        margin: 0; // 0 0 16px 0
+        max-width: 460px;
+    }
+    
+    // Description
+    &__description {
+        font-family: $font-family-secondary; // WixMadeforText
+        font-size: 16px;
+        color: var(--wp--preset--color--dark-blue);
+        line-height: 140%;
+        margin: 0;
+        flex: 1;
+        max-width: 530px;
+    }
+}
+
+// Grid compatibility
+.wp-block-columns .wp-block-column .card-block {
+    height: 100%;
+}
+
+// Mobile responsive adjustments
+@media (max-width: 767px) {
+    .card-block {
+        padding: spacing('xl'); // 32px on mobile
+        
+        &__icon i {
+            font-size: font-size('2xl'); // 20px on mobile
+        }
+        
+        &__heading {
+            font-size: font-size('xl'); // 18px on mobile
+        }
+        
+        &__description {
+            font-size: font-size('sm'); // 14px on mobile
+            margin-bottom: spacing('lg'); // 24px on mobile
+        }
+    }
+}

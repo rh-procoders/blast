@@ -1,0 +1,625 @@
+@import "_variable";
+html {
+	box-sizing: border-box;
+	font-size: 100%;
+	// line-height: 1.3125;
+	line-height: 1.5;
+	height: 100%;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	padding: 0 !important;
+	--scrollbar-width: 0px;
+	@include tablet {
+		--scrollbar-width: 0px !important;
+	}
+}
+
+body {
+	min-width: 320px;
+	font-size: 16px;
+	line-height: 1.5;
+	background: #F4F4F4;
+	color: $c-dark;
+	font-family: $font-family-primary;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	// --wp--preset--spacing--11: 10.4rem;
+	// --wp--preset--font-size--large: 50px;
+	// --wp--preset--font-size--small:1rem;
+	--wp--preset--font-size--medium:1.5rem;
+	@include desktop{
+		// --wp--preset--spacing--11: 8rem;
+		// --wp--preset--font-size--large: 40px;
+		// --wp--preset--font-size--medium:24px;
+	}
+	@include tablet {
+		// --wp--preset--spacing--1: 0.5rem;
+		// --wp--preset--spacing--2: 1rem;
+		// --wp--preset--spacing--3: 1.5rem;
+		// --wp--preset--spacing--4: 2rem;
+		// --wp--preset--spacing--5: 2.5rem;
+		// --wp--preset--spacing--6: 3rem;
+		// --wp--preset--spacing--7: 5rem;
+		// --wp--preset--spacing--8: 4rem;
+		// --wp--preset--spacing--9: 4.5rem;
+		// --wp--preset--spacing--10: 5rem;
+		// --wp--preset--spacing--11: 75px;
+		// --wp--preset--spacing--12: 6rem;
+		// --wp--preset--spacing--13: 6.5rem;
+		// --wp--preset--spacing--14: 7rem;
+		// --wp--preset--spacing--15: 7.5rem;
+		// --wp--preset--spacing--16: 8rem;
+		// --wp--preset--spacing--17: 8.5rem;
+	}
+	@include mobile{
+		// --wp--preset--font-size--large: 25px;
+		// --wp--preset--font-size--medium:20px;
+		// --wp--preset--font-size--small:18px;
+	}
+}
+
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+	box-sizing: border-box;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	clear: both;
+}
+
+
+dfn,
+cite,
+em,
+i {
+	font-style: italic;
+}
+
+blockquote {
+	margin: 0 1.5em;
+}
+
+address {
+	margin: 0 0 1.5em;
+}
+
+pre {
+	background: #eee;
+	font-family: "Courier 10 Pitch", courier, monospace;
+	line-height: 1.6;
+	margin-bottom: 1.6em;
+	max-width: 100%;
+	overflow: auto;
+	padding: 1.6em;
+}
+
+code,
+kbd,
+tt,
+var {
+	font-family: monaco, consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+}
+
+abbr,
+acronym {
+	border-bottom: 1px dotted #666;
+	cursor: help;
+}
+
+mark,
+ins {
+	background: #fff9c0;
+	text-decoration: none;
+}
+
+big {
+	font-size: 125%;
+}
+
+hr {
+	background-color: #ccc;
+	border: 0;
+	height: 1px;
+	margin-bottom: 1.5em;
+}
+
+dt {
+	font-weight: 700;
+}
+
+dd {
+	margin: 0 1.5em 1.5em;
+}
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+	border: 0;
+	vertical-align: middle;
+}
+
+figure {
+	margin: 1em 0;
+}
+
+table {
+	margin: 0 0 1.5em;
+	width: 100%;
+}
+
+
+/* Links
+--------------------------------------------- */
+a {
+	text-decoration: none;
+	transition: all 0.2s ease 0s;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+a:visited {
+	// color: #800080;
+}
+
+a:hover,
+a:focus,
+a:active {
+	// color: #191970;
+}
+
+a:focus {
+	outline: none;
+}
+
+a:hover,
+a:active {
+	outline: 0;
+}
+
+
+/* Widgets
+--------------------------------------------- */
+.widget {
+	margin: 0 0 1.5em;
+}
+.widget select {
+	max-width: 100%;
+}
+
+/* Captions
+--------------------------------------------- */
+.wp-caption {
+	margin-bottom: 1.5em;
+	max-width: 100%;
+}
+.wp-caption img[class*="wp-image-"] {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.wp-caption .wp-caption-text {
+	margin: 0.8075em 0;
+}
+.wp-caption-text {
+	text-align: center;
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	clip-path: none;
+	color: #21759b;
+	display: block;
+	font-size: 0.875rem;
+	font-weight: 700;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000;
+}
+/* Do not show the outline on the skip link target. */
+#primary[tabindex="-1"]:focus {
+	outline: 0;
+}
+
+/* Alignments
+--------------------------------------------- */
+.alignleft {
+
+	/*rtl:ignore*/
+	float: left;
+
+	/*rtl:ignore*/
+	margin-right: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+.alignright {
+
+	/*rtl:ignore*/
+	float: right;
+
+	/*rtl:ignore*/
+	margin-left: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+.aligncenter {
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1.5em;
+}
+
+.alignwide{
+	max-width: calc(var(--wp--preset--spacing--wide-size) + 20px);
+	margin: 0 auto;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+/**
+ * Add the correct display in IE 10+.
+ */
+template {
+	display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+[hidden] {
+	display: none;
+}
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+details {
+	display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+summary {
+	display: list-item;
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+progress {
+	vertical-align: baseline;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *		`fieldset` elements in all browsers.
+ */
+fieldset,
+form {
+	margin: 0;
+	padding: 0;
+	border-style: none;
+}
+
+legend {
+	box-sizing: border-box;
+	color: inherit;
+	display: table;
+	max-width: 100%;
+	padding: 0;
+	white-space: normal;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+	-webkit-appearance: none;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+	border-style: none;
+	padding: 0;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+[type="checkbox"],
+[type="radio"] {
+	box-sizing: border-box;
+	padding: 0;
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+button,
+input {
+	overflow: visible;
+}
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+	margin: 0;
+	vertical-align: middle;
+	-webkit-appearance: none;
+}
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+img {
+	border-style: none;
+}
+
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+code,
+kbd,
+samp {
+	font-family: monospace, monospace;
+	font-size: 1em;
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+small {
+	font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+sup {
+	top: -0.5em;
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+b,
+strong {
+	font-weight: bolder;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+abbr[title] {
+	border-bottom: none;
+	text-decoration: underline;
+	text-decoration: underline dotted;
+}
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+a {
+	background-color: transparent;
+}
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+hr {
+	box-sizing: content-box;
+	height: 0;
+	overflow: visible;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+pre {
+	font-family: monospace, monospace;
+	font-size: 1em;
+}
+article,
+aside,
+dialog,
+figure,
+footer,
+header,
+menu,
+nav,
+section {
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+.svg-icon {
+	vertical-align: top;
+	fill: currentColor;
+}
+.container{
+	max-width: 1280px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 30px;
+	@include desktop{
+		max-width: 1220px;
+	}
+	@include tablet-lg{
+		max-width: 1170px;
+	}
+	&--xl{
+		max-width: 1520px;
+	}
+	&--lg{
+		max-width: 1150px;
+	}
+	&--sm{
+		max-width: 1010px;
+	}
+	&--wide{
+		max-width: calc(1440px + 60px);
+	}
+	@include mobile{
+		padding: 0 25px;
+	}
+}
+.full-container{
+	width: 100%;
+	padding: 0 30px;
+	@include mobile{
+		padding: 0 25px;
+	}
+}
+.wpcf7 form.invalid .wpcf7-response-output, .wpcf7 form.unaccepted .wpcf7-response-output, .wpcf7 form.payment-required .wpcf7-response-output {
+    border-color: #fff;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 0px $c-white inset !important;
+	color: $c-dark;
+	-webkit-text-fill-color: $c-dark !important;
+}
+.overflow-hidden{
+	overflow: hidden;
+}
+.wp-block-image{
+	margin: 0px;
+}
+.wp-block-separator{
+	border-top: 8px solid;
+}
+
+.custom-container-wrapper{
+    border-radius: 45px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -80px;
+    max-width: 1640px;
+	@include tablet{
+		margin-top: 0px;
+		border-radius: 0px;
+	}
+}
+
+.entry-content .wp-block-group-is-layout-grid{
+	@include mobile{
+		grid-template-columns: 1fr;
+		&.reverse-sm{
+			.wp-block-group:nth-child(1){
+				order: 2;
+			}
+			.wp-block-group:nth-child(2){
+				order: 1;
+			}
+		}
+	}
+}
+
+.single-connectoor_jobs .entry-content .alignwide{
+	max-width: 1150px;
+	.wp-block-image{
+		margin-bottom: 60px;
+	}
+}
+
+.wp-block-group.wp-block-group-is-layout-grid{
+	@include mobile{
+		grid-template-columns: 1fr;
+		&.reverse-sm{
+			.wp-block-group:nth-child(1){
+				order: 2;
+			}
+			.wp-block-group:nth-child(2){
+				order: 1;
+			}
+		}
+	}
+}
+
+.connectoor-jobs-search-field-wrapper .select2-search{
+	left: 0px;
+}
