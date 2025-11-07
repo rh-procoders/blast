@@ -20,7 +20,8 @@
     --color-gray-900: #{color('gray-900')};
     --color-paragraph: #{color('paragraph')};
 
-    --wp--preset--spacing--wide-size: 1500px;
+    --wp--preset--container-xl: 1500px;
+
     
     // Legacy color names (backward compatibility)
     --Gray-gray: var(--color-gray);
@@ -101,7 +102,9 @@
     --wp--style--global--content-size: 1689px;
     
     @include desktop-lg {
+        --wp--preset--container-xl: 1280px;
         --wp--style--global--content-size: 1280px;
+
     }
 
     @include mobile {

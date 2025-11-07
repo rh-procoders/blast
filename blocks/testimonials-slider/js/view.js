@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create Splide instance
         const splide = new Splide(sliderElement, {
             type: 'loop',
-            perPage: slidesPerView, // Use the ACF field value
+            fixedWidth: '670px', // Fixed width for each slide
             perMove: 1,
             gap: '2rem',
             padding: { left: '0px', right: '0px' },
@@ -37,23 +37,20 @@ document.addEventListener('DOMContentLoaded', function() {
             easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
             breakpoints: {
                 1200: {
-                    perPage: Math.min(slidesPerView, 2.5), // Respect the ACF value but cap at 2.5 for tablets
+                    fixedWidth: '670px', // Keep fixed width
                     gap: '1.5rem'
                 },
                 900: {
-                    perPage: Math.min(slidesPerView, 1.5), // Cap at 1.5 for smaller tablets
+                    fixedWidth: '670px', // Keep fixed width
                     gap: '1rem'
                 },
                 768: {
-                    perPage: 1.2, // Show 1.2 slides on mobile landscape
-                    gap: '1rem',
-                    arrows: false
+                    fixedWidth: '500px', // Smaller fixed width for mobile
+                    gap: '1rem'
                 },
                 480: {
                     perPage: 1, // Single slide on small mobile
-                    gap: '0.5rem',
-                    arrows: false,
-                    pagination: true
+                    gap: '2rem'
                 }
             },
             classes: {
