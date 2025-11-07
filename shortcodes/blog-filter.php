@@ -251,8 +251,10 @@ function blast_blog_filter_shortcode( array $atts ): string
 
                     // Add loading class
                     categoryBar.classList.add( 'blog-filter__bar--loading' );
+                    if (loadMoreContainer) {
+                        loadMoreContainer.classList.add( 'blog-filter__load-more--loading' );
+                    }
                     if (loadMoreBtn) {
-                        loadMoreBtn.classList.add( 'blog-filter__load-more-btn--loading' );
                         loadMoreBtn.disabled = true;
                     }
 
@@ -293,8 +295,10 @@ function blast_blog_filter_shortcode( array $atts ): string
 
                             // Remove loading states
                             categoryBar.classList.remove( 'blog-filter__bar--loading' );
+                            if (loadMoreContainer) {
+                                loadMoreContainer.classList.remove( 'blog-filter__load-more--loading' );
+                            }
                             if (loadMoreBtn) {
-                                loadMoreBtn.classList.remove( 'blog-filter__load-more-btn--loading' );
                                 loadMoreBtn.disabled = false;
                             }
 
@@ -303,8 +307,10 @@ function blast_blog_filter_shortcode( array $atts ): string
                         .catch( error => {
                             console.error( 'AJAX error:', error );
                             categoryBar.classList.remove( 'blog-filter__bar--loading' );
+                            if (loadMoreContainer) {
+                                loadMoreContainer.classList.remove( 'blog-filter__load-more--loading' );
+                            }
                             if (loadMoreBtn) {
-                                loadMoreBtn.classList.remove( 'blog-filter__load-more-btn--loading' );
                                 loadMoreBtn.disabled = false;
                             }
                             isLoading = false;
