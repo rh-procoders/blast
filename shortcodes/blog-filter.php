@@ -165,10 +165,16 @@ function blast_blog_filter_shortcode( array $atts ): string
         </div><!-- /.blog-filter__grid -->
 
         <!-- Load More Button -->
-        <div class="blog-filter__load-more" style="<?= ! $has_more_posts ? 'display: none;' : '' ?>">
-            <button class="blog-filter__load-more-btn" data-page="2">
-                <?= esc_html__( 'Load More', 'blast-2025' ) ?>
-                <!-- <?php /* sprite_svg('icon-loader', 24, 24) */ ?> -->
+        <div class="blog-filter__load-more wp-block-button is-style-outline is-style-outline--1" style="<?= ! $has_more_posts ? 'display: none;' : '' ?>">
+            <button class="blog-filter__load-more-btn btn has-arrow-icon" data-page="2">
+                <span class="button-text"
+                      data-hover-text="<?= esc_attr__( 'Load More', 'blast-2025' ) ?>">
+                    <?= esc_html__( 'Load More', 'blast-2025' ) ?>
+                </span>
+
+                <span class="button-arrow-wrapper">
+                    <?php sprite_svg( 'icon-arrow-right', 14, 10 ) ?>
+                </span>
             </button>
         </div>
 
@@ -245,8 +251,10 @@ function blast_blog_filter_shortcode( array $atts ): string
 
                     // Add loading class
                     categoryBar.classList.add( 'blog-filter__bar--loading' );
+                    if (loadMoreContainer) {
+                        loadMoreContainer.classList.add( 'blog-filter__load-more--loading' );
+                    }
                     if (loadMoreBtn) {
-                        loadMoreBtn.classList.add( 'blog-filter__load-more-btn--loading' );
                         loadMoreBtn.disabled = true;
                     }
 
@@ -287,8 +295,10 @@ function blast_blog_filter_shortcode( array $atts ): string
 
                             // Remove loading states
                             categoryBar.classList.remove( 'blog-filter__bar--loading' );
+                            if (loadMoreContainer) {
+                                loadMoreContainer.classList.remove( 'blog-filter__load-more--loading' );
+                            }
                             if (loadMoreBtn) {
-                                loadMoreBtn.classList.remove( 'blog-filter__load-more-btn--loading' );
                                 loadMoreBtn.disabled = false;
                             }
 
@@ -297,8 +307,10 @@ function blast_blog_filter_shortcode( array $atts ): string
                         .catch( error => {
                             console.error( 'AJAX error:', error );
                             categoryBar.classList.remove( 'blog-filter__bar--loading' );
+                            if (loadMoreContainer) {
+                                loadMoreContainer.classList.remove( 'blog-filter__load-more--loading' );
+                            }
                             if (loadMoreBtn) {
-                                loadMoreBtn.classList.remove( 'blog-filter__load-more-btn--loading' );
                                 loadMoreBtn.disabled = false;
                             }
                             isLoading = false;

@@ -67,12 +67,14 @@ $reading_time = bs_get_reading_time();
             </div>
         <?php endif; ?>
 
-        <!-- Author -->
-        <?php
-        get_template_part( 'template-parts/components/author', null, [
-                'user_id'     => get_the_author_meta( 'ID' ),
-                'avatar_size' => 48
-        ] );
-        ?>
+        <!-- Footer -->
+        <div class="blog-filter-item__footer">
+            <?php
+            get_template_part( 'template-parts/components/author', null, [
+                    'user_id'     => get_the_author_meta( 'ID' ),
+                    'avatar_size' => 50
+            ] );
+            ?>
+        </div>
     </div>
 </article>

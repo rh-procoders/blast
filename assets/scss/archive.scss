@@ -1,13 +1,14 @@
 @import "_variable";
 
 .blog-filter {
-  font-family : $font-family-tertiary; // -> 'Tomorrow'
 
   // Filters
   &__bar {
 	--bs-filter-search-w : max(315px, 25rem); // 400px
 	--bs-filter-gap      : max(30px, 5rem); // 80px
 	--bs-filter-item-gap : max(10px, 1.25rem); // 20px
+
+	font-family          : $font-family-tertiary; // -> 'Tomorrow'
 
 	gap                  : var(--bs-filter-gap);
 	display              : flex;
@@ -29,9 +30,9 @@
 
 	&-input {
 	  height           : 60px;
-	  padding          : 19px 20px;
+	  padding          : 19px 20px !important;
 
-	  border-radius    : 14px;
+	  border-radius    : 14px !important;
 	  background-color : #FFFFFF;
 	  box-shadow       : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.10);
 
@@ -107,5 +108,194 @@
 	}
   }
 
-  
+  // Grid
+  &__grid {
+	--bs-filter-grid-gap  : max(30px, 3.75rem); // 60px
+
+	margin-top            : 60px; // same on mobile
+
+	grid-gap              : var(--bs-filter-grid-gap);
+	display               : grid;
+	grid-template-columns : repeat(2, 1fr);
+
+  }
+
+  // Grid Item
+  &-item {
+	display          : flex;
+	flex-direction   : column;
+
+	border-radius    : 40px;
+	color            : #000B40;
+	background-color : #FFFFFF;
+
+	padding          : 40px;
+
+	// thumbnail
+	&__image-link,
+	&__image-placeholder {
+	  aspect-ratio  : 460 / 245;
+
+	  border-radius : 23px;
+	  overflow      : hidden;
+	}
+
+	&__image-link {
+	  position : relative;
+
+	  img {
+		position        : absolute;
+		top             : 0;
+		left            : 0;
+		bottom          : 0;
+		width           : 100%;
+
+		object-fit      : cover;
+		object-position : 50% 50%;
+	  }
+	}
+
+	&__image-placeholder {
+	  background-color : #F4F4F4;
+	}
+
+	// Content
+	&__content {
+	  flex-grow      : 1;
+
+	  display        : flex;
+	  flex-direction : column;
+	}
+
+	// meta
+	&__meta {
+	  font-family : $font-family-tertiary; // -> 'Tomorrow'
+	  font-size   : var(--wp--preset--font-size--fs-tag); // -> 14px
+	  font-weight : font-weight('medium'); // -> 500
+	  line-height : 1.1;
+
+	  margin-top  : max(16px, 1.25rem); // 20px
+
+	  gap         : 10px;
+	  display     : flex;
+	  flex-wrap   : wrap;
+
+	  align-items : center;
+	}
+
+	&__categories {
+	  gap       : 10px;
+	  display   : flex;
+	  flex-wrap : wrap;
+	}
+
+	&__category {
+	  padding          : 7.3px 14px;
+	  background-color : #000B40;
+	  border-radius    : 20px;
+
+	  color            : #FFFFFF;
+	  text-decoration  : none !important;
+	}
+
+	&__read-time {
+
+	}
+
+	// Title
+	&__title {
+	  margin         : max(18px, 1.25rem) 0 0; // 20px top
+
+	  font-size      : max(24px, 1.875rem); // 30px
+	  font-weight    : font-weight('semibold');
+	  line-height    : 1.2;
+	  letter-spacing : calc(-1 * max(0.48px, 0.0375rem)); // -0.6px
+
+	  a {
+		color           : inherit;
+		text-decoration : none !important;
+	  }
+	}
+
+	// Excerpt
+	&__excerpt {
+	  margin      : max(16px, 1.25rem) 0 0; // 20px top
+
+	  font-family : $font-family-secondary;
+	  font-weight : font-weight('regular');
+	  font-size   : font-size('base'); // -> 16px
+	  line-height : 1.4;
+	}
+
+	// Footer
+	&__footer {
+	  margin-top : auto;
+
+	  .post-author {
+		margin-top : 30px;
+	  }
+	}
+  }
+
+  // Load More Button
+  &__load-more {
+	margin-top      : 60px;
+
+	display         : flex;
+	justify-content : center;
+
+	// Loading state
+	&--loading {
+	  position : relative;
+
+	  &::after {
+		content       : "";
+		position      : absolute;
+		left          : 50%;
+		transform     : translateX(-50%) translateY(50%);
+		top           : -45px;
+		width         : 15px;
+		aspect-ratio  : 1;
+		border-radius : 50%;
+		animation     : blog-filter-loader 1s infinite linear alternate;
+	  }
+	}
+  }
+
+  // Filter Bar Loading state
+  &__bar--loading {
+	position : relative;
+
+	&::after {
+	  content       : "";
+	  position      : absolute;
+	  left          : 50%;
+	  transform     : translateY(50%) translateX(-50%);
+	  bottom        : -30px;
+	  width         : 15px;
+	  aspect-ratio  : 1;
+	  border-radius : 50%;
+	  animation     : blog-filter-loader 1s infinite linear alternate;
+	}
+  }
+}
+
+// Loading animation (three-dot loader)
+@keyframes blog-filter-loader {
+  0% {
+	box-shadow : 20px 0 #000B40, -20px 0 rgba(0, 11, 64, 0.13);
+	background : #000B40;
+  }
+  33% {
+	box-shadow : 20px 0 #000B40, -20px 0 rgba(0, 11, 64, 0.13);
+	background : rgba(0, 11, 64, 0.13);
+  }
+  66% {
+	box-shadow : 20px 0 rgba(0, 11, 64, 0.13), -20px 0 #000B40;
+	background : rgba(0, 11, 64, 0.13);
+  }
+  100% {
+	box-shadow : 20px 0 rgba(0, 11, 64, 0.13), -20px 0 #000B40;
+	background : #000B40;
+  }
 }
