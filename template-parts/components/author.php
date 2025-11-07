@@ -10,7 +10,7 @@
  */
 
 $user_id     = $args['user_id'] ?? get_the_author_meta( 'ID' );
-$avatar_size = $args['avatar_size'] ?? 48;
+$avatar_size = $args['avatar_size'] ?? 50;
 
 if ( ! $user_id ) {
     return;

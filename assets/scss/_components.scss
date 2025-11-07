@@ -155,7 +155,7 @@ ul.nostyle {
                   }
               }
           }
-      } 
+      }
   }
 }
 
@@ -184,4 +184,38 @@ ul.nostyle {
 }
 .wp-block-separator.is-style-default{
   max-width: 60px!important;
+}
+
+// Post Author Component
+.post-author {
+  gap         : 20px;
+  display     : flex;
+  align-items : center;
+
+  &__avatar {
+	position      : relative;
+	border-radius : 16px;
+	border        : 2px solid #F4F4F4;
+
+	width         : 50px;
+	aspect-ratio  : 1/1;
+	overflow      : hidden;
+
+	img {
+	  position        : absolute;
+	  top             : 0;
+	  left            : 0;
+	  bottom          : 0;
+	  width           : 100%;
+
+	  object-fit      : cover;
+	  object-position : 50% 50%;
+	}
+  }
+
+  &__name {
+	font-family : $font-family-secondary;
+	font-weight : font-weight('medium');
+	line-height : 1.2;
+  }
 }
