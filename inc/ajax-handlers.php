@@ -33,6 +33,9 @@ function blast_filter_posts(): void
     $posts_per_page = 4; // Fixed: always 4 posts
     $category_slug  = isset($_POST['category']) ? sanitize_key($_POST['category']) : '';
     $search         = isset($_POST['search']) ? sanitize_text_field($_POST['search']) : '';
+    $taxonomy       = isset($_POST['taxonomy']) ? sanitize_key($_POST['taxonomy']) : 'category';
+    $is_archive     = isset($_POST['is_archive']) && $_POST['is_archive'] === 'true';
+    $tax_id         = !empty($_POST['tax_id']) ? absint($_POST['tax_id']) : null;
 
     // Build query args
     $args = [
@@ -49,18 +52,37 @@ function blast_filter_posts(): void
         $args['s'] = $search;
     }
 
-    // Exclude "Uncategorized" category
+    // Exclude "Uncategorized" category (only for category taxonomy)
     // To disable this exclusion, comment out the lines below
-    $uncategorized = get_category_by_slug('uncategorized');
-    if ($uncategorized) {
-        $args['category__not_in'] = [$uncategorized->term_id];
+    if ($taxonomy === 'category') {
+        $uncategorized = get_category_by_slug('uncategorized');
+        if ($uncategorized) {
+            $args['category__not_in'] = [$uncategorized->term_id];
+        }
     }
 
-    // Add category filter if specific category is selected
-    if (!empty($category_slug) && $category_slug !== 'all') {
-        $category = get_category_by_slug($category_slug);
-        if ($category) {
-            $args['category__in'] = [$category->term_id];
+    // Handle taxonomy filtering
+    if ($tax_id) {
+        // Filter by specific taxonomy term (archive mode)
+        if ($taxonomy === 'category') {
+            $args['category__in'] = [$tax_id];
+        } elseif ($taxonomy === 'tag') {
+            $args['tag_id'] = $tax_id;
+        } elseif ($taxonomy === 'author') {
+            $args['author'] = $tax_id;
+        }
+    } elseif (!empty($category_slug) && $category_slug !== 'all') {
+        // Filter by URL parameter (normal mode)
+        if ($taxonomy === 'category') {
+            $category = get_category_by_slug($category_slug);
+            if ($category) {
+                $args['category__in'] = [$category->term_id];
+            }
+        } elseif ($taxonomy === 'tag') {
+            $tag = get_term_by('slug', $category_slug, 'post_tag');
+            if ($tag) {
+                $args['tag_id'] = $tag->term_id;
+            }
         }
     }
 
