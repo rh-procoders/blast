@@ -12,16 +12,3 @@
 // For example: custom validation, data processing, etc.
 
 // Example: Custom function to process hero data
-function hero_home_process_images($images) {
-    if (!$images) return array();
-    
-    $processed = array();
-    foreach ($images as $image) {
-        $processed[] = array(
-            'url' => $image['url'],
-            'alt' => $image['alt'],
-            'sizes' => $image['sizes'],
-        );
-    }
-    return $processed;
-}

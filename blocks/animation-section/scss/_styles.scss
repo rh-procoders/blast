@@ -8,8 +8,10 @@
     aspect-ratio: 1920 / 680;
     border-radius: 70px;
 
+
     @include mobile{
         aspect-ratio: 375 / 726; // Adjust aspect ratio for mobile
+        border-radius: 50px;
     }
     
     // Fallback for browsers that don't support aspect-ratio
@@ -24,23 +26,60 @@
         }
     }
     
-    &__lottie {
+    .animation-layer {       
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 1;
-        pointer-events: none; // Allow clicks to pass through to content
         
+        // Spline layer goes behind Lottie
+        &--spline {
+            z-index: 3;
+        }
+        
+        // Lottie layer goes in front of Spline
+        &--lottie {
+            z-index: 2;
+        }
+     
+        
+        // Lottie Player Styling
         lottie-player {
             width: 100% !important;
             height: 100% !important;
             object-fit: cover;
         }
         
-        // Desktop Lottie - show on tablets and up (768px+)
-        .lottie-desktop {
+        // Spline Viewer Styling
+        spline-viewer {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover;
+            display: block;
+            
+            // Make canvas inside spline-viewer responsive
+            canvas {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover;
+                display: block;
+            }
+        }
+        
+        // General canvas responsiveness (for any canvas elements)
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover;
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        // Desktop Animation - show on tablets and up (768px+)
+        .lottie-desktop,
+        .spline-desktop {
             display: block;
 
             @include mobile{
@@ -48,8 +87,9 @@
             }
         }
         
-        // Mobile Lottie - show on mobile only (below 768px)
-        .lottie-mobile {
+        // Mobile Animation - show on mobile only (below 768px)
+        .lottie-mobile,
+        .spline-mobile {
             display: none;
             @include mobile{
                 display: block;
@@ -70,6 +110,9 @@
         left: 50%;
         transform: translateX(-50%);
         min-height: 450px;
+        @include desktop-lg{
+            padding: 80px 30px 40px!important; // Adjust padding for mobile
+        }
     }
     
     &__content {

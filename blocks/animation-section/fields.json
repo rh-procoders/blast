@@ -3,6 +3,24 @@
     "title": "Animation Section Settings",
     "fields": [
         {
+            "key": "field_spline_url_desktop",
+            "label": "Spline Scene URL (Desktop)",
+            "name": "spline_url_desktop",
+            "type": "url",
+            "instructions": "Enter the Spline scene URL for desktop (e.g., https://prod.spline.design/AEGoxlwciCmSW2z0/scene.splinecode)",
+            "required": 0,
+            "placeholder": "https://prod.spline.design/AEGoxlwciCmSW2z0/scene.splinecode"
+        },
+        {
+            "key": "field_spline_url_mobile",
+            "label": "Spline Scene URL (Mobile)",
+            "name": "spline_url_mobile",
+            "type": "url",
+            "instructions": "Enter the Spline scene URL for mobile (optional - will use desktop URL if not provided)",
+            "required": 0,
+            "placeholder": "https://prod.spline.design/AEGoxlwciCmSW2z0/scene.splinecode"
+        },
+        {
             "key": "field_lottie_animation",
             "label": "Lottie Animation URL",
             "name": "lottie_animation",

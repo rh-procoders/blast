@@ -90,7 +90,7 @@ $inner_blocks = '<InnerBlocks template="' . esc_attr( wp_json_encode( $allowed_b
     </div>
     
     <!-- Container -->
-    <div class="hero-home__container">
+    <div class="hero-home__container container container--xl">
         
         <!-- Left Content Area: InnerBlocks -->
         <div class="hero-home__content">

@@ -9,6 +9,10 @@
     position: relative;
     z-index: 0;
 
+    @include mobile{
+        padding: 170px 0px 100px;
+    }
+
     &__bg-image-bottom{
         position: absolute;
         bottom: 0;
@@ -18,6 +22,7 @@
         pointer-events: none;
         user-select: none;
         z-index: 1;
+        filter: blur(3px);
     }
     &__bg-image-top{
         position: absolute;
@@ -30,6 +35,7 @@
         width: 60%;
         object-fit: contain;
         object-position: right;
+        filter: blur(3px);
     }
     
     &__container {
@@ -40,7 +46,10 @@
     &__header {
         text-align: left;
         max-width: 710px;
-        margin-bottom: spacing('4xl'); // 80px on mobile
+        margin-bottom:80px; // 80px on mobile
+        @include mobile{
+            margin-bottom: 60px;
+        }
         
     }
     
@@ -52,6 +61,9 @@
     &__grid {
         display: grid;
         gap: 160px; // 48px gap between cards
+        @include mobile{
+            gap: 80px;
+        }
     }
     
     // Column variations
@@ -127,16 +139,12 @@
     
     &__description {
         font-family: $font-family-secondary; // WixMadeforText
-        font-size: font-size('sm'); // 14px
-        font-weight: font-weight('regular'); // 400
-        color: color('dark');
+        font-size: 20px;
+        font-weight: 400;
+        color: #000B40;
         line-height: 1.5;
         margin: 0;
         opacity: 0.9;
-        
-        @media (min-width: 768px) {
-            font-size: font-size('base'); // 16px on desktop
-        }
     }
     
     &__placeholder {
@@ -146,50 +154,3 @@
     }
 }
 
-// Enhanced mobile responsiveness
-@media (max-width: 480px) {
-    .features-section {
-        padding: spacing('3xl') 0; // 64px on small mobile
-        
-        &__header {
-            margin-bottom: spacing('3xl'); // 64px on small mobile
-        }
-        
-        &__grid {
-            gap: spacing('lg'); // 24px on small mobile
-        }
-        
-        &__icon i {
-            width: 36px;
-            height: 36px;
-            font-size: font-size('sm'); // 14px on small mobile
-        }
-        
-        &__title {
-            font-size: font-size('base'); // 16px on small mobile
-        }
-        
-        &__description {
-            font-size: font-size('sm'); // 14px on small mobile
-        }
-    }
-}
-
-// Print styles
-@media print {
-    .features-section {
-        background: color('white') !important;
-        color: color('dark') !important;
-        
-        &__heading,
-        &__title,
-        &__description {
-            color: color('dark') !important;
-        }
-        
-        &__icon i {
-            background: color('light-gray') !important;
-            color: color('dark') !important;
-        }
-    }
-}
