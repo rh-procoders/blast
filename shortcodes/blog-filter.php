@@ -81,7 +81,7 @@ function blast_blog_filter_shortcode(array $atts): string
 
         </div><!-- /.blog-filter__bar -->
 
-        <!-- Posts Grid (Server-side initial render) -->
+        <!-- Posts Grid -->
         <div class="blog-filter__grid">
             <?php
             // Build initial query based on URL parameters
@@ -144,7 +144,7 @@ function blast_blog_filter_shortcode(array $atts): string
 
     </div><!-- /.blog-filter -->
 
-    <script>
+    <script id="blog-filter-scripts" type="text/javascript">
     (function() {
         'use strict';
 
