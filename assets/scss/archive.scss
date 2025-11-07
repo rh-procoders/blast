@@ -1,15 +1,16 @@
 @import "_variable";
 
 .blog-filter {
+  font-family : $font-family-tertiary; // -> 'Tomorrow'
 
   // Filters
   &__bar {
-	--bs-filter-search-w : 400px; // 400px
-	--bs-filter-gap      : 80px; // 80px
+	--bs-filter-search-w : max(315px, 25rem); // 400px
+	--bs-filter-gap      : max(30px, 5rem); // 80px
+	--bs-filter-item-gap : max(10px, 1.25rem); // 20px
 
 	gap                  : var(--bs-filter-gap);
 	display              : flex;
-	flex-direction       : row-reverse;
   }
 
   &__search,
@@ -20,13 +21,53 @@
 
   // Filters - Search
   &__search {
+	position   : relative;
+	align-self : flex-start;
+
 	flex-basis : var(--bs-filter-search-w);
 	max-width  : var(--bs-filter-search-w);
+
+	&-input {
+	  height           : 60px;
+	  padding          : 19px 20px;
+
+	  border-radius    : 14px;
+	  background-color : #FFFFFF;
+	  box-shadow       : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.10);
+
+	  font-size        : font-size('base'); // -> 16px
+	  font-weight      : font-weight('medium'); // -> 500
+	  line-height      : 1.4;
+	}
+
+	.svg-icon {
+	  stroke    : currentColor; // ToDo: Could be moved to _reset.scss
+
+	  position  : absolute;
+	  top       : 50%;
+	  right     : 20px;
+	  transform : translateY(-50%);
+	}
   }
 
+  // Filters - Categories
   &__categories {
-	flex-basis : calc(100% - var(--bs-filter-search-w) - var(--bs-filter-gap));
-	max-width  : calc(100% - var(--bs-filter-search-w) - var(--bs-filter-gap));
+	flex-basis  : calc(100% - var(--bs-filter-search-w) - var(--bs-filter-gap));
+	max-width   : calc(100% - var(--bs-filter-search-w) - var(--bs-filter-gap));
+
+	gap         : var(--bs-filter-item-gap);
+	display     : flex;
+	align-items : center;
+
+  }
+
+  &__category-label {
+	font-size   : font-size('xs'); // -> 12px
+	font-weight : font-weight('bold'); // -> 500
+	font-family : $font-family-tertiary; // -> 'Tomorrow'
+	line-height : 1.1;
+
+	color       : #000B40;
   }
 
   &__category-list {
@@ -34,18 +75,37 @@
 	margin     : 0;
 	padding    : 0;
 
+	gap        : 20px;
 	display    : flex;
 	flex-wrap  : wrap;
 
 	li {
-	  font-family : $font-family-tertiary;
-	  font-weight : $font-weight-semibold; // 500
-	  line-height : 1.1;
-	  font-size   : max(12px, 14px);
-
-	  a {
-
-	  }
+	  display : flex;
 	}
   }
+
+  &__category-item {
+	font-size        : var(--wp--preset--font-size--fs-tag); // -> 14px
+	font-weight      : font-weight('medium'); // -> 500
+	line-height      : 1.1;
+
+	text-decoration  : none !important;
+
+	padding          : 6.3px 12px;
+	border           : 1px solid #000B40;
+	border-radius    : 20px;
+
+	color            : #000B40;
+	background-color : transparent;
+	transition       : color ease .3s, background-color ease .3s;
+
+	&:hover,
+	&:focus,
+	&--active {
+	  color            : #FFFFFF;
+	  background-color : #000B40;
+	}
+  }
+
+  
 }

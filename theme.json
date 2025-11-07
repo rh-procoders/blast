@@ -129,7 +129,12 @@
 					"slug": "fs-large-paragraph",
 					"size": "1.25rem",
 					"name": "Paragraph L - 20px"
-				}
+				},
+                {
+                  "slug": "fs-tag",
+                  "size": "max(12px, 0.875rem)",
+                  "name": "Tag - 14px"
+                }
 			]
 		},
 		"blocks": {
