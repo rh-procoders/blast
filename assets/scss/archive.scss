@@ -1,0 +1,51 @@
+@import "_variable";
+
+.blog-filter {
+
+  // Filters
+  &__bar {
+	--bs-filter-search-w : 400px; // 400px
+	--bs-filter-gap      : 80px; // 80px
+
+	gap                  : var(--bs-filter-gap);
+	display              : flex;
+	flex-direction       : row-reverse;
+  }
+
+  &__search,
+  &__categories {
+	flex-grow   : 1;
+	flex-shrink : 1;
+  }
+
+  // Filters - Search
+  &__search {
+	flex-basis : var(--bs-filter-search-w);
+	max-width  : var(--bs-filter-search-w);
+  }
+
+  &__categories {
+	flex-basis : calc(100% - var(--bs-filter-search-w) - var(--bs-filter-gap));
+	max-width  : calc(100% - var(--bs-filter-search-w) - var(--bs-filter-gap));
+  }
+
+  &__category-list {
+	list-style : none;
+	margin     : 0;
+	padding    : 0;
+
+	display    : flex;
+	flex-wrap  : wrap;
+
+	li {
+	  font-family : $font-family-tertiary;
+	  font-weight : $font-weight-semibold; // 500
+	  line-height : 1.1;
+	  font-size   : max(12px, 14px);
+
+	  a {
+
+	  }
+	}
+  }
+}
