@@ -8,8 +8,8 @@ function load_scripts() {
 
 	wp_enqueue_style( 'main', THEME_URI . '/assets/css/style.css', array(), filemtime(THEME_DIR . '/assets/css/style.css'), false );
 	wp_enqueue_style( 'style', get_stylesheet_uri(), array(), filemtime(THEME_DIR . '/style.css') );
-    
-    
+
+
 	// Register non global style and scripts
     wp_enqueue_script( 'jquery-local', THEME_URI . '/js/plugins/jquery.min.js', '', '3.7.1', false );
 	wp_register_style( 'splide-slider', THEME_URI . '/css/plugins/splide/splide.min.css' );
@@ -38,18 +38,18 @@ function load_scripts() {
 	wp_enqueue_script( 'main', THEME_URI . '/js/main.js', array(), filemtime(THEME_DIR . '/js/main.js'), true );
 
     // Register FAQ block script and style
-    // wp_register_script( 
-    //     'faq-block-script', 
-    //     THEME_URI . '/blocks/faq/js/faq.js', 
-    //     array(), 
-    //     filemtime(THEME_DIR . '/blocks/faq/js/faq.js'), 
-    //     true 
+    // wp_register_script(
+    //     'faq-block-script',
+    //     THEME_URI . '/blocks/faq/js/faq.js',
+    //     array(),
+    //     filemtime(THEME_DIR . '/blocks/faq/js/faq.js'),
+    //     true
     // );
-    // wp_register_style( 
-    //     'faq-block-style', 
-    //     THEME_URI . '/blocks/faq/css/view-style.css', 
-    //     array(), 
-    //     filemtime(THEME_DIR . '/blocks/faq/css/view-style.css') 
+    // wp_register_style(
+    //     'faq-block-style',
+    //     THEME_URI . '/blocks/faq/css/view-style.css',
+    //     array(),
+    //     filemtime(THEME_DIR . '/blocks/faq/css/view-style.css')
     // );
 	wp_enqueue_script( 'main', THEME_URI . '/js/main.js', array(), filemtime(THEME_DIR . '/js/main.js'), true );
 
@@ -61,10 +61,13 @@ function load_scripts() {
     if( is_singular( 'post' ) ) {
         wp_enqueue_style( 'single-post',  THEME_URI . '/assets/css/single-post.css', array(), filemtime(THEME_DIR . '/assets/css/single-post.css') );
     }
+
+    // Archive Page Styles
+    wp_register_style( 'blast-archive', THEME_URI . '/assets/css/archive.css' );
 }
 add_action( 'wp_enqueue_scripts', 'load_scripts' );
 
-    
+
 
 
 function enqueue_custom_script() {

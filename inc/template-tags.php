@@ -161,3 +161,66 @@ if ( ! function_exists( 'wp_body_open' ) ) :
 		do_action( 'wp_body_open' );
 	}
 endif;
+
+/**
+ *  Function tries to retrieve "custom_avatar"
+ *  custom field set for user profile with ACF Pro
+ *
+ *  If nothing is found, tries to get default WooCommerce
+ *  Gravatar result for the given user ID
+ *
+ * @param int $user_id
+ * @param int $size
+ *
+ * @return void
+ */
+function bs_get_user_avatar( int $user_id, int $size = 59 ): void
+{
+    // First, try returning Custom Avatar from ACF Fields
+    if ( function_exists( 'get_field' ) ) {
+        $avatar = get_field( 'bs_custom_avatar', "user_" . $user_id );
+        if ( $avatar ) {
+            echo wp_kses_post( "<img
+                        src='{$avatar['url']}'
+                        alt='{$avatar['title']}'
+                        width='{$size}' width='{$size}'
+                        class='avatar avatar-{$size} photo'>" );
+        } else {
+            echo get_avatar( $user_id, $size );
+        }
+    } else {
+        echo get_avatar( $user_id, $size );
+    }
+}
+
+/**
+ * Calculate estimated reading time for a post
+ * Based on average reading speed of 200 words per minute
+ *
+ * @param int|null $post_id Post ID (optional, defaults to current post)
+ * @return int Reading time in minutes (minimum 1)
+ */
+function bs_get_reading_time( ?int $post_id = null ): int
+{
+    if ( ! $post_id ) {
+        $post_id = get_the_ID();
+    }
+
+    $post = get_post( $post_id );
+    if ( ! $post ) {
+        return 1;
+    }
+
+    // Get post content and strip HTML tags
+    $content = strip_tags( $post->post_content );
+    $content = strip_shortcodes( $content );
+
+    // Count words
+    $word_count = str_word_count( $content );
+
+    // Calculate reading time (200 words per minute)
+    $reading_time = ceil( $word_count / 200 );
+
+    // Minimum 1 minute
+    return max( 1, $reading_time );
+}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-  
+
   <!-- Arrow Right -->
 
   <symbol id="icon-arrow-right" viewBox="0 0 14 10">
@@ -11,98 +11,98 @@
     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.21875 1.06067L12.7482 4.59008L9.21875 1.06067Z" fill="currentColor"/>
     <path d="M9.21875 1.06067L12.7482 4.59008" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
   </symbol>
-  
+
   <!-- Arrow Right Simple -->
   <symbol id="icon-arrow-right-simple" viewBox="0 0 16 16">
     <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  
+
   <!-- Arrow Right Circle -->
   <symbol id="icon-arrow-right-circle" viewBox="0 0 24 24">
     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
     <path d="M12 8l4 4-4 4M8 12h8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  
+
   <!-- Arrow Left -->
   <symbol id="icon-arrow-left" viewBox="0 0 24 24">
     <path d="M15.41 16.59L10.83 12L15.41 7.41L14 6L8 12L14 18L15.41 16.59Z" fill="currentColor"/>
   </symbol>
-  
+
   <!-- Arrow Left Simple -->
   <symbol id="icon-arrow-left-simple" viewBox="0 0 16 16">
     <path d="M10 3l-5 5 5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  
+
   <!-- Arrow Up -->
   <symbol id="icon-arrow-up" viewBox="0 0 24 24">
     <path d="M16.59 15.41L12 10.83L7.41 15.41L6 14L12 8L18 14L16.59 15.41Z" fill="currentColor"/>
   </symbol>
-  
+
   <!-- Arrow Down -->
   <symbol id="icon-arrow-down" viewBox="0 0 24 24">
     <path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z" fill="currentColor"/>
   </symbol>
-  
+
   <!-- Chevron Down -->
   <symbol id="icon-chevron-down" viewBox="0 0 24 24">
     <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  
+
   <!-- Chevron Up -->
   <symbol id="icon-chevron-up" viewBox="0 0 24 24">
     <path d="M18 15l-6-6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  
+
   <!-- Chevron Right -->
   <symbol id="icon-chevron-right" viewBox="0 0 24 24">
     <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  
+
   <!-- Chevron Left -->
   <symbol id="icon-chevron-left" viewBox="0 0 24 24">
     <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  
+
   <!-- External Link Arrow -->
   <symbol id="icon-external-link" viewBox="0 0 24 24">
     <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  
+
   <!-- Long Arrow Right -->
   <symbol id="icon-long-arrow-right" viewBox="0 0 24 24">
     <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  
+
   <!-- Long Arrow Left -->
   <symbol id="icon-long-arrow-left" viewBox="0 0 24 24">
     <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  
+
   <!-- Arrow Right Bold -->
   <symbol id="icon-arrow-right-bold" viewBox="0 0 16 16">
     <path d="M6.5 2L12 7.5L6.5 13L5.5 12L10 7.5L5.5 3L6.5 2Z" fill="currentColor"/>
   </symbol>
-  
+
   <!-- Double Arrow Right -->
   <symbol id="icon-double-arrow-right" viewBox="0 0 24 24">
     <path d="M5 12l6-6v12l-6-6zm7 0l6-6v12l-6-6z" fill="currentColor"/>
   </symbol>
-  
+
   <!-- Arrow Right Curved -->
   <symbol id="icon-arrow-right-curved" viewBox="0 0 24 24">
     <path d="M3 12c0-4.97 4.03-9 9-9s9 4.03 9 9M21 12l-3-3M21 12l-3 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  
+
   <!-- Play Arrow -->
   <symbol id="icon-play-arrow" viewBox="0 0 24 24">
     <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
   </symbol>
-  
+
   <!-- Back Arrow -->
   <symbol id="icon-back-arrow" viewBox="0 0 24 24">
     <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  
+
   <!-- Forward Arrow -->
   <symbol id="icon-forward-arrow" viewBox="0 0 24 24">
     <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
@@ -131,7 +131,10 @@
     <path id="bubbles2" d="M43.376,25.2a12.508,12.508,0,0,0,.344-13.571,16.906,16.906,0,0,0-4.8-5.1A26.263,26.263,0,0,0,23.725,2a26.277,26.277,0,0,0-15.2,4.525,16.884,16.884,0,0,0-4.8,5.1,12.462,12.462,0,0,0-.047,12.935,16.263,16.263,0,0,0,3.844,4.413c-.438,2.83-3,5.072-6.674,7.5A1.9,1.9,0,0,0,1.9,39.96a29.742,29.742,0,0,0,13-3.251,33.016,33.016,0,0,0,4.578-2.747c.913.131,1.839.22,2.764.268.3.011.592.023.9.03a9.907,9.907,0,0,0,1.145,1.086,12.6,12.6,0,0,0,7.983,2.716,13.827,13.827,0,0,0,2.479-.226c1.471,1.555,4.028,2.124,6.063,2.124a.956.956,0,0,0,.926-.7A.935.935,0,0,0,41.3,38.2a3.56,3.56,0,0,1-1.5-2.509,8.847,8.847,0,0,0,3.849-7.118,8.111,8.111,0,0,0-.558-2.959c.095-.142.19-.279.279-.416Zm-24.07,4.893a1.9,1.9,0,0,0-1.53.4,27.238,27.238,0,0,1-4.662,2.864,28.788,28.788,0,0,1-4.692,1.834,10.347,10.347,0,0,0,2.959-7.1,1.9,1.9,0,0,0-.784-1.536c-3.162-2.3-4.9-5.3-4.9-8.422,0-3.174,1.792-6.2,5.041-8.524A22.467,22.467,0,0,1,23.725,5.8,22.467,22.467,0,0,1,36.716,9.609c3.251,2.325,5.041,5.351,5.041,8.524a8.734,8.734,0,0,1-1.027,4.081c-.154-.142-.315-.279-.48-.416a12.6,12.6,0,0,0-7.983-2.716A12.6,12.6,0,0,0,24.283,21.8a8.734,8.734,0,0,0-3.405,6.774,7.9,7.9,0,0,0,.2,1.761c-.6-.059-1.186-.142-1.767-.243Zm19,4.335a.95.95,0,0,0-.427.79,5.435,5.435,0,0,0,.605,2.551,4.542,4.542,0,0,1-2.593-1.518.957.957,0,0,0-.776-.4.89.89,0,0,0-.213.023,11.813,11.813,0,0,1-2.635.3c-5.231,0-9.49-3.405-9.49-7.592s4.259-7.592,9.49-7.592,9.49,3.405,9.49,7.592A7.1,7.1,0,0,1,38.3,34.425Z" transform="translate(-0.001 -2)" fill="#68b32f"/>
   </symbol>
 
-
+    <symbol id="icon-filter-search" viewBox="0 0 20 20">
+        <path d="M16.6652 16.6691L13.168 13.1719" fill="none" stroke-width="1.5" stroke-linecap="square"/>
+        <path d="M2 8C2 11.3137 4.68629 14 8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2V2C4.68639 2.00024 2.00024 4.68639 2 8" fill="none" stroke-width="1.5" stroke-linecap="square"/>
+    </symbol>
 
 
 </svg>

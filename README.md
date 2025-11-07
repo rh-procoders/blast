@@ -38,7 +38,7 @@ cd /Users/renatohoxha/Local Sites/blast-2025/app/public/wp-content/themes/blast-
 Run the following command to install the necessary packages:
 
 ```sh
-npm install gulp gulp-sass sass gulp-plumber gulp-rename gulp-postcss cssnano sass-graph --save-dev
+npm install
 ```
 
 ---
