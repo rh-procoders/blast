@@ -1,8 +1,7 @@
 @import "_variable";
 html {
 	box-sizing: border-box;
-	font-size: 100%;
-	// line-height: 1.3125;
+	font-size: 16px;
 	line-height: 1.5;
 	height: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -11,6 +10,10 @@ html {
 	-moz-osx-font-smoothing: grayscale;
 	padding: 0 !important;
 	--scrollbar-width: 0px;
+	@include desktop-lg {
+		font-size: clamp(8px,8px + .573vw,16px);
+	}
+
 	@include tablet {
 		--scrollbar-width: 0px !important;
 	}
@@ -18,8 +21,6 @@ html {
 
 body {
 	min-width: 320px;
-	font-size: 16px;
-	line-height: 1.5;
 	background: #F4F4F4;
 	color: $c-dark;
 	font-family: $font-family-primary;
@@ -293,7 +294,7 @@ a:active {
 }
 
 .alignwide{
-	max-width: calc(var(--wp--preset--spacing--wide-size) + 20px);
+	max-width: var(--wp--preset--container-xl);
 	margin: 0 auto;
 	padding-left: 30px;
 	padding-right: 30px;
@@ -530,7 +531,7 @@ section {
 		max-width: 1170px;
 	}
 	&--xl{
-		max-width: 1520px;
+		max-width: var(--wp--preset--container-xl);
 	}
 	&--blog-filter {
 	  max-width: 1200px;

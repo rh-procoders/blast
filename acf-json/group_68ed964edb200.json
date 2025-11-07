@@ -156,6 +156,27 @@
             "mime_types": "",
             "allow_in_bindings": 0,
             "preview_size": "medium"
+        },
+        {
+            "key": "field_690de69c3a5f1",
+            "label": "Footer Lottie File",
+            "name": "footer_lottie_file",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0
         }
     ],
     "location": [
@@ -177,5 +198,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762402576
+    "modified": 1762518709
 }

@@ -2,28 +2,37 @@
 
 
 h1, .h1 {
-  font-size: 80px;
+  font-size: var(--wp--preset--font-size--fs-2-extra-large);
   letter-spacing: -0.04em;
   line-height: 110%;
   font-weight: $font-weight-semibold;
+  @include mobile-sm {
+    font-size: 56px;
+  }
 }
 
 h2, .h2 {
-  font-size: 60px;
+  font-size: var(--wp--preset--font-size--fs-extra-large);
   letter-spacing: 0px;
   line-height: 110%;
   font-weight: $font-weight-regular;
+  @include mobile-sm {
+    font-size: 34px;
+  }
 }
 
 h3, .h3 {
-  font-size: 56px;
+  font-size: var(--wp--preset--font-size--fs-large);
   letter-spacing: -0.04em;
   line-height: 110%;
   font-weight: $font-weight-regular;
+  @include mobile-sm {
+    font-size: 28px;
+  }
 }
 
 h4, .h4 {
-  font-size: 34px;
+  font-size: var(--wp--preset--font-size--fs-medium);
   letter-spacing: -0.02em;
   line-height: 130%;
   font-weight: $font-weight-regular;

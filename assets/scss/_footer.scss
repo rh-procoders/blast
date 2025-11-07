@@ -4,10 +4,10 @@
         width: 100%;
         height: auto;
    }
+
    &__wrapper{
         border-radius: 70px;
         background-color: #F4F4F4;
-        background-image: url('../../img/footer-bg-graph.svg');
         background-position: bottom right;
         background-size: contain;
         background-repeat: no-repeat;
@@ -16,6 +16,16 @@
         margin-bottom: 200px;
         display: flex;
         gap: 60px;
+        position: relative;
+        overflow: hidden;
+   }
+   &__bg-image-bottom{
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        width: 55%;
+        height: auto;
+        z-index: 0;
    }
    .footer-menu{
     ul{

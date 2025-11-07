@@ -28,6 +28,13 @@ if ( ! empty( $block['className'] ) ) {
 // Get field values
 $lottie_animation_desktop = get_field('lottie_animation');
 $lottie_animation_mobile = get_field('lottie_animation_mobile');
+$spline_url_desktop = get_field('spline_url_desktop');
+$spline_url_mobile = get_field('spline_url_mobile');
+
+// Enqueue Spline script only if Spline URLs are provided
+if ($spline_url_desktop || $spline_url_mobile) {
+    wp_enqueue_script('spline-viewer');
+}
 
 // Fallback: if only one is set, use it for both
 if (!$lottie_animation_desktop && $lottie_animation_mobile) {
@@ -35,6 +42,10 @@ if (!$lottie_animation_desktop && $lottie_animation_mobile) {
 }
 if (!$lottie_animation_mobile && $lottie_animation_desktop) {
     $lottie_animation_mobile = $lottie_animation_desktop;
+}
+
+if (!$spline_url_mobile && $spline_url_desktop) {
+    $spline_url_mobile = $spline_url_desktop;
 }
 
 $wrapper_attributes = get_block_wrapper_attributes([
@@ -72,39 +83,74 @@ $inner_blocks = '<InnerBlocks template="' . esc_attr( wp_json_encode( $allowed_b
 <?php else: ?>
 
 <section <?php echo $wrapper_attributes; ?>>
-    <!-- Background Lottie Animation -->
-    <div class="animation-section__lottie">
-        <?php if ($lottie_animation_desktop || $lottie_animation_mobile): ?>
-            <!-- Desktop Lottie Animation -->
-            <?php if ($lottie_animation_desktop): ?>
-                <lottie-player 
-                    id="lottie-desktop-<?php echo $block['id']; ?>"
-                    class="lottie-desktop"
-                    src="<?php echo esc_url( $lottie_animation_desktop ); ?>"  
-                    background="transparent"  
-                    speed="0.6"  
-                    style="width: 100%; height: 100%;"  
+    <!-- Background Animation -->
+    <!-- Spline 3D Animation Layer -->
+    <?php if ($spline_url_desktop || $spline_url_mobile): ?>
+        <div class="animation-layer animation-layer--spline">
+            <!-- Desktop Spline Animation -->
+            <?php if ($spline_url_desktop): ?>
+                <spline-viewer 
+                    id="spline-desktop-<?php echo $block['id']; ?>"
+                    class="spline-desktop"
+                    url="<?php echo esc_url($spline_url_desktop); ?>"
                     data-animation-on-scroll>
-                </lottie-player>
+                </spline-viewer>
             <?php endif; ?>
             
-            <!-- Mobile Lottie Animation -->
-            <?php if ($lottie_animation_mobile): ?>
-                <lottie-player 
-                    id="lottie-mobile-<?php echo $block['id']; ?>"
-                    class="lottie-mobile"
-                    src="<?php echo esc_url( $lottie_animation_mobile ); ?>"  
-                    background="transparent"  
-                    speed="0.6"  
-                    style="width: 100%; height: 100%;"  
+            <!-- Mobile Spline Animation -->
+            <?php if ($spline_url_mobile): ?>
+                <spline-viewer 
+                    id="spline-mobile-<?php echo $block['id']; ?>"
+                    class="spline-mobile"
+                    url="<?php echo esc_url($spline_url_mobile); ?>"
                     data-animation-on-scroll>
-                </lottie-player>
+                </spline-viewer>
             <?php endif; ?>
-        <?php else: ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="animation-layer animation-layer--lottie">
+        
+        <!-- Lottie Animation Layer -->
+        <?php if ($lottie_animation_desktop || $lottie_animation_mobile): ?>
+            <div class="animation-layer animation-layer--lottie">
+                <!-- Desktop Lottie Animation -->
+                <?php if ($lottie_animation_desktop): ?>
+                    <lottie-player 
+                        id="lottie-desktop-<?php echo $block['id']; ?>"
+                        class="lottie-desktop"
+                        src="<?php echo esc_url( $lottie_animation_desktop ); ?>"  
+                        background="transparent"  
+                        speed="0.6"
+                        loop="false"
+                        style="width: 100%; height: 100%;"  
+                        data-animation-on-scroll>
+                    </lottie-player>
+                <?php endif; ?>
+                
+                <!-- Mobile Lottie Animation -->
+                <?php if ($lottie_animation_mobile): ?>
+                    <lottie-player 
+                        id="lottie-mobile-<?php echo $block['id']; ?>"
+                        class="lottie-mobile"
+                        src="<?php echo esc_url( $lottie_animation_mobile ); ?>"  
+                        background="transparent"  
+                        speed="0.6"
+                        loop="false"
+                        style="width: 100%; height: 100%;"  
+                        data-animation-on-scroll>
+                    </lottie-player>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+        
+        <!-- Fallback message when no animations are provided -->
+        <?php if (!($spline_url_desktop || $spline_url_mobile) && !($lottie_animation_desktop || $lottie_animation_mobile)): ?>
             <p style="text-align: center; padding: 50px; background: #f0f0f0; border: 2px dashed #ccc;">
-                No Lottie animation files selected. Please add Lottie JSON files for desktop and/or mobile in the block settings.
+                No animations provided. Please add Spline scene URLs and/or Lottie JSON files in the block settings.
             </p>
         <?php endif; ?>
+        
     </div>
     
     <!-- Container -->

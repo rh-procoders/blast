@@ -18,6 +18,23 @@ function load_scripts() {
     wp_enqueue_script( 'lottie-player', THEME_URI . '/js/lottie-player.js', '', '1.7.1', false );
 	wp_enqueue_script( 'lottie-player-interactivity', THEME_URI . '/js/lottie-interactivity.js', '', '1.7.1', false );
 
+    // Register Spline 3D viewer library
+    wp_register_script( 
+        'spline-viewer', 
+        'https://unpkg.com/@splinetool/viewer@1.10.96/build/spline-viewer.js', 
+        array(), 
+        '1.10.96', 
+        true 
+    );
+    
+    // Add module type attribute for Spline viewer
+    add_filter('script_loader_tag', function($tag, $handle) {
+        if ($handle === 'spline-viewer') {
+            return str_replace('<script ', '<script type="module" ', $tag);
+        }
+        return $tag;
+    }, 10, 2);
+
 	wp_enqueue_script( 'main', THEME_URI . '/js/main.js', array(), filemtime(THEME_DIR . '/js/main.js'), true );
 
     // Register FAQ block script and style

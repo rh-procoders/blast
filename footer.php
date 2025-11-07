@@ -38,6 +38,7 @@
                 )
             );
             ?>
+        <img src="<?php echo THEME_URI ?>/img/footer-bg-graph.png" alt="footer graphic" class="main-footer__bg-image-bottom" loading="lazy"/>
         </div>
 
         </div>
@@ -45,7 +46,12 @@
 
     <?php $footer_image_placeholder = get_field( 'footer_image_placeholder', 'option' ); ?>
     <?php if ( $footer_image_placeholder ) : ?>
-        <img src="<?php echo esc_url( $footer_image_placeholder['url'] ); ?>" alt="<?php echo esc_attr( $footer_image_placeholder['alt'] ); ?>" class="footer-image-placeholder"/>
+        <?php $footer_lottie = get_field( 'footer_lottie_file', 'option' ); ?>
+        <?php if ( $footer_lottie ) : ?>
+            <lottie-player src="<?php echo esc_url( $footer_lottie['url'] ); ?>" background="transparent" speed="1" loop autoplay></lottie-player>
+        <?php else : ?>
+            <img src="<?php echo esc_url( $footer_image_placeholder['url'] ); ?>" alt="<?php echo esc_attr( $footer_image_placeholder['alt'] ); ?>" class="footer-image-placeholder"/>
+        <?php endif; ?>
     <?php endif; ?>
 
 </footer>
