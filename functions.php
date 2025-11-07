@@ -173,6 +173,11 @@ require get_template_directory() . '/inc/init-cpt.php';
 require get_template_directory() . '/inc/helpers.php';
 
 /**
+ * AJAX Handlers
+ */
+require get_template_directory() . '/inc/ajax-handlers.php';
+
+/**
  * ACF Functions and Block Registration
  */
 require get_template_directory() . '/inc/acf.php';

@@ -210,7 +210,7 @@ function highlight_words($text, $words_to_highlight) {
     if (empty($words_to_highlight)) {
         return $text;
     }
-    
+
     $words = array_map('trim', explode(',', $words_to_highlight));
     foreach ($words as $word) {
         if (!empty($word)) {
@@ -221,3 +221,20 @@ function highlight_words($text, $words_to_highlight) {
 }
 
 
+/**
+ * Auto-load all shortcodes from the shortcodes folder
+ */
+function blast_load_shortcodes() {
+    $shortcodes_dir = get_template_directory() . '/shortcodes/';
+
+    if (!is_dir($shortcodes_dir)) {
+        return;
+    }
+
+    $shortcode_files = glob($shortcodes_dir . '*.php');
+
+    foreach ($shortcode_files as $file) {
+        require_once $file;
+    }
+}
+blast_load_shortcodes();
