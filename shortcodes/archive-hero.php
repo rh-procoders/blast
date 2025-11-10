@@ -217,8 +217,8 @@ function blast_archive_hero_shortcode( array $atts ): string
 
             // Initialize content slider (slide effect)
             const contentSlider = new Splide( '#<?= esc_js( $slider_id . '-content' ) ?>', {
-                type: 'slide',
-                rewind: true,
+                type: 'loop',
+                rewind: false,
                 pagination: false,
                 arrows: true,
             } );
