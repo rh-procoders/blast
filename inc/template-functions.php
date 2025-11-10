@@ -49,3 +49,126 @@ function add_custom_block_categories( $categories, $post ) {
 }
 add_filter( 'block_categories_all', 'add_custom_block_categories', 10, 2 );
 
+
+/**
+ * Featured star column for default Posts
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
+define( 'BS_FEATURED_META_KEY', 'bs-post__is-featured' );
+
+/**
+ * Add "star" column to Posts list table.
+ */
+add_filter( 'manage_post_posts_columns', function ( $columns ) {
+
+    $new = [];
+
+    foreach ($columns as $key => $label) {
+        $new[$key] = $label;
+
+        // Inject our column right after the title column.
+        if ( 'title' === $key ) {
+            $new['bs_featured'] = '★';
+        }
+    }
+
+    // Fallback in case "title" column key changes somehow.
+    if ( ! isset( $new['bs_featured'] ) ) {
+        $new['bs_featured'] = '★';
+    }
+
+    return $new;
+} );
+
+/**
+ * Render the star button in our custom column.
+ */
+add_action( 'manage_post_posts_custom_column', function ( $column, $post_id ) {
+
+    if ( 'bs_featured' !== $column ) {
+        return;
+    }
+
+    // Read ACF true/false value – stored as '0' or '1'
+    $is_featured = (bool)get_post_meta( $post_id, BS_FEATURED_META_KEY, true );
+
+    $nonce      = wp_create_nonce( 'bs_toggle_post_featured_' . $post_id );
+    $icon_class = $is_featured ? 'dashicons-star-filled' : 'dashicons-star-empty';
+    $aria_label = $is_featured
+        ? __( 'Unmark as featured', 'blast-2025' )
+        : __( 'Mark as featured', 'blast-2025' );
+
+    echo '<button
+        type="button"
+        class="bs-featured-toggle button-link"
+        data-post-id="' . esc_attr( $post_id ) . '"
+        data-nonce="' . esc_attr( $nonce ) . '"
+        aria-label="' . esc_attr( $aria_label ) . '"
+        title="' . esc_attr( $aria_label ) . '"
+    >';
+    echo '<span class="dashicons ' . esc_attr( $icon_class ) . '"></span>';
+    echo '</button>';
+}, 10, 2 );
+
+/**
+ * Make the column narrow + center aligned only on Posts list screen.
+ */
+add_action( 'admin_head-edit.php', function () {
+    $screen = get_current_screen();
+    if ( ! $screen || 'edit-post' !== $screen->id ) {
+        return;
+    }
+    ?>
+    <style>
+        .column-bs_featured {
+            width: 60px;
+            text-align: center!important;
+        }
+
+        .column-bs_featured .bs-featured-toggle .dashicons {
+            font-size: 18px;
+        }
+
+        .column-bs_featured .bs-featured-toggle {
+            cursor: pointer;
+        }
+    </style>
+    <?php
+} );
+
+
+/**
+ * AJAX: toggle the ACF "Is Featured" true/false field.
+ */
+add_action( 'wp_ajax_bs_toggle_post_featured', function () {
+
+    if ( ! current_user_can( 'edit_posts' ) ) {
+        wp_send_json_error( array( 'message' => 'No permission.' ), 403 );
+    }
+
+    $post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
+    $nonce   = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+
+    if ( ! $post_id || ! $nonce ) {
+        wp_send_json_error( array( 'message' => 'Missing data.' ), 400 );
+    }
+
+    if ( ! wp_verify_nonce( $nonce, 'bs_toggle_post_featured_' . $post_id ) ) {
+        wp_send_json_error( array( 'message' => 'Invalid nonce.' ), 403 );
+    }
+
+    $current = (bool)get_post_meta( $post_id, BS_FEATURED_META_KEY, true );
+    $new     = $current ? 0 : 1;
+
+    // Update ACF meta; true_false expects '1' or '0'.
+    update_post_meta( $post_id, BS_FEATURED_META_KEY, $new );
+
+    wp_send_json_success( array(
+        'post_id'     => $post_id,
+        'is_featured' => (bool)$new,
+    ) );
+} );
