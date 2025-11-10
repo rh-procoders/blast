@@ -19,14 +19,14 @@ function load_scripts() {
 	wp_enqueue_script( 'lottie-player-interactivity', THEME_URI . '/js/lottie-interactivity.js', '', '1.7.1', false );
 
     // Register Spline 3D viewer library
-    wp_register_script( 
-        'spline-viewer', 
-        'https://unpkg.com/@splinetool/viewer@1.10.96/build/spline-viewer.js', 
-        array(), 
-        '1.10.96', 
-        true 
+    wp_register_script(
+        'spline-viewer',
+        'https://unpkg.com/@splinetool/viewer@1.10.96/build/spline-viewer.js',
+        array(),
+        '1.10.96',
+        true
     );
-    
+
     // Add module type attribute for Spline viewer
     add_filter('script_loader_tag', function($tag, $handle) {
         if ($handle === 'spline-viewer') {
@@ -82,6 +82,40 @@ function enqueue_custom_script() {
      wp_enqueue_script( 'lottie-player', THEME_URI . '/js/lottie-player.js', '', '1.7.1', false );
 }
 add_action( 'enqueue_block_editor_assets', 'enqueue_custom_script' );
+
+
+/**
+ * Posts Editor Script
+ * Used to execute setting featured posts from the Posts View screen
+ */
+add_action( 'admin_enqueue_scripts', function( $hook ) {
+    // We only want the Posts list screen.
+    if ( 'edit.php' !== $hook ) {
+        return;
+    }
+
+    $screen = get_current_screen();
+    if ( empty( $screen ) || 'post' !== $screen->post_type ) {
+        return;
+    }
+
+    wp_enqueue_script(
+        'admin-posts-script',
+        THEME_URI . '/js/admin-posts-script.js',
+        array( 'jquery' ), // or [] if you don't need anything
+        THEME_VERSION,
+        true
+    );
+
+    wp_localize_script(
+        'admin-posts-script',
+        'bsFeaturedPosts',
+        array(
+            'ajax_url' => admin_url( 'admin-ajax.php' ),
+        )
+    );
+} );
+
 
 
 // /wp-content/themes/blast-2025/js/plugins/lottie-player.js
