@@ -1,6 +1,211 @@
 @import "_variable";
 
+// General Archive Styles
+.blog {
+  --header-h : 122px;
+
+  .main {
+	padding-top : var(--header-h);
+
+	// Main Blog Heading
+	h1.wp-block-heading {
+	  margin-top  : max(40px, 3.75rem); // 60px
+
+	  font-size   : max(24px, 2.5rem); // 40px
+	  font-weight : 400;
+	  line-height : 1.1;
+
+	  color       : #000B40;
+	}
+  }
+}
+
+// Archive Hero Shortcode - Styles
+.archive-hero {
+  --bs-archive-hero-pt          : max(20px, 3.75rem); // 60px
+  --bs-archive-hero-pr          : max(20px, 3.75rem); // 60px
+  --bs-archive-hero-pb          : max(30px, 3.75rem); // 60px
+  --bs-archive-hero-pl          : max(20px, 3.75rem); // 60px
+
+  --bs-archive-hero-wrapper-gap : max(16px, 46px); // 46px
+  --bs-archive-hero-thumbs-w    : 37.5rem; // 600px
+
+
+  margin-top                    : max(60px, 5rem); // 80px
+
+  background-color              : #FFFFFF;
+  border-radius                 : 40px;
+  padding                       : var(--bs-archive-hero-pt) var(--bs-archive-hero-pr) var(--bs-archive-hero-pb) var(--bs-archive-hero-pl);
+
+  &__wrapper {
+	gap     : var(--bs-archive-hero-wrapper-gap);
+	display : flex;
+  }
+
+  &__content,
+  &__thumbnails {
+	flex-grow   : 1;
+	flex-shrink : 1;
+  }
+
+  // Left Column
+  &__content {
+	flex-basis : calc(100% - var(--bs-archive-hero-wrapper-gap) - var(--bs-archive-hero-thumbs-w));
+	max-width  : calc(100% - var(--bs-archive-hero-wrapper-gap) - var(--bs-archive-hero-thumbs-w));
+
+	display    : flex;
+  }
+
+  &__slide-content {
+	gap            : max(16px, 1.25rem); //20px
+	display        : flex;
+	flex-direction : column;
+  }
+
+  &__featured-badge {
+	align-self       : flex-start;
+
+	gap              : 8px;
+	display          : flex;
+	align-items      : center;
+
+	padding          : 7.3px 12.8px;
+	background-color : #FF654A;
+	border-radius    : 20px;
+	color            : #FFFFFF;
+
+	font-family      : $font-family-tertiary;
+
+	font-size        : max(12px, 0.875rem); // 14px
+	font-weight      : font-weight(medium);
+	line-height      : 1.1;
+  }
+
+  &__title {
+	font-size      : max(24px, 2.875rem); // 46px
+	line-height    : 1.2;
+	letter-spacing : calc(-1 * max(0.48px, 0.0575rem)); // -0.92px
+	font-weight    : 600;
+
+	color          : #000B40;
+
+	a {
+	  color           : inherit;
+	  text-decoration : none !important;
+	}
+  }
+
+  // Right Column
+  &__thumbnails {
+	flex-basis : var(--bs-archive-hero-thumbs-w);
+	max-width  : var(--bs-archive-hero-thumbs-w);
+  }
+
+  &__thumbnail {
+	background-color : #F4F4F4;
+
+	border-radius    : 30px;
+	overflow         : hidden;
+
+	img {
+	  object-fit      : cover;
+	  object-position : 50% 50%;
+	}
+  }
+
+  &__splide {
+
+	// Left Column
+	&--content {
+	  display        : flex;
+	  flex-direction : column;
+
+	  .archive-hero__splide {
+
+		&-track {
+
+		}
+	  }
+	}
+
+	// Right Column
+	&--thumbnails {
+
+	}
+  }
+
+  // Splide Navigation Wrapper
+  &__navigation {
+	margin-top  : auto;
+	padding-top : max(30px, 2.3125rem); // 37px
+
+	gap         : max(10px, 1rem); // 16px
+	display     : flex;
+	align-items : center;
+  }
+
+  &__arrows {
+	gap     : 10px;
+	display : flex;
+  }
+
+  &__arrow {
+	// Style reset
+	position      : relative;
+	top           : auto;
+	left          : auto;
+	right         : auto;
+	transform     : none;
+	background    : transparent;
+	border-radius : 0;
+	font-size     : 26px;
+	opacity       : 1;
+
+	// Styles
+	display       : flex;
+
+	height        : max(24px, 1.625rem); // 26px
+	width         : max(24px, 1.625rem); // 26px
+
+	color         : #000B40;
+
+	transition    : opacity ease .3s;
+
+	&:hover:not(:disabled),
+	&:focus {
+	  opacity : 0.7;
+	}
+
+	&--prev {
+
+	}
+
+	&--left {
+
+	}
+
+
+	svg {
+	  stroke  : currentColor;
+	  fill    : currentColor;
+
+	  display : flex;
+	}
+  }
+
+  &__counter {
+	font-family          : $font-family-tertiary;
+	font-size            : max(12px, 0.875rem); // 14px
+	font-weight          : font-weight(medium);
+	line-height          : 1.1;
+
+	font-variant-numeric : tabular-nums; // does nothing
+  }
+}
+
+// Blog Filter Shortcode - Styles
 .blog-filter {
+  margin-top : 60px; // same for mobile
 
   // Filters
   &__bar {
@@ -126,7 +331,7 @@
 	flex-direction   : column;
 
 	border-radius    : 40px;
-	color            : #000B40;
+	color            : #000B40 !important;
 	background-color : #FFFFFF;
 
 	padding          : 40px;

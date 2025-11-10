@@ -8,6 +8,10 @@
 
 wp_enqueue_style('blast-archive');
 
+// Enqueue Splide for archive hero slider
+wp_enqueue_style('splide-slider');
+wp_enqueue_script('splide-slider');
+
 get_header();
 
 // Get the page set as "Posts Page" for title/content
@@ -23,11 +27,14 @@ if ($page_for_posts):
         <h1 class="page-title"><?= esc_html($page->post_title); ?></h1>
     <?php endif;
 
-    // Optionally display page content
-    // echo apply_filters('the_content', $page->post_content);
+    // Display page content
+     echo apply_filters('the_content', $page->post_content);
 endif;
 
+// Render archive hero slider
+//echo do_shortcode('[blast-archive-hero]');
+
 // Render blog filter shortcode ONCE
-echo do_shortcode('[blast-blog-filter]');
+//echo do_shortcode('[blast-blog-filter]');
 
 get_footer();
