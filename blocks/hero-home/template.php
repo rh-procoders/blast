@@ -86,7 +86,7 @@ $inner_blocks = '<InnerBlocks template="' . esc_attr( wp_json_encode( $allowed_b
 <section <?php echo $wrapper_attributes; ?>>
     <!-- Background Gradient Overlay -->
     <div class="hero-home__gradient-overlay">
-        <img src="<?php echo THEME_URI ?>/img/hero-background.svg" alt="">
+        <img src="<?php echo THEME_URI ?>/img/hero-home-bg-desktop.png" alt="">
     </div>
     
     <!-- Container -->

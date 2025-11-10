@@ -160,7 +160,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
                                             </div>
 
                                         </div>
-                                        <img src="<?php echo THEME_URI ?>/img/testimonials-bg-effect.svg" alt="testimonials-bg-effect" loading="lazy" class="testimonials-slider__bg-effect">
+                                        <img src="<?php echo THEME_URI ?>/img/testimonials-bg-desktop.png" alt="testimonials-bg-effect" loading="lazy" class="testimonials-slider__bg-effect">
                                         
                                     </div>
                                     <div class="testimonials-slider__bottom-icon">

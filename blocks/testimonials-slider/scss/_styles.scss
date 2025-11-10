@@ -89,20 +89,15 @@
     &__bg-effect{
         height: auto;
         position: absolute;
-        right: -107px;
-        top: 36%;
-        width: 140%;
+        right: 0px;
+        bottom: 0px;
+        width: 100%;
         z-index: -1;
-        filter: blur(5px);
         @include tablet{
-             filter: blur(7px);
             height: auto;
             position: absolute;
-            right: -42px;
             top: inherit;
-            width: 171%;
             z-index: -1;
-            bottom: -23px;
         }
     }
     
