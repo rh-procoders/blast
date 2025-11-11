@@ -1,0 +1,24 @@
+<svg width="406" height="235" viewBox="0 0 406 235" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_fn_710_1797)">
+<path d="M375.484 282.751C-162.516 268.751 441.68 534.675 493.781 482.737C545.883 430.798 545.918 346.493 493.86 294.435C627.984 -153.249 527.484 -116.932 375.484 282.751Z" fill="#FF654A"/>
+</g>
+<defs>
+<filter id="filter0_fn_710_1797" x="-0.0015564" y="-183.134" width="710.476" height="826.503" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="76.95" result="effect1_foregroundBlur_710_1797"/>
+<feTurbulence type="fractalNoise" baseFrequency="1.4285714626312256 1.4285714626312256" stitchTiles="stitch" numOctaves="3" result="noise" seed="8615" />
+<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise" />
+<feComponentTransfer in="alphaNoise" result="coloredNoise1">
+<feFuncA type="discrete" tableValues="0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
+</feComponentTransfer>
+<feComposite operator="in" in2="effect1_foregroundBlur_710_1797" in="coloredNoise1" result="noise1Clipped" />
+<feFlood flood-color="#F32300" result="color1Flood" />
+<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1" />
+<feMerge result="effect2_noise_710_1797">
+<feMergeNode in="effect1_foregroundBlur_710_1797" />
+<feMergeNode in="color1" />
+</feMerge>
+</filter>
+</defs>
+</svg>
