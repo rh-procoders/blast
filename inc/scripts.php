@@ -15,6 +15,9 @@ function load_scripts() {
 	wp_register_style( 'splide-slider', THEME_URI . '/css/plugins/splide/splide.min.css' );
 	wp_register_script( 'splide-slider', THEME_URI . '/js/plugins/splide/splide.min.js' );
 
+	// Custom forms enhancements (2px caret, etc.)
+	wp_register_script( 'custom-forms', THEME_URI . '/js/custom-forms.js', array(), filemtime(THEME_DIR . '/js/custom-forms.js'), true );
+
     wp_enqueue_script( 'lottie-player', THEME_URI . '/js/lottie-player.js', '', '1.7.1', false );
 	wp_enqueue_script( 'lottie-player-interactivity', THEME_URI . '/js/lottie-interactivity.js', '', '1.7.1', false );
 

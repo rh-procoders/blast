@@ -41,5 +41,6 @@
     "usesContext": ["postId", "postType"],
     "textdomain": "blast-2025",
     "editorStyle": "file:./css/editor-style.css",
-    "style": "file:./css/view-style.css"
+    "style": "file:./css/view-style.css",
+    "viewScript": [ "custom-forms" ]
 }

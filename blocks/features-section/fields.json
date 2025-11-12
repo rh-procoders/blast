@@ -1,187 +1,187 @@
 {
-    "key": "group_691472b58539a",
-    "title": "Features Section Block Fields (copy)",
-    "fields": [
+  "key": "group_features_section",
+  "title": "Features Section Block Fields",
+  "fields": [
+    {
+      "key": "field_section_heading",
+      "label": "Section Heading",
+      "name": "section_heading",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Enter the main heading for the features section (line breaks will be preserved)",
+      "required": 1,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "Lead with Prevention.\nWin with Confidence.",
+      "placeholder": "Lead with Prevention.\nWin with Confidence.",
+      "maxlength": 200,
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_features",
+      "label": "Features",
+      "name": "features",
+      "aria-label": "",
+      "type": "repeater",
+      "instructions": "Add feature cards with icons, titles, and descriptions",
+      "required": 1,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "min": 1,
+      "max": 6,
+      "layout": "block",
+      "button_label": "Add Feature",
+      "rows_per_page": 20,
+      "collapsed": "",
+      "sub_fields": [
         {
-            "key": "field_691472b586963",
-            "label": "Section Heading",
-            "name": "section_heading",
-            "aria-label": "",
-            "type": "textarea",
-            "instructions": "Enter the main heading for the features section (line breaks will be preserved)",
-            "required": 1,
-            "conditional_logic": false,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "Lead with Prevention.\nWin with Confidence.",
-            "placeholder": "Lead with Prevention.\nWin with Confidence.",
-            "maxlength": 200,
-            "rows": 3,
-            "new_lines": ""
+          "key": "field_feature_icon",
+          "label": "Feature Icon\/Image",
+          "name": "icon",
+          "aria-label": "",
+          "type": "image",
+          "instructions": "Upload an icon or image for this feature (recommended: 48x48px or larger, SVG\/PNG format)",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "return_format": "array",
+          "library": "all",
+          "min_width": "",
+          "min_height": "",
+          "min_size": "",
+          "max_width": "",
+          "max_height": "",
+          "max_size": "",
+          "mime_types": "",
+          "allow_in_bindings": 1,
+          "preview_size": "thumbnail",
+          "parent_repeater": "field_features"
         },
         {
-            "key": "field_691472b5869f9",
-            "label": "Features",
-            "name": "features",
-            "aria-label": "",
-            "type": "repeater",
-            "instructions": "Add feature cards with icons, titles, and descriptions",
-            "required": 1,
-            "conditional_logic": false,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "min": 1,
-            "max": 6,
-            "layout": "block",
-            "button_label": "Add Feature",
-            "rows_per_page": 20,
-            "collapsed": "",
-            "sub_fields": [
-                {
-                    "key": "field_691472b588a94",
-                    "label": "Feature Icon\/Image",
-                    "name": "icon",
-                    "aria-label": "",
-                    "type": "image",
-                    "instructions": "Upload an icon or image for this feature (recommended: 48x48px or larger, SVG\/PNG format)",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
-                    "allow_in_bindings": 1,
-                    "preview_size": "thumbnail",
-                    "parent_repeater": "field_691472b5869f9"
-                },
-                {
-                    "key": "field_691472b588e24",
-                    "label": "Feature Title",
-                    "name": "title",
-                    "aria-label": "",
-                    "type": "textarea",
-                    "instructions": "Enter the title for this feature",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "rows": 2,
-                    "placeholder": "",
-                    "new_lines": "br",
-                    "parent_repeater": "field_691472b5869f9"
-                },
-                {
-                    "key": "field_691472b5891ee",
-                    "label": "Feature Description",
-                    "name": "description",
-                    "aria-label": "",
-                    "type": "textarea",
-                    "instructions": "Enter the description for this feature",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": 300,
-                    "allow_in_bindings": 1,
-                    "rows": 3,
-                    "placeholder": "Proactively limit blast radius with preventive guardrails across identity, data, workloads, and networks.",
-                    "new_lines": "",
-                    "parent_repeater": "field_691472b5869f9"
-                }
-            ]
+          "key": "field_feature_title",
+          "label": "Feature Title",
+          "name": "title",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "Enter the title for this feature",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "allow_in_bindings": 0,
+          "rows": 2,
+          "placeholder": "",
+          "new_lines": "br",
+          "parent_repeater": "field_features"
         },
         {
-            "key": "field_691472b586c50",
-            "label": "Layout Settings",
-            "name": "layout_settings",
-            "aria-label": "",
-            "type": "group",
-            "instructions": "Configure the layout and appearance",
-            "required": false,
-            "conditional_logic": false,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_691472b58daa9",
-                    "label": "Columns on Desktop",
-                    "name": "columns_desktop",
-                    "aria-label": "",
-                    "type": "select",
-                    "instructions": "Number of columns to display on desktop",
-                    "required": 0,
-                    "conditional_logic": false,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "2": "2 Columns",
-                        "3": "3 Columns",
-                        "4": "4 Columns"
-                    },
-                    "default_value": 3,
-                    "allow_null": 0,
-                    "multiple": 0,
-                    "ui": 0,
-                    "return_format": "value",
-                    "ajax": 0,
-                    "placeholder": "",
-                    "create_options": 0,
-                    "save_options": 0
-                }
-            ]
+          "key": "field_feature_description",
+          "label": "Feature Description",
+          "name": "description",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "Enter the description for this feature",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": 300,
+          "allow_in_bindings": 1,
+          "rows": 3,
+          "placeholder": "Proactively limit blast radius with preventive guardrails across identity, data, workloads, and networks.",
+          "new_lines": "",
+          "parent_repeater": "field_features"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "block",
-                "operator": "==",
-                "value": "acf\/features-section"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "show_in_rest": 0,
-    "display_title": "",
-    "modified": 1762947765
+      ]
+    },
+    {
+      "key": "field_layout_settings",
+      "label": "Layout Settings",
+      "name": "layout_settings",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "Configure the layout and appearance",
+      "required": false,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_columns_desktop",
+          "label": "Columns on Desktop",
+          "name": "columns_desktop",
+          "aria-label": "",
+          "type": "select",
+          "instructions": "Number of columns to display on desktop",
+          "required": 0,
+          "conditional_logic": false,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "choices": {
+            "2": "2 Columns",
+            "3": "3 Columns",
+            "4": "4 Columns"
+          },
+          "default_value": 3,
+          "allow_null": 0,
+          "multiple": 0,
+          "ui": 0,
+          "return_format": "value",
+          "ajax": 0,
+          "placeholder": "",
+          "create_options": 0,
+          "save_options": 0
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf\/features-section"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "display_title": "",
+  "modified": 1762401439
 }
