@@ -202,11 +202,52 @@ global $single_toc;
             let lastActiveH2 = null;
             let lastActiveH3 = null;
 
+            /* Store indices for direction tracking */
+            const allLiElements = Array.from( tocList.querySelectorAll( 'li' ) );
+
             const setActive = ( li, ref ) => {
                 if (ref.current === li) {
                     return;
                 }
-                ref.current?.classList.remove( 'active' );
+
+                const oldLi = ref.current;
+                const newLi = li;
+
+                // Determine scroll direction based on DOM position
+                if (oldLi && newLi) {
+                    const oldIndex = allLiElements.indexOf( oldLi );
+                    const newIndex = allLiElements.indexOf( newLi );
+                    const scrollingDown = newIndex > oldIndex;
+
+                    // Add exit animation to old item
+                    if (scrollingDown) {
+                        oldLi.classList.add( 'exiting-to-bottom' );
+                    } else {
+                        oldLi.classList.add( 'exiting-to-top' );
+                    }
+
+                    // Add enter animation to new item
+                    if (scrollingDown) {
+                        newLi?.classList.add( 'entering-from-top' );
+                    } else {
+                        newLi?.classList.add( 'entering-from-bottom' );
+                    }
+
+                    // Clean up old item classes after animation
+                    setTimeout( () => {
+                        oldLi.classList.remove( 'active', 'exiting-to-bottom', 'exiting-to-top' );
+                    }, 500 );
+
+                    // Clean up new item animation classes after animation
+                    setTimeout( () => {
+                        newLi?.classList.remove( 'entering-from-top', 'entering-from-bottom' );
+                    }, 500 );
+                } else {
+                    // First time activation (no animation)
+                    ref.current?.classList.remove( 'active' );
+                }
+
+                // Add active class to new item
                 li?.classList.add( 'active' );
                 ref.current = li;
             };

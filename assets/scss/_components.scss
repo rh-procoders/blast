@@ -253,6 +253,7 @@ ul.nostyle {
 
 
   padding          : var(--bs-toc-pt) var(--bs-toc-pr) var(--bs-toc-pb) 0;
+  border-radius    : 40px;
 
   &__heading {
 	padding-left : var(--bs-toc-pl);
@@ -286,11 +287,12 @@ ul.nostyle {
 		  &:after {
 			content  : "";
 			position : absolute;
+			opacity  : 0; // Hidden by default
 		  }
 
 		  &:before {
-			top              : 50%;
-			transform        : translateY(-50%);
+			// Center vertically without transform (so transform is free for animation)
+			top              : calc(50% - 3.5px); // 50% minus half of element height (7px / 2)
 			left             : 7px;
 
 			width            : 7px;
@@ -315,15 +317,56 @@ ul.nostyle {
 			clip-path        : polygon(0% 0%, 0% 21.119%, 0% 78.881%, 0% 100%, 0% 100%, 0.557% 96.934%, 2.19% 93.961%, 4.842% 91.096%, 8.458% 88.357%, 12.982% 85.759%, 18.355% 83.32%, 24.523% 81.054%, 31.429% 78.978%, 39.017% 77.109%, 47.23% 75.463%, 47.23% 75.463%, 47.393% 75.434%, 47.555% 75.405%, 47.718% 75.376%, 47.882% 75.347%, 48.045% 75.318%, 48.209% 75.289%, 48.372% 75.261%, 48.536% 75.232%, 48.7% 75.204%, 48.865% 75.176%, 48.865% 75.176%, 48.978% 75.156%, 49.091% 75.137%, 49.204% 75.117%, 49.318% 75.098%, 49.431% 75.079%, 49.545% 75.059%, 49.658% 75.04%, 49.772% 75.021%, 49.886% 75.002%, 50% 74.983%, 50% 74.983%, 50.275% 74.937%, 50.55% 74.892%, 50.825% 74.847%, 51.101% 74.802%, 51.378% 74.757%, 51.655% 74.712%, 51.933% 74.668%, 52.212% 74.624%, 52.491% 74.581%, 52.77% 74.537%, 52.77% 74.537%, 60.983% 72.891%, 68.57% 71.022%, 75.477% 68.946%, 81.645% 66.681%, 87.018% 64.241%, 91.541% 61.643%, 95.158% 58.904%, 97.81% 56.039%, 99.443% 53.066%, 100% 50%, 100% 50%, 99.443% 46.934%, 97.81% 43.96%, 95.156% 41.095%, 91.539% 38.356%, 87.014% 35.758%, 81.639% 33.317%, 75.469% 31.051%, 68.561% 28.976%, 60.971% 27.107%, 52.756% 25.461%, 52.756% 25.461%, 52.478% 25.418%, 52.201% 25.374%, 51.924% 25.33%, 51.647% 25.286%, 51.371% 25.242%, 51.096% 25.197%, 50.821% 25.153%, 50.547% 25.108%, 50.273% 25.062%, 50% 25.017%, 50% 25.017%, 49.722% 24.97%, 49.444% 24.923%, 49.167% 24.876%, 48.891% 24.829%, 48.615% 24.781%, 48.339% 24.733%, 48.065% 24.685%, 47.791% 24.637%, 47.517% 24.588%, 47.244% 24.539%, 47.244% 24.539%, 39.029% 22.893%, 31.439% 21.024%, 24.531% 18.949%, 18.361% 16.683%, 12.986% 14.243%, 8.461% 11.645%, 4.844% 8.905%, 2.19% 6.04%, 0.557% 3.066%, 0% 0%);
 		  }
 
+		  // Active state - show pseudo-elements
+		  &.active {
+			&:before,
+			&:after {
+			  opacity : 1;
+			}
+		  }
+
+		  // Entering from top (scrolling down - new item)
+		  &.entering-from-top {
+			&:before,
+			&:after {
+			  animation : slideInFromTop 0.5s ease forwards;
+			}
+		  }
+
+		  // Exiting to bottom (scrolling down - old item)
+		  &.exiting-to-bottom {
+			&:before,
+			&:after {
+			  animation : slideOutToBottom 0.5s ease forwards;
+			}
+		  }
+
+		  // Entering from bottom (scrolling up - new item)
+		  &.entering-from-bottom {
+			&:before,
+			&:after {
+			  animation : slideInFromBottom 0.5s ease forwards;
+			}
+		  }
+
+		  // Exiting to top (scrolling up - old item)
+		  &.exiting-to-top {
+			&:before,
+			&:after {
+			  animation : slideOutToTop 0.5s ease forwards;
+			}
+		  }
+
 		  a {
-			font-family : $font-family-secondary;
-			font-size   : font-size('base'); // 16px
-			font-weight : normal;
-			line-height : 1.4;
+			font-family     : $font-family-secondary;
+			font-size       : font-size('base'); // 16px
+			font-weight     : normal;
+			line-height     : 1.4;
 
-			color       : #000B40;
+			color           : #000B40;
+			text-decoration : none !important;
 
-			transition  : color ease .3s;
+			transition      : color ease .3s;
 
 			&:hover,
 			&:focus {
@@ -341,5 +384,50 @@ ul.nostyle {
 		}
 	  }
 	}
+  }
+}
+
+// TOC Animation Keyframes
+@keyframes slideInFromTop {
+  from {
+	opacity   : 0;
+	transform : translateY(-100%);
+  }
+  to {
+	opacity   : 1;
+	transform : translateY(0);
+  }
+}
+
+@keyframes slideOutToBottom {
+  from {
+	opacity   : 1;
+	transform : translateY(0);
+  }
+  to {
+	opacity   : 0;
+	transform : translateY(100%);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+	opacity   : 0;
+	transform : translateY(100%);
+  }
+  to {
+	opacity   : 1;
+	transform : translateY(0);
+  }
+}
+
+@keyframes slideOutToTop {
+  from {
+	opacity   : 1;
+	transform : translateY(0);
+  }
+  to {
+	opacity   : 0;
+	transform : translateY(-100%);
   }
 }
