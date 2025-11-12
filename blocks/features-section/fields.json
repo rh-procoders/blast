@@ -1,9 +1,9 @@
 {
-    "key": "group_features_section",
-    "title": "Features Section Block Fields",
+    "key": "group_691472b58539a",
+    "title": "Features Section Block Fields (copy)",
     "fields": [
         {
-            "key": "field_section_heading",
+            "key": "field_691472b586963",
             "label": "Section Heading",
             "name": "section_heading",
             "aria-label": "",
@@ -23,7 +23,7 @@
             "new_lines": ""
         },
         {
-            "key": "field_features",
+            "key": "field_691472b5869f9",
             "label": "Features",
             "name": "features",
             "aria-label": "",
@@ -44,7 +44,7 @@
             "collapsed": "",
             "sub_fields": [
                 {
-                    "key": "field_feature_icon",
+                    "key": "field_691472b588a94",
                     "label": "Feature Icon\/Image",
                     "name": "icon",
                     "aria-label": "",
@@ -68,10 +68,10 @@
                     "mime_types": "",
                     "allow_in_bindings": 1,
                     "preview_size": "thumbnail",
-                    "parent_repeater": "field_features"
+                    "parent_repeater": "field_691472b5869f9"
                 },
                 {
-                    "key": "field_feature_title",
+                    "key": "field_691472b588e24",
                     "label": "Feature Title",
                     "name": "title",
                     "aria-label": "",
@@ -90,10 +90,10 @@
                     "rows": 2,
                     "placeholder": "",
                     "new_lines": "br",
-                    "parent_repeater": "field_features"
+                    "parent_repeater": "field_691472b5869f9"
                 },
                 {
-                    "key": "field_feature_description",
+                    "key": "field_691472b5891ee",
                     "label": "Feature Description",
                     "name": "description",
                     "aria-label": "",
@@ -112,12 +112,12 @@
                     "rows": 3,
                     "placeholder": "Proactively limit blast radius with preventive guardrails across identity, data, workloads, and networks.",
                     "new_lines": "",
-                    "parent_repeater": "field_features"
+                    "parent_repeater": "field_691472b5869f9"
                 }
             ]
         },
         {
-            "key": "field_layout_settings",
+            "key": "field_691472b586c50",
             "label": "Layout Settings",
             "name": "layout_settings",
             "aria-label": "",
@@ -133,7 +133,7 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_columns_desktop",
+                    "key": "field_691472b58daa9",
                     "label": "Columns on Desktop",
                     "name": "columns_desktop",
                     "aria-label": "",
@@ -183,5 +183,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762401439
+    "modified": 1762947765
 }

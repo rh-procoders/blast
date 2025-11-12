@@ -84,6 +84,16 @@ add_filter( 'manage_post_posts_columns', function ( $columns ) {
     return $new;
 } );
 
+if (function_exists('wpcf7_autop_or_not')) {
+    /**
+     * Contact 7
+     * Remove auto p-tags
+     *
+     * ref: https://pineco.de/snippets/remove-p-tag-from-contact-form-7/
+     */
+    add_filter('wpcf7_autop_or_not', '__return_false');
+}
+
 /**
  * Render the star button in our custom column.
  */
@@ -139,7 +149,6 @@ add_action( 'admin_head-edit.php', function () {
     </style>
     <?php
 } );
-
 
 /**
  * AJAX: toggle the ACF "Is Featured" true/false field.
