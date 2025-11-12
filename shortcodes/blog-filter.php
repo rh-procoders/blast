@@ -51,10 +51,10 @@ function blast_blog_filter_shortcode( array $atts ): string
     ob_start();
     ?>
 
-    <div class="blog-filter container container--blog-filter">
+    <div class="blog-filter">
 
         <!-- Filter Bar -->
-        <div class="blog-filter__bar"
+        <div class="blog-filter__bar container container--blog-filter"
              data-taxonomy="<?= esc_attr( $taxonomy ) ?>"
              data-is-archive="<?= esc_attr( $is_archive ? 'true' : 'false' ) ?>"
              data-tax-id="<?= esc_attr( $tax_id ?? '' ) ?>">

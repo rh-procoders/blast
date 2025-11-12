@@ -136,5 +136,14 @@
         <path d="M2 8C2 11.3137 4.68629 14 8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2V2C4.68639 2.00024 2.00024 4.68639 2 8" fill="none" stroke-width="1.5" stroke-linecap="square"/>
     </symbol>
 
+    <symbol id="icon-archive-featured" viewBox="0 0 14 13">
+        <path d="M6.65625 0L8.22785 4.83688H13.3136L9.19915 7.82624L10.7707 12.6631L6.65625 9.67376L2.54175 12.6631L4.11335 7.82624L-0.00114584 4.83688H5.08465L6.65625 0Z" stroke="none"/>
+    </symbol>
 
+    <symbol id="icon-archive-slider-arrow-right" viewBox="0 0 26 26">
+        <rect x="25.25" y="25.25" width="24.5" height="24.5" rx="7.55537" transform="rotate(-180 25.25 25.25)" fill="none" stroke-width="1.5"/>
+        <path d="M16.5618 13.0156H8.17188" fill="none" stroke-width="1.5" stroke-linecap="square"/>
+        <path d="M14.4648 15.6375L17.0867 13.0156" fill="none" stroke-width="1.5" stroke-linecap="square"/>
+        <path d="M14.4648 10.3984L17.0867 13.0203" fill="none" stroke-width="1.5" stroke-linecap="square"/>
+    </symbol>
 </svg>

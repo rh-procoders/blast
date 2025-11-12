@@ -18,7 +18,7 @@ if ( $categories ) {
 $reading_time = bs_get_reading_time();
 ?>
 
-<article class="blog-filter-item">
+<article class="blog-filter-item card-block">
     <!-- Thumbnail -->
     <a href="<?= esc_url( get_permalink() ) ?>" class="blog-filter-item__image-link">
         <?php if ( has_post_thumbnail() ): ?>
@@ -37,10 +37,9 @@ $reading_time = bs_get_reading_time();
             <?php if ( ! empty( $categories ) ): ?>
                 <div class="blog-filter-item__categories">
                     <?php foreach ($categories as $category): ?>
-                        <a href="<?= esc_url( get_category_link( $category->term_id ) ) ?>"
-                           class="blog-filter-item__category">
+                        <span class="blog-filter-item__category">
                             <?= esc_html( $category->name ) ?>
-                        </a>
+                        </span>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>

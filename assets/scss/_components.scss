@@ -213,9 +213,25 @@ ul.nostyle {
 	}
   }
 
+
+
   &__name {
 	font-family : $font-family-secondary;
 	font-weight : font-weight('medium');
 	line-height : 1.2;
+
+	font-size: font-size('base');
+  }
+}
+
+// Sticky Sidebar
+.entry-content__sidebar-left,
+.entry-content__sidebar-right {
+
+  .sticky-sidebar {
+	position   : sticky;
+	top        : 1rem;
+	max-height : 90vh;
+	overflow-y : auto;
   }
 }
