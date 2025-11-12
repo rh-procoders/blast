@@ -16,6 +16,7 @@
             this.input = input;
             this.caretElement = null;
             this.isActive = false;
+            this.lastCursorPos = 0;
 
             this.init();
         }
@@ -23,6 +24,9 @@
         init() {
             // Mark input as initialized
             this.input.classList.add( 'has-custom-caret' );
+
+            // Store original type (email inputs don't support selectionStart)
+            this.originalType = this.input.type;
 
             // Create caret element with "|" character
             this.caretElement = document.createElement( 'div' );
@@ -37,33 +41,56 @@
             this.input.addEventListener( 'focus', () => this.show() );
             this.input.addEventListener( 'blur', () => this.hide() );
 
-            // Use requestAnimationFrame to ensure DOM updates before repositioning
-            this.input.addEventListener( 'input', () => {
-                requestAnimationFrame( () => this.updatePosition() );
-            } );
-            this.input.addEventListener( 'click', () => {
-                requestAnimationFrame( () => this.updatePosition() );
-            } );
-            this.input.addEventListener( 'keyup', () => {
-                requestAnimationFrame( () => this.updatePosition() );
-            } );
-            this.input.addEventListener( 'keydown', ( e ) => {
-                // Update position after key is processed
-                requestAnimationFrame( () => this.updatePosition() );
-            } );
-
-            // Handle text selection
+            // Track all cursor position changes
+            this.input.addEventListener( 'input', () => this.scheduleUpdate() );
+            this.input.addEventListener( 'click', () => this.scheduleUpdate() );
+            this.input.addEventListener( 'keyup', () => this.scheduleUpdate() );
+            this.input.addEventListener( 'keydown', () => this.scheduleUpdate() );
             this.input.addEventListener( 'select', () => {
                 if (this.input.selectionStart !== this.input.selectionEnd) {
                     this.hide();
                 } else {
-                    requestAnimationFrame( () => this.updatePosition() );
+                    this.scheduleUpdate();
                 }
             } );
+
+            // Continuous position checking using requestAnimationFrame loop
+            this.checkPosition();
+        }
+
+        scheduleUpdate() {
+            requestAnimationFrame( () => this.updatePosition() );
+        }
+
+        checkPosition() {
+            if (this.isActive && document.activeElement === this.input) {
+                let currentPos = this.input.selectionStart;
+
+                // Handle null selectionStart (fallback for edge cases)
+                if (currentPos === null || currentPos === undefined) {
+                    currentPos = this.input.value.length;
+                }
+
+                // Only update if position actually changed
+                if (currentPos !== this.lastCursorPos) {
+                    this.lastCursorPos = currentPos;
+                    this.updatePosition();
+                }
+            }
+
+            // Continue checking with requestAnimationFrame (smoother than setInterval)
+            requestAnimationFrame( () => this.checkPosition() );
         }
 
         show() {
             this.isActive = true;
+
+            // Temporarily change type to "text" to enable selectionStart
+            // (email/url/tel inputs don't support cursor position in some browsers)
+            if (this.originalType !== 'text' && this.originalType !== 'password') {
+                this.input.type = 'text';
+            }
+
             this.updatePosition();
             this.caretElement.style.display = 'block';
         }
@@ -71,6 +98,11 @@
         hide() {
             this.isActive = false;
             this.caretElement.style.display = 'none';
+
+            // Restore original type for CF7 validation
+            if (this.originalType !== 'text' && this.originalType !== 'password') {
+                this.input.type = this.originalType;
+            }
         }
 
         updatePosition() {
@@ -127,6 +159,7 @@
         destroy() {
             this.hide();
             this.input.classList.remove( 'has-custom-caret' );
+
             if (this.caretElement && this.caretElement.parentNode) {
                 this.caretElement.parentNode.removeChild( this.caretElement );
             }

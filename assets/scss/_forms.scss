@@ -165,9 +165,112 @@ label {
 
   &-control {
 
-
 	&.wpcf7-not-valid {
-	  border-color : #FA423C!important;
+	  border-color : #FA423C !important;
+	}
+  }
+
+  // Effect to have Submit inside the input
+  .submit-wrapper {
+	position : relative;
+
+	.wpcf7-email {
+	  padding-right: calc(5px + 19px + 20px); // small gap | icon width | padding-right
+	}
+
+	.wpcf7-form-control-wrap {
+
+	  // Error icon - shown when input is invalid
+	  &:has(.wpcf7-not-valid):after {
+		content             : "";
+		position            : absolute;
+
+		top                 : 50%;
+		right               : calc(19px + 10px + 20px); // gap | submit icon | padding
+		transform           : translateY(-50%);
+
+		width               : 24px;
+		height              : 24px;
+
+		background-image    : url("../../img/input-indicator-error.svg");
+		background-repeat   : no-repeat;
+		background-position : center;
+		background-size     : contain;
+
+		pointer-events      : none;
+		z-index             : 2; // Above custom caret
+	  }
+
+	  // Adjust email input padding when error icon shows
+	  &:has(.wpcf7-not-valid) .wpcf7-email {
+		// small gap | error icon | gap | submit width | padding right
+		padding-right : calc(5px + 24px + 10px + 19px + 20px);
+	  }
+
+	  .wpcf7-not-valid-tip {
+		position    : absolute;
+
+		bottom      : -20px;
+
+		font-family : $font-family-tertiary;
+		font-size   : font-size('xs'); // 12px
+		font-weight : 400;
+		line-height : 1.2;
+
+		color       : #FFFFFF;
+	  }
+	}
+
+	&__submit {
+	  position  : absolute;
+
+	  display   : flex;
+
+	  top       : 50%;
+	  right     : 20px;
+
+	  transform : translateY(-50%);
+
+	  // Style the actual input as the arrow (so it's clickable)
+	  input[type="submit"] {
+		// Remove default button styling
+		appearance          : none;
+		border              : none;
+		background-color    : transparent;
+		padding             : 0;
+		margin              : 0;
+
+		// Arrow styling
+		width               : 19px;
+		height              : 19px;
+
+		background-image    : url("../../img/input-submit-arrow.svg");
+		background-repeat   : no-repeat;
+		background-position : center;
+		background-size     : contain;
+
+		// Hide the text but keep it accessible
+		text-indent         : -9999px;
+		overflow            : hidden;
+
+		// Cursor
+		cursor              : pointer;
+
+		// Transition for hover effect
+		// transition          : opacity 0.3s ease;
+
+		&:hover {
+		  // opacity : 0.7;
+		}
+	  }
+
+	  .wpcf7-spinner {
+		position  : absolute;
+		top       : 50%;
+		right     : -50px;
+		transform : translateY(-50%);
+		margin    : 0;
+	  }
 	}
   }
 }
