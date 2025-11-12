@@ -163,4 +163,108 @@ global $single_toc;
     endif;
     ?>
 
+    <script id="single-post-scripts" type="text/javascript">
+        /* ==========================================================================
+          EZ‑TOC  ↔  2‑level (H2 + H3) highlighter
+          ========================================================================== */
+        (function () {
+            const TOP_OFFSET = 150; // px
+
+            /* ------------------------------------------------------------------ 1 */
+            const tocList =
+                document.querySelector( '.bs-toc .ez-toc-list' )
+                || document.querySelector( '.the_sidebar > .the_sidebar__toc .ez-toc-list' );
+
+            if (!tocList) {
+                return;
+            }
+
+            /* ------------------------------------------------------------------ 2 */
+            const idToLi = Object.create( null );
+            tocList.querySelectorAll( 'li > a.ez-toc-link' ).forEach( a => {
+                idToLi[a.hash.slice( 1 )] = a.parentElement; // id → LI
+            } );
+
+            const firstH2Li = tocList.querySelector( 'li.ez-toc-heading-level-2' );
+            if (!firstH2Li) {
+                return;
+            }
+
+            /* ------------------------------------------------------------------ 3 */
+            const spans = Array.from( document.querySelectorAll( 'span.ez-toc-section[id]' ) )
+                .filter( span => idToLi[span.id] );
+
+            if (!spans.length) {
+                return;
+            }
+
+            /* ------------------------------------------------------------------ 4 */
+            let lastActiveH2 = null;
+            let lastActiveH3 = null;
+
+            const setActive = ( li, ref ) => {
+                if (ref.current === li) {
+                    return;
+                }
+                ref.current?.classList.remove( 'active' );
+                li?.classList.add( 'active' );
+                ref.current = li;
+            };
+
+            /* object wrappers so we can pass by reference */
+            const refH2 = {current: null};
+            const refH3 = {current: null};
+
+            /* ------------------------------------------------------------------ 5 */
+            let ticking = false;
+            const resolve = () => {
+                ticking = false;
+                let currentSectionLi = null; // H2 that wraps the viewport slice
+                let currentLi = null; // last span whose top ≤ TOP_OFFSET
+
+                for (const span of spans) {
+                    if (span.getBoundingClientRect().top - TOP_OFFSET <= 0) {
+                        const li = idToLi[span.id];
+                        currentLi = li;
+                        if (li.classList.contains( 'ez-toc-heading-level-2' )) {
+                            currentSectionLi = li; // remember H2
+                        }
+                    } else {
+                        break;
+                    }
+                }
+
+                /* If we haven’t crossed any span yet, default to the first H2 */
+                if (!currentSectionLi) {
+                    currentSectionLi = firstH2Li;
+                }
+
+                /* === Apply highlights === */
+                setActive( currentSectionLi, refH2 );
+
+                if (currentLi &&
+                    currentLi.classList.contains( 'ez-toc-heading-level-3' ) &&
+                    currentLi !== refH3.current) {
+                    setActive( currentLi, refH3 ); // highlight H3
+                } else if (!currentLi ||
+                    !currentLi.classList.contains( 'ez-toc-heading-level-3' )) {
+                    setActive( null, refH3 ); // clear H3 when none
+                }
+            };
+
+            const onScroll = () => {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame( resolve );
+                }
+            };
+
+            /* ------------------------------------------------------------------ 6 */
+            resolve(); // highlight on load
+            document.addEventListener( 'scroll', onScroll, {passive: true} );
+            window.addEventListener( 'resize', onScroll, {passive: true} );
+
+        })();
+    </script>
+
 </article><!-- #post-<?php the_ID(); ?> -->

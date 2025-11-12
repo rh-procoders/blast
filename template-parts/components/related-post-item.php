@@ -19,7 +19,7 @@ if ( $categories ) {
 $reading_time = bs_get_reading_time();
 ?>
 
-<article class="related-post-item">
+<article class="related-post-item card-block">
 	<!-- Thumbnail -->
 	<a href="<?= esc_url( get_permalink() ) ?>" class="related-post-item__image-link">
 		<?php if ( has_post_thumbnail() ): ?>
