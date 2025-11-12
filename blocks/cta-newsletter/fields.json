@@ -1,14 +1,14 @@
 {
-    "key": "group_691472b58539a",
-    "title": "CTA - Newsletter",
+    "key": "group_cta_newsletter_block",
+    "title": "CTA Newsletter Block Fields",
     "fields": [
         {
-            "key": "field_691472d0bbea1",
-            "label": "CTA - Newsletter",
-            "name": "cta-newsletter",
+            "key": "field_cta_newsletter_heading",
+            "label": "Newsletter Heading",
+            "name": "newsletter_heading",
             "aria-label": "",
             "type": "group",
-            "instructions": "",
+            "instructions": "Enter the heading text for the newsletter signup section",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -19,7 +19,7 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_691472e1bbea2",
+                    "key": "field_69148ca37d096",
                     "label": "Heading",
                     "name": "cta-newsletter__heading",
                     "aria-label": "",
@@ -35,14 +35,14 @@
                     "default_value": "Stay <strong>ahead<\/strong>. Get Preemptive Cloud Defense insights in your inbox.",
                     "maxlength": "",
                     "allow_in_bindings": 0,
-                    "rows": "",
                     "placeholder": "",
-                    "new_lines": ""
+                    "prepend": "",
+                    "append": ""
                 },
                 {
-                    "key": "field_69147346bbea3",
-                    "label": "Contact7 ID",
-                    "name": "cta-newsletter__contact-id",
+                    "key": "field_69148d2ea9950",
+                    "label": "Contact Id",
+                    "name": "newsletter__contact-id",
                     "aria-label": "",
                     "type": "text",
                     "instructions": "",
@@ -59,6 +59,27 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": ""
+                },
+                {
+                    "key": "field_69148d3ca9951",
+                    "label": "Is footer",
+                    "name": "newsletter__is-footer",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "allow_in_bindings": 0,
+                    "ui": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
                 }
             ]
         }
@@ -82,5 +103,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762949327
+    "modified": 1762954586
 }
