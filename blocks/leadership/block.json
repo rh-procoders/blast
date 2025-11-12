@@ -1,0 +1,46 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acf/leadership",
+    "title": "Leadership",
+    "description": "A leadership team grid with member profiles and expandable bio information",
+    "category": "theme",
+    "icon": "groups",
+    "keywords": ["leadership", "team", "members", "profiles", "bios"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "align": false,
+        "anchor": true,
+        "customClassName": true,
+        "spacing": {
+            "margin": ["top", "bottom", "left", "right"],
+            "padding": ["top", "bottom", "left", "right"]
+        },
+        "color": {
+            "background": true,
+            "gradients": true,
+            "text": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true
+        }
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "preview_image_help": "preview.png"
+            }
+        }
+    },
+    "usesContext": ["postId", "postType"],
+    "textdomain": "blast-2025",
+    "editorStyle": "file:./css/editor-style.css",
+    "style": "file:./css/view-style.css",
+    "script": "file:./js/script.js"
+}

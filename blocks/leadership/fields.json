@@ -1,0 +1,110 @@
+{
+    "key": "group_leadership_block",
+    "title": "Leadership Block Fields",
+    "fields": [
+        {
+            "key": "field_leadership_heading",
+            "label": "Section Heading",
+            "name": "leadership_heading",
+            "type": "text",
+            "instructions": "Enter the heading for the leadership section",
+            "required": 0,
+            "default_value": "Our leadership",
+            "placeholder": "Our leadership",
+            "maxlength": 100
+        },
+        {
+            "key": "field_leadership_members",
+            "label": "Leadership Team Members",
+            "name": "leadership_members",
+            "type": "repeater",
+            "instructions": "Add leadership team members",
+            "required": 0,
+            "layout": "table",
+            "button_label": "Add Team Member",
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_member_name",
+            "sub_fields": [
+                {
+                    "key": "field_member_photo",
+                    "label": "Member Photo",
+                    "name": "member_photo",
+                    "type": "image",
+                    "instructions": "Upload a photo of the team member (recommended: 400x400px square)",
+                    "required": 1,
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "parent_repeater": "field_leadership_members"
+                },
+                {
+                    "key": "field_member_name",
+                    "label": "Member Name",
+                    "name": "member_name",
+                    "type": "text",
+                    "instructions": "Enter the team member's full name",
+                    "required": 1,
+                    "default_value": "",
+                    "placeholder": "John Doe",
+                    "maxlength": 100,
+                    "parent_repeater": "field_leadership_members"
+                },
+                {
+                    "key": "field_member_title",
+                    "label": "Member Title",
+                    "name": "member_title",
+                    "type": "text",
+                    "instructions": "Enter the team member's job title",
+                    "required": 1,
+                    "default_value": "",
+                    "placeholder": "CEO",
+                    "maxlength": 100,
+                    "parent_repeater": "field_leadership_members"
+                },
+                {
+                    "key": "field_member_bio",
+                    "label": "Member Bio",
+                    "name": "member_bio",
+                    "type": "wysiwyg",
+                    "instructions": "Enter the team member's biography",
+                    "required": 0,
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_leadership_members"
+                },
+                {
+                    "key": "field_member_linkedin",
+                    "label": "LinkedIn Profile",
+                    "name": "member_linkedin",
+                    "type": "url",
+                    "instructions": "Enter the LinkedIn profile URL (optional)",
+                    "required": 0,
+                    "default_value": "",
+                    "placeholder": "https://linkedin.com/in/username",
+                    "parent_repeater": "field_leadership_members"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/leadership"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": ""
+}
