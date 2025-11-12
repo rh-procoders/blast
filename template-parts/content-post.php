@@ -70,9 +70,11 @@ global $single_toc;
                     </span>
                 </div>
 
-                <?php
-                the_post_thumbnail( 'post-thumbnail', [ 'class' => 'entry-content__thumbnail', 'title' => get_the_title() ] );
-                ?>
+                <figure class="entry-content__thumbnail">
+                    <?php
+                    the_post_thumbnail( 'full', [ 'class' => '', 'title' => get_the_title() ] );
+                    ?>
+                </figure>
 
                 <?php
                 the_content(

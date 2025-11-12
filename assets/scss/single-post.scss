@@ -12,12 +12,19 @@ html {
   }
 
   .main {
-	--bs-entry-padding-x   : 30px;
-	--bs-entry-content-w   : 66.25rem; // 1060px
-	--bs-entry-sidebar-w   : 270px;
-	--bs-entry-content-gap : 3.75rem; // 60px
+	// Unified grid columns - controls all sections (entry-content, entry-author, entry-related)
+	--bs-grid-col-left   : 270px;                  // Left sidebar width
+	--bs-grid-col-center : minmax(auto, 1060px);   // Center content (flexible, max 1060px)
+	--bs-grid-col-right  : 270px;                  // Right sidebar width
+	--bs-grid-gap        : 3.75rem;                // 60px - gap between columns
 
-	padding-top            : var(--header-h);
+	// Unified grid template
+	--bs-grid-template   : var(--bs-grid-col-left) var(--bs-grid-col-center) var(--bs-grid-col-right);
+
+	// Container padding
+	--bs-entry-padding-x : 30px;
+
+	padding-top          : var(--header-h);
   }
 
   .entry-content {
@@ -27,14 +34,13 @@ html {
 	margin-right          : auto;
 
 	width                 : 100%;
-	max-width             : calc(var(--bs-entry-content-w) + (var(--bs-entry-sidebar-w) * 2) + (var(--bs-entry-content-gap) * 2) + (var(--bs-entry-padding-x) * 2));
-
 	padding-left          : var(--bs-entry-padding-x);
 	padding-right         : var(--bs-entry-padding-x);
 
-	grid-gap              : var(--bs-entry-content-gap);
 	display               : grid;
-	grid-template-columns : var(--bs-entry-sidebar-w) var(--bs-entry-content-w) var(--bs-entry-sidebar-w);
+	grid-template-columns : var(--bs-grid-template);
+	gap                   : var(--bs-grid-gap);
+	justify-content       : center;
 
 	&__sidebar-left {
 
@@ -385,6 +391,7 @@ html {
 	  margin-bottom : max(20px, 2.5rem); // 40px
 
 	  border-radius : max(22.395px, 2.5rem); // 40px
+	  overflow      : hidden;
 
 	  margin-left   : -10px;
 	  margin-right  : -10px;
@@ -397,15 +404,22 @@ html {
   }
 
   .entry-author {
-	margin-top   : 60px; // unchanged
-	margin-left  : auto;
-	margin-right : auto;
+	margin-top            : 60px; // unchanged
+	margin-left           : auto;
+	margin-right          : auto;
 
-	width        : 100%;
-	padding      : 0 30px;
-	max-width    : calc(var(--bs-entry-content-w) + (30px * 2));
+	width                 : 100%;
+	padding-left          : var(--bs-entry-padding-x);
+	padding-right         : var(--bs-entry-padding-x);
+
+	display               : grid;
+	grid-template-columns : var(--bs-grid-template);
+	gap                   : var(--bs-grid-gap);
+	justify-content       : center;
 
 	&__wrapper {
+	  grid-column      : 2; // Place in center column
+
 	  border-radius    : 40px;
 	  padding          : max(40px, 3.75rem); // 60px
 
@@ -458,20 +472,25 @@ html {
   }
 
   .entry-related {
-	margin-top   : max(100px, 10rem); // 160px
-	margin-left  : auto;
-	margin-right : auto;
+	margin-top            : max(100px, 10rem); // 160px
+	margin-left           : auto;
+	margin-right          : auto;
 
-	width        : 100%;
-	padding      : 0 30px;
-	max-width    : calc(var(--bs-entry-content-w) + (30px * 2));
+	width                 : 100%;
+	padding-left          : var(--bs-entry-padding-x);
+	padding-right         : var(--bs-entry-padding-x);
+
+	display               : grid;
+	grid-template-columns : var(--bs-grid-template);
+	gap                   : var(--bs-grid-gap);
+	justify-content       : center;
 
 	@include mobile {
 	  margin-top : 100px;
 	}
 
 	&__wrapper {
-	  // No offset - full width like entry-author
+	  grid-column : 2; // Place in center column
 	}
 
 	&__heading {
