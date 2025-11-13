@@ -46,17 +46,18 @@
             "type": "repeater",
             "instructions": "Add gallery items with images and optional value tags",
             "required": 0,
-            "conditional_logic": false,
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "layout": "table",
-            "button_label": "Add Gallery Item",
-            "min": 3,
-            "max": 8,
+            "pagination": 0,
+            "min": 4,
+            "max": 7,
             "collapsed": "field_item_image",
+            "button_label": "Add Gallery Item",
             "rows_per_page": 20,
             "sub_fields": [
                 {
@@ -162,5 +163,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762951356
+    "modified": 1762966269
 }

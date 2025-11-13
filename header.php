@@ -51,7 +51,11 @@
 
             <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" id="menu_toggle_button">
                 <span class="toggle-text">Menu</span>
-                <div class="toggle-icon"></div>
+                <div class="toggle-icon">
+                    <span class="toggle-icon-bar"></span>
+                    <span class="toggle-icon-bar"></span>
+                    <span class="toggle-icon-bar"></span>
+                </div>
                 <span class="screen-reader-text"><?php esc_html_e( 'Primary Menu', 'blast-2025' ); ?></span>
             </button>
 

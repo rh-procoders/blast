@@ -4,6 +4,11 @@
 .leadership-group{
     margin-top: -100px;
     border-radius: 80px;
+    @include tablet-lg{
+        border-radius: 50px;
+        margin-top: -70px;
+        padding-bottom: 50px;
+    }
 }
 .leadership-block {
   
@@ -67,6 +72,10 @@
         overflow: hidden;
         border-radius: 40px;
         background: #B4B4B4;
+        @include tablet{
+            border-radius: 30px;
+            aspect-ratio: 315/433;
+        }
     }
     
     &__image {
@@ -135,6 +144,9 @@
         display: flex;
         gap: 20px;
         align-items: flex-start;
+        @include tablet{
+            justify-content: space-between;
+        }
     }
     
     &__name {

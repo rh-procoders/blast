@@ -52,16 +52,16 @@ $wrapper_attributes = get_block_wrapper_attributes([
             <?php endif; ?>
             
             <?php if ($button): ?>
-                <a 
-                    href="<?php echo esc_url($button['url']); ?>" 
-                    class="about-gallery-block__button"
-                    <?php echo $button['target'] ? 'target="' . esc_attr($button['target']) . '"' : ''; ?>
-                    <?php echo $button['target'] === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>
-                >
-                    <?php echo esc_html($button['title'] ?: 'Open Jobs'); ?>
-                    <svg class="about-gallery-block__button-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M3.33334 10H16.6667M16.6667 10L10 3.33334M16.6667 10L10 16.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+
+                <a  href="<?php echo esc_url($button['url']); ?>"  class="btn has-dark-blue-background-color">
+                    <span class="button-text"
+                        data-hover-text="<?php echo esc_html($button['title'] ?: 'Open Jobs'); ?>">
+                        <?php echo esc_html($button['title'] ?: 'Open Jobs'); ?>
+                    </span>
+
+                    <span class="button-arrow-wrapper">
+                        <?php sprite_svg( 'icon-arrow-right', 14, 10 ) ?>
+                    </span>
                 </a>
             <?php endif; ?>
         </div>
@@ -91,12 +91,12 @@ $wrapper_attributes = get_block_wrapper_attributes([
                             </div>
                         <?php endif; ?>
                         
-                        <?php if ($tag_text): ?>
-                            <div class="about-gallery-item__tag about-gallery-item__tag--<?php echo esc_attr($tag_color); ?>">
-                                <span class="about-gallery-item__tag-text"><?php echo esc_html($tag_text); ?></span>
-                            </div>
-                        <?php endif; ?>
                     </div>
+                    <?php if ($tag_text): ?>
+                        <div class="about-gallery-item__tag about-gallery-item__tag--<?php echo esc_attr($tag_color); ?>">
+                            <span class="about-gallery-item__tag-text"><?php echo esc_html($tag_text); ?></span>
+                        </div>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         <?php else: ?>

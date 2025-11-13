@@ -272,6 +272,12 @@ a:active {
 	margin-bottom: 1.5em;
 }
 
+@include mobile {
+	.align-left-mobile *{
+		text-align: left !important;
+	}
+}
+
 .alignright {
 
 	/*rtl:ignore*/
@@ -293,8 +299,8 @@ a:active {
 .alignwide{
 	max-width: var(--wp--preset--container-xl);
 	margin: 0 auto;
-	padding-left: 30px;
-	padding-right: 30px;
+	padding-left: var(--wp--preset--spacing--30);
+	padding-right: var(--wp--preset--spacing--30);
 }
 
 /**
@@ -520,7 +526,7 @@ section {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	padding: 0 30px;
+	padding: 0 var(--wp--preset--spacing--30);
 	@include desktop{
 		max-width: 1220px;
 	}
@@ -531,10 +537,10 @@ section {
 		max-width: var(--wp--preset--container-xl);
 	}
 	&--blog-filter {
-	  max-width: calc(1520px + (30px * 2));
+	  max-width: calc(1520px + (var(--wp--preset--spacing--30) * 2));
 	}
 	&--blog-grid {
-	  max-width: calc(1140px + (30px * 2));
+	  max-width: calc(1140px + (var(--wp--preset--spacing--30) * 2));
 	}
 	&--lg{
 		max-width: 1150px;
@@ -544,9 +550,6 @@ section {
 	}
 	&--wide{
 		max-width: calc(1440px + 60px);
-	}
-	@include mobile{
-		padding: 0 25px;
 	}
 }
 .full-container{
@@ -626,4 +629,9 @@ input:-webkit-autofill:active{
 
 .connectoor-jobs-search-field-wrapper .select2-search{
 	left: 0px;
+}
+
+.z-index-2{
+	position: relative;
+	z-index: 2;
 }
