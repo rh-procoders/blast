@@ -22,6 +22,7 @@ function blast_blog_filter_shortcode( array $atts ): string
             'tax'            => 'category',  // Taxonomy type: category, tag, author
             'is_archive'     => 'false',     // Archive mode flag
             'tax_id'         => null,        // Specific taxonomy ID to filter
+            'load_type'      => 'button',    // Load type: button|infinite
     ], $atts, 'blast-blog-filter' );
 
     // Get current category from URL parameter (if not in archive mode with tax_id)
@@ -57,7 +58,8 @@ function blast_blog_filter_shortcode( array $atts ): string
         <div class="blog-filter__bar container container--blog-filter"
              data-taxonomy="<?= esc_attr( $taxonomy ) ?>"
              data-is-archive="<?= esc_attr( $is_archive ? 'true' : 'false' ) ?>"
-             data-tax-id="<?= esc_attr( $tax_id ?? '' ) ?>">
+             data-tax-id="<?= esc_attr( $tax_id ?? '' ) ?>"
+             data-load-type="<?= esc_attr( sanitize_key( $atts['load_type'] ) ) ?>">
 
             <!-- Search Input -->
             <div class="blog-filter__search">
@@ -199,11 +201,13 @@ function blast_blog_filter_shortcode( array $atts ): string
                 const taxonomy = categoryBar.getAttribute( 'data-taxonomy' ) || 'category';
                 const isArchive = categoryBar.getAttribute( 'data-is-archive' ) === 'true';
                 const taxId = categoryBar.getAttribute( 'data-tax-id' ) || '';
+                const loadType = categoryBar.getAttribute( 'data-load-type' ) || 'button';
 
                 let currentCategory = '<?= esc_js( $current_category ) ?>';
                 let currentSearch = '<?= esc_js( $current_search ) ?>';
                 let currentPage = 1;
                 let isLoading = false;
+                let hasMorePosts = <?= $has_more_posts ? 'true' : 'false' ?>;
 
                 /**
                  * Debounce function for search input
@@ -253,6 +257,11 @@ function blast_blog_filter_shortcode( array $atts ): string
                     categoryBar.classList.add( 'blog-filter__bar--loading' );
                     if (loadMoreContainer) {
                         loadMoreContainer.classList.add( 'blog-filter__load-more--loading' );
+
+                        // In infinite scroll mode, show the container during loading
+                        if (loadType === 'infinite' && append) {
+                            loadMoreContainer.style.display = '';
+                        }
                     }
                     if (loadMoreBtn) {
                         loadMoreBtn.disabled = true;
@@ -286,17 +295,27 @@ function blast_blog_filter_shortcode( array $atts ): string
                                 currentPage = 1;
                             }
 
-                            // Show/hide Load More button
-                            if (data.more_posts) {
-                                loadMoreContainer.style.display = '';
-                            } else {
-                                loadMoreContainer.style.display = 'none';
+                            // Update hasMorePosts flag
+                            hasMorePosts = data.more_posts;
+
+                            // Show/hide Load More button (only in button mode)
+                            if (loadType === 'button') {
+                                if (data.more_posts) {
+                                    loadMoreContainer.style.display = '';
+                                } else {
+                                    loadMoreContainer.style.display = 'none';
+                                }
                             }
 
                             // Remove loading states
                             categoryBar.classList.remove( 'blog-filter__bar--loading' );
                             if (loadMoreContainer) {
                                 loadMoreContainer.classList.remove( 'blog-filter__load-more--loading' );
+
+                                // In infinite scroll mode, hide the container after loading completes
+                                if (loadType === 'infinite') {
+                                    loadMoreContainer.style.display = 'none';
+                                }
                             }
                             if (loadMoreBtn) {
                                 loadMoreBtn.disabled = false;
@@ -309,6 +328,11 @@ function blast_blog_filter_shortcode( array $atts ): string
                             categoryBar.classList.remove( 'blog-filter__bar--loading' );
                             if (loadMoreContainer) {
                                 loadMoreContainer.classList.remove( 'blog-filter__load-more--loading' );
+
+                                // In infinite scroll mode, hide the container after error
+                                if (loadType === 'infinite') {
+                                    loadMoreContainer.style.display = 'none';
+                                }
                             }
                             if (loadMoreBtn) {
                                 loadMoreBtn.disabled = false;
@@ -375,6 +399,92 @@ function blast_blog_filter_shortcode( array $atts ): string
                         loadPosts( currentPage, true );
                         loadMoreBtn.setAttribute( 'data-page', currentPage + 1 );
                     } );
+                }
+
+                /**
+                 * Throttle function for scroll events
+                 * Unlike debounce, throttle ensures the function runs at regular intervals
+                 */
+                function throttle( func, wait ) {
+                    let timeout = null;
+                    let previous = 0;
+
+                    return function executedFunction( ...args ) {
+                        const now = Date.now();
+                        const remaining = wait - (now - previous);
+
+                        if (remaining <= 0 || remaining > wait) {
+                            if (timeout) {
+                                clearTimeout( timeout );
+                                timeout = null;
+                            }
+                            previous = now;
+                            func( ...args );
+                        } else if (!timeout) {
+                            timeout = setTimeout( function () {
+                                previous = Date.now();
+                                timeout = null;
+                                func( ...args );
+                            }, remaining );
+                        }
+                    };
+                }
+
+                /**
+                 * Infinite Scroll Handler
+                 * Checks if user scrolled near the bottom of the last post
+                 */
+                function handleInfiniteScroll() {
+                    // Don't load if already loading or no more posts
+                    if (isLoading || !hasMorePosts) {
+                        return;
+                    }
+
+                    // Get all post items
+                    const postItems = grid.querySelectorAll( '.blog-filter-item, .related-post-item' );
+                    if (postItems.length === 0) {
+                        return;
+                    }
+
+                    // Get the last post item
+                    const lastPost = postItems[postItems.length - 1];
+                    const lastPostRect = lastPost.getBoundingClientRect();
+
+                    // Get window height
+                    const windowHeight = window.innerHeight;
+
+                    // Calculate trigger point: 150px before the bottom of last post enters viewport
+                    // lastPostRect.bottom = distance from top of viewport to bottom of element
+                    // If bottom of last post is less than windowHeight + 150px, trigger load
+                    const triggerPoint = windowHeight + 150;
+
+                    if (lastPostRect.bottom <= triggerPoint) {
+                        // User has scrolled near the last post, load more
+                        currentPage++;
+                        loadPosts( currentPage, true );
+                    }
+                }
+
+                /**
+                 * Initialize Infinite Scroll (if enabled)
+                 */
+                if (loadType === 'infinite') {
+                    // Hide the actual button in infinite scroll mode (keep container for loader)
+                    if (loadMoreBtn) {
+                        loadMoreBtn.style.display = 'none';
+                    }
+
+                    // Hide the container initially
+                    if (loadMoreContainer) {
+                        loadMoreContainer.style.display = 'none';
+                    }
+
+                    // Add throttled scroll listener (checks every 200ms)
+                    const throttledScroll = throttle( handleInfiniteScroll, 200 );
+                    window.addEventListener( 'scroll', throttledScroll );
+
+                    // Also check on initial load (in case content doesn't fill viewport)
+                    setTimeout( handleInfiniteScroll, 500 );
                 }
 
                 /**
