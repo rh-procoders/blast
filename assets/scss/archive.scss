@@ -517,8 +517,12 @@
 	  border-radius       : 20px;
 	}
 
+	&__link {
+	  text-decoration : none !important;
+	}
+
 	// thumbnail
-	&__image-link,
+	&__image-figure,
 	&__image-placeholder {
 	  aspect-ratio  : 460 / 245;
 
@@ -530,7 +534,7 @@
 	  }
 	}
 
-	&__image-link {
+	&__image-figure {
 	  position : relative;
 
 	  img {

@@ -556,8 +556,13 @@ html {
 	  border-radius       : 20px;
 	}
 
+	// Link wrapper
+	&__link {
+	  text-decoration : none !important;
+	}
+
 	// thumbnail
-	&__image-link,
+	&__image-wrapper,
 	&__image-placeholder {
 	  aspect-ratio  : 460 / 245;
 
@@ -569,7 +574,7 @@ html {
 	  }
 	}
 
-	&__image-link {
+	&__image-figure {
 	  position : relative;
 
 	  img {
@@ -649,14 +654,11 @@ html {
 	  line-height    : 1.2;
 	  letter-spacing : calc(-1 * max(0.48px, 0.0375rem)); // -0.6px
 
+	  color          : inherit;
+
 	  @include mobile {
 		margin-top     : 18px;
 		letter-spacing : -0.48px;
-	  }
-
-	  a {
-		color           : inherit;
-		text-decoration : none !important;
 	  }
 	}
 
