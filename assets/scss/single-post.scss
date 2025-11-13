@@ -13,10 +13,10 @@ html {
 
   .main {
 	// Unified grid columns - controls all sections (entry-content, entry-author, entry-related)
-	--bs-grid-col-left   : 270px;                  // Left sidebar width
-	--bs-grid-col-center : minmax(auto, 1060px);   // Center content (flexible, max 1060px)
-	--bs-grid-col-right  : 270px;                  // Right sidebar width
-	--bs-grid-gap        : 3.75rem;                // 60px - gap between columns
+	--bs-grid-col-left   : 270px; // Left sidebar width
+	--bs-grid-col-center : minmax(auto, 1060px); // Center content (flexible, max 1060px)
+	--bs-grid-col-right  : 270px; // Right sidebar width
+	--bs-grid-gap        : 3.75rem; // 60px - gap between columns
 
 	// Unified grid template
 	--bs-grid-template   : var(--bs-grid-col-left) var(--bs-grid-col-center) var(--bs-grid-col-right);
@@ -528,6 +528,13 @@ html {
 		grid-template-columns : 1fr;
 		gap                   : 40px;
 	  }
+	}
+  }
+
+  .entry-footer {
+
+	.widget {
+	  margin-bottom : 0;
 	}
   }
 

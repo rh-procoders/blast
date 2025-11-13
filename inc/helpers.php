@@ -204,7 +204,14 @@ function add_arrows_to_gutenberg_buttons($content) {
 
     return $modifiedContent;
 }
+// Hook to post/page content
 add_filter('the_content', 'add_arrows_to_gutenberg_buttons', 20);
+
+// Hook to widget content (for Gutenberg blocks in widgets)
+add_filter('widget_block_content', 'add_arrows_to_gutenberg_buttons', 20);
+
+// Hook to text widget content (if using classic text widgets with HTML)
+add_filter('widget_text', 'add_arrows_to_gutenberg_buttons', 20);
 
 function highlight_words($text, $words_to_highlight) {
     if (empty($words_to_highlight)) {
