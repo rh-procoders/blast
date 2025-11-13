@@ -96,7 +96,7 @@ function blast_theme_wp_setup() {
 
 	// Add theme support for editor styles
 	add_theme_support( 'editor-styles' );
-	
+
 	// Add custom editor styles
 	add_editor_style( 'assets/css/editor-style.css' );
 
@@ -108,7 +108,7 @@ add_action( 'after_setup_theme', 'blast_theme_wp_setup' );
 
 /**
  * Load theme textdomain for translations.
- * 
+ *
  * This function is hooked to 'init' to comply with WordPress 6.7.0+ requirements
  * for translation loading timing.
  */
@@ -184,7 +184,7 @@ require get_template_directory() . '/inc/acf.php';
 
 /**
  * Enable JSON file uploads for Lottie animations
- * 
+ *
  * Note: Only use for trusted users as JSON files can potentially contain malicious code
  */
 function enable_json_upload($mimes) {
@@ -198,12 +198,12 @@ add_filter('upload_mimes', 'enable_json_upload');
  */
 function check_json_filetype($data, $file, $filename, $mimes) {
     $wp_filetype = wp_check_filetype($filename, $mimes);
-    
+
     if ($wp_filetype['ext'] === 'json') {
         $data['ext'] = 'json';
         $data['type'] = 'application/json';
     }
-    
+
     return $data;
 }
 add_filter('wp_check_filetype_and_ext', 'check_json_filetype', 10, 4);
@@ -225,23 +225,23 @@ function validate_lottie_json_upload($file) {
     if ($file['type'] !== 'application/json') {
         return $file;
     }
-    
+
     // Read the JSON content
     $json_content = file_get_contents($file['tmp_name']);
     $decoded = json_decode($json_content, true);
-    
+
     // Check if it's valid JSON
     if (json_last_error() !== JSON_ERROR_NONE) {
         $file['error'] = 'Invalid JSON file. Please upload a valid Lottie animation file.';
         return $file;
     }
-    
+
     // Basic validation for Lottie format (check for required properties)
     if (!is_array($decoded) || !isset($decoded['v']) || !isset($decoded['layers'])) {
         $file['error'] = 'This JSON file does not appear to be a valid Lottie animation. Please ensure you\'re uploading a Lottie JSON file.';
         return $file;
     }
-    
+
     return $file;
 }
 add_filter('wp_handle_upload_prefilter', 'validate_lottie_json_upload');
@@ -255,19 +255,19 @@ add_filter( 'gu_ignore_dot_org', '__return_true' );
  */
 function wpdocs_theme_slug_widgets_init() {
 	register_sidebar( array(
-		'name'          => __( 'Blog Sidebar', 'blast-2025' ),
-		'id'            => 'sidebar-1',
-		'description'   => __( 'Widgets in this area will be shown on all posts.', 'blast-2025' ),
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h2 class="widgettitle">',
-		'after_title'   => '</h2>',
-	) );
-
-	register_sidebar( array(
 		'name'          => __( 'Post Content Sidebar', 'blast-2025' ),
 		'id'            => 'post-content-sidebar',
 		'description'   => __( 'Widgets in this area will be shown in the right sidebar on single posts.', 'blast-2025' ),
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
+	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Post Footer Widget', 'blast-2025' ),
+		'id'            => 'post-footer-widget',
+		'description'   => __( 'Widgets in this area will be shown after the author section on single posts.', 'blast-2025' ),
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</div>',
 		'before_title'  => '<h3 class="widget-title">',
@@ -281,7 +281,7 @@ function enqueue_fancybox() {
     if (is_singular() && has_blocks()) {
         $post = get_post();
         if ($post && has_block('gallery', $post)) {
-			
+
 			wp_enqueue_script( 'fancybox-js', THEME_URI . '/vendor/fancybox/fancybox.umd.js', '', '5.0.0', false );
 			wp_enqueue_style( 'fancybox-css', THEME_URI . '/vendor/fancybox/fancybox.css', array(), '5.0.0', false );
 		}
@@ -295,38 +295,38 @@ function add_fancybox_to_gallery_block($content) {
     if (is_admin() || empty(trim($content))) {
         return $content;
     }
-    
+
     // Check if content contains gallery block
     if (strpos($content, 'wp-block-gallery') === false) {
         return $content;
     }
-    
+
     // Use DOMDocument for more reliable HTML parsing
     libxml_use_internal_errors(true);
     $dom = new DOMDocument();
     $dom->loadHTML('<?xml encoding="utf-8" ?>' . $content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-    
+
     // Find all gallery figures
     $xpath = new DOMXPath($dom);
     $galleries = $xpath->query('//figure[contains(@class, "wp-block-gallery")]');
-    
+
     foreach ($galleries as $gallery) {
         // Find all image links within this gallery
         $imageLinks = $xpath->query('.//a[contains(@href, ".jpg") or contains(@href, ".jpeg") or contains(@href, ".png") or contains(@href, ".gif") or contains(@href, ".webp")]', $gallery);
-        
+
         foreach ($imageLinks as $link) {
             $link->setAttribute('data-fancybox', 'gallery');
         }
     }
-    
+
     // Get the modified HTML
     $modifiedContent = $dom->saveHTML();
-    
+
     // Remove the XML declaration that DOMDocument adds
     $modifiedContent = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace(['<?xml encoding="utf-8" ?>', '<html><body>', '</body></html>'], '', $modifiedContent));
-    
+
     libxml_clear_errors();
-    
+
     return $modifiedContent;
 }
 add_filter('the_content', 'add_fancybox_to_gallery_block');

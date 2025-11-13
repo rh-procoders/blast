@@ -123,6 +123,18 @@ global $single_toc;
     </div>
 
     <?php
+    // Post Footer Widget Area
+    if ( is_active_sidebar( 'post-footer-widget' ) ) : ?>
+        <div class="entry-footer">
+            <div class="entry-footer__wrapper">
+                <?php dynamic_sidebar( 'post-footer-widget' ); ?>
+            </div>
+        </div>
+    <?php
+    endif;
+    ?>
+
+    <?php
     // Get current post's categories
     $current_categories = wp_get_post_categories( get_the_ID() );
 

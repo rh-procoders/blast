@@ -251,8 +251,7 @@ ul.nostyle {
 
   background-color : #FFFFFF;
 
-
-  padding          : var(--bs-toc-pt) var(--bs-toc-pr) var(--bs-toc-pb) 0;
+  padding          : calc(var(--bs-toc-pt) - 20px) var(--bs-toc-pr) calc(var(--bs-toc-pb) - 20px) 0;
   border-radius    : 40px;
 
   &__heading {
@@ -273,8 +272,6 @@ ul.nostyle {
 		list-style : none;
 		margin     : 0;
 		padding    : 0;
-
-		margin-top : calc((var(--bs-toc-pt) - 20px) * -1);
 
 		li {
 		  position       : relative;
