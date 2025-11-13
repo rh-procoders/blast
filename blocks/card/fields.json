@@ -6,55 +6,283 @@
             "key": "field_card_image",
             "label": "Card Image",
             "name": "card_image",
+            "aria-label": "",
             "type": "image",
             "instructions": "Upload an image for the card (recommended: 600x320px)",
-            "required": 1,
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "return_format": "array",
-            "preview_size": "medium",
-            "library": "all"
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 1,
+            "preview_size": "medium"
         },
         {
             "key": "field_card_tag",
             "label": "Card Tag",
             "name": "card_tag",
-            "type": "text",
-            "instructions": "Enter a small tag/category text",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Enter a small tag\/category text",
             "required": 0,
-            "default_value": "",
-            "placeholder": "Feature",
-            "maxlength": 50
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_691524d3b2654",
+                    "label": "Label",
+                    "name": "label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_card_tag"
+                },
+                {
+                    "key": "field_691524ddb2655",
+                    "label": "Color",
+                    "name": "color",
+                    "aria-label": "",
+                    "type": "color_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "enable_opacity": 0,
+                    "return_format": "string",
+                    "allow_in_bindings": 0,
+                    "show_custom_palette": 1,
+                    "custom_palette_source": "themejson",
+                    "show_color_wheel": 1,
+                    "palette_colors": "",
+                    "parent_repeater": "field_card_tag"
+                },
+                {
+                    "key": "field_691525e2428fb",
+                    "label": "Background Color",
+                    "name": "background_color",
+                    "aria-label": "",
+                    "type": "color_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "enable_opacity": 0,
+                    "return_format": "string",
+                    "allow_in_bindings": 0,
+                    "show_custom_palette": 1,
+                    "custom_palette_source": "themejson",
+                    "show_color_wheel": 1,
+                    "palette_colors": "",
+                    "parent_repeater": "field_card_tag"
+                }
+            ]
         },
         {
             "key": "field_card_heading",
             "label": "Card Heading",
             "name": "card_heading",
+            "aria-label": "",
             "type": "text",
             "instructions": "Enter the main heading for the card",
-            "required": 1,
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
+            "maxlength": 100,
+            "allow_in_bindings": 1,
             "placeholder": "Card Heading",
-            "maxlength": 100
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_card_description",
             "label": "Card Description",
             "name": "card_description",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "Enter the description text for the card",
             "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "placeholder": "Card description...",
             "maxlength": 300,
-            "rows": 4
+            "rows": 4,
+            "new_lines": ""
         },
         {
             "key": "field_card_link",
             "label": "Card Link",
             "name": "card_link",
+            "aria-label": "",
             "type": "link",
             "instructions": "Add a link for the entire card (optional)",
             "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "return_format": "array"
+        },
+        {
+            "key": "field_691526e7f7318",
+            "label": "Button Label",
+            "name": "button_label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Leave empty to hide button",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_691529827e87b",
+            "label": "Show Author",
+            "name": "show_author",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_691529907e87c",
+            "label": "Author Image",
+            "name": "author_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_691529827e87b",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_6915299d7e87d",
+            "label": "Author Name",
+            "name": "author_name",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_691529827e87b",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 2,
+            "placeholder": "",
+            "new_lines": "br"
         }
     ],
     "location": [
@@ -62,7 +290,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf/card"
+                "value": "acf\/card"
             }
         ]
     ],
@@ -73,5 +301,8 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": ""
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1762995719
 }

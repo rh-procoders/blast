@@ -9,7 +9,9 @@
                 { "slug": "coral", "color": "#FF654A", "name": "Coral" },
                 { "slug": "dark-blue", "color": "#000B40", "name": "Dark Blue" },
                 { "slug": "blue-grey", "color": "#999DB2", "name": "Blue Grey" },
-                { "slug": "red", "color": "#FA423C", "name": "Red" }
+                { "slug": "red", "color": "#FA423C", "name": "Red" },
+                { "slug": "white", "color": "#FFFFFF", "name": "White" },
+                { "slug": "black", "color": "#000000", "name": "Black" }
             ],
             "gradients": [
                 {

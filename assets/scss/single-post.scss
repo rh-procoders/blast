@@ -65,7 +65,7 @@ html {
 
 		  &:hover,
 		  &:focus {
-			color : #000B40;
+			color : var(--wp--preset--color--dark-blue);
 		  }
 		}
 	  }
@@ -156,7 +156,7 @@ html {
 		  line-height      : 1.1;
 
 		  // styles
-		  color            : #000B40;
+		  color            : var(--wp--preset--color--dark-blue);
 		  background-color : #F4F4F4;
 
 		  border-radius    : 20px;
@@ -305,7 +305,7 @@ html {
 	  align-items     : center;
 
 	  text-decoration : none !important;
-	  color           : #000B40;
+	  color           : var(--wp--preset--color--dark-blue);
 
 	  transition      : color ease .3s;
 
@@ -485,7 +485,7 @@ html {
 
 	  text-align     : center;
 
-	  color          : #000B40;
+	  color          : var(--wp--preset--color--dark-blue);
 
 	  @include tablet {
 		font-size      : 40px;
@@ -523,7 +523,7 @@ html {
 	flex-direction      : column;
 
 	border-radius       : max(20px, 2.5rem); // 40px
-	color               : #000B40 !important;
+	color               : var(--wp--preset--color--dark-blue) !important;
 	background-color    : #FFFFFF;
 
 	padding             : var(--bs-filter-item-pt) var(--bs-filter-item-pr) var(--bs-filter-item-pb) var(--bs-filter-item-pl);
@@ -606,7 +606,7 @@ html {
 
 	&__category {
 	  padding          : 7.3px 14px;
-	  background-color : #000B40;
+	  background-color : var(--wp--preset--color--dark-blue);
 	  border-radius    : 20px;
 
 	  color            : #FFFFFF;

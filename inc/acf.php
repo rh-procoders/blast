@@ -319,3 +319,16 @@ function register_all_acf_blocks() {
     }
 }
 add_action('init', 'register_all_acf_blocks', 20);
+
+add_filter('acf/color_picker_args', function($args) {
+    // Get editor settings
+    $settings = wp_get_theme_data('core/editor')->get_settings();
+    
+    // Get the theme's color palette
+    $colors = $settings['colors'];
+    
+    // Add the colors to the ACF field
+    $args['palettes'] = array_column($colors, 'color');
+
+    return $args;
+});

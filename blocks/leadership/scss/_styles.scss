@@ -150,7 +150,7 @@
     }
     
     &__name {
-        color: #000B40;
+        color: var(--wp--preset--color--dark-blue);
         font-size: 30px;
         font-style: normal;
         font-weight: 400;
@@ -159,7 +159,7 @@
     }
     
     &__title {
-        color: #000B40;
+        color: var(--wp--preset--color--dark-blue);
         font-family: $font-family-secondary; // WixMadeforText
         font-size: 18px;
         font-style: normal;
@@ -172,7 +172,7 @@
         width: 34px;
         height: 34px;
         border-radius: 10px;
-        background-color: #000B40;
+        background-color: var(--wp--preset--color--dark-blue);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -191,7 +191,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: #000B40;
+        background: var(--wp--preset--color--dark-blue);
         display: flex;
         align-items: center;
         justify-content: center;

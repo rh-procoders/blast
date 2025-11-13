@@ -70,7 +70,7 @@ header.site-header {
           border-radius: 1px;
           .toggle-icon-bar{
             height: 3px;
-            background: #000B40;
+            background: var(--wp--preset--color--dark-blue);
             position: absolute;
             left: 0;
             width: 100%;
