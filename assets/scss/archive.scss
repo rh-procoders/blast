@@ -41,6 +41,9 @@
 
 // Archive Hero Shortcode - Styles
 .archive-hero {
+  position                      : relative;
+  overflow                      : hidden;
+
   --bs-archive-hero-pt          : max(20px, 3.75rem); // 60px
   --bs-archive-hero-pr          : max(20px, 3.75rem); // 60px
   --bs-archive-hero-pb          : max(30px, 3.75rem); // 60px
@@ -54,6 +57,20 @@
   background-color              : #FFFFFF;
   border-radius                 : max(20px, 2.5rem); // 40px
   padding                       : var(--bs-archive-hero-pt) var(--bs-archive-hero-pr) var(--bs-archive-hero-pb) var(--bs-archive-hero-pl);
+
+  &:before {
+	content             : "";
+	position            : absolute;
+	left                : 0;
+	bottom              : 0;
+
+	background-image    : url("../../img/archive-hero-bg_desktop.svg");
+	background-repeat   : no-repeat;
+	background-position : center center;
+
+	width               : 600px;
+	height              : 419px;
+  }
 
   @include mobile {
 	--bs-archive-hero-pt          : 20px;
@@ -500,8 +517,12 @@
 	  border-radius       : 20px;
 	}
 
+	&__link {
+	  text-decoration : none !important;
+	}
+
 	// thumbnail
-	&__image-link,
+	&__image-figure,
 	&__image-placeholder {
 	  aspect-ratio  : 460 / 245;
 
@@ -513,7 +534,7 @@
 	  }
 	}
 
-	&__image-link {
+	&__image-figure {
 	  position : relative;
 
 	  img {

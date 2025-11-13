@@ -146,4 +146,18 @@
         <path d="M14.4648 15.6375L17.0867 13.0156" fill="none" stroke-width="1.5" stroke-linecap="square"/>
         <path d="M14.4648 10.3984L17.0867 13.0203" fill="none" stroke-width="1.5" stroke-linecap="square"/>
     </symbol>
+
+    <symbol id="icon-share-linkedin" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 16H12.7125V10.4007C12.7125 8.86546 12.1292 8.00755 10.9141 8.00755C9.59219 8.00755 8.90156 8.90034 8.90156 10.4007V16H5.73333V5.33333H8.90156V6.77013C8.90156 6.77013 9.85417 5.00745 12.1177 5.00745C14.3802 5.00745 16 6.38907 16 9.24653V16ZM1.95365 3.93662C0.874479 3.93662 0 3.05528 0 1.96831C0 0.881341 0.874479 0 1.95365 0C3.03281 0 3.90677 0.881341 3.90677 1.96831C3.90677 3.05528 3.03281 3.93662 1.95365 3.93662ZM0.317708 16H3.62135V5.33333H0.317708V16Z" stroke="none"/>
+    </symbol>
+
+    <symbol id="icon-share-mail" viewBox="0 0 22 22">
+        <path d="M6.875 8.92969L9.5578 10.5837C10.443 11.1295 11.5604 11.1295 12.4456 10.5837L15.1284 8.92969" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="2.74609" y="4.57812" width="16.5069" height="12.8387" rx="2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-share-clipboard" viewBox="0 0 18 18">
+        <rect x="0.75" y="4.30469" width="12.4444" height="12.4444" rx="2" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16.2311 12.6737C16.565 12.3407 16.7524 11.8883 16.7518 11.4167V2.52778C16.7518 1.54594 15.9559 0.750001 14.9741 0.750001H6.08517C5.61356 0.74939 5.16116 0.936797 4.82812 1.27073" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
 </svg>

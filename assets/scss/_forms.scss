@@ -1,43 +1,49 @@
 @import "_variable";
+
 input,
 textarea,
 select,
 button {
-    font: inherit;
-    margin: 0;
-    color: inherit;
-    background: transparent;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    font-size: 1rem;
-    line-height: 1.5;
-    resize: none;
-    &:focus {
-        outline: none;
-    }
+  font        : inherit;
+  margin      : 0;
+  color       : inherit;
+  background  : transparent;
+  border      : none;
+  outline     : none;
+  box-shadow  : none;
+  font-size   : 1rem;
+  line-height : 1.5;
+  resize      : none;
+
+  &:focus {
+	outline : none;
+  }
 }
+
 select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-image: url('../../img/select-arrow.svg');
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1rem;
-    padding-right: 2.5rem;
-    cursor: pointer;
+  //-webkit-appearance  : none;
+  //-moz-appearance     : none;
+  //appearance          : none;
+  //background-image    : url('../../img/select-arrow.svg');
+  //background-repeat   : no-repeat;
+  //background-position : right 1rem center;
+  //background-size     : 1rem;
+  //padding-right       : 2.5rem;
+  //cursor              : pointer;
 }
+
 textarea {
-    min-height: 100px;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--Gray-gray-300);
-    border-radius: var(--border-radius-xs);
-    transition: var(--transition);
-    &:focus {
-        border-color: var(--Light-blue);
-    }
+  //min-height    : 100px;
+  //padding       : 0.75rem 1rem;
+  //border        : 1px solid var(--Gray-gray-300);
+  //border-radius : var(--border-radius-xs);
+  //transition    : var(--transition);
+
+  &:focus {
+	//border-color : var(--Light-blue);
+  }
 }
+
 input[type="text"],
 input[type="email"],
 input[type="url"],
@@ -51,30 +57,221 @@ input[type="datetime-local"],
 input[type="month"],
 input[type="week"],
 input[type="color"] {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--Gray-gray-300);
-    border-radius: var(--border-radius-xs);
-    transition: var(--transition);
-    &:focus {
-        border-color: var(--Light-blue);
-    }
+  //padding       : 0.75rem 1rem;
+  //border        : 1px solid var(--Gray-gray-300);
+  //border-radius : var(--border-radius-xs);
+  //transition    : var(--transition);
+
+  // Typography
+  font-family      : $font-family-tertiary;
+  font-size        : font-size('base');
+  font-weight      : 500;
+  line-height      : 1.4;
+
+  // Sizing
+  width            : 100%;
+  // padding          : 19px 20px 19px 20px;
+  padding-top      : 17.8px; // remove 1px border & then some
+  padding-bottom   : 17.8px; // remove 1px border & then some
+  padding-left     : 19px; // remove 1px border
+  padding-right    : 19px; // remove 1px border & then some
+
+  // Styles
+  border-width     : 1px;
+  border-style     : solid;
+  border-color     : transparent;
+
+  background-color : #FFFFFF;
+  border-radius    : 12px;
+  box-shadow       : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.10);
+
+  transition       : all ease .3s;
+
+  &:hover {
+	box-shadow : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.20);
+  }
+
+  &:focus {
+	box-shadow   : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.20);
+	border-color : #000B40;
+	// caret-color  : transparent; // Hide native caret for custom 2px version
+  }
+
 }
+
 input[type="checkbox"],
 input[type="radio"] {
-    width: auto;
-    margin-right: 0.5rem;
-    vertical-align: middle;
-    &:focus {
-        outline: 2px solid var(--Light-blue);
-        outline-offset: 2px;
-    }
+  //width          : auto;
+  //margin-right   : 0.5rem;
+  //vertical-align : middle;
+
+  &:focus {
+	//outline        : 2px solid var(--Light-blue);
+	//outline-offset : 2px;
+  }
 }
+
 label {
-    display: inline-block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
+  //display       : inline-block;
+  //margin-bottom : 0.5rem;
+  //font-weight   : 600;
 }
+
 .form-group {
-    margin-bottom: 1.5rem;
+  //margin-bottom : 1.5rem;
 }
+
+
+// Custom Caret - Uses "I" character to match input height exactly
+.custom-caret {
+  position       : absolute;
+  pointer-events : none;
+  animation      : blink 1s step-end infinite;
+  z-index        : 1;
+
+  // Match input font styles exactly
+  font-family    : $font-family-tertiary;
+  font-size      : font-size('base'); // 16px
+  font-weight    : 500;
+  line-height    : 1.4;
+
+  color          : #000B40;
+
+  // Prevent text selection
+  user-select    : none;
+}
+
+@keyframes blink {
+  0%, 100% {
+	opacity : 1;
+  }
+  50% {
+	opacity : 0;
+  }
+}
+
+
+// Search Form Styles
+
+
+// Contact 7 Styles
+.wpcf7-form {
+
+  &-control-wrap {
+	// Position relative for custom caret positioning
+	position : relative;
+	display  : block; // Ensure it's a block element for proper positioning
+  }
+
+  &-control {
+
+	&.wpcf7-not-valid {
+	  border-color : #FA423C !important;
+	}
+  }
+
+  // Effect to have Submit inside the input
+  .submit-wrapper {
+	position : relative;
+
+	.wpcf7-email {
+	  padding-right: calc(5px + 19px + 20px); // small gap | icon width | padding-right
+	}
+
+	.wpcf7-form-control-wrap {
+
+	  // Error icon - shown when input is invalid
+	  &:has(.wpcf7-not-valid):after {
+		content             : "";
+		position            : absolute;
+
+		top                 : 50%;
+		right               : calc(19px + 10px + 20px); // gap | submit icon | padding
+		transform           : translateY(-50%);
+
+		width               : 24px;
+		height              : 24px;
+
+		background-image    : url("../../img/input-indicator-error.svg");
+		background-repeat   : no-repeat;
+		background-position : center;
+		background-size     : contain;
+
+		pointer-events      : none;
+		z-index             : 2; // Above custom caret
+	  }
+
+	  // Adjust email input padding when error icon shows
+	  &:has(.wpcf7-not-valid) .wpcf7-email {
+		// small gap | error icon | gap | submit width | padding right
+		padding-right : calc(5px + 24px + 10px + 19px + 20px);
+	  }
+
+	  .wpcf7-not-valid-tip {
+		position    : absolute;
+
+		bottom      : -20px;
+
+		font-family : $font-family-tertiary;
+		font-size   : font-size('xs'); // 12px
+		font-weight : 400;
+		line-height : 1.2;
+
+		color       : #FFFFFF;
+	  }
+	}
+
+	&__submit {
+	  position  : absolute;
+
+	  display   : flex;
+
+	  top       : 50%;
+	  right     : 20px;
+
+	  transform : translateY(-50%);
+
+	  // Style the actual input as the arrow (so it's clickable)
+	  input[type="submit"] {
+		// Remove default button styling
+		appearance          : none;
+		border              : none;
+		background-color    : transparent;
+		padding             : 0;
+		margin              : 0;
+
+		// Arrow styling
+		width               : 19px;
+		height              : 19px;
+
+		background-image    : url("../../img/input-submit-arrow.svg");
+		background-repeat   : no-repeat;
+		background-position : center;
+		background-size     : contain;
+
+		// Hide the text but keep it accessible
+		text-indent         : -9999px;
+		overflow            : hidden;
+
+		// Cursor
+		cursor              : pointer;
+
+		// Transition for hover effect
+		// transition          : opacity 0.3s ease;
+
+		&:hover {
+		  // opacity : 0.7;
+		}
+	  }
+
+	  .wpcf7-spinner {
+		position  : absolute;
+		top       : 50%;
+		right     : -50px;
+		transform : translateY(-50%);
+		margin    : 0;
+	  }
+	}
+  }
+}
+

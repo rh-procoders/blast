@@ -1,0 +1,152 @@
+@import "../../../assets/scss/variable";
+
+.cta-newsletter {
+  --bs-wrapper-pt : 74px; // 74px
+  --bs-wrapper-pr : 4.375rem; // 70px
+  --bs-wrapper-pb : 73px; // 73px
+  --bs-wrapper-pl : 4.375rem; // 70px
+
+  /* declare this element as a size-based container */
+  container-type  : inline-size;
+
+  &__wrapper {
+	position      : relative;
+	overflow      : hidden;
+	z-index       : 1;
+
+	margin        : 0 auto;
+	max-width     : 1496px;
+
+	border-radius : max(50px, 4.375rem); // 70px
+	padding       : var(--bs-wrapper-pt) var(--bs-wrapper-pr) var(--bs-wrapper-pb) var(--bs-wrapper-pl);
+	background    : linear-gradient(44deg, #FFF2D9 -9.95%, #FFD993 13.32%, #FF735B 49.01%);
+
+	@container (max-width: 768px) {
+	  --bs-wrapper-pl : 23px;
+	  --bs-wrapper-pr : 23px;
+	}
+
+	&:before {
+	  content             : "";
+	  position            : absolute;
+	  left                : 0;
+	  bottom              : 0;
+
+	  background-repeat   : no-repeat;
+	  background-position : center;
+
+	  background-image    : url("../images/cta_newsletter-bg--desktop.svg");
+	  width               : 1496px;
+	  height              : 386px;
+
+	  @container (max-width: 768px) {
+		background-image : url("../images/cta_newsletter-bg--mobile.svg");
+
+		width            : 315px;
+		height           : 317px;
+	  }
+	}
+
+	@container (max-width: 768px) {
+	  border-radius : 50px;
+	}
+  }
+
+  &__content {
+	position : relative;
+	z-index  : 2;
+  }
+
+  &__heading {
+	display     : block;
+	color       : #FFFFFF;
+	text-align  : center;
+
+	margin      : 0 auto;
+	max-width   : 58.75rem; // 940px
+
+	font-family : $font-family-primary;
+	font-size   : max(24px, 3.75rem); // 60px
+	font-weight : normal;
+	line-height : 1.1;
+
+	@container (max-width: 768px) {
+	  font-size : 24px;
+	}
+
+	strong {
+	  font-family : $font-family-tertiary;
+	  font-weight : 700;
+	}
+  }
+
+  &__cf7-wrapper {
+	margin-top : max(30px, 2.5rem); // 40px
+
+	@container (max-width: 768px) {
+	  margin-top : 30px;
+	}
+
+	// Class from CF7 - wrap input & submit
+	.submit-wrapper {
+	  max-width : 320px;
+	  margin    : 0 auto;
+	}
+
+	.wpcf7-response-output {
+	  max-width     : 320px;
+	  margin-left   : auto !important;
+	  margin-right  : auto !important;
+
+	  padding       : 10px 20px !important;
+	  border-radius : 6px !important;
+	  border        : 1px solid #FFFFFF !important;
+	  background    : #FE8B5E !important;
+
+	  font-family   : $font-family-tertiary;
+	  font-size     : font-size('base'); // 16px
+	  font-weight   : 400;
+	  line-height   : 1.4;
+
+	  color         : #FFFFFF;
+	}
+
+	.wpcf7-form {
+
+	  &-control {
+
+	  }
+	}
+  }
+
+  &--is-footer {
+	--bs-cta-newsletter-py        : 180px; // 180px
+	--bs-cta-newsletter-bg-offset : 80px; // 80px
+
+	position                      : relative;
+	padding-top                   : var(--bs-cta-newsletter-py);
+	padding-bottom                : var(--bs-cta-newsletter-py);
+
+	padding-left                  : 30px;
+	padding-right                 : 30px;
+
+	&:after {
+	  content          : "";
+	  position         : absolute;
+
+	  bottom           : 0;
+	  left             : 0;
+	  width            : 100%;
+	  height           : calc(var(--bs-cta-newsletter-bg-offset) + var(--bs-cta-newsletter-py));
+
+	  background-color : #000B40;
+
+	  border-radius    : 70px 70px 0 0;
+	}
+
+	.cta-newsletter {
+
+	}
+  }
+}
+
