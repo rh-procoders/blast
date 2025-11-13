@@ -95,6 +95,11 @@
 					"size": "max(24px, 2.125rem)",
 					"name": "H4 - 34px"
 				},
+                {
+					"slug": "fs-medium-large",
+					"size": "max(26px, 2.5rem)",
+					"name": "Custom Size - 40px"
+				},
 				{
 					"slug": "fs-large",
 					"size": "max(28px, 3.5rem)",

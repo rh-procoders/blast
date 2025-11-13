@@ -6,39 +6,137 @@
    }
 
    &__wrapper{
+        max-width: 1700px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
         border-radius: 70px;
         background-color: #F4F4F4;
-        background-position: bottom right;
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 100%;
         padding: 100px 100px 60px 100px;
         margin-bottom: 200px;
-        display: flex;
-        gap: 60px;
+        width: 100%;
+        max-width: calc(100% - 60px);
+        overflow: hidden;
+        @include desktop{
+            padding: 80px 50px 40px 50px;
+        }
+        @include tablet{
+            padding: 60px 30px 30px 30px;
+            margin-bottom: 150px;
+            border-radius: 50px;
+
+        }
+        
+   }
+
+   &__grid{
+        display: grid;
+        grid-template-columns:8.125rem 1fr 27.625rem;
         position: relative;
         overflow: hidden;
+        justify-content: space-between;
+        gap: 6.25rem;
+        z-index: 1;
+        @include desktop-lg{
+            grid-template-columns:8.125rem 1fr 22.625rem;
+            gap: 5rem;
+        }
+        @include desktop{
+            gap: 4rem;
+        }
+        @include tablet-lg{
+            grid-template-columns:8.125rem 1fr;
+        }
+        @include tablet{
+            grid-template-columns: 1fr;
+            gap: 3.75rem 0rem;
+        }
    }
-   &__bg-image-bottom{
-        position: absolute;
-        bottom: 0px;
-        right: 0px;
-        width: 55%;
-        height: auto;
-        z-index: 0;
-   }
-   .footer-menu{
-    ul{
-        list-style: none;
-        padding: 0;
-        margin: 0px;
-        li{
-            margin-bottom: 12px;
-            &:last-of-type{
-                margin-bottom: 0;
+    &__navigation{
+        display: flex;
+        gap: 3.75rem;
+        justify-content: space-around;
+        @include desktop{
+            gap: 2.5rem;
+        }
+        @include tablet{
+            flex-direction: column;
+            gap: 3.75rem;
+        }
+        .footer-column{
+            min-width: 120px;
+            &__title{
+                color: inherit;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 140%; /* 22.4px */
+                margin-bottom: 16px;
+                font-weight: 600;
+
             }
-            a{
-                color: #000B40;
+            &__links{
+                list-style: none;
+                padding: 0px;
+                margin: 0px;
+                li{
+                    margin-bottom: 12px;
+                    &:last-of-type{
+                        margin-bottom: 0px;
+                    }
+                    a{
+                        color: inherit;
+                        font-family: $font-family-secondary;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 160%; /* 25.6px */
+                        text-decoration: none;
+                        &:hover{
+                            color: var(--wp--preset--color--coral);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__brand{
+        width: 100%;
+        img{
+            width: 100%;
+            height: auto;
+            max-width: 180px;
+        }
+    }
+
+    &__newsletter{
+        display: grid;
+        grid-template-columns: 1fr 40px;
+        gap: 5rem;
+        width: 100%;
+        @include desktop-lg{
+            gap: 3.5rem;
+        }
+        @include tablet-lg{
+            grid-column: 1/4;
+            grid-template-columns: 1fr;
+        }
+        @include tablet{
+            grid-column: 1;
+        }
+        .footer-newsletter{
+            &__title{
+                color: inherit;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 140%; /* 22.4px */
+                margin-bottom: 16px;
+                font-weight: 600;
+            }
+            &__description{
+                color: inherit;
                 font-family: $font-family-secondary;
                 font-size: 16px;
                 font-style: normal;
@@ -47,5 +145,93 @@
             }
         }
     }
-   }
+
+    .footer-social{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        @include tablet-lg{
+            flex-direction: row;
+        }
+        &__link{
+            border-radius: 10px;
+            background: #FFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            &:hover{
+                background-color: var(--wp--preset--color--coral);
+            }
+            img{
+                width: 16px;
+                height: 16px;
+                object-fit: contain;
+            }
+        }
+    }
+
+    &__bottom{
+        margin-top: 200px;
+        position: relative;
+        z-index: 1;
+        @include desktop{
+            margin-top: 150px;
+        }
+        &-content{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            @include tablet{
+                flex-direction: column-reverse;
+                gap: 20px;
+                align-items: flex-start;
+            }
+            .footer-copyright p{
+                font-family: $font-family-secondary;
+                color: #000B40;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 140%; /* 19.6px */
+            }
+            .footer-legal{
+                ul{
+                    list-style: none;
+                    padding: 0px;
+                    margin: 0px;
+                    display: flex;
+                    gap: 24px;
+                    @include tablet{
+                        flex-direction: column;
+                        gap: 12px;
+                        align-items: flex-start;
+                    }
+                    li{
+                        a{
+                            font-family: $font-family-secondary;
+                            color: #000B40;
+                            font-size: 14px;
+                            font-style: normal;
+                            font-weight: 500;
+                            line-height: 140%; /* 19.6px */
+                            text-decoration: none;
+                            &:hover{
+                                color: var(--wp--preset--color--coral);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    &__bg-image-bottom{
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        width: 55%;
+        height: auto;
+        z-index: 0;
+    }
 }

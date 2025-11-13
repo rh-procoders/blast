@@ -17,6 +17,7 @@
     border: 1px solid;
     &.has-dark-blue-background-color{
         border-color: var(--wp--preset--color--dark-blue);
+        color: #fff;
     }
     &.has-coral-background-color{
         border-color: var(--wp--preset--color--coral);

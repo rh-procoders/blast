@@ -1,0 +1,82 @@
+{
+    "key": "group_about_backed_by_block",
+    "title": "About Backed By Block Fields",
+    "fields": [
+        {
+            "key": "field_backed_by_heading",
+            "label": "Section Heading",
+            "name": "backed_by_heading",
+            "type": "text",
+            "instructions": "Enter the heading for the backed by section",
+            "required": 0,
+            "default_value": "Backed by",
+            "placeholder": "Backed by",
+            "maxlength": 100
+        },
+        {
+            "key": "field_backed_by_logos",
+            "label": "Backer Logos",
+            "name": "backed_by_logos",
+            "type": "repeater",
+            "instructions": "Add logos of investors, partners, or backers",
+            "required": 0,
+            "layout": "table",
+            "button_label": "Add Logo",
+            "min": 1,
+            "max": 10,
+            "collapsed": "field_logo_name",
+            "sub_fields": [
+                {
+                    "key": "field_logo_image",
+                    "label": "Logo Image",
+                    "name": "logo_image",
+                    "type": "image",
+                    "instructions": "Upload a logo image (recommended: SVG or PNG with transparent background)",
+                    "required": 1,
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "parent_repeater": "field_backed_by_logos"
+                },
+                {
+                    "key": "field_logo_name",
+                    "label": "Company/Backer Name",
+                    "name": "logo_name",
+                    "type": "text",
+                    "instructions": "Enter the name of the company or backer (for accessibility)",
+                    "required": 1,
+                    "placeholder": "Company Name",
+                    "maxlength": 100,
+                    "parent_repeater": "field_backed_by_logos"
+                },
+                {
+                    "key": "field_logo_link",
+                    "label": "Logo Link",
+                    "name": "logo_link",
+                    "type": "url",
+                    "instructions": "Optional: Add a link to the company website",
+                    "required": 0,
+                    "placeholder": "https://company.com",
+                    "parent_repeater": "field_backed_by_logos"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/about-backed-by"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": ""
+}

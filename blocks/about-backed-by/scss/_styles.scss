@@ -1,0 +1,161 @@
+// About Backed By Block Styles
+@import "../../../assets/scss/mixins";
+@import "../../../assets/scss/variable";
+
+.about-backed-by-block {
+    padding:0px;    
+    &__container {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    &__header {
+        margin-bottom: 30px;
+        @media (max-width: 768px) {
+            margin-bottom: 2rem;
+        }
+    }
+
+    
+    &__heading {
+        font-size: var(--wp--preset--font-size--fs-small-medium);
+        font-weight: 600;
+        margin: 0;
+        color: var(--wp--preset--color--neutral-800);
+        letter-spacing: -0.02em;
+    }
+    
+    &__grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:  20px 10px;
+        flex-wrap: wrap;
+        
+        
+        @include mobile {
+            gap: 20px;
+            flex-direction: column;
+        }
+    }
+    
+    &__empty {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--wp--preset--color--neutral-600);
+        font-style: italic;
+    }
+}
+
+.about-backed-by-item {
+    &__link {
+        text-decoration: none;
+        display: block;
+        transition: transform 0.3s ease;
+        
+        &:hover {
+            transform: translateY(-4px);
+            
+            .about-backed-by-item__card {
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            }
+        }
+        
+        &:focus {
+            outline: 2px solid var(--wp--preset--color--accent-500);
+            outline-offset: 4px;
+            border-radius: 12px;
+        }
+    }
+    
+    &__card {
+        background: white;
+        border-radius: 30px;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border: 1px solid var(--wp--preset--color--neutral-200);
+        width: 300px;
+        height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        
+        &:hover {
+            border-color: var(--wp--preset--color--neutral-300);
+        }
+    }
+    
+    &__image-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+    
+    &__image {
+        max-width: 100%;
+        height: 60px;
+        object-fit: contain;
+        width: auto;
+        object-fit: contain;
+        transition: all 0.3s ease;
+        
+        @media (max-width: 768px) {
+            max-height: 50px;
+        }
+        
+        @media (max-width: 480px) {
+            max-height: 45px;
+        }
+        
+        .about-backed-by-item__link:hover & {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        // If no link, allow direct hover on the image
+        .about-backed-by-item:not(:has(.about-backed-by-item__link)) &:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+    }
+}
+
+// Special styling for text-based logos (like "10D", "MZ")
+.about-backed-by-item__card {
+    // If the image is very small or text-based, we can style it differently
+    &:has(.about-backed-by-item__image[src*=".svg"]) {
+        // SVG logos get special treatment
+        .about-backed-by-item__image {
+            max-height: 40px;
+        }
+    }
+}
+
+// Animation on load
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.about-backed-by-item {
+    animation: fadeInUp 0.6s ease forwards;
+    
+    // Stagger animation for multiple items
+    @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+            animation-delay: #{$i * 0.1}s;
+        }
+    }
+}
+
