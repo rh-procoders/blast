@@ -32,6 +32,10 @@ $card_heading = get_field('card_heading') ?: 'Card Heading';
 $card_description = get_field('card_description') ?: '';
 $card_link = get_field('card_link') ?: '';
 
+$button_label = get_field('button_label') ?: null;
+$author_image = get_field('author_image') ?: null;
+$author_name = get_field('author_name') ?: null;
+
 $wrapper_attributes = get_block_wrapper_attributes([
 	'class' => $classes,
 	'id' => $id
@@ -68,9 +72,16 @@ $wrapper_attributes = get_block_wrapper_attributes([
         
         <!-- Card Tag -->
         <?php if ($card_tag): ?>
-            <span class="card-block__tag">
-                <?php echo esc_html($card_tag); ?>
-            </span>
+            <div class="card-block__tag-wrapper">
+            <?php foreach ($card_tag as $tag): 
+                $color = $tag['color'] ?: '#000B40';
+                $bg_color = $tag['background_color'] ?: 'transparent';
+                ?>
+                <span class="card-block__tag" style="color: <?php echo esc_attr($color); ?>; background-color: <?php echo esc_attr($bg_color); ?>;">
+                    <?php echo esc_html($tag['label']); ?>
+                </span>
+            <?php endforeach; ?>
+            </div>
         <?php endif; ?>
         
         <!-- Card Heading -->
@@ -84,6 +95,39 @@ $wrapper_attributes = get_block_wrapper_attributes([
                 <?php echo esc_html($card_description); ?>
             </p>
         <?php endif; ?>
+        <div class="card-block__footer">
+            <?php if(get_field('show_author')): ?>
+                <div class="card-block__author">
+                    <?php if ($author_image): ?>
+                        <div class="card-block__author-image">
+                            <img 
+                                src="<?php echo esc_url($author_image['url']); ?>" 
+                                alt="<?php echo esc_attr($author_name); ?>"
+                                loading="lazy"
+                            >
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($author_name): ?>
+                        <span class="card-block__author-name">
+                            <?php echo $author_name; ?>
+                        </span>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($button_label): ?>
+                <div  class="card-block__button btn  btn-outline">
+                    <span class="button-text"
+                        data-hover-text="<?php echo esc_html($button_label); ?>">
+                        <?php echo esc_html($button_label); ?>
+                    </span>
+
+                    <span class="button-arrow-wrapper">
+                        <?php sprite_svg( 'icon-arrow-right', 14, 10 ) ?>
+                    </span>
+                </div>
+            <?php endif; ?>
+        </div>
         
     </div>
     

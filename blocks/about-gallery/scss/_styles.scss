@@ -1,0 +1,347 @@
+// About Gallery Block Styles
+@import "../../../assets/scss/variable";
+
+.about-gallery-block {
+    padding: 0;
+    background: var(--wp--preset--color--neutral-50);
+    overflow: hidden;
+    
+    &__container {
+        position: relative;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 1104px;
+        @include desktop{
+            max-width: 1200px;
+            min-height: 1000px;
+        }
+        @include tablet-lg{
+            max-width: 900px;
+            min-height: 960px;
+        }
+
+        @include tablet{
+            max-width: 550px;
+            min-height: auto;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+        }
+    }
+    
+    &__center {
+        text-align: center;
+        z-index: 10;
+        position: relative;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    &__heading {
+        color: var(--wp--preset--color--dark-blue);
+        font-style: normal;
+        line-height: 110%;
+        margin-bottom: 30px;
+    }
+    
+    &__gallery {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        min-height: 1024px;
+        height: 100%;
+        @include tablet-lg{
+            min-height: 900px;
+        }
+        @include tablet{
+            position: relative;
+            min-height: auto;
+            width: 100%;
+            margin-bottom: 60px;
+        }
+    }
+    
+    &__empty {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--wp--preset--color--neutral-600);
+        font-style: italic;
+    }
+}
+
+.about-gallery-item {
+    position: absolute;
+    pointer-events: auto;
+    border-radius: 40px;
+    overflow: hidden;
+    width: 100%;
+    // Base positioning for different layout positions
+    @include tablet{
+        position: relative;
+    }
+    &--1 {
+        top: 5%;
+        left: 14%;
+        z-index: 3;
+        aspect-ratio: 220 / 290;
+        transform: rotate(-5deg); 
+        max-width: 220px;
+        @include tablet{
+            aspect-ratio: 150 / 200;
+            max-width: 150px;
+            transform: rotate(5deg); 
+            left: 0px;
+            right: 0px;
+            margin-left: auto;
+        }       
+    }
+    
+    &--2 {
+        aspect-ratio: 1 / 1;
+        z-index: 4;
+        transform: rotate(-4deg);
+        max-width: 198px;
+        right: 21.4%;
+        top: 13%;
+        @include tablet-lg{
+            max-width: 190px;
+            right: 15.4%;
+            top: 9%;
+        }
+        @include tablet{
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            top: -50px;
+            transform: rotate(0deg);
+        }
+    }
+    
+    &--3 {
+        aspect-ratio: 270 / 250;
+        left: 0.5%;
+        top: 29%;
+        z-index: 4;
+        max-width: 270px;  
+        @include tablet-lg{
+            max-width: 230px;
+        }  
+        @include tablet{
+            max-width: 140px;
+            transform: rotate(-5deg);
+        }   
+    }
+    
+    &--4 {
+        aspect-ratio: 310 / 356;
+        max-width: 310px;
+        right: 4%;
+        top: 23%;
+        z-index: 2;
+        @include tablet-lg{
+            max-width: 250px;
+            right: 2%;
+            top: 22%;
+        }
+        @include tablet{
+            max-width: 215px;
+            right: 0px;
+            top: -60px;
+            margin-left: auto;
+        }
+    }
+    
+    &--5 {
+        aspect-ratio: 365 / 358;
+        max-width: 365px;
+        width: 100%;
+        bottom: 0%;
+        left: 8%;
+        z-index: 3;
+        @include desktop{
+            max-width: 280px;
+        }
+        @include tablet-lg{
+            max-width: 250px;
+        }
+        @include tablet{
+            max-width: 100%;
+            left: 0px;
+            right: 0px;
+            margin-top: 40px;
+        }
+ 
+    }
+    
+    &--6 {
+        aspect-ratio: 1 / 1;
+        bottom: 1.5%;
+        max-width: 350px;
+        right: 8.5%;
+        width: 100%;
+        z-index: 2;
+        @include desktop{
+            max-width: 250px;
+            bottom: 3.5%;
+        }
+        @include tablet-lg{
+            max-width: 220px;
+            right: 3%;
+        }
+        @include tablet{
+            max-width: 182px;
+            bottom: 0px;
+            right: 0px;
+            margin-left: auto;
+            margin-top: 90px;
+        }
+    }
+
+    &--7 {
+        aspect-ratio: 270 / 294;
+        transform: rotate(6.4deg);
+        right: 30%;
+        max-width: 270px;
+        width: 100%;
+        bottom: 0px;
+        @include desktop{
+            max-width: 220px;
+        }
+        @include tablet-lg{
+            max-width: 200px;
+            right: 24%;
+        }
+        @include tablet{
+            max-width: 144px;
+            right: 0px;
+            left: 0px;
+            bottom: 0px;
+            margin-top: -130px;
+        }
+    }
+    
+
+
+
+    &__image-wrapper {
+        overflow: hidden;
+        transition: all 0.3s ease;
+        display: block;
+        width: 100%;
+        height: 100%;
+        &:hover {
+            transform: scale(1.05) !important;
+        }
+    }
+    
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    &__tag {
+        position: absolute;
+        top: -10px;
+        right: -15px;
+        padding: 24px 36px;
+        border-radius: 20px;
+        leading-trim: both;
+        text-edge: cap;
+        font-family: $font-family-tertiary; // Tomorrow
+        font-size: 24px;
+        font-style: italic;
+        font-weight: 600;
+        line-height: 110%; /* 26.4px */
+        background: #fff;
+        width: fit-content;
+        @include tablet{
+            padding: 20px 32px;
+            font-size: 20px;
+        }
+        
+        &--purple {
+            color: #9d00ff;
+            right: 3%;
+            top: 64%;
+            transform: rotate(11.5deg);
+            
+            z-index: 9;
+            @include tablet{
+                right: inherit;
+                left: 0px;
+                top: 52%;
+                transform: rotate(-17.5deg);
+                z-index: 9;
+            }
+        }
+        
+        &--blue {
+            color: #3355FF;
+            left: 0px;
+            top: 85%;
+            transform: rotate(-14.5deg);
+            z-index: 9;
+            @include tablet{
+                left: inherit;
+                margin-left: auto;
+                top: 82%;
+                transform: rotate(10.5deg);
+                z-index: 9;
+            }
+        }
+
+        &--pink {
+            color: #FF00D4;
+            left: calc(50% - 103px);
+            top: 5%;
+            transform: rotate(-8.5deg);
+            @include tablet{
+                left: calc(50% - 54px);
+                top: 21%;
+                transform: rotate(-12.5deg);
+                z-index: 5;
+            }
+        }
+        
+        &--green {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+        }
+        
+        &--orange {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            color: white;
+        }
+        
+        &--red {
+            background: linear-gradient(135deg, #EF4444, #DC2626);
+            color: white;
+        }
+        
+        &--yellow {
+            background: linear-gradient(135deg, #FCD34D, #F59E0B);
+            color: #92400E;
+        }
+        
+       
+        
+    
+    }
+    
+    &__tag-text {
+        white-space: nowrap;
+    }
+}
+
+

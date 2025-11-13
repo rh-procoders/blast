@@ -19,7 +19,7 @@
 	  font-weight : 400;
 	  line-height : 1.1;
 
-	  color       : #000B40;
+	  color       : var(--wp--preset--color--dark-blue);
 
 	  padding     : 0 30px;
 
@@ -155,7 +155,7 @@
 	letter-spacing : calc(-1 * max(0.48px, 0.0575rem)); // -0.92px
 	font-weight    : 600;
 
-	color          : #000B40;
+	color          : var(--wp--preset--color--dark-blue);
 
 	@include mobile {
 	  font-size : 24px;
@@ -277,7 +277,7 @@
 	height        : max(24px, 1.625rem); // 26px
 	width         : max(24px, 1.625rem); // 26px
 
-	color         : #000B40;
+	color         : var(--wp--preset--color--dark-blue);
 
 	transition    : opacity ease .3s;
 
@@ -421,7 +421,7 @@
 	font-family : $font-family-tertiary; // -> 'Tomorrow'
 	line-height : 1.1;
 
-	color       : #000B40;
+	color       : var(--wp--preset--color--dark-blue);
   }
 
   &__category-list {
@@ -454,10 +454,10 @@
 	text-decoration  : none !important;
 
 	padding          : 6.3px 12px;
-	border           : 1px solid #000B40;
+	border           : 1px solid var(--wp--preset--color--dark-blue);
 	border-radius    : 20px;
 
-	color            : #000B40;
+	color            : var(--wp--preset--color--dark-blue);
 	background-color : transparent;
 	transition       : color ease .3s, background-color ease .3s;
 
@@ -470,7 +470,7 @@
 	&:focus,
 	&--active {
 	  color            : #FFFFFF;
-	  background-color : #000B40;
+	  background-color : var(--wp--preset--color--dark-blue);
 	}
   }
 
@@ -503,7 +503,7 @@
 	flex-direction      : column;
 
 	border-radius       : max(20px, 2.5rem); // 40px
-	color               : #000B40 !important;
+	color               : var(--wp--preset--color--dark-blue) !important;
 	background-color    : #FFFFFF;
 
 	padding             : var(--bs-filter-item-pt) var(--bs-filter-item-pr) var(--bs-filter-item-pb) var(--bs-filter-item-pl);
@@ -590,7 +590,7 @@
 
 	&__category {
 	  padding          : 7.3px 14px;
-	  background-color : #000B40;
+	  background-color : var(--wp--preset--color--dark-blue);
 	  border-radius    : 20px;
 
 	  color            : #FFFFFF;
@@ -696,7 +696,7 @@
 @keyframes blog-filter-loader {
   0% {
 	box-shadow : 20px 0 #000B40, -20px 0 rgba(0, 11, 64, 0.13);
-	background : #000B40;
+	background : var(--wp--preset--color--dark-blue);
   }
   33% {
 	box-shadow : 20px 0 #000B40, -20px 0 rgba(0, 11, 64, 0.13);
@@ -708,6 +708,6 @@
   }
   100% {
 	box-shadow : 20px 0 rgba(0, 11, 64, 0.13), -20px 0 #000B40;
-	background : #000B40;
+	background : var(--wp--preset--color--dark-blue);
   }
 }

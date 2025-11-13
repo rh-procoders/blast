@@ -1,0 +1,167 @@
+{
+    "key": "group_about_gallery_block",
+    "title": "About Gallery Block Fields",
+    "fields": [
+        {
+            "key": "field_gallery_heading",
+            "label": "Main Heading",
+            "name": "gallery_heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Enter the main heading for the gallery section",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Join our Team",
+            "placeholder": "Join our Team",
+            "maxlength": 100,
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_gallery_button",
+            "label": "Call to Action Button",
+            "name": "gallery_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Add a call-to-action button link",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_gallery_items",
+            "label": "Gallery Items",
+            "name": "gallery_items",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Add gallery items with images and optional value tags",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 4,
+            "max": 7,
+            "collapsed": "field_item_image",
+            "button_label": "Add Gallery Item",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_item_image",
+                    "label": "Image",
+                    "name": "item_image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Upload an image for this gallery item (recommended: 300x200px)",
+                    "required": 1,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "parent_repeater": "field_gallery_items",
+                    "min_width": 0,
+                    "min_height": 0,
+                    "min_size": 0,
+                    "max_width": 0,
+                    "max_height": 0,
+                    "max_size": 0,
+                    "mime_types": ""
+                },
+                {
+                    "key": "field_item_tag_text",
+                    "label": "Tag Text",
+                    "name": "item_tag_text",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Enter text for the colored tag (optional)",
+                    "required": 0,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Innovation",
+                    "maxlength": 50,
+                    "parent_repeater": "field_gallery_items",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_item_tag_color",
+                    "label": "Tag Color",
+                    "name": "item_tag_color",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "Choose a color for the tag",
+                    "required": 0,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "purple": "Purple",
+                        "blue": "Blue",
+                        "green": "Green",
+                        "orange": "Orange",
+                        "red": "Red",
+                        "yellow": "Yellow",
+                        "pink": "Pink"
+                    },
+                    "default_value": "purple",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 1,
+                    "return_format": "value",
+                    "parent_repeater": "field_gallery_items",
+                    "ajax": 0,
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/about-gallery"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1762966269
+}

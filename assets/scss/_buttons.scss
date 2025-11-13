@@ -17,6 +17,7 @@
     border: 1px solid;
     &.has-dark-blue-background-color{
         border-color: var(--wp--preset--color--dark-blue);
+        color: #fff;
     }
     &.has-coral-background-color{
         border-color: var(--wp--preset--color--coral);
@@ -67,6 +68,32 @@
         background-color: var(--color-white);
         color: var(--wp--preset--color--dark-blue);
         border-radius: 13px;
+    }
+    &.btn-outline{
+        background-color: transparent;
+        .button-arrow-wrapper{
+            background-color: var(--wp--preset--color--dark-blue);
+            color: var(--color-white);
+        }
+        &.has-dark-blue-color{
+            .button-arrow-wrapper{
+                background-color: var(--wp--preset--color--dark-blue);
+                color: var(--wp--preset--color--dark-blue);
+            }
+        }
+        &.has-dark-blue-color{
+            .button-arrow-wrapper{
+                background-color: var(--wp--preset--color--dark-blue);
+                color: var(--color-white);
+            }
+        }
+        
+        &.has-coral-color{
+            .button-arrow-wrapper{
+                background-color: var(--wp--preset--color--coral);
+                color: var(--color-white);
+            }
+        }
     }    
 }
 

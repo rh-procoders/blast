@@ -12,6 +12,7 @@ header.site-header {
 
   @include tablet {
     padding: 18px 0;
+    top: 0px;
   }
 
   .content-wrap {
@@ -46,7 +47,7 @@ header.site-header {
         z-index: 10;
         padding: 10px 12px;
         border-radius: 50%;
-        background-color: #525D63;
+        background-color: transparent;
         transition: .3s all;
         width: 50px;
         height: 50px;
@@ -64,24 +65,30 @@ header.site-header {
           display: block;
           width: 25px;
           height: 17px;
-          border-bottom: 3px solid $c-white;
+          border-bottom: 0px;
           transition: .3s all;
-
-          &:before,
-          &:after {
-            content: '';
+          border-radius: 1px;
+          .toggle-icon-bar{
             height: 3px;
-            background: $c-white;
+            background: var(--wp--preset--color--dark-blue);
             position: absolute;
-            top: 0;
             left: 0;
             width: 100%;
             transition: .3s all;
-          }
-
-          &:after {
-            bottom: -3px;
-            margin: auto;
+            border-radius: 1px;
+            &:nth-child(1){
+              top: 0px;
+              width: 16px;
+              left: 4px;
+            }
+            &:nth-child(2){
+              top: 7px;
+            }
+            &:nth-child(3){
+              bottom: 0px;
+              width: 16px;
+              left: 4px;
+            }
           }
         }
       }
@@ -106,10 +113,17 @@ header.site-header {
         transform: translateX(100%);
         opacity: 0;
         visibility: hidden;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
 
         .menu-main-menu-container{
           padding: 150px 35px 35px;
         }
+        .navigation-buttons{
+          padding: 0px 35px 35px;
+        }
+        
       }
     }
     nav {
@@ -130,6 +144,8 @@ header.site-header {
 
           .menu-main-menu-container{
             padding: 150px 35px 35px;
+            width: 100%;
+            margin-top: 0px;
           }
       }
 
@@ -145,25 +161,29 @@ header.site-header {
 
         @include tablet {
           flex-direction: column;
-          height: calc(100vh - 80px);
           margin-top: 80px;
           overflow: auto;
           padding-bottom: 60px;
         }
         li {
           margin: -7px 0px 0px;
+          @include tablet {
+            display: block;
+            width: 100%;
+          }
           a {
             color: var(--wp--preset--color--dark-blue);
             padding: 0px;
             transition: all 400ms linear;
             @include tablet {
               background-color: transparent;
-              font-size: 20px;
               display: block;
               margin-left: 0px;
               margin-right: auto;
               text-align: left;
               width: 100%;
+              font-size: 24px;
+              color: #fff;
             }
   
             &:hover {
@@ -235,9 +255,22 @@ header.site-header {
       background-color: transparent;
       border-color: transparent;
     }
-    .toggle-icon:after {
-      bottom: -1px!important;
-    }
+    .toggle-icon{
+        .toggle-icon-bar{
+          background: #fff!important;
+          &:nth-child(1){
+            top: 7px!important;
+            width: 100%!important;
+            left: 0px!important;
+          }
+
+          &:nth-child(3){
+            width: 100%!important;
+            left: 0px!important;
+            bottom: 7px!important;
+          }
+        }
+      }
     .toggle-icon:before, .toggle-icon:after {
       background: #fff!important;
     }
