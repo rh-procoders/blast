@@ -94,7 +94,7 @@ input[type="color"] {
   &:focus {
 	box-shadow   : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.20);
 	border-color : #000B40;
-	caret-color  : transparent; // Hide native caret for custom 2px version
+	// caret-color  : transparent; // Hide native caret for custom 2px version
   }
 
 }
