@@ -1,14 +1,13 @@
 @import "../../../assets/scss/variable";
 
 .cta-newsletter {
-  --bs-wrapper-pt : 4.625rem; // 74px
+  --bs-wrapper-pt : 74px; // 74px
   --bs-wrapper-pr : 4.375rem; // 70px
-  --bs-wrapper-pb : 4.5625rem; // 73px
+  --bs-wrapper-pb : 73px; // 73px
   --bs-wrapper-pl : 4.375rem; // 70px
 
   /* declare this element as a size-based container */
   container-type  : inline-size;
-
 
   &__wrapper {
 	position      : relative;
@@ -22,10 +21,12 @@
 	padding       : var(--bs-wrapper-pt) var(--bs-wrapper-pr) var(--bs-wrapper-pb) var(--bs-wrapper-pl);
 	background    : linear-gradient(44deg, #FFF2D9 -9.95%, #FFD993 13.32%, #FF735B 49.01%);
 
+	@container (max-width: 768px) {
+	  --bs-wrapper-pl : 23px;
+	  --bs-wrapper-pr : 23px;
+	}
 
 	&:before {
-	  display             : none;
-
 	  content             : "";
 	  position            : absolute;
 	  left                : 0;
@@ -125,6 +126,9 @@
 	position                      : relative;
 	padding-top                   : var(--bs-cta-newsletter-py);
 	padding-bottom                : var(--bs-cta-newsletter-py);
+
+	padding-left                  : 30px;
+	padding-right                 : 30px;
 
 	&:after {
 	  content          : "";

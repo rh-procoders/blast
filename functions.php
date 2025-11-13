@@ -251,17 +251,27 @@ add_filter( 'gu_ignore_dot_org', '__return_true' );
 
 
 /**
- * Add a sidebar.
+ * Register widget areas.
  */
 function wpdocs_theme_slug_widgets_init() {
 	register_sidebar( array(
-		'name'          => __( 'Blog Sidebar', 'textdomain' ),
+		'name'          => __( 'Blog Sidebar', 'blast-2025' ),
 		'id'            => 'sidebar-1',
-		'description'   => __( 'Widgets in this area will be shown on all posts.', 'textdomain' ),
+		'description'   => __( 'Widgets in this area will be shown on all posts.', 'blast-2025' ),
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</div>',
 		'before_title'  => '<h2 class="widgettitle">',
 		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Post Content Sidebar', 'blast-2025' ),
+		'id'            => 'post-content-sidebar',
+		'description'   => __( 'Widgets in this area will be shown in the right sidebar on single posts.', 'blast-2025' ),
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
 	) );
 }
 add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );

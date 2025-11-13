@@ -274,7 +274,7 @@ ul.nostyle {
 		margin     : 0;
 		padding    : 0;
 
-		margin-top: calc((var(--bs-toc-pt) - 20px) * -1);
+		margin-top : calc((var(--bs-toc-pt) - 20px) * -1);
 
 		li {
 		  position       : relative;
@@ -431,5 +431,164 @@ ul.nostyle {
   to {
 	opacity   : 0;
 	transform : translateY(-100%);
+  }
+}
+
+// Post Social Share Component
+.post-social-share {
+  position : relative;
+  z-index  : 2;
+
+  &__list {
+	margin          : 40px 0 0;
+	padding         : 0;
+	list-style      : none;
+
+	gap             : 10px;
+	display         : flex;
+	justify-content : center;
+  }
+
+  &__item {
+	display : flex;
+  }
+
+  &__link {
+	position         : relative; // Required for tooltip positioning
+	display          : grid;
+	place-items      : center;
+
+	background-color : #FFFFFF;
+	border-radius    : 10px;
+	width            : 40px;
+	height           : 40px;
+
+	color            : #000B40;
+
+	text-decoration  : none !important;
+	cursor           : pointer;
+
+	transition       : color 0.3s ease;
+
+	// Icon styles
+	svg {
+	  fill       : currentColor;
+	  stroke     : currentColor;
+	  transition : transform 0.3s ease;
+	}
+
+	// Hover states
+	&:hover,
+	&:focus {
+	  color : #FF654A;
+
+	  svg {
+
+	  }
+	}
+
+	// Active state (when clicking)
+	&:active {
+	  svg {
+
+	  }
+	}
+
+	// LinkedIn specific
+	&--linkedin {
+	  // Could add LinkedIn-specific styles here
+	}
+
+	// Email specific
+	&--email {
+	  // Could add email-specific styles here
+	}
+
+	// Copy button specific
+	&--copy {
+	  // Reset button styles
+	  appearance         : none;
+	  -webkit-appearance : none;
+	  -moz-appearance    : none;
+	  font-family        : inherit;
+	  font-size          : inherit;
+	  line-height        : inherit;
+	  padding            : 0;
+	  border             : none;
+
+	  cursor             : pointer;
+	}
+  }
+
+  // Tooltip for "Copied!" message
+  &__tooltip {
+	position         : absolute;
+	bottom           : calc(100% + 10px); // Position above button
+	left             : 50%;
+	transform        : translateX(-50%);
+
+	padding          : 8px 16px;
+	border-radius    : 8px;
+
+	background-color : #000B40;
+	color            : #FFFFFF;
+
+	font-family      : $font-family-tertiary;
+	font-size        : font-size('xs'); // 12psx
+	font-weight      : font-weight('medium'); // 500
+	line-height      : 1.2;
+	white-space      : nowrap;
+
+	// Hidden by default
+	opacity          : 0;
+	visibility       : hidden;
+	pointer-events   : none;
+
+	transition       : opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+
+	// Arrow pointing down
+	&:after {
+	  content      : "";
+	  position     : absolute;
+	  top          : 100%;
+	  left         : 50%;
+	  transform    : translateX(-50%);
+
+	  width        : 0;
+	  height       : 0;
+	  border-left  : 6px solid transparent;
+	  border-right : 6px solid transparent;
+	  border-top   : 6px solid #000B40;
+	}
+
+	// Visible state
+	&--visible {
+	  opacity    : 1;
+	  visibility : visible;
+	  transform  : translateX(-50%) translateY(-4px);
+	}
+
+	@include mobile {
+	  font-size : 12px;
+	  padding   : 6px 12px;
+
+	  &:after {
+		border-left-width  : 5px;
+		border-right-width : 5px;
+		border-top-width   : 5px;
+	  }
+	}
+  }
+}
+
+// Animation for tooltip appearance
+@keyframes tooltipFadeIn {
+  from {
+	opacity   : 0;
+	transform : translateX(-50%) translateY(0);
+  }
+  to {
+	opacity   : 1;
+	transform : translateX(-50%) translateY(-4px);
   }
 }

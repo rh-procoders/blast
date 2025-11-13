@@ -95,7 +95,15 @@ global $single_toc;
         <!-- Widget & Socials -->
         <div class="entry-content__sidebar-right">
             <div class="sticky-sidebar">
-                social shares and widget
+                <?php
+                // Display post content sidebar widget if active
+                if ( is_active_sidebar( 'post-content-sidebar' ) ) :
+                    dynamic_sidebar( 'post-content-sidebar' );
+                endif;
+
+                // Social share buttons
+                get_template_part( 'template-parts/components/post-social-share' );
+                ?>
             </div>
         </div><!-- .entry-content__sidebar-right -->
     </div><!-- .entry-content -->
