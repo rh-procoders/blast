@@ -22,10 +22,6 @@ global $single_toc;
                 <?php
                 if ( $single_toc ) : ?>
                     <div class="bs-toc">
-                            <span class="bs-toc__heading">
-                                <?php echo __( "Intro", 'blast-2025' ) ?>
-                            </span>
-
                         <div class="bs-toc__container">
                             <?php
                             echo $single_toc; ?>

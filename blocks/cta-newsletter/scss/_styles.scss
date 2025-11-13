@@ -9,6 +9,7 @@
   /* declare this element as a size-based container */
   container-type  : inline-size;
 
+
   &__wrapper {
 	position      : relative;
 	overflow      : hidden;
@@ -114,6 +115,33 @@
 	  &-control {
 
 	  }
+	}
+  }
+
+  &--is-footer {
+	--bs-cta-newsletter-py        : 180px; // 180px
+	--bs-cta-newsletter-bg-offset : 80px; // 80px
+
+	position                      : relative;
+	padding-top                   : var(--bs-cta-newsletter-py);
+	padding-bottom                : var(--bs-cta-newsletter-py);
+
+	&:after {
+	  content          : "";
+	  position         : absolute;
+
+	  bottom           : 0;
+	  left             : 0;
+	  width            : 100%;
+	  height           : calc(var(--bs-cta-newsletter-bg-offset) + var(--bs-cta-newsletter-py));
+
+	  background-color : #000B40;
+
+	  border-radius    : 70px 70px 0 0;
+	}
+
+	.cta-newsletter {
+
 	}
   }
 }

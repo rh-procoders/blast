@@ -155,7 +155,7 @@ function blast_blog_filter_shortcode( array $atts ): string
             else:
                 ?>
                 <div class="blog-filter__no-results">
-                    <p><?= esc_html__( 'No posts found.', 'blast-2025' ) ?></p>
+                    <p><?= esc_html__( 'No articles found...', 'blast-2025' ) ?></p>
                 </div>
             <?php
             endif;

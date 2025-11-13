@@ -105,6 +105,12 @@ function blast_filter_posts(): void
         if ($query->found_posts > ($paged * $posts_per_page)) {
             $more_posts = true;
         }
+    } else {
+        // No posts found - display message
+        $response = sprintf(
+            '<div class="blog-filter__no-results"><p>%s</p></div>',
+            esc_html__('No articles found...', 'blast-2025')
+        );
     }
 
     wp_reset_postdata();

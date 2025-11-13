@@ -94,6 +94,31 @@ if (function_exists('wpcf7_autop_or_not')) {
     add_filter('wpcf7_autop_or_not', '__return_false');
 }
 
+
+/**
+ * Modify TOC return to add a top link
+ */
+function bs_add_custom_toc_link( $html )
+{
+    // Get the current post ID
+    $post_id = get_the_ID();
+
+    // Check if the post type is "leader_interview" AND the assigned template is "single-leader_interview.php"
+    if ( is_singular( 'post' ) ) {
+
+        // Define the custom link
+        $custom_link = '<li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-0" href="#post-' . esc_attr( $post_id ) . '" title="Top">' . __( "Intro", "blast-2025" ) . '</a></li>';
+
+        // Prepend the custom link to the existing TOC
+        $html = $custom_link . $html;
+    }
+
+    return $html;
+}
+
+// Apply the filter only on the correct template
+add_filter( 'ez_toc_add_custom_links', 'bs_add_custom_toc_link' );
+
 /**
  * Render the star button in our custom column.
  */

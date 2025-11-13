@@ -32,14 +32,8 @@ $heading   = $fields["{$block_name}__heading"] ?? null;
 $cf7_id    = $fields["{$block_name}__contact-id"] ?? null;
 $is_footer = $fields["{$block_name}__is-footer"] ?? FALSE;
 
-// ToDo - connect ACF fields - Temporary value assignment - remove when done
-//$heading = 'Stay <strong>ahead</strong>. Get Preemptive Cloud Defense insights in your inbox.';
-//$cf7_id  = 'a705793';
-// END - ToDo
-
-
 // Add gradient class to main classes
-$classes .= '';
+$classes .=  $is_footer ? ' ' . $block_name . '--is-footer' : '';
 
 $wrapper_attributes = get_block_wrapper_attributes( [
         'class' => $classes,
