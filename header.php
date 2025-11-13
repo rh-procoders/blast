@@ -81,10 +81,6 @@
                         } else {
                             $button_class = 'wp-element-button has-arrow-icon tertiary-button';
                         }
-                        $opens_modal = get_sub_field( 'opens_modal' );
-                        if($opens_modal){
-                            $button_class .= ' opens-demo-modal';
-                        }
                         ?>
                         <?php if ( $link ) : ?>
                             <a class="wp-block-button__link btn <?php echo esc_attr( $button_class ); ?>" href="<?php echo esc_url( $link['url'] ); ?>" target="<?php echo esc_attr( $link['target'] ); ?>">

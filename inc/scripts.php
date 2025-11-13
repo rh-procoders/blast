@@ -67,6 +67,12 @@ function load_scripts() {
 
     // Archive Page Styles
     wp_register_style( 'blast-archive', THEME_URI . '/assets/css/archive.css' );
+
+    // Demo Page Assets (only on page-demo.php template)
+    if ( is_page_template( 'page-demo.php' ) ) {
+        wp_enqueue_style( 'page-demo-styles', THEME_URI . '/assets/css/page-demo.css', array(), filemtime(THEME_DIR . '/assets/css/page-demo.css') );
+        wp_enqueue_script( 'page-demo-scripts', THEME_URI . '/js/page-demo.js', array(), filemtime(THEME_DIR . '/js/page-demo.js'), true );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'load_scripts' );
 

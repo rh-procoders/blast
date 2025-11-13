@@ -84,28 +84,6 @@
                     "allow_in_bindings": 0,
                     "layout": "horizontal",
                     "parent_repeater": "field_690baa43a0e56"
-                },
-                {
-                    "key": "field_6915e2bb89d45",
-                    "label": "Opens Modal",
-                    "name": "opens_modal",
-                    "aria-label": "",
-                    "type": "true_false",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "message": "",
-                    "default_value": 0,
-                    "allow_in_bindings": 0,
-                    "ui_on_text": "TRUE",
-                    "ui_off_text": "FALSE",
-                    "ui": 1,
-                    "parent_repeater": "field_690baa43a0e56"
                 }
             ]
         },
@@ -220,5 +198,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763042002
+    "modified": 1763048723
 }
