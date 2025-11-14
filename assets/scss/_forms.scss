@@ -157,6 +157,9 @@ label {
 // Contact 7 Styles
 .wpcf7-form {
 
+  // Reset hidden overflow from Multi-Step-CF7 Plugin
+  overflow : visible !important;
+
   &-control-wrap {
 	// Position relative for custom caret positioning
 	position : relative;
@@ -175,7 +178,7 @@ label {
 	position : relative;
 
 	.wpcf7-email {
-	  padding-right: calc(5px + 19px + 20px); // small gap | icon width | padding-right
+	  padding-right : calc(5px + 19px + 20px); // small gap | icon width | padding-right
 	}
 
 	.wpcf7-form-control-wrap {

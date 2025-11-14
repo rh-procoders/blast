@@ -24,6 +24,11 @@ $right_cf7_id = $fields_right["tpl-demo-right__cf7-id"] ?? null;
 
 ?>
 
+<figure class="demo__bg">
+    <?php
+    the_post_thumbnail( 'full', [ 'class' => '', 'title' => get_the_title() ] ); ?>
+</figure>
+
 <section class="demo-section">
 
     <!-- Form Section (First in HTML, visually on right) -->
@@ -89,35 +94,48 @@ $right_cf7_id = $fields_right["tpl-demo-right__cf7-id"] ?? null;
             ?>
 
             <div class="demo-section__testimonial">
-                <?php if ( $testimonial_quote ) : ?>
-                    <blockquote class="demo-section__testimonial-quote">
-                        <?= wp_kses_post( wpautop( $testimonial_quote ) ); ?>
-                    </blockquote>
-                <?php endif; ?>
+                <div class="clip-path">
+                    <?php if ( $testimonial_quote ) : ?>
+                        <blockquote class="demo-section__testimonial-quote">
+                            <?= wp_kses_post( wpautop( $testimonial_quote ) ); ?>
+                        </blockquote>
+                    <?php endif; ?>
 
-                <?php if ( $testimonial_image ) : ?>
-                    <figure class="demo-section__testimonial-image">
-                        <img src="<?= esc_url( $testimonial_image['sizes']['large'] ?: $testimonial_image['url'] ); ?>"
-                             alt="<?= esc_attr( $testimonial_image['alt'] ?: 'Testimonial author' ); ?>"
-                             loading="lazy">
-                    </figure>
-                <?php endif; ?>
+                    <?php if ( $testimonial_image || $testimonial_quoter ) : ?>
+                        <div class="demo-section__testimonial-quoter">
+                            <?php if ( $testimonial_image ) : ?>
+                                <figure class="demo-section__testimonial-quoter-image">
+                                    <img src="<?= esc_url( $testimonial_image['sizes']['large'] ?: $testimonial_image['url'] ); ?>"
+                                         alt="<?= esc_attr( $testimonial_image['alt'] ?: 'Testimonial author' ); ?>"
+                                         loading="lazy">
+                                </figure>
+                            <?php endif; ?>
 
-                <?php if ( $testimonial_quoter ) : ?>
-                    <div class="demo-section__testimonial-quoter">
-                        <?= wp_kses_post( $testimonial_quoter ); ?>
-                    </div>
-                <?php endif; ?>
+                            <?php if ( $testimonial_quoter ) : ?>
+                                <div class="demo-section__testimonial-quoter-name">
+                                    <?= wp_kses_post( $testimonial_quoter ); ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php
+                    endif; ?>
 
-                <?php if ( $testimonial_logo ) : ?>
-                    <figure class="demo-section__testimonial-logo">
-                        <img src="<?= esc_url( $testimonial_logo['sizes']['large'] ?: $testimonial_logo['url'] ); ?>"
-                             alt="<?= esc_attr( $testimonial_logo['alt'] ?: 'Company logo' ); ?>"
-                             loading="lazy">
-                    </figure>
-                <?php endif; ?>
+                    <?php if ( $testimonial_logo ) : ?>
+                        <figure class="demo-section__testimonial-logo">
+                            <img src="<?= esc_url( $testimonial_logo['sizes']['large'] ?: $testimonial_logo['url'] ); ?>"
+                                 alt="<?= esc_attr( $testimonial_logo['alt'] ?: 'Company logo' ); ?>"
+                                 loading="lazy">
+                        </figure>
+                    <?php endif; ?>
+                </div>
+
+                <svg class="demo-section__testimonial-artwork"
+                     xmlns="http://www.w3.org/2000/svg"
+                     width="49" height="38" viewBox="0 0 49 38" fill="none">
+                    <path d="M3.04371 36.3111C1.67776 37.069 0 36.0813 0 34.5191V26.5171V2.04938C0 0.917537 0.917537 0 2.04938 0H19.6649C20.7967 0 21.7143 0.917537 21.7143 2.04938V24.7446C21.7143 25.4893 21.3104 26.1753 20.6592 26.5366L3.04371 36.3111Z" fill="#000B40"/>
+                    <path d="M30.1783 20.8563C28.8125 21.6082 27.1406 20.6201 27.1406 19.061V11.0344V2.04938C27.1406 0.917538 28.0582 0 29.19 0H46.8055C47.9374 0 48.8549 0.917537 48.8549 2.04938V9.36344C48.8549 10.1105 48.4484 10.7985 47.7939 11.1587L30.1783 20.8563Z" fill="#000B40"/>
+                </svg>
             </div>
-
         <?php endif; ?>
     </div>
 

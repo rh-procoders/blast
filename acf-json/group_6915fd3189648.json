@@ -277,7 +277,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "See how Blast turns <strong>prevention <em>on<\/em><\/strong> in your cloud.",
+                    "default_value": "See how Blast turns <strong>prevention <em><span>on<\/span><\/em><\/strong> in your cloud.",
                     "maxlength": "",
                     "allow_in_bindings": 0,
                     "placeholder": "",
@@ -327,5 +327,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763050849
+    "modified": 1763114643
 }
