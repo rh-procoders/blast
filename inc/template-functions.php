@@ -245,6 +245,12 @@ function blast_customize_cf7_multistep_buttons( $form_html ) {
         blast_wrap_button_with_block_div( $button, $dom );
     }
 
+    // Find and convert Submit inputs to styled buttons
+    $submit_inputs = $xpath->query( '//input[contains(@class, "wpcf7-submit")]' );
+    foreach ( $submit_inputs as $input ) {
+        blast_convert_submit_to_button( $input, $dom );
+    }
+
     // Get the modified HTML
     $modified_html = $dom->saveHTML();
 
@@ -261,7 +267,7 @@ add_filter( 'wpcf7_form_elements', 'blast_customize_cf7_multistep_buttons', 20 )
  * Restructure a single multi-step button to match site button style
  *
  * @param DOMElement $button The button element to modify
- * @param string $button_type 'next' or 'back'
+ * @param string $button_type 'next', 'back', or 'submit'
  * @param DOMDocument $dom The DOM document
  * @throws DOMException
  */
@@ -275,9 +281,15 @@ function blast_restructure_multistep_button( $button, $button_type, $dom ) {
         }
     }
 
-    // Default to "Next" or "Back" if empty
+    // Default to appropriate text if empty
     if ( empty( $button_text ) ) {
-        $button_text = ( $button_type === 'next' ) ? 'Next' : 'Back';
+        if ( $button_type === 'next' ) {
+            $button_text = 'Next';
+        } elseif ( $button_type === 'back' ) {
+            $button_text = 'Back';
+        } else {
+            $button_text = 'Submit';
+        }
     }
 
     // Add site button classes (remove action-button, add btn and has-arrow-icon)
@@ -444,4 +456,50 @@ function blast_inject_progress_bar( $xpath, $dom ) {
 
     // Insert progress bar before the wrapper
     $wrapper->parentNode->insertBefore( $progress_bar, $wrapper );
+}
+
+/**
+ * Convert CF7 submit input to a styled button element
+ *
+ * Takes the default CF7 submit input and converts it to a button element,
+ * then applies the same styling as Next/Back buttons
+ *
+ * @param DOMElement $input The input element to convert
+ * @param DOMDocument $dom The DOM document
+ * @throws DOMException
+ */
+function blast_convert_submit_to_button( $input, $dom ) {
+    // Get the submit button text from value attribute
+    $button_text = $input->getAttribute( 'value' );
+    if ( empty( $button_text ) ) {
+        $button_text = 'Submit';
+    }
+
+    // Get existing classes from input
+    $input_classes = $input->getAttribute( 'class' );
+
+    // Create new button element
+    $button = $dom->createElement( 'button' );
+    $button->setAttribute( 'type', 'submit' );
+
+    // Transfer classes and add our custom classes
+    $button->setAttribute( 'class', $input_classes . ' btn has-arrow-icon' );
+
+    // Copy any data attributes or other relevant attributes
+    if ( $input->hasAttribute( 'id' ) ) {
+        $button->setAttribute( 'id', $input->getAttribute( 'id' ) );
+    }
+    if ( $input->hasAttribute( 'name' ) ) {
+        $button->setAttribute( 'name', $input->getAttribute( 'name' ) );
+    }
+
+    // Set button text as text node temporarily (will be restructured next)
+    $button->nodeValue = $button_text;
+
+    // Replace input with button in DOM
+    $input->parentNode->replaceChild( $button, $input );
+
+    // Now apply the same restructuring as Next/Back buttons
+    blast_restructure_multistep_button( $button, 'submit', $dom );
+    blast_wrap_button_with_block_div( $button, $dom );
 }
