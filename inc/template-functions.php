@@ -210,9 +210,11 @@ add_action( 'wp_ajax_bs_toggle_post_featured', function () {
 
 /**
  * Modify CF7 Multi-Step buttons to match site button style
+ * and inject progress bar
  *
  * Hooks into wpcf7_form_elements to restructure the multi-step plugin buttons
- * to use the same markup and styling as the site's standard buttons
+ * to use the same markup and styling as the site's standard buttons, and adds
+ * a progress indicator before the fieldset wrapper
  */
 function blast_customize_cf7_multistep_buttons( $form_html ) {
     // Only process if the form contains multi-step buttons
@@ -225,6 +227,9 @@ function blast_customize_cf7_multistep_buttons( $form_html ) {
     $dom = new DOMDocument();
     $dom->loadHTML( '<?xml encoding="utf-8" ?>' . $form_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
     $xpath = new DOMXPath( $dom );
+
+    // Inject progress bar before fieldset-cf7mls-wrapper
+    blast_inject_progress_bar( $xpath, $dom );
 
     // Find all Next buttons (cf7mls_next)
     $next_buttons = $xpath->query( '//button[contains(@class, "cf7mls_next")]' );
@@ -349,4 +354,94 @@ function blast_wrap_button_with_block_div( $button, $dom ) {
 
     // Move button into wrapper
     $wrapper->appendChild( $button );
+}
+
+/**
+ * Inject progress bar before the fieldset-cf7mls-wrapper
+ *
+ * Creates a progress indicator showing "Step X of Y" where X is the current step
+ * and Y is the total number of steps (fieldsets)
+ *
+ * @param DOMXPath $xpath The XPath object for querying
+ * @param DOMDocument $dom The DOM document
+ * @throws DOMException
+ */
+function blast_inject_progress_bar( $xpath, $dom ) {
+    // Find the fieldset-cf7mls-wrapper div
+    $wrapper_divs = $xpath->query( '//div[contains(@class, "fieldset-cf7mls-wrapper")]' );
+
+    if ( $wrapper_divs->length === 0 ) {
+        return; // No wrapper found, exit early
+    }
+
+    $wrapper = $wrapper_divs->item( 0 );
+
+    // Count total fieldsets inside wrapper
+    $fieldsets = $xpath->query( './/fieldset[contains(@class, "fieldset-cf7mls")]', $wrapper );
+    $total_steps = $fieldsets->length;
+
+    if ( $total_steps === 0 ) {
+        return; // No fieldsets found, exit early
+    }
+
+    // Determine current step (find which fieldset has cf7mls_current_fs class)
+    $current_step = 1;
+    for ( $i = 0; $i < $fieldsets->length; $i++ ) {
+        $fieldset = $fieldsets->item( $i );
+        $classes = $fieldset->getAttribute( 'class' );
+        if ( strpos( $classes, 'cf7mls_current_fs' ) !== false ) {
+            $current_step = $i + 1;
+            break;
+        }
+    }
+
+    // Calculate initial percentage
+    $percentage = ( $total_steps > 0 ) ? ( $current_step / $total_steps ) * 100 : 0;
+
+    // Create progress bar container
+    $progress_bar = $dom->createElement( 'div' );
+    $progress_bar->setAttribute( 'class', 'cf7mls-progress-bar' );
+
+    // Create progress bar text element
+    $progress_text = $dom->createElement( 'div' );
+    $progress_text->setAttribute( 'class', 'cf7mls-progress-bar__text' );
+
+    // Build text: "Step <span class="cf7mls-progress-bar__current">1</span> of <span class="cf7mls-progress-bar__total">3</span>"
+    $step_text = $dom->createTextNode( 'Step ' );
+    $progress_text->appendChild( $step_text );
+
+    $current_span = $dom->createElement( 'span' );
+    $current_span->setAttribute( 'class', 'cf7mls-progress-bar__current' );
+    $current_span->nodeValue = strval( $current_step );
+    $progress_text->appendChild( $current_span );
+
+    $of_text = $dom->createTextNode( ' of ' );
+    $progress_text->appendChild( $of_text );
+
+    $total_span = $dom->createElement( 'span' );
+    $total_span->setAttribute( 'class', 'cf7mls-progress-bar__total' );
+    $total_span->nodeValue = strval( $total_steps );
+    $progress_text->appendChild( $total_span );
+
+    // Append text to progress bar
+    $progress_bar->appendChild( $progress_text );
+
+    // Create visual progress bar track
+    $progress_track = $dom->createElement( 'div' );
+    $progress_track->setAttribute( 'class', 'cf7mls-progress-bar__track' );
+
+    // Create progress bar fill
+    $progress_fill = $dom->createElement( 'div' );
+    $progress_fill->setAttribute( 'class', 'cf7mls-progress-bar__fill' );
+    $progress_fill->setAttribute( 'style', 'width: ' . number_format( $percentage, 2, '.', '' ) . '%' );
+    $progress_fill->setAttribute( 'data-progress', strval( $current_step ) );
+
+    // Append fill to track
+    $progress_track->appendChild( $progress_fill );
+
+    // Append track to progress bar
+    $progress_bar->appendChild( $progress_track );
+
+    // Insert progress bar before the wrapper
+    $wrapper->parentNode->insertBefore( $progress_bar, $wrapper );
 }
