@@ -171,6 +171,88 @@ label {
 	&.wpcf7-not-valid {
 	  border-color : #FA423C !important;
 	}
+
+	// Checkbox - Acceptance
+	&.wpcf7-acceptance {
+
+	  .wpcf7-list-item {
+		margin-left : 0;
+
+		label {
+		  display      : flex;
+		  position     : relative;
+		  padding-left : calc(24px + 16px);
+
+		  input[type="checkbox"] {
+
+			&:checked + span {
+
+			  &:before {
+				background-color : #000B40;
+				border-color     : #000B40;
+			  }
+
+			  &:after {
+				opacity : 1;
+			  }
+			}
+		  }
+
+		  span {
+			font-family : $font-family-secondary;
+			font-size   : font-size('xs'); // 12px
+			font-weight : 400;
+			line-height : 1.4;
+
+			&:before,
+			&:after {
+			  content    : "";
+			  position   : absolute;
+
+			  top        : 0;
+			  left       : 0;
+
+			  width      : 24px;
+			  height     : 24px;
+
+			  transition : all ease .3s;
+			}
+
+			&:before {
+			  border-radius    : 8px;
+			  background-color : #FFFFFF;
+			  border           : 1px solid transparent;
+			}
+
+			&:after {
+			  display             : grid;
+			  place-items         : center;
+
+			  background-image    : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8' fill='none'%3E%3Cpath d='M0.75 4.002L3.26346 6.75L8.75 0.75' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+			  background-repeat   : no-repeat;
+			  background-position : center;
+			  background-size     : 10px 8px;
+
+			  opacity             : 0;
+
+			  transition          : opacity ease .3s;
+			}
+
+			a {
+			  color           : #000B40;
+			  text-decoration : none;
+
+			  transition      : color ease .3s;
+
+			  &:hover,
+			  &:focus {
+				color : #FF654A;
+			  }
+			}
+		  }
+		}
+	  }
+	}
   }
 
   // Effect to have Submit inside the input

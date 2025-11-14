@@ -206,3 +206,147 @@ add_action( 'wp_ajax_bs_toggle_post_featured', function () {
         'is_featured' => (bool)$new,
     ) );
 } );
+
+
+/**
+ * Modify CF7 Multi-Step buttons to match site button style
+ *
+ * Hooks into wpcf7_form_elements to restructure the multi-step plugin buttons
+ * to use the same markup and styling as the site's standard buttons
+ */
+function blast_customize_cf7_multistep_buttons( $form_html ) {
+    // Only process if the form contains multi-step buttons
+    if ( strpos( $form_html, 'cf7mls_btn' ) === false ) {
+        return $form_html;
+    }
+
+    // Use DOMDocument for reliable HTML parsing
+    libxml_use_internal_errors( true );
+    $dom = new DOMDocument();
+    $dom->loadHTML( '<?xml encoding="utf-8" ?>' . $form_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
+    $xpath = new DOMXPath( $dom );
+
+    // Find all Next buttons (cf7mls_next)
+    $next_buttons = $xpath->query( '//button[contains(@class, "cf7mls_next")]' );
+    foreach ( $next_buttons as $button ) {
+        blast_restructure_multistep_button( $button, 'next', $dom );
+        blast_wrap_button_with_block_div( $button, $dom );
+    }
+
+    // Find all Back buttons (cf7mls_back)
+    $back_buttons = $xpath->query( '//button[contains(@class, "cf7mls_back")]' );
+    foreach ( $back_buttons as $button ) {
+        blast_restructure_multistep_button( $button, 'back', $dom );
+        blast_wrap_button_with_block_div( $button, $dom );
+    }
+
+    // Get the modified HTML
+    $modified_html = $dom->saveHTML();
+
+    // Clean up DOMDocument artifacts
+    $modified_html = preg_replace( '/^<!DOCTYPE.+?>/', '', str_replace( [ '<?xml encoding="utf-8" ?>', '<html><body>', '</body></html>' ], '', $modified_html ) );
+
+    libxml_clear_errors();
+
+    return $modified_html;
+}
+add_filter( 'wpcf7_form_elements', 'blast_customize_cf7_multistep_buttons', 20 );
+
+/**
+ * Restructure a single multi-step button to match site button style
+ *
+ * @param DOMElement $button The button element to modify
+ * @param string $button_type 'next' or 'back'
+ * @param DOMDocument $dom The DOM document
+ * @throws DOMException
+ */
+function blast_restructure_multistep_button( $button, $button_type, $dom ) {
+    // Get button text (first text node)
+    $button_text = '';
+    foreach ( $button->childNodes as $node ) {
+        if ( $node->nodeType === XML_TEXT_NODE ) {
+            $button_text = trim( $node->nodeValue );
+            break;
+        }
+    }
+
+    // Default to "Next" or "Back" if empty
+    if ( empty( $button_text ) ) {
+        $button_text = ( $button_type === 'next' ) ? 'Next' : 'Back';
+    }
+
+    // Add site button classes (remove action-button, add btn and has-arrow-icon)
+    $existing_classes = $button->getAttribute( 'class' );
+    $existing_classes = str_replace( 'action-button', '', $existing_classes );
+    $existing_classes = trim( preg_replace( '/\s+/', ' ', $existing_classes ) ); // Clean up extra spaces
+    $button->setAttribute( 'class', $existing_classes . ' btn has-arrow-icon' );
+
+    // Clear existing button content
+    while ( $button->firstChild ) {
+        $button->removeChild( $button->firstChild );
+    }
+
+    // Create button-text span
+    $text_span = $dom->createElement( 'span' );
+    $text_span->setAttribute( 'class', 'button-text' );
+    $text_span->setAttribute( 'data-hover-text', $button_text );
+    $text_span->nodeValue = $button_text;
+
+    // Create arrow wrapper span
+    $arrow_wrapper = $dom->createElement( 'span' );
+    $arrow_wrapper->setAttribute( 'class', 'button-arrow-wrapper' );
+
+    // Create SVG element with icon sprite reference
+    $svg = $dom->createElement( 'svg' );
+    $svg->setAttribute( 'class', 'svg-icon icon-arrow-right' );
+    $svg->setAttribute( 'width', '14' );
+    $svg->setAttribute( 'height', '10' );
+
+    // Create use element for sprite reference
+    $use = $dom->createElement( 'use' );
+    $sprite_url = get_template_directory_uri() . '/img/general/icon-sprites.svg?ver=' . THEME_VERSION . '#icon-arrow-right';
+    $use->setAttribute( 'xlink:href', $sprite_url );
+
+    $svg->appendChild( $use );
+    $arrow_wrapper->appendChild( $svg );
+
+    // Add loader img back (for Next buttons)
+    if ( $button_type === 'next' ) {
+        $loader_img = $dom->createElement( 'img' );
+        $loader_img->setAttribute( 'src', plugins_url( 'cf7-multi-step/assets/frontend/img/loader.svg' ) );
+        $loader_img->setAttribute( 'alt', 'Step Loading' );
+        $loader_img->setAttribute( 'style', 'display: none;' );
+        $loader_img->setAttribute( 'class', 'cf7mls-loader' );
+
+        // Append elements to button
+        $button->appendChild( $text_span );
+        $button->appendChild( $arrow_wrapper );
+        $button->appendChild( $loader_img );
+    } else {
+        // Back button - no loader
+        $button->appendChild( $text_span );
+        $button->appendChild( $arrow_wrapper );
+    }
+}
+
+/**
+ * Wrap a button element with a div.wp-block-button wrapper
+ *
+ * @param DOMElement $button The button element to wrap
+ * @param DOMDocument $dom The DOM document
+ * @throws DOMException
+ */
+function blast_wrap_button_with_block_div( $button, $dom ) {
+    // Create wrapper div with block button classes
+    $wrapper = $dom->createElement( 'div' );
+    $wrapper->setAttribute( 'class', 'wp-block-button is-style-outline is-style-outline--1' );
+
+    // Get button's parent node
+    $parent = $button->parentNode;
+
+    // Insert wrapper before button
+    $parent->insertBefore( $wrapper, $button );
+
+    // Move button into wrapper
+    $wrapper->appendChild( $button );
+}

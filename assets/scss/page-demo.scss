@@ -72,7 +72,7 @@
 	  padding              : var(--demo-section-el-pt) var(--demo-section-el-pr) var(--demo-section-el-pb) var(--demo-section-el-pl);
 
 	  // Required by the CF7 - Multi Step Plugin
-	  overflow: hidden;
+	  overflow             : hidden;
 
 	  &-label {
 		font-family : $font-family-tertiary;
@@ -129,8 +129,49 @@
 
 		  .fieldset-cf7mls-wrapper {
 			overflow : visible;
-		  }
 
+			// Multi-Step Form Plugin generates a p-tag inside filedset
+			fieldset {
+			  p {
+				margin : 0 !important;
+			  }
+			}
+
+			.wpcf7-form-control-wrap {
+
+			  &[data-name="consent-marketing"] {
+				margin-top : 16px;
+			  }
+
+			  &[data-name="consent-privacy"] {
+				margin-top : 10px;
+			  }
+			}
+
+			.fieldset-cf7mls {
+
+			  .cf7mls-btns {
+				margin : 21px 0 0;
+
+				button {
+				  margin : 0;
+				}
+			  }
+
+			  // Validation Errors
+			  .wpcf7-validation-errors {
+				margin   : 0;
+				position : absolute;
+				left     : 0;
+				bottom   : 0;
+
+				// info-box of CF7
+				&.wpcf7-response-output {
+
+				}
+			  }
+			}
+		  }
 		}
 	  }
 	}
