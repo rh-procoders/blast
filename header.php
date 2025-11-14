@@ -45,7 +45,7 @@
                         <h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
                         </a>
                         <?php
-                    }   
+                    }
                     ?>
             </div>
 
@@ -71,8 +71,8 @@
                 <?php if ( have_rows( 'navigation_buttons', 'option' ) ) : ?>
                     <div class="navigation-buttons">
                     <?php while ( have_rows( 'navigation_buttons', 'option' ) ) : the_row(); ?>
-                        <?php 
-                        $link = get_sub_field( 'link' ); 
+                        <?php
+                        $link = get_sub_field( 'link' );
                         $button_style = get_sub_field( 'button_style' );
                         if($button_style == 'primary_dark'){
                             $button_class = 'has-dark-blue-background-color has-background wp-element-button has-arrow-icon';
