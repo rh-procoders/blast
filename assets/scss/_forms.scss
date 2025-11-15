@@ -121,7 +121,6 @@ label {
   //margin-bottom : 1.5rem;
 }
 
-
 // Custom Caret - Uses "I" character to match input height exactly
 .custom-caret {
   position       : absolute;
@@ -170,26 +169,31 @@ label {
 
 	  // Drop-down
 	  .flag-container {
-		padding : 0;
+		padding  : 0;
 
-		&:after {
-		  content    : "";
-		  position   : absolute;
-		  top        : 16px;
-		  right      : 0;
-
-		  width      : 1px;
-		  height     : calc(100% - 32px);
-		  background : #CBCEDE;
-
-		  z-index    : 1;
-		}
+		position : unset; // reset positioning so .country-list can take full-width
 
 		.selected-flag {
+		  position         : absolute;
+		  z-index          : 3;
+
 		  padding-left     : var(--cf7-phone-pl);
 		  width            : var(--cf7-phone-w) !important;
 
 		  background-color : transparent !important;
+
+		  &:after {
+			content    : "";
+			position   : absolute;
+			top        : 16px;
+			right      : 0;
+
+			width      : 1px;
+			height     : calc(100% - 32px);
+			background : #CBCEDE;
+
+			z-index    : 1;
+		  }
 
 		  // flag
 		  .iti-flag {
@@ -221,7 +225,6 @@ label {
 			transition        : transform ease .3s;
 		  }
 
-
 		  // .country-list is present - is opened
 		  &:has(+ .country-list:not(.hide)) {
 			background : red;
@@ -237,11 +240,23 @@ label {
 		  }
 		}
 
+		.country-list {
+		  top           : calc(100% - 10px);
+
+		  width         : 100%;
+
+		  padding-top   : 10px;
+		  border        : none;
+		  border-radius : 0px 0px 14px 14px;
+		  box-shadow    : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.10);
+		}
 	  }
 
 	  // Input
 	  .wpcf7-phonetext {
 		padding-left : calc(var(--cf7-phone-w) + 16px) !important;
+
+		z-index      : 2;
 	  }
 	}
   }
