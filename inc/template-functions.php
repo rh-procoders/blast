@@ -235,7 +235,7 @@ function blast_customize_cf7_multistep_buttons( $form_html ) {
     $next_buttons = $xpath->query( '//button[contains(@class, "cf7mls_next")]' );
     foreach ( $next_buttons as $button ) {
         blast_restructure_multistep_button( $button, 'next', $dom );
-        blast_wrap_button_with_block_div( $button, $dom );
+        blast_wrap_button_with_block_div( $button, $dom, 'next' );
     }
 
     // Find all Back buttons (cf7mls_back)
@@ -292,11 +292,17 @@ function blast_restructure_multistep_button( $button, $button_type, $dom ) {
         }
     }
 
-    // Add site button classes (remove action-button, add btn and has-arrow-icon)
+    // Add site button classes
     $existing_classes = $button->getAttribute( 'class' );
     $existing_classes = str_replace( 'action-button', '', $existing_classes );
     $existing_classes = trim( preg_replace( '/\s+/', ' ', $existing_classes ) ); // Clean up extra spaces
-    $button->setAttribute( 'class', $existing_classes . ' btn has-arrow-icon' );
+
+    // Submit buttons get different classes than Next/Back
+    if ( $button_type === 'submit' ) {
+        $button->setAttribute( 'class', $existing_classes . ' btn has-dark-blue-background-color has-background wp-element-button has-arrow-icon' );
+    } else {
+        $button->setAttribute( 'class', $existing_classes . ' btn has-arrow-icon' );
+    }
 
     // Clear existing button content
     while ( $button->firstChild ) {
@@ -327,20 +333,9 @@ function blast_restructure_multistep_button( $button, $button_type, $dom ) {
     $svg->appendChild( $use );
     $arrow_wrapper->appendChild( $svg );
 
-    // Add CF7 spinner (for Next and Submit buttons)
-    if ( $button_type === 'next' || $button_type === 'submit' ) {
-        $spinner = $dom->createElement( 'span' );
-        $spinner->setAttribute( 'class', 'wpcf7-spinner' );
-
-        // Append elements to button
-        $button->appendChild( $text_span );
-        $button->appendChild( $arrow_wrapper );
-        $button->appendChild( $spinner );
-    } else {
-        // Back button - no loader
-        $button->appendChild( $text_span );
-        $button->appendChild( $arrow_wrapper );
-    }
+    // Append elements to button (spinner will be added outside button by wrapper function)
+    $button->appendChild( $text_span );
+    $button->appendChild( $arrow_wrapper );
 }
 
 /**
@@ -348,12 +343,19 @@ function blast_restructure_multistep_button( $button, $button_type, $dom ) {
  *
  * @param DOMElement $button The button element to wrap
  * @param DOMDocument $dom The DOM document
+ * @param string $button_type Optional. The button type ('submit', 'next', 'back'). Default empty.
  * @throws DOMException
  */
-function blast_wrap_button_with_block_div( $button, $dom ) {
+function blast_wrap_button_with_block_div( $button, $dom, $button_type = '' ) {
     // Create wrapper div with block button classes
     $wrapper = $dom->createElement( 'div' );
-    $wrapper->setAttribute( 'class', 'wp-block-button is-style-outline is-style-outline--1' );
+
+    // Submit buttons use plain wrapper, Next/Back use outline style
+    if ( $button_type === 'submit' ) {
+        $wrapper->setAttribute( 'class', 'wp-block-button' );
+    } else {
+        $wrapper->setAttribute( 'class', 'wp-block-button is-style-outline is-style-outline--1' );
+    }
 
     // Get button's parent node
     $parent = $button->parentNode;
@@ -363,6 +365,13 @@ function blast_wrap_button_with_block_div( $button, $dom ) {
 
     // Move button into wrapper
     $wrapper->appendChild( $button );
+
+    // Add CF7 spinner as sibling after button (for Next and Submit buttons)
+    if ( $button_type === 'next' || $button_type === 'submit' ) {
+        $spinner = $dom->createElement( 'span' );
+        $spinner->setAttribute( 'class', 'wpcf7-spinner' );
+        $wrapper->appendChild( $spinner );
+    }
 }
 
 /**
@@ -498,5 +507,5 @@ function blast_convert_submit_to_button( $input, $dom ) {
 
     // Now apply the same restructuring as Next/Back buttons
     blast_restructure_multistep_button( $button, 'submit', $dom );
-    blast_wrap_button_with_block_div( $button, $dom );
+    blast_wrap_button_with_block_div( $button, $dom, 'submit' );
 }
