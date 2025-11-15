@@ -74,6 +74,9 @@
 	  // Required by the CF7 - Multi Step Plugin
 	  overflow             : hidden;
 
+	  display              : flex;
+	  flex-direction       : column;
+
 	  &-label {
 		font-family : $font-family-tertiary;
 		font-size   : 18px;
@@ -122,10 +125,20 @@
 	  }
 
 	  &-content {
+		flex-grow  : 1;
+		display    : flex;
 		margin-top : 40px;
+
+		> .wpcf7 {
+		  display        : flex;
+		  flex-direction : column;
+		}
 
 		// CF7 Form - Multi Step Plugin
 		.wpcf7-form {
+		  flex-grow      : 1;
+		  display        : flex !important;
+		  flex-direction : column;
 
 		  // Progress Bar (injected via PHP before fieldset-cf7mls-wrapper)
 		  .cf7mls-progress-bar {
@@ -176,6 +189,9 @@
 		  }
 
 		  .fieldset-cf7mls-wrapper {
+			flex-grow  : 1;
+			display    : flex;
+
 			margin-top : 20px;
 			overflow   : visible;
 
@@ -195,9 +211,18 @@
 			  &[data-name="consent-privacy"] {
 				margin-top : 10px;
 			  }
+
+			  .wpcf7-not-valid-tip {
+				font-family : $font-family-secondary;
+				font-size   : font-size('xs'); // 12px
+				font-weight : 600;
+				line-height : 1.4;
+			  }
 			}
 
 			.fieldset-cf7mls {
+			  display        : flex;
+			  flex-direction : column;
 
 			  // Second Column Styles
 			  &:nth-child(2) {
@@ -212,7 +237,7 @@
 			  }
 
 			  .cf7mls-btns {
-				margin     : 21px 0 0;
+				margin     : auto 0 0;
 				display    : flex;
 				min-height : auto;
 
@@ -222,7 +247,15 @@
 					display : none;
 				  }
 
+				  .cf7mls_next {
+
+					&.sending {
+
+					}
+				  }
+
 				  &:last-of-type {
+					margin-top  : 24px;
 					margin-left : auto;
 				  }
 				}
@@ -232,7 +265,34 @@
 				}
 			  }
 
-			  // Validation Errors
+			  // Last Column Styles
+			  &:last-child {
+				.wp-block-button {
+				  margin-top : auto;
+
+				  position   : relative;
+				  display    : flex;
+
+				  .wpcf7-submit {
+					margin-top  : 24px;
+					margin-left : auto;
+				  }
+
+				  .wpcf7-spinner {
+					position  : absolute;
+					margin    : 0;
+					top       : calc(50% + 12px);
+					right     : -30px;
+					transform : translateY(-50%);
+				  }
+				}
+
+				.cf7mls-btns {
+				  display : none;
+				}
+			  }
+
+			  // Validation Errors - Multi Step
 			  .wpcf7-validation-errors {
 				margin      : 0;
 
@@ -248,10 +308,10 @@
 				color       : #FA423C;
 
 				.wpcf7-icon-wraning {
-				  margin-right : 6px;
+				  margin-right        : 6px;
 
-				  width        : 24px;
-				  height       : 24px;
+				  width               : 24px;
+				  height              : 24px;
 
 				  // Hide default CF7 SVG paths
 				  path {
@@ -274,6 +334,44 @@
 				  align-items : center;
 				}
 			  }
+			}
+		  }
+
+		  // Validation Errors - Last Step
+		  > .wpcf7-response-output {
+			border      : none;
+
+			margin      : 0;
+			padding     : 0 0 0 calc(24px + 9px);
+
+			position    : absolute;
+			left        : 0;
+			bottom      : 15px;
+
+			font-family : $font-family-secondary;
+			font-size   : font-size('xs'); // 12px
+			font-weight : 600;
+			line-height : 24px; // hack - same as icon
+			min-height  : 24px;
+
+			color       : #FA423C;
+
+			&:before {
+			  content             : "";
+			  position            : absolute;
+
+			  top                 : 50%;
+			  transform           : translateY(-50%);
+
+			  width               : 24px;
+			  height              : 24px;
+			  left                : 0;
+
+			  // Replace with custom error icon via background
+			  background-image    : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M12 3C16.971 3 21 7.029 21 12C21 16.971 16.971 21 12 21C7.029 21 3 16.971 3 12C3 7.029 7.029 3 12 3Z' fill='%23FA423C' stroke='%23FA423C' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 12.5V7.5' stroke='%23F4F3F3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.999 16C11.861 16 11.749 16.112 11.75 16.25C11.75 16.388 11.862 16.5 12 16.5C12.138 16.5 12.25 16.388 12.25 16.25C12.25 16.112 12.138 16 11.999 16' stroke='%23F4F3F3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+			  background-repeat   : no-repeat;
+			  background-position : center;
+			  background-size     : contain;
 			}
 		  }
 		}

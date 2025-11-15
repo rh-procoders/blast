@@ -327,18 +327,15 @@ function blast_restructure_multistep_button( $button, $button_type, $dom ) {
     $svg->appendChild( $use );
     $arrow_wrapper->appendChild( $svg );
 
-    // Add loader img back (for Next buttons)
-    if ( $button_type === 'next' ) {
-        $loader_img = $dom->createElement( 'img' );
-        $loader_img->setAttribute( 'src', plugins_url( 'cf7-multi-step/assets/frontend/img/loader.svg' ) );
-        $loader_img->setAttribute( 'alt', 'Step Loading' );
-        $loader_img->setAttribute( 'style', 'display: none;' );
-        $loader_img->setAttribute( 'class', 'cf7mls-loader' );
+    // Add CF7 spinner (for Next and Submit buttons)
+    if ( $button_type === 'next' || $button_type === 'submit' ) {
+        $spinner = $dom->createElement( 'span' );
+        $spinner->setAttribute( 'class', 'wpcf7-spinner' );
 
         // Append elements to button
         $button->appendChild( $text_span );
         $button->appendChild( $arrow_wrapper );
-        $button->appendChild( $loader_img );
+        $button->appendChild( $spinner );
     } else {
         // Back button - no loader
         $button->appendChild( $text_span );
