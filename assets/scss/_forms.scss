@@ -225,19 +225,7 @@ label {
 			transition        : transform ease .3s;
 		  }
 
-		  // .country-list is present - is opened
-		  &:has(+ .country-list:not(.hide)) {
-			background : red;
-
-			.iti-arrow {
-			  transform : rotate(180deg);
-			}
-		  }
-
-		  // country-list is present - is closed
-		  &:has(+ .country-list.hide) {
-			background : blue;
-		  }
+		  // Arrow rotation handled at .intl-tel-input level below
 		}
 
 		.country-list {
@@ -245,7 +233,7 @@ label {
 
 		  width         : 100%;
 
-		  padding-top   : 10px;
+		  padding-top   : calc(10px + 16px);
 		  border        : none;
 		  border-radius : 0px 0px 14px 14px;
 		  box-shadow    : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.10);
@@ -257,6 +245,21 @@ label {
 		padding-left : calc(var(--cf7-phone-w) + 16px) !important;
 
 		z-index      : 2;
+	  }
+
+	  // Dropdown OPEN state - detect when country-list is visible
+	  &:has(.country-list:not(.hide)) {
+
+		// Style the phone input when dropdown is open
+		.wpcf7-phonetext {
+		  border-color : #000B40 !important;
+		  box-shadow: none;
+		}
+
+		// Rotate the arrow when dropdown is open
+		.iti-arrow {
+		  transform : rotate(180deg);
+		}
 	  }
 	}
   }
