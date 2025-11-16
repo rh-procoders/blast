@@ -237,6 +237,11 @@ label {
 		  border        : none;
 		  border-radius : 0px 0px 14px 14px;
 		  box-shadow    : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.10);
+
+		  &.dropup {
+			bottom : auto !important;
+			margin : 0 !important;
+		  }
 		}
 	  }
 
@@ -253,7 +258,7 @@ label {
 		// Style the phone input when dropdown is open
 		.wpcf7-phonetext {
 		  border-color : #000B40 !important;
-		  box-shadow: none;
+		  box-shadow   : none;
 		}
 
 		// Rotate the arrow when dropdown is open
@@ -457,4 +462,36 @@ label {
 	}
   }
 }
+
+
+/* Make country list scrollable */
+.intl-tel-input .country-list {
+  // max-height: 260px;      /* whatever height you want */
+  // overflow-y: auto;
+}
+
+/* Chrome / Safari / Edge */
+.intl-tel-input .country-list::-webkit-scrollbar {
+  width: 4px;             /* matches your spec */
+}
+
+.intl-tel-input .country-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.intl-tel-input .country-list::-webkit-scrollbar-thumb {
+  background: #000B40;    /* your color */
+  border-radius: 31px;    /* your radius */
+}
+
+.intl-tel-input .country-list::-webkit-scrollbar-thumb:hover {
+  background: #000f60;    /* optional hover tweak */
+}
+
+/* Firefox */
+.intl-tel-input .country-list {
+  scrollbar-width: thin;                      /* ~4–6px depending on platform */
+  scrollbar-color: #000B40 transparent;       /* thumb + track */
+}
+
 
