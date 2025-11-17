@@ -79,6 +79,8 @@
 	}
 
 	@include tablet {
+	  min-height     : 100%;
+
 	  display        : flex;
 	  flex-direction : column;
 
@@ -842,7 +844,7 @@
 	&__success {
 	  display      : none;
 
-	  padding      : 106px 100px 117px;
+	  padding      : 6.625rem 6.25rem 7.3125rem; // 106px 100px 117px
 
 	  // Center content vertically and horizontally
 	  grid-column  : 1 / -1; // Span both columns
@@ -850,8 +852,15 @@
 	  justify-self : center;
 	  text-align   : center;
 
+	  @include tablet {
+		padding-top    : 120px;
+		padding-left   : 43px;
+		padding-right  : 43px;
+		padding-bottom : 120px;
+	  }
+
 	  > * {
-		max-width : 780px;
+		max-width : 48.75rem; // 780px
 	  }
 
 	  &-heading {
@@ -863,8 +872,6 @@
 		line-height : 1;
 
 		color       : #000B40;
-
-		max-width   : 780px;
 
 		@include mobile {
 		  max-width : 300px;
@@ -889,8 +896,6 @@
 
 		@include mobile {
 		  margin-top : 20px;
-
-
 		}
 	  }
 
