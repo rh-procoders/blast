@@ -248,6 +248,8 @@
 
 			// Multi-Step Form Plugin generates a p-tag inside filedset
 			fieldset {
+
+
 			  p {
 				margin : 0 !important;
 			  }
@@ -309,11 +311,33 @@
 				  }
 
 				  .cf7mls_next {
+					transition : all ease .3s;
+
+					.button-text {
+					  transition : all ease .3s;
+					}
+
+					.button-arrow-wrapper {
+					  transition : all ease .3s;
+					}
 
 					&.sending {
-
 					  & + .wpcf7-spinner {
 						visibility : visible;
+					  }
+					}
+
+					&.has-error {
+					  background-color : #FF654A;
+					  border-color     : #FF654A;
+
+					  .button-text {
+						color : #FFFFFF;
+					  }
+
+					  .button-arrow-wrapper {
+						background-color : #FFFFFF;
+						color            : var(--wp--preset--color--dark-blue);
 					  }
 					}
 				  }
@@ -340,6 +364,30 @@
 				  .wpcf7-submit {
 					margin-top  : 24px;
 					margin-left : auto;
+
+					transition  : all ease .3s;
+
+					.button-text {
+					  transition : all ease .3s;
+					}
+
+					.button-arrow-wrapper {
+					  transition : all ease .3s;
+					}
+
+					&.has-error {
+					  background-color : #FF654A !important;
+					  border-color     : #FF654A;
+
+					  .button-text {
+						color : #FFFFFF;
+					  }
+
+					  .button-arrow-wrapper {
+						background-color : #FFFFFF;
+						color            : var(--wp--preset--color--dark-blue);
+					  }
+					}
 				  }
 
 				  .wpcf7-spinner {
