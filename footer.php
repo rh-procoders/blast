@@ -13,12 +13,12 @@
 
 
 <footer id="footer" class="main-footer">
-    
+
     <!-- Main Footer Content -->
     <div class="main-footer__wrapper">
-   
+
         <div class="main-footer__grid">
-            
+
             <!-- Footer Logo & Brand -->
             <div class="main-footer__brand">
                 <div class="footer-logo">
@@ -33,10 +33,10 @@
 
             <!-- Footer Navigation Columns -->
             <div class="main-footer__navigation">
-                
+
                 <!-- Company Column -->
                 <div class="footer-column">
-                    <?php 
+                    <?php
                     $company_links = get_field('company_links', 'option');
                     if ($company_links): ?>
                     <h4 class="footer-column__title">
@@ -45,7 +45,7 @@
                         <ul class="footer-column__links">
                             <?php foreach ($company_links as $link): ?>
                                 <li>
-                                    <a href="<?php echo esc_url($link['link']['url']); ?>" 
+                                    <a href="<?php echo esc_url($link['link']['url']); ?>"
                                         <?php echo $link['link']['target'] ? 'target="' . $link['link']['target'] . '"' : ''; ?>>
                                         <?php echo esc_html($link['link']['title']); ?>
                                     </a>
@@ -57,7 +57,7 @@
 
                 <!-- Platform Column -->
                 <div class="footer-column">
-                    <?php 
+                    <?php
                     $platform_links = get_field('platform_links', 'option');
                     if ($platform_links): ?>
                     <h4 class="footer-column__title">
@@ -66,7 +66,7 @@
                         <ul class="footer-column__links">
                             <?php foreach ($platform_links as $link): ?>
                                 <li>
-                                    <a href="<?php echo esc_url($link['link']['url']); ?>" 
+                                    <a href="<?php echo esc_url($link['link']['url']); ?>"
                                         <?php echo $link['link']['target'] ? 'target="' . $link['link']['target'] . '"' : ''; ?>>
                                         <?php echo esc_html($link['link']['title']); ?>
                                     </a>
@@ -78,7 +78,7 @@
 
                 <!-- Resources Column -->
                 <div class="footer-column">
-                    <?php 
+                    <?php
                     $resources_links = get_field('resources_links', 'option');
                     if ($resources_links): ?>
                     <h4 class="footer-column__title">
@@ -87,7 +87,7 @@
                         <ul class="footer-column__links">
                             <?php foreach ($resources_links as $link): ?>
                                 <li>
-                                    <a href="<?php echo esc_url($link['link']['url']); ?>" 
+                                    <a href="<?php echo esc_url($link['link']['url']); ?>"
                                         <?php echo $link['link']['target'] ? 'target="' . $link['link']['target'] . '"' : ''; ?>>
                                         <?php echo esc_html($link['link']['title']); ?>
                                     </a>
@@ -119,7 +119,7 @@
                 <?php if ($social_links): ?>
                     <div class="footer-social">
                         <?php foreach ($social_links as $social): ?>
-                            <a href="<?php echo esc_url($social['url']); ?>" 
+                            <a href="<?php echo esc_url($social['url']); ?>"
                                 class="footer-social__link"
                                 target="_blank"
                                 rel="noopener noreferrer">
@@ -131,7 +131,7 @@
             </div>
 
         </div>
-     
+
         <!-- Footer Bottom -->
         <div class="main-footer__bottom">
             <div class="main-footer__bottom-content">
@@ -139,7 +139,7 @@
                     <p><?php echo get_field('copyright_text', 'option') ?: '© ' . date('Y') . ' Blast Security. All rights reserved.'; ?></p>
                 </div>
                 <div class="footer-legal">
-                    <?php 
+                    <?php
                     $legal_links = get_field('legal_links', 'option');
                     if ($legal_links): ?>
                         <ul class="footer-legal__links">
@@ -155,10 +155,10 @@
                 </div>
             </div>
         </div>
-    
+
         <!-- Background Elements -->
         <img src="<?php echo THEME_URI ?>/img/footer-bg-graph.png" alt="footer graphic" class="main-footer__bg-image-bottom" loading="lazy"/>
-        
+
     </div>
 
     <?php $footer_image_placeholder = get_field( 'footer_image_placeholder', 'option' ); ?>
@@ -172,14 +172,6 @@
     <?php endif; ?>
 
 </footer>
-
-</main><!-- #main -->
-
-<?php wp_footer(); ?>
-
-</body>
-</html>
-
 
 </main><!-- #main -->
 

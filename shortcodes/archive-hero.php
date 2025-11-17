@@ -176,7 +176,7 @@ function blast_archive_hero_shortcode( array $atts ): string
                                     ?>
 
                                     <li class="splide__slide archive-hero__splide-slide">
-                                        <div class="archive-hero__thumbnail">
+                                        <a href="<?= esc_url( get_permalink() ) ?>" class="archive-hero__thumbnail">
                                             <?php
                                             if ( $post_thumbnail ) :
                                                 echo $post_thumbnail;
@@ -188,7 +188,7 @@ function blast_archive_hero_shortcode( array $atts ): string
                                             <?php
                                             endif;
                                             ?>
-                                        </div>
+                                        </a>
                                     </li>
 
                                 <?php
@@ -211,8 +211,7 @@ function blast_archive_hero_shortcode( array $atts ): string
                 rewind: true,
                 pagination: false,
                 arrows: false,
-                cover: true,
-                autoHeight: false,
+                drag: false,
             } );
 
             // Initialize content slider (slide effect)

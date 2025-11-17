@@ -1,0 +1,277 @@
+@import "_variable";
+
+/**
+ * Demo Page Styles
+ * Schedule a demo page template (looks like modal, but dedicated page)
+ *
+ * @package blast-2025
+ */
+
+.page-template-page-demo {
+  display : flex;
+
+  .main {
+	flex        : 1 1 100%;
+
+	display     : grid;
+	place-items : center;
+  }
+
+  // Featured Image - set as background
+  .demo__bg {
+	position : absolute;
+	top      : 0;
+	left     : 0;
+	width    : 100%;
+	height   : 100%;
+
+	img {
+	  position        : absolute;
+	  top             : 0;
+	  left            : 0;
+	  width           : 100%;
+	  height          : 100%;
+
+	  object-fit      : cover;
+	  object-position : 50% 50%;
+	}
+
+	&:after {
+	  content    : "";
+
+	  position   : absolute;
+	  top        : 0;
+	  left       : 0;
+	  width      : 100%;
+	  height     : 100%;
+
+	  background : rgba(0, 11, 64, 0.80);
+	}
+  }
+
+  .demo-section {
+	--demo-content-col    : 52.6315%;
+
+	position              : relative;
+	background-color      : #F4F4F4;
+	border-radius         : 70px;
+
+	max-width             : 1520px;
+
+	display               : grid;
+	grid-template-columns : var(--demo-content-col) calc( 100% - var(--demo-content-col) );
+
+	&__form {
+	  --demo-section-el-pt : 60px;
+	  --demo-section-el-pr : 100px;
+	  --demo-section-el-pb : 60px;
+	  --demo-section-el-pl : 80px;
+
+	  order                : 2;
+
+	  padding              : var(--demo-section-el-pt) var(--demo-section-el-pr) var(--demo-section-el-pb) var(--demo-section-el-pl);
+
+	  // Required by the CF7 - Multi Step Plugin
+	  overflow: hidden;
+
+	  &-label {
+		font-family : $font-family-tertiary;
+		font-size   : 18px;
+		font-weight : 500;
+		line-height : 1.1;
+	  }
+
+	  &-title {
+		margin      : 30px 0 0;
+
+		font-family : $font-family-primary;
+		font-size   : 40px;
+		font-weight : 400;
+		line-height : 1.1;
+
+		color       : #000B40;
+
+		strong {
+		  font-family : $font-family-tertiary;
+		  font-weight : 600;
+		}
+
+		em {
+		  font-style : normal;
+		  color      : #FFFFFF;
+
+		  position   : relative;
+
+		  span {
+			position : relative;
+		  }
+
+		  &:before {
+			content          : "";
+
+			position         : absolute;
+			bottom           : 3px;
+			left             : 0;
+			width            : calc(100% + 6px);
+			height           : calc(40px - 8px);
+
+			border-radius    : 6px;
+			background-color : #FF654A;
+		  }
+		}
+	  }
+
+	  &-content {
+		margin-top : 40px;
+
+		// CF7 Form - Multi Step Plugin
+		.wpcf7-form {
+
+		  .fieldset-cf7mls-wrapper {
+			overflow : visible;
+		  }
+
+		}
+	  }
+	}
+
+	&__content {
+	  --demo-section-el-pt : 55px;
+	  --demo-section-el-pr : 80px;
+	  --demo-section-el-pb : 60px;
+	  --demo-section-el-pl : 80px;
+
+	  order                : 1;
+
+	  padding              : var(--demo-section-el-pt) var(--demo-section-el-pr) var(--demo-section-el-pb) var(--demo-section-el-pl);
+
+	  &-title {
+		font-family : $font-family-primary;
+		font-size   : 24px;
+		font-weight : 400;
+		line-height : 1.1;
+
+		strong {
+		  font-family : $font-family-tertiary;
+		  font-weight : 600;
+		}
+	  }
+	}
+
+	&__benefits {
+	  // reset ul
+	  list-style : none;
+	  margin     : 0;
+	  padding    : 0;
+	}
+
+	&__benefit {
+	  gap                   : 10px;
+	  display               : grid;
+	  grid-template-columns : 40px 1fr;
+
+	  margin-top            : 20px;
+
+	  &-icon {
+
+	  }
+
+	  &-description {
+		font-family : $font-family-secondary;
+		font-size   : 14px;
+		line-height : 1.4;
+
+		max-width   : 520px;
+
+		strong {
+		  font-weight : 700;
+		}
+	  }
+	}
+
+	&__testimonial {
+	  --demo-section-el-pt : 28px;
+	  --demo-section-el-pr : 28px;
+	  --demo-section-el-pb : 28px;
+	  --demo-section-el-pl : 28px;
+
+	  margin-top           : 41px;
+	  position             : relative;
+
+	  .clip-path {
+		padding-top      : var(--demo-section-el-pt);
+		padding-right    : var(--demo-section-el-pr);
+		padding-bottom   : var(--demo-section-el-pb);
+		padding-left     : var(--demo-section-el-pl);
+
+		background-color : #FFFFFF;
+
+		clip-path        : polygon(90.625% 0%, 90.625% 0%, 91.886% 0.004%, 93.022% 0.032%, 94.043% 0.109%, 94.955% 0.258%, 95.768% 0.504%, 96.49% 0.871%, 97.128% 1.383%, 97.692% 2.064%, 98.189% 2.938%, 98.627% 4.031%, 98.627% 4.031%, 98.999% 5.318%, 99.297% 6.776%, 99.529% 8.43%, 99.703% 10.305%, 99.828% 12.423%, 99.912% 14.81%, 99.963% 17.489%, 99.989% 20.484%, 99.999% 23.821%, 100% 27.523%, 100% 72.477%, 100% 72.477%, 99.999% 76.179%, 99.989% 79.515%, 99.963% 82.511%, 99.912% 85.191%, 99.828% 87.577%, 99.703% 89.696%, 99.529% 91.57%, 99.297% 93.224%, 98.999% 94.682%, 98.627% 95.969%, 98.627% 95.969%, 98.189% 97.062%, 97.692% 97.936%, 97.128% 98.617%, 96.49% 99.129%, 95.768% 99.496%, 94.955% 99.742%, 94.043% 99.891%, 93.022% 99.968%, 91.886% 99.996%, 90.625% 100%, 22.131% 100%, 22.131% 100%, 21.56% 99.999%, 21.044% 99.993%, 20.579% 99.976%, 20.159% 99.944%, 19.78% 99.89%, 19.438% 99.809%, 19.126% 99.697%, 18.841% 99.548%, 18.578% 99.357%, 18.332% 99.118%, 18.332% 99.118%, 17.961% 98.654%, 17.608% 98.103%, 17.273% 97.468%, 16.96% 96.756%, 16.668% 95.969%, 16.4% 95.114%, 16.158% 94.193%, 15.942% 93.212%, 15.754% 92.175%, 15.596% 91.086%, 15.596% 91.086%, 15.514% 90.363%, 15.449% 89.59%, 15.398% 88.753%, 15.36% 87.839%, 15.333% 86.833%, 15.315% 85.721%, 15.303% 84.488%, 15.298% 83.122%, 15.296% 81.608%, 15.295% 79.931%, 15.295% 79.931%, 15.295% 78.255%, 15.293% 76.74%, 15.287% 75.374%, 15.276% 74.142%, 15.258% 73.03%, 15.23% 72.023%, 15.192% 71.109%, 15.141% 70.272%, 15.076% 69.499%, 14.995% 68.776%, 14.995% 68.776%, 14.837% 67.688%, 14.649% 66.651%, 14.433% 65.67%, 14.19% 64.749%, 13.922% 63.893%, 13.631% 63.107%, 13.317% 62.394%, 12.983% 61.76%, 12.63% 61.208%, 12.259% 60.744%, 12.259% 60.744%, 12.013% 60.505%, 11.749% 60.314%, 11.464% 60.165%, 11.153% 60.053%, 10.81% 59.973%, 10.431% 59.919%, 10.012% 59.886%, 9.546% 59.869%, 9.03% 59.863%, 8.459% 59.862%, 7.648% 59.862%, 7.648% 59.862%, 6.859% 59.861%, 6.146% 59.849%, 5.504% 59.818%, 4.927% 59.756%, 4.407% 59.655%, 3.939% 59.504%, 3.516% 59.294%, 3.132% 59.013%, 2.781% 58.654%, 2.457% 58.204%, 2.457% 58.204%, 2.221% 57.803%, 1.994% 57.364%, 1.777% 56.888%, 1.57% 56.377%, 1.373% 55.832%, 1.187% 55.255%, 1.013% 54.646%, 0.851% 54.009%, 0.701% 53.343%, 0.565% 52.65%, 0.565% 52.65%, 0.412% 51.698%, 0.289% 50.667%, 0.194% 49.541%, 0.122% 48.299%, 0.071% 46.925%, 0.036% 45.399%, 0.015% 43.703%, 0.005% 41.818%, 0.001% 39.727%, 0% 37.411%, 0% 27.523%, 0% 27.523%, 0.001% 23.821%, 0.011% 20.484%, 0.037% 17.489%, 0.088% 14.81%, 0.172% 12.423%, 0.297% 10.305%, 0.471% 8.43%, 0.703% 6.776%, 1.001% 5.318%, 1.373% 4.031%, 1.373% 4.031%, 1.811% 2.938%, 2.308% 2.064%, 2.872% 1.383%, 3.51% 0.871%, 4.232% 0.504%, 5.044% 0.258%, 5.957% 0.109%, 6.978% 0.032%, 8.114% 0.004%, 9.375% 0%, 90.625% 0%);
+	  }
+
+	  &-quote {
+		// reset blockquote
+		margin      : 0;
+
+		// typography
+		font-family : $font-family-primary;
+		font-size   : font-size('xl'); // 18px
+		font-weight : 400;
+		line-height : 1.4;
+
+		p {
+		  font-family : inherit;
+		  font-size   : inherit;
+		  font-weight : inherit;
+		  line-height : inherit;
+		}
+	  }
+
+	  &-quoter {
+		margin-top  : 23px;
+		margin-left : calc(132px - var(--demo-section-el-pl));
+
+		gap         : 16px;
+		display     : flex;
+		align-items : center;
+
+		&-image {
+		  border        : 2px solid #FFFFFF;
+		  border-radius : 20px;
+
+		  width         : 100%;
+		  max-width     : 62px;
+		  aspect-ratio  : 1/1;
+		  overflow      : hidden;
+
+		  img {
+			object-fit      : cover;
+			object-position : 50% 50%;
+		  }
+		}
+
+		&-name {
+		  font-family : $font-family-secondary;
+		  font-size   : 16px;
+		  font-style  : normal;
+		  font-weight : 500;
+		  line-height : 1.2;
+		}
+	  }
+
+	  &-logo {
+		position : absolute;
+		right    : var(--demo-section-el-pr);
+		bottom   : var(--demo-section-el-pb);
+	  }
+
+	  &-artwork {
+		position : absolute;
+		left     : 25px;
+		bottom   : 15px;
+	  }
+	}
+  }
+}
+
+

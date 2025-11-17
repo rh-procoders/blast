@@ -1,0 +1,109 @@
+{
+  "key": "group_cta_newsletter_block",
+  "title": "CTA Newsletter Block Fields",
+  "fields": [
+    {
+      "key": "field_cta_newsletter_heading",
+      "label": "CTA - Newsletter",
+      "name": "cta-newsletter",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "Enter the heading text for the newsletter signup section",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_69148ca37d096",
+          "label": "Heading",
+          "name": "cta-newsletter__heading",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "Stay <strong>ahead<\/strong>. Get Preemptive Cloud Defense insights in your inbox.",
+          "maxlength": "",
+          "allow_in_bindings": 0,
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "new_lines": "",
+          "rows": ""
+        },
+        {
+          "key": "field_69148d2ea9950",
+          "label": "Contact Id",
+          "name": "cta-newsletter__contact-id",
+          "aria-label": "",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "allow_in_bindings": 0,
+          "placeholder": "",
+          "prepend": "",
+          "append": ""
+        },
+        {
+          "key": "field_69148d3ca9951",
+          "label": "Is footer",
+          "name": "cta-newsletter__is-footer",
+          "aria-label": "",
+          "type": "true_false",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "message": "",
+          "default_value": 0,
+          "allow_in_bindings": 0,
+          "ui_on_text": "TRUE",
+          "ui_off_text": "FALSE",
+          "ui": 1
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf\/cta-newsletter"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "display_title": "",
+  "modified": 1762955906
+}
