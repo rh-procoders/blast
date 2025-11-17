@@ -1,0 +1,149 @@
+{
+    "key": "group_hero_product_fields",
+    "title": "Product Hero Settings",
+    "fields": [
+        {
+            "key": "field_hero__prod_youtube_video",
+            "label": "YouTube Video",
+            "name": "youtube_video",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Enter the YouTube video URL (will be auto-embedded with autoplay)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https:\/\/www.youtube.com\/watch?v=..."
+        },
+        {
+            "key": "field_hero__prod_video_autoplay",
+            "label": "Video Autoplay",
+            "name": "video_autoplay",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Enable video autoplay (muted by default for browser compatibility)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "On",
+            "ui_off_text": "Off",
+            "ui": 1
+        },
+        {
+            "key": "field_hero__prod_video_loop",
+            "label": "Video Loop",
+            "name": "video_loop",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Enable video loop",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "On",
+            "ui_off_text": "Off",
+            "ui": 1
+        },
+        {
+            "key": "field_hero__prod_images",
+            "label": "Hero Image",
+            "name": "hero_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Upload up to 3 images for the hero section. Recommended: square format, 400x400px or larger.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_hero__prod_animation_enabled",
+            "label": "Enable Animations",
+            "name": "animation_enabled",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Enable floating animations for images and shapes",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33.33",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "Enabled",
+            "ui_off_text": "Disabled",
+            "ui": 1
+        },
+        {
+            "key": "field_hero__prod_lazy_load",
+            "label": "Lazy Load Images",
+            "name": "lazy_load",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Enable lazy loading for better performance",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33.34",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "On",
+            "ui_off_text": "Off",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/product-hero"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Custom fields for the Hero Home block with enhanced V3 features",
+    "show_in_rest": 1,
+    "display_title": "",
+    "modified": 1763332111
+}

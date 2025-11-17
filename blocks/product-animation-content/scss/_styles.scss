@@ -1,0 +1,333 @@
+@import "../../../assets/scss/variable";
+// Product Animation Content Block Styles
+.pac-product-animation-content {
+    width: 100%;
+    margin-top: -50px;
+    position: relative;
+    max-width: calc(100% - 60px);
+    margin-left: auto;
+    margin-right: auto;
+    background: #fff;
+    padding: 170px 30px 120px;
+    border-radius: 0px 0px 50px 50px;
+    @include tablet{
+        max-width: 100%;
+    }
+    
+    .pac-container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .pac-header {
+        text-align: center;
+        margin-bottom: 60px;
+
+        .pac-heading {
+            font-size: var(--wp--preset--font-size--fs-extra-large);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: var(--wp--preset--color--dark-blue);
+
+            strong {
+                font-family: $font-family-tertiary;
+            }
+        }
+
+        .pac-description {
+            font-size: var(--wp--preset--font-size--fs-medium-paragraph);
+            color: var(--wp--preset--color--dark-blue);
+            font-family: $font-family-secondary;
+            max-width: 756px;
+            margin: 0 auto;
+        }
+    }
+
+    .pac-content-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 60px;
+        align-items: center;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+    }
+
+    .pac-lottie-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 570px;
+        margin: -50px auto 0px;
+
+        @include tablet-lg {
+            max-width: 460px;
+        }
+
+        .pac-lottie {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        .pac-lottie-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            border-radius: 8px;
+            border: 2px dashed #ccc;
+            color: #999;
+            font-size: 14px;
+        }
+    }
+
+    // Dots Container - Positioned Absolutely Over Lottie
+    .pac-dots-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: auto;
+
+        .pac-content-dot {
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            .pac-dot-label{
+                color: #000B40;
+                text-align: center;
+                font-size: 22px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 120%; /* 26.4px */
+                position: absolute;
+                transition: all 300ms linear;
+                @include tablet{
+                    display: none;
+                }
+            }
+            // Position mappings
+            &[data-position="top-left"] {
+                top: 19%;
+                left: 20%;
+                .pac-dot-label{
+                    left: -96px;
+                    top: -20px;
+                    transform-origin: bottom right;
+                }
+            }
+
+            &[data-position="top-right"] {
+                top: 19%;
+                right: 20%;
+                .pac-dot-label{
+                    top: -20px;
+                    right: -70px;
+                    transform-origin: bottom left;
+                }
+            }
+
+            &[data-position="bottom-left"] {
+                bottom: 23.5%;
+                left: 20%;
+                .pac-dot-label{
+                    bottom: -10px;
+                    left: -100px;
+                    transform-origin: top right;
+                }
+            }
+
+            &[data-position="bottom-right"] {
+                bottom: 23.5%;
+                right: 20%;
+                .pac-dot-label{
+                    bottom: -10px;
+                    right: -100px;
+                    transform-origin: top left;
+                }
+            }
+
+            .pac-dot-button {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(255, 101, 74, 0.3);
+                transition: all 0.3s ease;
+                position: relative;
+                z-index: 10;
+                color: #000B40;
+            }
+
+            // Hover state for dot button
+            &:hover{
+
+                .pac-dot-button {
+                    transform: scale(1.15);
+                    box-shadow: 0 8px 20px rgba(255, 101, 74, 0.4);
+                    color: #FF654A;
+                }
+                .pac-dot-label{
+                    transform: scale(2.1);
+                }
+                + .pac-content-item{
+                    opacity: 1;
+                }
+            }
+        }
+        .pac-content-item{
+            position: absolute;
+            width: 328px;
+            color: #000B40;
+            font-family: $font-family-secondary;
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 159%; /* 34.98px */
+            opacity: 0;
+            transition: all 300ms linear;
+            @include desktop {
+                width: 240px;
+                font-size: 18px;
+            }
+            @include tablet {
+                display: none;
+            }
+            &[data-position="top-left"], &[data-position="bottom-left"] {
+                top: 42%;
+                right: 105%;
+                @include desktop {
+                    right: 95%;
+                }
+            }
+            &[data-position="top-right"], &[data-position="bottom-right"] {
+                top: 42%;
+                left: 105%;
+                @include desktop {
+                    left: 95%;
+                }
+            }
+
+   
+            .pac-dot-label {
+                position: absolute;
+                color: #fff;
+                font-size: 12px;
+                font-weight: 600;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                text-align: center;
+                width: 100%;
+            }
+            .pac-dot-body{
+                position: absolute;
+            }
+        }
+    }
+    .pac-content-mobile{
+        display: none;
+        @include tablet {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 1.4;
+            gap: 40px 35px;
+            max-width: 500px;
+            margin: 0 auto;
+            .pac-content-item{
+                .pac-dot-label{
+                    color: #000B40;
+                    font-size: 30px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 120%; /* 36px */
+                    margin-bottom: 8px;
+                    display: block;
+                }
+                p{
+                    color: #000B40;
+                    font-family:$font-family-secondary;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 154%; /* 21.56px */
+                }
+            }
+        }
+    }
+    
+    .pac-bottom{
+        text-align: center;
+        margin-top: 115px;
+
+        @include tablet{
+            text-align: left;
+        }
+
+        .pac-heading {
+            font-size: var(--wp--preset--font-size--fs-extra-large);
+            font-weight: 400;
+            line-height: 1.1;
+            color: var(--wp--preset--color--dark-blue);
+            margin-bottom: 25px;
+            @include tablet{
+                margin-bottom: 40px;
+            }
+            strong {
+                font-family: $font-family-tertiary;
+            }
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            max-width: 1412px;
+            @include tablet{
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+            }
+        }
+    }
+
+    
+
+    @include mobile {
+        padding-top: 120px;
+
+        .pac-container {
+            padding: 0;
+        }
+
+        .pac-header {
+            text-align: left;
+
+        }
+
+        .pac-content-wrapper {
+            gap: 30px;
+        }
+
+
+        .pac-lottie-container {
+            min-height: 250px;
+        }
+    }
+}

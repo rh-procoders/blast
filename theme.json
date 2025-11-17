@@ -129,7 +129,7 @@
 				},
 				{
 					"slug": "fs-medium-paragraph",
-					"size": "1.125rem",
+					"size": "max(16px, 1.125rem)",
 					"name": "Paragraph M - 18px"
 				},
 				{

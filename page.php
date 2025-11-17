@@ -17,7 +17,6 @@ get_header();
         while ( have_posts() ) :
         the_post();
 
-
         if (get_field('hide_title') == false): ?> 
         <h1 class="page-title"><?php the_title(); ?></h1>
         <?php endif; ?>

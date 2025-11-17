@@ -165,26 +165,50 @@ $submit_success_subheading = $fields_submit_success["tpl-demo-submit_success__su
                 <?= __( "Meanwhile visit us on", 'blast-2025' ) ?>
             </span>
 
-            <div class="wp-block-button is-style-outline is-style-outline--1">
-                <a class="wp-block-button__link wp-element-button has-arrow-icon">
-                    <span class="button-text" data-hover-text="Explore the platform">
-                        Explore the platform
-                    </span>
-                    <span class="button-arrow-wrapper">
-                        <svg class="svg-icon icon-arrow-right" width="14" height="10" viewBox="0 0 14 10"
-                             fill="currentColor">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0441 4.59009H0.75H12.0441Z"></path>
-                            <path d="M12.0441 4.59009H0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.21875 8.1195L12.7482 4.59009L9.21875 8.1195Z"></path>
-                            <path d="M9.21875 8.1195L12.7482 4.59009" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="square"></path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.21875 1.06067L12.7482 4.59008L9.21875 1.06067Z"></path>
-                            <path d="M9.21875 1.06067L12.7482 4.59008" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="square"></path>
-                        </svg>
-                    </span>
-                </a>
-            </div>
+            <?php
+            $social_links = get_field( 'social_media_links', 'option' );
+
+            if ( $social_links ): ?>
+
+            <?php
+            endif; ?>
+
+            <?php
+            foreach ($social_links as $social) :
+                $social_link = $social['link'] ?? null;
+                $social_icon = $social['icon'] ?? null;
+                ?>
+                <div class="wp-block-button is-style-outline is-style-outline--1">
+                    <a href="<?= esc_url( $social_link ? $social_link['url'] : '#' ) ?>"
+                       class="wp-block-button__link wp-element-button has-arrow-icon">
+                        <!-- social icon here -->
+                        <img src="<?php echo esc_url( $social_icon ? $social_icon['url'] : '#' ); ?>"
+                             alt="<?php echo esc_attr( $social_icon ? $social_icon['alt'] : 'alt' ); ?>"/>
+
+                        <span class="button-text" data-hover-text="">
+                            <?= esc_html( $social_link ? $social_link['title'] : 'follow' ) ?>
+                        </span>
+
+                        <span class="button-arrow-wrapper">
+                            <svg class="svg-icon icon-arrow-right" width="14" height="10" viewBox="0 0 14 10"
+                                 fill="currentColor">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0441 4.59009H0.75H12.0441Z"></path>
+                                <path d="M12.0441 4.59009H0.75" stroke="currentColor" stroke-width="1.5"
+                                      stroke-linecap="square"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M9.21875 8.1195L12.7482 4.59009L9.21875 8.1195Z"></path>
+                                <path d="M9.21875 8.1195L12.7482 4.59009" stroke="currentColor" stroke-width="1.5"
+                                      stroke-linecap="square"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M9.21875 1.06067L12.7482 4.59008L9.21875 1.06067Z"></path>
+                                <path d="M9.21875 1.06067L12.7482 4.59008" stroke="currentColor" stroke-width="1.5"
+                                      stroke-linecap="square"></path>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            <?php
+            endforeach; ?>
         </div>
     </div>
 
