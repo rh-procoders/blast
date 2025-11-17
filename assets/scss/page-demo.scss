@@ -8,13 +8,20 @@
  */
 
 .page-template-page-demo {
-  display : flex;
+  display    : flex;
+
+  height     : auto;
+  min-height : 100%;
 
   .main {
+	position    : relative;
+
 	flex        : 1 1 100%;
 
 	display     : grid;
 	place-items : center;
+
+	padding     : 30px;
   }
 
   // Featured Image - set as background
@@ -574,6 +581,100 @@
 		line-height   : 1.4;
 
 		color         : #000B40;
+	  }
+
+	  &-socials {
+		margin-top : 60px;
+	  }
+
+	  &-socials_label {
+		font-family : $font-family-tertiary;
+		font-size   : 18px;
+		line-height : 1.1;
+
+		font-weight : 500;
+
+		color       : #FF654A;
+	  }
+
+	  &-socials_links {
+		margin-top      : 16px;
+
+		display         : flex;
+		justify-content : center;
+
+		.success_social_btn {
+		  display         : flex;
+		  align-items     : center;
+
+		  padding         : 14px 20px 14px 14px;
+		  border-radius   : 20px;
+		  background      : #FFFFFF;
+
+		  text-decoration : none !important;
+
+		  position        : relative;
+		  overflow        : hidden;
+		  transition      : var(--transition);
+
+		  &-icon {
+			width            : 40px;
+			height           : 40px;
+			border-radius    : 10px;
+
+			padding          : 12px;
+
+			background-color : #F4F4F4;
+		  }
+
+		  &-text {
+			margin-left    : 30px;
+
+			font-family    : $font-family-primary;
+			font-size      : 16px;
+			line-height    : 1.1;
+			font-weight    : 400;
+
+			color          : #000B40;
+
+			padding-bottom : 5px; // hack
+
+			// Hover effect - same as site buttons
+			position       : relative;
+			display        : block;
+			transition     : transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+			&::before {
+			  content     : attr(data-hover-text);
+			  position    : absolute;
+			  top         : 0;
+			  left        : 0;
+			  width       : 100%;
+			  height      : 100%;
+			  display     : flex;
+			  align-items : center;
+			  transition  : transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			  transform   : translateY(-400%);
+			}
+		  }
+
+		  &-arrow {
+			margin-left : 10px;
+
+			display     : flex;
+		  }
+
+		  &:hover,
+		  &:focus {
+			.success_social_btn-text {
+			  transform : translateY(300%);
+
+			  &::before {
+				transform : translateY(-300%);
+			  }
+			}
+		  }
+		}
 	  }
 	}
 

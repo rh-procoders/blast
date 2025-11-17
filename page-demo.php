@@ -161,7 +161,7 @@ $submit_success_subheading = $fields_submit_success["tpl-demo-submit_success__su
         <?php endif; ?>
 
         <div class="demo-section__success-socials">
-            <span class="">
+            <span class="demo-section__success-socials_label">
                 <?= __( "Meanwhile visit us on", 'blast-2025' ) ?>
             </span>
 
@@ -170,45 +170,42 @@ $submit_success_subheading = $fields_submit_success["tpl-demo-submit_success__su
 
             if ( $social_links ): ?>
 
+                <div class="demo-section__success-socials_links">
+                    <?php
+                    foreach ($social_links as $social) :
+                        $social_link = $social['link'] ?? null;
+                        $social_icon = $social['icon'] ?? null;
+                        ?>
+                        <a href="<?= esc_url( $social_link ? $social_link['url'] : '#' ) ?>"
+                           class="success_social_btn">
+                            <!-- social icon here -->
+                            <img class="success_social_btn-icon"
+                                    src="<?php echo esc_url( $social_icon ? $social_icon['url'] : '#' ); ?>"
+                                    alt="<?php echo esc_attr( $social_icon ? $social_icon['alt'] : 'alt' ); ?>"/>
+
+                            <span class="success_social_btn-text"
+                                  data-hover-text="<?= esc_html( $social_link ? $social_link['title'] : 'follow' ) ?>">
+                                <?= esc_html( $social_link ? $social_link['title'] : 'follow' ) ?>
+                            </span>
+
+                            <span class="success_social_btn-arrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                  <rect width="17.998" height="17.998" rx="6.88123" fill="#000B40"/>
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M11.8035 8.75H5.82422H11.8035Z" fill="white"/>
+                                  <path d="M11.8035 8.75H5.82422" stroke="white" stroke-width="0.8" stroke-linecap="square"/>
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3086 10.6185L12.1771 8.75L10.3086 10.6185Z" fill="white"/>
+                                  <path d="M10.3086 10.6185L12.1771 8.75" stroke="white" stroke-width="0.8" stroke-linecap="square"/>
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3086 6.88281L12.1771 8.75132L10.3086 6.88281Z" fill="white"/>
+                                  <path d="M10.3086 6.88281L12.1771 8.75132" stroke="white" stroke-width="0.8" stroke-linecap="square"/>
+                                </svg>
+                            </span>
+                        </a>
+                    <?php
+                    endforeach; ?>
+                </div>
+
             <?php
             endif; ?>
-
-            <?php
-            foreach ($social_links as $social) :
-                $social_link = $social['link'] ?? null;
-                $social_icon = $social['icon'] ?? null;
-                ?>
-                <div class="wp-block-button is-style-outline is-style-outline--1">
-                    <a href="<?= esc_url( $social_link ? $social_link['url'] : '#' ) ?>"
-                       class="wp-block-button__link wp-element-button has-arrow-icon">
-                        <!-- social icon here -->
-                        <img src="<?php echo esc_url( $social_icon ? $social_icon['url'] : '#' ); ?>"
-                             alt="<?php echo esc_attr( $social_icon ? $social_icon['alt'] : 'alt' ); ?>"/>
-
-                        <span class="button-text" data-hover-text="">
-                            <?= esc_html( $social_link ? $social_link['title'] : 'follow' ) ?>
-                        </span>
-
-                        <span class="button-arrow-wrapper">
-                            <svg class="svg-icon icon-arrow-right" width="14" height="10" viewBox="0 0 14 10"
-                                 fill="currentColor">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0441 4.59009H0.75H12.0441Z"></path>
-                                <path d="M12.0441 4.59009H0.75" stroke="currentColor" stroke-width="1.5"
-                                      stroke-linecap="square"></path>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M9.21875 8.1195L12.7482 4.59009L9.21875 8.1195Z"></path>
-                                <path d="M9.21875 8.1195L12.7482 4.59009" stroke="currentColor" stroke-width="1.5"
-                                      stroke-linecap="square"></path>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M9.21875 1.06067L12.7482 4.59008L9.21875 1.06067Z"></path>
-                                <path d="M9.21875 1.06067L12.7482 4.59008" stroke="currentColor" stroke-width="1.5"
-                                      stroke-linecap="square"></path>
-                            </svg>
-                        </span>
-                    </a>
-                </div>
-            <?php
-            endforeach; ?>
         </div>
     </div>
 
