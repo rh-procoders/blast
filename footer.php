@@ -118,12 +118,15 @@
                 <?php $social_links = get_field('social_media_links', 'option'); ?>
                 <?php if ($social_links): ?>
                     <div class="footer-social">
-                        <?php foreach ($social_links as $social): ?>
-                            <a href="<?php echo esc_url($social['url']); ?>"
+                        <?php foreach ($social_links as $social):
+                            $social_link = $social['link'] ?? null;
+                            $social_icon = $social['icon'] ?? null;
+                            ?>
+                            <a href="<?php echo esc_url($social_link ? $social_link['url'] : '#'); ?>"
                                 class="footer-social__link"
                                 target="_blank"
                                 rel="noopener noreferrer">
-                                <img src="<?php echo esc_url($social['icon']['url']); ?>" alt="<?php echo esc_attr($social['icon']['alt']); ?>" />
+                                <img src="<?php echo esc_url($social_icon ? $social_icon['url'] : '#'); ?>" alt="<?php echo esc_attr($social_icon ? $social_icon['alt'] : 'alt'); ?>" />
                             </a>
                         <?php endforeach; ?>
                     </div>

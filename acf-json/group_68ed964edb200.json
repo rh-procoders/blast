@@ -453,11 +453,11 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_6913c82c99103",
-                    "label": "URL",
-                    "name": "url",
+                    "key": "field_691afb0105fa6",
+                    "label": "Link",
+                    "name": "link",
                     "aria-label": "",
-                    "type": "url",
+                    "type": "link",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -466,9 +466,8 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
+                    "return_format": "array",
                     "allow_in_bindings": 0,
-                    "placeholder": "",
                     "parent_repeater": "field_6913c80a99102"
                 },
                 {
@@ -583,5 +582,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762904272
+    "modified": 1763377181
 }

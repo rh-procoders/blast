@@ -206,3 +206,306 @@ add_action( 'wp_ajax_bs_toggle_post_featured', function () {
         'is_featured' => (bool)$new,
     ) );
 } );
+
+
+/**
+ * Modify CF7 Multi-Step buttons to match site button style
+ * and inject progress bar
+ *
+ * Hooks into wpcf7_form_elements to restructure the multi-step plugin buttons
+ * to use the same markup and styling as the site's standard buttons, and adds
+ * a progress indicator before the fieldset wrapper
+ */
+function blast_customize_cf7_multistep_buttons( $form_html ) {
+    // Only process if the form contains multi-step buttons
+    if ( strpos( $form_html, 'cf7mls_btn' ) === false ) {
+        return $form_html;
+    }
+
+    // Use DOMDocument for reliable HTML parsing
+    libxml_use_internal_errors( true );
+    $dom = new DOMDocument();
+    $dom->loadHTML( '<?xml encoding="utf-8" ?>' . $form_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
+    $xpath = new DOMXPath( $dom );
+
+    // Inject progress bar before fieldset-cf7mls-wrapper
+    blast_inject_progress_bar( $xpath, $dom );
+
+    // Find all Next buttons (cf7mls_next)
+    $next_buttons = $xpath->query( '//button[contains(@class, "cf7mls_next")]' );
+    foreach ( $next_buttons as $button ) {
+        blast_restructure_multistep_button( $button, 'next', $dom );
+        blast_wrap_button_with_block_div( $button, $dom, 'next' );
+    }
+
+    // Find all Back buttons (cf7mls_back)
+    $back_buttons = $xpath->query( '//button[contains(@class, "cf7mls_back")]' );
+    foreach ( $back_buttons as $button ) {
+        blast_restructure_multistep_button( $button, 'back', $dom );
+        blast_wrap_button_with_block_div( $button, $dom );
+    }
+
+    // Find and convert Submit inputs to styled buttons
+    $submit_inputs = $xpath->query( '//input[contains(@class, "wpcf7-submit")]' );
+    foreach ( $submit_inputs as $input ) {
+        blast_convert_submit_to_button( $input, $dom );
+    }
+
+    // Get the modified HTML
+    $modified_html = $dom->saveHTML();
+
+    // Clean up DOMDocument artifacts
+    $modified_html = preg_replace( '/^<!DOCTYPE.+?>/', '', str_replace( [ '<?xml encoding="utf-8" ?>', '<html><body>', '</body></html>' ], '', $modified_html ) );
+
+    libxml_clear_errors();
+
+    return $modified_html;
+}
+add_filter( 'wpcf7_form_elements', 'blast_customize_cf7_multistep_buttons', 20 );
+
+/**
+ * Restructure a single multi-step button to match site button style
+ *
+ * @param DOMElement $button The button element to modify
+ * @param string $button_type 'next', 'back', or 'submit'
+ * @param DOMDocument $dom The DOM document
+ * @throws DOMException
+ */
+function blast_restructure_multistep_button( $button, $button_type, $dom ) {
+    // Get button text (first text node)
+    $button_text = '';
+    foreach ( $button->childNodes as $node ) {
+        if ( $node->nodeType === XML_TEXT_NODE ) {
+            $button_text = trim( $node->nodeValue );
+            break;
+        }
+    }
+
+    // Default to appropriate text if empty
+    if ( empty( $button_text ) ) {
+        if ( $button_type === 'next' ) {
+            $button_text = 'Next';
+        } elseif ( $button_type === 'back' ) {
+            $button_text = 'Back';
+        } else {
+            $button_text = 'Submit';
+        }
+    }
+
+    // Add site button classes
+    $existing_classes = $button->getAttribute( 'class' );
+    $existing_classes = str_replace( 'action-button', '', $existing_classes );
+    $existing_classes = trim( preg_replace( '/\s+/', ' ', $existing_classes ) ); // Clean up extra spaces
+
+    // Submit buttons get different classes than Next/Back
+    if ( $button_type === 'submit' ) {
+        $button->setAttribute( 'class', $existing_classes . ' btn has-dark-blue-background-color has-background wp-element-button has-arrow-icon' );
+    } else {
+        $button->setAttribute( 'class', $existing_classes . ' btn has-arrow-icon' );
+    }
+
+    // Clear existing button content
+    while ( $button->firstChild ) {
+        $button->removeChild( $button->firstChild );
+    }
+
+    // Create button-text span
+    $text_span = $dom->createElement( 'span' );
+    $text_span->setAttribute( 'class', 'button-text' );
+    $text_span->setAttribute( 'data-hover-text', $button_text );
+    $text_span->nodeValue = $button_text;
+
+    // Create arrow wrapper span
+    $arrow_wrapper = $dom->createElement( 'span' );
+    $arrow_wrapper->setAttribute( 'class', 'button-arrow-wrapper' );
+
+    // Create SVG element with icon sprite reference
+    $svg = $dom->createElement( 'svg' );
+    $svg->setAttribute( 'class', 'svg-icon icon-arrow-right' );
+    $svg->setAttribute( 'width', '14' );
+    $svg->setAttribute( 'height', '10' );
+
+    // Create use element for sprite reference
+    $use = $dom->createElement( 'use' );
+    $sprite_url = get_template_directory_uri() . '/img/general/icon-sprites.svg?ver=' . THEME_VERSION . '#icon-arrow-right';
+    $use->setAttribute( 'xlink:href', $sprite_url );
+
+    $svg->appendChild( $use );
+    $arrow_wrapper->appendChild( $svg );
+
+    // Append elements to button (spinner will be added outside button by wrapper function)
+    $button->appendChild( $text_span );
+    $button->appendChild( $arrow_wrapper );
+}
+
+/**
+ * Wrap a button element with a div.wp-block-button wrapper
+ *
+ * @param DOMElement $button The button element to wrap
+ * @param DOMDocument $dom The DOM document
+ * @param string $button_type Optional. The button type ('submit', 'next', 'back'). Default empty.
+ * @throws DOMException
+ */
+function blast_wrap_button_with_block_div( $button, $dom, $button_type = '' ) {
+    // Create wrapper div with block button classes
+    $wrapper = $dom->createElement( 'div' );
+
+    // Submit buttons use plain wrapper, Next/Back use outline style
+    if ( $button_type === 'submit' ) {
+        $wrapper->setAttribute( 'class', 'wp-block-button' );
+    } else {
+        $wrapper->setAttribute( 'class', 'wp-block-button is-style-outline is-style-outline--1' );
+    }
+
+    // Get button's parent node
+    $parent = $button->parentNode;
+
+    // Insert wrapper before button
+    $parent->insertBefore( $wrapper, $button );
+
+    // Move button into wrapper
+    $wrapper->appendChild( $button );
+
+    // Add CF7 spinner as sibling after button (for Next and Submit buttons)
+    if ( $button_type === 'next' || $button_type === 'submit' ) {
+        $spinner = $dom->createElement( 'span' );
+        $spinner->setAttribute( 'class', 'wpcf7-spinner' );
+        $wrapper->appendChild( $spinner );
+    }
+}
+
+/**
+ * Inject progress bar before the fieldset-cf7mls-wrapper
+ *
+ * Creates a progress indicator showing "Step X of Y" where X is the current step
+ * and Y is the total number of steps (fieldsets)
+ *
+ * @param DOMXPath $xpath The XPath object for querying
+ * @param DOMDocument $dom The DOM document
+ * @throws DOMException
+ */
+function blast_inject_progress_bar( $xpath, $dom ) {
+    // Find the fieldset-cf7mls-wrapper div
+    $wrapper_divs = $xpath->query( '//div[contains(@class, "fieldset-cf7mls-wrapper")]' );
+
+    if ( $wrapper_divs->length === 0 ) {
+        return; // No wrapper found, exit early
+    }
+
+    $wrapper = $wrapper_divs->item( 0 );
+
+    // Count total fieldsets inside wrapper
+    $fieldsets = $xpath->query( './/fieldset[contains(@class, "fieldset-cf7mls")]', $wrapper );
+    $total_steps = $fieldsets->length;
+
+    if ( $total_steps === 0 ) {
+        return; // No fieldsets found, exit early
+    }
+
+    // Determine current step (find which fieldset has cf7mls_current_fs class)
+    $current_step = 1;
+    for ( $i = 0; $i < $fieldsets->length; $i++ ) {
+        $fieldset = $fieldsets->item( $i );
+        $classes = $fieldset->getAttribute( 'class' );
+        if ( strpos( $classes, 'cf7mls_current_fs' ) !== false ) {
+            $current_step = $i + 1;
+            break;
+        }
+    }
+
+    // Calculate initial percentage
+    $percentage = ( $total_steps > 0 ) ? ( $current_step / $total_steps ) * 100 : 0;
+
+    // Create progress bar container
+    $progress_bar = $dom->createElement( 'div' );
+    $progress_bar->setAttribute( 'class', 'cf7mls-progress-bar' );
+
+    // Create progress bar text element
+    $progress_text = $dom->createElement( 'div' );
+    $progress_text->setAttribute( 'class', 'cf7mls-progress-bar__text' );
+
+    // Build text: "Step <span class="cf7mls-progress-bar__current">1</span> of <span class="cf7mls-progress-bar__total">3</span>"
+    $step_text = $dom->createTextNode( 'Step ' );
+    $progress_text->appendChild( $step_text );
+
+    $current_span = $dom->createElement( 'span' );
+    $current_span->setAttribute( 'class', 'cf7mls-progress-bar__current' );
+    $current_span->nodeValue = strval( $current_step );
+    $progress_text->appendChild( $current_span );
+
+    $of_text = $dom->createTextNode( ' of ' );
+    $progress_text->appendChild( $of_text );
+
+    $total_span = $dom->createElement( 'span' );
+    $total_span->setAttribute( 'class', 'cf7mls-progress-bar__total' );
+    $total_span->nodeValue = strval( $total_steps );
+    $progress_text->appendChild( $total_span );
+
+    // Append text to progress bar
+    $progress_bar->appendChild( $progress_text );
+
+    // Create visual progress bar track
+    $progress_track = $dom->createElement( 'div' );
+    $progress_track->setAttribute( 'class', 'cf7mls-progress-bar__track' );
+
+    // Create progress bar fill
+    $progress_fill = $dom->createElement( 'div' );
+    $progress_fill->setAttribute( 'class', 'cf7mls-progress-bar__fill' );
+    $progress_fill->setAttribute( 'style', 'width: ' . number_format( $percentage, 2, '.', '' ) . '%' );
+    $progress_fill->setAttribute( 'data-progress', strval( $current_step ) );
+
+    // Append fill to track
+    $progress_track->appendChild( $progress_fill );
+
+    // Append track to progress bar
+    $progress_bar->appendChild( $progress_track );
+
+    // Insert progress bar before the wrapper
+    $wrapper->parentNode->insertBefore( $progress_bar, $wrapper );
+}
+
+/**
+ * Convert CF7 submit input to a styled button element
+ *
+ * Takes the default CF7 submit input and converts it to a button element,
+ * then applies the same styling as Next/Back buttons
+ *
+ * @param DOMElement $input The input element to convert
+ * @param DOMDocument $dom The DOM document
+ * @throws DOMException
+ */
+function blast_convert_submit_to_button( $input, $dom ) {
+    // Get the submit button text from value attribute
+    $button_text = $input->getAttribute( 'value' );
+    if ( empty( $button_text ) ) {
+        $button_text = 'Submit';
+    }
+
+    // Get existing classes from input
+    $input_classes = $input->getAttribute( 'class' );
+
+    // Create new button element
+    $button = $dom->createElement( 'button' );
+    $button->setAttribute( 'type', 'submit' );
+
+    // Transfer classes and add our custom classes
+    $button->setAttribute( 'class', $input_classes . ' btn has-arrow-icon' );
+
+    // Copy any data attributes or other relevant attributes
+    if ( $input->hasAttribute( 'id' ) ) {
+        $button->setAttribute( 'id', $input->getAttribute( 'id' ) );
+    }
+    if ( $input->hasAttribute( 'name' ) ) {
+        $button->setAttribute( 'name', $input->getAttribute( 'name' ) );
+    }
+
+    // Set button text as text node temporarily (will be restructured next)
+    $button->nodeValue = $button_text;
+
+    // Replace input with button in DOM
+    $input->parentNode->replaceChild( $button, $input );
+
+    // Now apply the same restructuring as Next/Back buttons
+    blast_restructure_multistep_button( $button, 'submit', $dom );
+    blast_wrap_button_with_block_div( $button, $dom, 'submit' );
+}
