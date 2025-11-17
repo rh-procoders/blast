@@ -8,8 +8,6 @@
 (function () {
     'use strict';
 
-    console.log( 'page-demo loaded...' );
-
     /**
      * Show Success Screen
      * Called from CF7's on_sent_ok additional setting
@@ -27,10 +25,6 @@
                 behavior: 'smooth',
                 block: 'center'
             } );
-
-            console.log( 'Success screen activated' );
-        } else {
-            console.error( 'demoShowSuccess: .demo-section not found' );
         }
     };
 
@@ -103,8 +97,6 @@
             // Update the visual bar fill width
             progressFill.style.width = percentage + '%';
             progressFill.setAttribute( 'data-progress', currentStep );
-
-            console.log( 'Progress bar updated: Step', currentStep, 'of', totalSteps, '(' + percentage.toFixed( 2 ) + '%)' );
         }
 
         // Initial update on page load
@@ -146,8 +138,6 @@
                 attributeFilter: ['class']
             } );
         } );
-
-        console.log( 'CF7 Multi-Step progress bar initialized' );
     }
 
     /**
@@ -161,12 +151,9 @@
             const demoSection = event.target.closest( '.demo-section' );
 
             if (demoSection) {
-                console.log( 'CF7 form submitted successfully, showing success screen' );
                 window.demoShowSuccess();
             }
         }, false );
-
-        console.log( 'CF7 success handler initialized' );
     }
 
     /**
@@ -177,7 +164,6 @@
         const form = document.querySelector( '.demo-section form.wpcf7-form' );
 
         if (!form) {
-            console.log( 'CF7 form not found, skipping error state handler' );
             return;
         }
 
@@ -193,13 +179,11 @@
                 const nextButton = currentFieldset.querySelector( '.cf7mls_next' );
                 if (nextButton && !nextButton.classList.contains( 'has-error' )) {
                     nextButton.classList.add( 'has-error' );
-                    console.log( 'Error class added to Next button' );
                 } else {
                     // No Next button found - must be final step with Submit button
                     const submitButton = form.querySelector( '.wpcf7-submit' );
                     if (submitButton && !submitButton.classList.contains( 'has-error' )) {
                         submitButton.classList.add( 'has-error' );
-                        console.log( 'Error class added to Submit button' );
                     }
                 }
             } else {
@@ -207,7 +191,6 @@
                 const submitButton = form.querySelector( '.wpcf7-submit' );
                 if (submitButton && !submitButton.classList.contains( 'has-error' )) {
                     submitButton.classList.add( 'has-error' );
-                    console.log( 'Error class added to Submit button (fallback)' );
                 }
             }
         }
@@ -219,14 +202,12 @@
             const allButtons = form.querySelectorAll( '.cf7mls_next.has-error, .wpcf7-submit.has-error' );
             allButtons.forEach( button => {
                 button.classList.remove( 'has-error' );
-                console.log( 'Error class removed from button' );
             } );
         }
 
         // Method 1: Listen for CF7 validation error event
         document.addEventListener( 'wpcf7invalid', function ( event ) {
             if (event.target === form) {
-                console.log( 'wpcf7invalid event fired' );
                 addErrorClassToButton();
             }
         }, false );
@@ -240,7 +221,6 @@
                     if (target.classList.contains( 'wpcf7-validation-errors' )) {
                         const isVisible = target.style.display !== 'none' && target.style.display !== '';
                         if (isVisible) {
-                            console.log( 'Validation errors became visible (MutationObserver)' );
                             addErrorClassToButton();
                         }
                     }
@@ -262,8 +242,6 @@
             const clickedButton = event.target.closest( '.cf7mls_next, .wpcf7-submit' );
 
             if (clickedButton) {
-                console.log( 'Button clicked:', clickedButton.className );
-
                 // Remove error class when user clicks (they're trying again)
                 if (clickedButton.classList.contains( 'has-error' )) {
                     clickedButton.classList.remove( 'has-error' );
@@ -277,29 +255,16 @@
 
                             // Check if "sending" class was just removed
                             if (!button.classList.contains( 'sending' )) {
-                                console.log( '"sending" class removed - validation complete, checking for errors...' );
-
                                 // Small delay to ensure DOM is updated
                                 setTimeout( function () {
-                                    // Check 1: Look for visible error message
+                                    // Check for validation errors
                                     const errorMessage = form.querySelector( '.wpcf7-response-output.wpcf7-validation-errors' );
                                     const hasVisibleErrorMessage = errorMessage && errorMessage.offsetParent !== null;
-
-                                    // Check 2: Look for invalid field classes
                                     const hasInvalidFields = form.querySelector( '.wpcf7-not-valid, .cf7mls-invalid' ) !== null;
-
-                                    // Check 3: Look for not-valid-tip spans
                                     const hasErrorTips = form.querySelector( '.wpcf7-not-valid-tip' ) !== null;
 
-                                    console.log( 'Error message visible:', hasVisibleErrorMessage );
-                                    console.log( 'Invalid fields present:', hasInvalidFields );
-                                    console.log( 'Error tips present:', hasErrorTips );
-
                                     if (hasVisibleErrorMessage || hasInvalidFields || hasErrorTips) {
-                                        console.log( 'Validation errors detected - adding error class to button' );
                                         addErrorClassToButton();
-                                    } else {
-                                        console.log( 'No validation errors detected - validation passed!' );
                                     }
 
                                     // Stop observing after check
@@ -324,8 +289,6 @@
                 removeErrorClassFromButtons();
             }
         }, false );
-
-        console.log( 'CF7 button error states initialized' );
     }
 
     /**

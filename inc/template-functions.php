@@ -697,6 +697,11 @@ class Blast_Contact_Forms_Handler {
      * @return WPCF7_Validation Modified validation result
      */
     public function validate_email_before_sending( $result, $tag ) {
+        // Only validate on page-demo.php template
+        if ( ! $this->is_demo_page() ) {
+            return $result;
+        }
+
         // Get the field name
         $name = $tag->name;
 
@@ -734,6 +739,56 @@ class Blast_Contact_Forms_Handler {
         }
 
         return $result;
+    }
+
+    /**
+     * Check if current page is using the page-demo.php template
+     *
+     * @return bool True if on demo page template, false otherwise
+     */
+    private function is_demo_page() {
+        $post_id = 0;
+
+        // Method 1: Try to get from CF7's unit (form) post data
+        if ( isset( $_POST['_wpcf7_unit_tag'] ) ) {
+            // Unit tag format is like: wpcf7-f123-p456-o1 where 456 is the post ID
+            $unit_tag = sanitize_text_field( $_POST['_wpcf7_unit_tag'] );
+            if ( preg_match( '/-p(\d+)-/', $unit_tag, $matches ) ) {
+                $post_id = absint( $matches[1] );
+            }
+        }
+
+        // Method 2: Try _wpcf7_container_post
+        if ( ! $post_id && isset( $_POST['_wpcf7_container_post'] ) ) {
+            $post_id = absint( $_POST['_wpcf7_container_post'] );
+        }
+
+        // Method 3: Try to get from global $post
+        if ( ! $post_id ) {
+            global $post;
+            if ( $post && isset( $post->ID ) ) {
+                $post_id = $post->ID;
+            }
+        }
+
+        // Method 4: Check HTTP_REFERER as last resort
+        if ( ! $post_id && isset( $_SERVER['HTTP_REFERER'] ) ) {
+            $referer = esc_url_raw( $_SERVER['HTTP_REFERER'] );
+            $referer_post_id = url_to_postid( $referer );
+            if ( $referer_post_id ) {
+                $post_id = $referer_post_id;
+            }
+        }
+
+        // No post ID found
+        if ( ! $post_id ) {
+            return false;
+        }
+
+        // Check if this page uses the page-demo.php template
+        $template = get_page_template_slug( $post_id );
+
+        return ( $template === 'page-demo.php' );
     }
 }
 
