@@ -26,10 +26,13 @@ if ( ! empty( $block['className'] ) ) {
 }
 
 // Get field values
+$local_video_files = get_field('local_video_files');
 $youtube_video = get_field('youtube_video');
+$vimeo_video = get_field('vimeo_video');
 $video_autoplay = get_field('video_autoplay');
 $video_loop = get_field('video_loop');
 $animation_enabled = get_field('animation_enabled');
+$video_poster = get_field('video_poster');
 
 if($animation_enabled){
     $classes .= ' hero-home--animate';
@@ -49,6 +52,21 @@ if ($youtube_video) {
         $autoplay_param = $video_autoplay ? '&autoplay=1&mute=1' : '';
         $loop_param = $video_loop ? '&loop=1&playlist=' . $video_id : '';
         $youtube_embed_url = "https://www.youtube.com/embed/{$video_id}?controls=0&showinfo=0&rel=0&modestbranding=1{$autoplay_param}{$loop_param}";
+    }
+}
+
+// Convert Vimeo URL to embed format
+$vimeo_embed_url = '';
+if ($vimeo_video) {
+    $video_id = '';
+    if (preg_match('/vimeo\\.com\\/([0-9]+)/', $vimeo_video, $matches)) {
+        $video_id = $matches[1];
+    }
+    
+    if ($video_id) {
+        $autoplay_param = $video_autoplay ? '&autoplay=1&muted=1' : '';
+        $loop_param = $video_loop ? '&loop=1' : '';
+        $vimeo_embed_url = "https://player.vimeo.com/video/{$video_id}?{$autoplay_param}{$loop_param}";
     }
 }
 
@@ -100,11 +118,47 @@ $inner_blocks = '<InnerBlocks template="' . esc_attr( wp_json_encode( $allowed_b
         <!-- Right Video Area -->
         <div class="hero-home__media">
             <div class="hero-home__video-container">
-                <?php if ($youtube_embed_url): ?>
+                <?php if (!empty($local_video_files) && is_array($local_video_files)): ?>
+                    <!-- HTML5 Local Video Player -->
+                    <div class="hero-home__video-wrapper">
+                        <video 
+                            class="hero-home__html5-video"
+                            controls
+                            playsinline
+                            width="100%"
+                            height="auto"
+                            <?php if ($video_autoplay): ?>autoplay muted<?php endif; ?>
+                            <?php if ($video_loop): ?>loop<?php endif; ?>
+                            <?php if ($video_poster): ?>poster="<?php echo esc_url($video_poster); ?>"<?php endif; ?>>
+                            <?php foreach ($local_video_files as $video_item):
+                                $video_url = $video_item['video_file']['url'] ?? '';
+                                $mime_type = $video_item['video_file']['mime_type'] ?? '';
+                                ?>
+                                <?php if (!empty($video_url) && !empty($mime_type)): ?>
+                                    <source src="<?php echo esc_url($video_url); ?>" type="<?php echo esc_attr($mime_type); ?>">
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                <?php elseif ($youtube_embed_url): ?>
+                    <!-- YouTube Embed -->
                     <div class="hero-home__video-wrapper">
                         <iframe 
                             class="hero-home__video-iframe"
                             src="<?php echo esc_url($youtube_embed_url); ?>"
+                            title="Hero Video"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                <?php elseif ($vimeo_embed_url): ?>
+                    <!-- Vimeo Embed -->
+                    <div class="hero-home__video-wrapper">
+                        <iframe 
+                            class="hero-home__video-iframe"
+                            src="<?php echo esc_url($vimeo_embed_url); ?>"
                             title="Hero Video"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -119,7 +173,7 @@ $inner_blocks = '<InnerBlocks template="' . esc_attr( wp_json_encode( $allowed_b
                                 <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
                             </svg>
                             <p>Video Placeholder</p>
-                            <small>Add a YouTube URL in the block settings</small>
+                            <small>Add a local video, YouTube URL, or Vimeo URL in the block settings</small>
                         </div>
                     </div>
                 <?php endif; ?>
