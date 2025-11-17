@@ -40,8 +40,8 @@ $submit_success_subheading = $fields_submit_success["tpl-demo-submit_success__su
     <button type="button" class="demo-section__close" data-demo-back aria-label="Close">
         <span aria-hidden="true">
             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
-              <path d="M21.4141 1.41406L1.41406 21.4141" stroke="white" stroke-width="2" stroke-linecap="square"/>
-              <path d="M21.4141 21.4141L1.41406 1.41406" stroke="white" stroke-width="2" stroke-linecap="square"/>
+              <path d="M21.4141 1.41406L1.41406 21.4141" fill="none" stroke-width="2" stroke-linecap="square"/>
+              <path d="M21.4141 21.4141L1.41406 1.41406" fill="none" stroke-width="2" stroke-linecap="square"/>
             </svg>
         </span>
     </button>

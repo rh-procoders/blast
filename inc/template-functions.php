@@ -366,8 +366,9 @@ function blast_wrap_button_with_block_div( $button, $dom, $button_type = '' ) {
     // Move button into wrapper
     $wrapper->appendChild( $button );
 
-    // Add CF7 spinner as sibling after button (for Next and Submit buttons)
-    if ( $button_type === 'next' || $button_type === 'submit' ) {
+    // Add CF7 spinner as sibling after button (only for Next buttons)
+    // Note: CF7 already adds its own spinner for Submit buttons, so we skip those
+    if ( $button_type === 'next' ) {
         $spinner = $dom->createElement( 'span' );
         $spinner->setAttribute( 'class', 'wpcf7-spinner' );
         $wrapper->appendChild( $spinner );
