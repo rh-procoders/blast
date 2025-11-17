@@ -131,6 +131,23 @@
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
+
+                <?php $footer_badges = get_field('footer_badges', 'option'); ?>
+                <?php  if ($footer_badges): ?>
+                    <div class="footer-badges">
+                        <?php foreach ($footer_badges as $badge):
+                            $badge_image = $badge['badge_image'] ?? null;
+                            $badge_link = $badge['badge_link'] ?? null;
+                            ?>
+                            <a href="<?php echo esc_url($badge_link ? $badge_link['url'] : '#'); ?>"
+                                class="footer-badges__link"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                <img src="<?php echo esc_url($badge_image ? $badge_image['url'] : '#'); ?>" alt="<?php echo esc_attr($badge_image ? $badge_image['alt'] : 'alt'); ?>" />
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </div>
 
         </div>
