@@ -453,7 +453,7 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_691afb0105fa6",
+                    "key": "field_6913c82c99103",
                     "label": "Link",
                     "name": "link",
                     "aria-label": "",
@@ -568,7 +568,10 @@
             "name": "footer_badges",
             "aria-label": "",
             "type": "repeater",
+            "instructions": "Upload Images",
+            "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
@@ -648,5 +651,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763380218
+    "modified": 1763380979
 }
