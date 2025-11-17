@@ -91,6 +91,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        max-width: calc(100% - 60px);
+        @include tablet {
+            max-width: 100%;
+        }
+    }
+
+    &__html5-video{
+        
+
     }
     
     // Video container
