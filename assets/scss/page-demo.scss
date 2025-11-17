@@ -70,6 +70,48 @@
 	display               : grid;
 	grid-template-columns : var(--demo-content-col) calc( 100% - var(--demo-content-col) );
 
+	&__close {
+	  // reset button
+	  padding    : 0;
+
+	  // size
+	  display    : flex;
+
+	  span {
+		display : flex;
+
+		svg {
+		  display : flex;
+
+		  width   : 20px;
+		  height  : 20px;
+		}
+	  }
+
+	  // positioning
+	  position   : absolute;
+	  top        : calc((3.75rem - (20px * 0.5)) * -1); // 60px
+	  right      : calc((6.25rem - (20px * 0.5)) * -1); // 100px
+
+	  // Style
+	  cursor     : pointer;
+
+	  transition : transform ease .3s;
+
+	  &:hover,
+	  &:focus {
+		transform : rotate(180deg);
+	  }
+
+	  @media(max-width : 1710px) {
+		right : -20px;
+	  }
+
+	  @media(max-height : 720px) {
+		top : -20px;
+	  }
+	}
+
 	&__form {
 	  position             : relative;
 
