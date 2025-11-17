@@ -366,8 +366,9 @@ function blast_wrap_button_with_block_div( $button, $dom, $button_type = '' ) {
     // Move button into wrapper
     $wrapper->appendChild( $button );
 
-    // Add CF7 spinner as sibling after button (for Next and Submit buttons)
-    if ( $button_type === 'next' || $button_type === 'submit' ) {
+    // Add CF7 spinner as sibling after button (only for Next buttons)
+    // Note: CF7 already adds its own spinner for Submit buttons, so we skip those
+    if ( $button_type === 'next' ) {
         $spinner = $dom->createElement( 'span' );
         $spinner->setAttribute( 'class', 'wpcf7-spinner' );
         $wrapper->appendChild( $spinner );
@@ -509,3 +510,287 @@ function blast_convert_submit_to_button( $input, $dom ) {
     blast_restructure_multistep_button( $button, 'submit', $dom );
     blast_wrap_button_with_block_div( $button, $dom, 'submit' );
 }
+
+/**
+ * Business Email Validation Handler for Contact Form 7
+ *
+ * Validates email addresses to ensure users submit business/corporate emails
+ * by blocking free email providers. Uses Levenshtein distance to catch typos
+ * and common misspellings of blocked domains.
+ *
+ * @package blast-2025
+ */
+class Blast_Contact_Forms_Handler {
+
+    /**
+     * List of blocked free email domains
+     *
+     * @var array
+     */
+    private $blocked_domains = array(
+        'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com', 'icloud.com',
+        'mail.com', 'protonmail.com', 'zoho.com', 'yandex.com', 'gmx.com', 'inbox.com',
+        'live.com', 'msn.com', 'yahoo.co.uk', 'yahoo.fr', 'yahoo.de', 'yahoo.es',
+        'yahoo.it', 'yahoo.ca', 'yahoo.com.au', 'yahoo.co.in', 'yahoo.com.br',
+        'hotmail.co.uk', 'hotmail.fr', 'hotmail.de', 'hotmail.es', 'hotmail.it',
+        'outlook.fr', 'outlook.de', 'outlook.es', 'outlook.it', 'outlook.co.uk',
+        'googlemail.com', 'me.com', 'mac.com', 'gmx.de', 'gmx.net', 'web.de',
+        't-online.de', 'freenet.de', 'arcor.de', 'mail.ru', 'ya.ru', 'yandex.ru',
+        'qq.com', '163.com', '126.com', 'sina.com', 'sohu.com', 'yeah.net',
+        'rediffmail.com', 'fastmail.com', 'hushmail.com', 'tutanota.com',
+        'rocketmail.com', 'att.net', 'sbcglobal.net', 'verizon.net', 'comcast.net',
+        'bellsouth.net', 'charter.net', 'cox.net', 'earthlink.net', 'juno.com',
+        'netzero.net', 'optonline.net', 'windstream.net', 'free.fr', 'orange.fr',
+        'laposte.net', 'wanadoo.fr', 'sfr.fr', 'aliceadsl.fr', 'neuf.fr',
+        'libero.it', 'virgilio.it', 'alice.it', 'tin.it', 'tiscali.it',
+        'btinternet.com', 'virginmedia.com', 'sky.com', 'talktalk.net', 'blueyonder.co.uk',
+        'ntlworld.com', 'tiscali.co.uk', 'freeserve.co.uk', 'orange.net', 'wanadoo.co.uk',
+        'telstra.com', 'bigpond.com', 'optusnet.com.au', 'westnet.com.au', 'aapt.net.au',
+        'telus.net', 'shaw.ca', 'rogers.com', 'sympatico.ca', 'videotron.ca',
+        'bol.com.br', 'uol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com',
+        'mailinator.com', 'guerrillamail.com', 'temp-mail.org', '10minutemail.com',
+        'throwaway.email', 'maildrop.cc', 'tempmail.com', 'getnada.com',
+        'prodigy.net', 'openweb.net.nz', 'xtra.co.nz', 'paradise.net.nz', 'slingshot.co.nz',
+        'seznam.cz', 'centrum.cz', 'post.cz', 'email.cz', 'atlas.cz',
+        'wp.pl', 'o2.pl', 'interia.pl', 'onet.pl', 'gazeta.pl',
+        'rambler.ru', 'bk.ru', 'inbox.ru', 'list.ru', 'lenta.ru',
+        'hanmail.net', 'naver.com', 'daum.net', 'nate.com', 'korea.com',
+        'sapo.pt', 'clix.pt', 'netcabo.pt', 'iol.pt', 'mail.pt',
+        'bluewin.ch', 'hispeed.ch', 'sunrise.ch', 'swissonline.ch', 'vtxmail.ch',
+        'home.nl', 'hetnet.nl', 'planet.nl', 'quicknet.nl', 'zonnet.nl',
+        'telenet.be', 'skynet.be', 'pandora.be', 'proximus.be', 'scarlet.be',
+        'bredband.net', 'spray.se', 'telia.com', 'passagen.se', 'swipnet.se',
+        'chello.at', 'aon.at', 'kabsi.at', 'liwest.at', 'a1.net',
+        'elisa.fi', 'kolumbus.fi', 'luukku.com', 'saunalahti.fi', 'suomi24.fi',
+        'jubii.dk', 'mail.dk', 'ofir.dk', 'post.tele.dk', 'tdcadsl.dk',
+        'online.no', 'frisurf.no', 'broadpark.no', 'start.no', 'chello.no',
+        'ireland.com', 'eircom.net', 'indigo.ie', 'vodafone.ie', 'o2.ie',
+        'ono.com', 'ya.com', 'movistar.es', 'jazztel.es', 'uni2.es',
+        'club-internet.fr', 'caramail.com', 'voila.fr', 'tiscali.fr', 'bbox.fr',
+        'arcor.de', 'gmx.at', 'gmx.ch', 'gmx.fr', 'gmx.es',
+        'tele2.nl', 'xs4all.nl', 'ziggo.nl', 'upcmail.nl', 'kpnmail.nl',
+        'iol.ie', 'poczta.onet.pl', 'pocztowy.pl', 'tlen.pl', 'vp.pl',
+        'freemail.hu', 'citromail.hu', 'index.hu', 'indamail.hu', 'mailbox.hu',
+        'abv.bg', 'mail.bg', 'dir.bg', 'gbg.bg', 'gyuvetch.bg',
+        'azet.sk', 'atlas.sk', 'centrum.sk', 'zoznam.sk', 'post.sk',
+        'volny.cz', 'tiscali.cz', 'quick.cz', 'nextra.cz', 'iol.cz',
+        'freemail.gr', 'in.gr', 'otenet.gr', 'forthnet.gr', 'flash.net',
+        'mynet.com', 'superonline.com', 'turk.net', 'ttnet.net.tr', 'ttmail.com',
+        'ismail.net.tr', 'hotmail.com.tr', 'yahoo.com.tr', 'gmail.com.tr', 'ymail.com',
+        'rr.com', 'roadrunner.com', 'twc.com', 'cfl.rr.com', 'kc.rr.com',
+        'nc.rr.com', 'rochester.rr.com', 'san.rr.com', 'sc.rr.com', 'wi.rr.com',
+        'frontiernet.net', 'mediacombb.net', 'toast.net', 'wowway.com', 'rcn.com',
+        'metrocast.net', 'snet.net', 'ptd.net', 'epix.net', 'embarqmail.com',
+        'centurylink.net', 'centurytel.net', 'q.com', 'mchsi.com', 'suddenlink.net',
+        'cable.comcast.com', 'comcast.com', 'comporium.net', 'consolidatedcomm.net', 'cfl.rr.com',
+        'cablevision.net', 'optimum.net', 'optonline.net', 'optonline.com', 'tampabay.rr.com',
+        'insight.rr.com', 'bright.net', 'cinci.rr.com', 'neo.rr.com', 'hawaii.rr.com',
+        'maine.rr.com', 'midsouth.rr.com', 'triad.rr.com', 'austin.rr.com', 'satx.rr.com',
+        'elp.rr.com', 'prodigy.net.mx', 'yahoo.com.mx', 'hotmail.com.mx', 'outlook.com.mx',
+        'live.com.mx', 'msn.com.mx', 'gmail.com.mx', 'uninet.net.mx', 'prodigy.net',
+        'claro.net.ar', 'fibertel.com.ar', 'speedy.com.ar', 'ciudad.com.ar', 'arnet.com.ar',
+        'yahoo.com.ar', 'hotmail.com.ar', 'outlook.com.ar', 'gmail.com.ar', 'live.com.ar',
+        'vtr.net', 'tie.cl', 'terra.cl', 'yahoo.cl', 'hotmail.cl',
+        'outlook.cl', 'gmail.cl', 'live.cl', 'une.net.co', 'etb.net.co',
+        'emcali.net.co', 'cable.net.co', 'cableunion.net.co', 'yahoo.com.co', 'hotmail.com.co',
+        'outlook.com.co', 'gmail.com.co', 'live.com.co', 'cantv.net', 'intercable.net.ve',
+        'netuno.net.ve', 'supercable.net.ve', 'yahoo.com.ve', 'hotmail.com.ve', 'outlook.com.ve',
+        'gmail.com.ve', 'live.com.ve', 'speedy.com.pe', 'terra.com.pe', 'yahoo.com.pe',
+        'hotmail.com.pe', 'outlook.com.pe', 'gmail.com.pe', 'live.com.pe', 'anteldata.net.uy',
+        'adinet.com.uy', 'yahoo.com.uy', 'hotmail.com.uy', 'outlook.com.uy', 'gmail.com.uy',
+        'live.com.uy', 'entelchile.net', 'telmex.net.co', 'etb.net', 'emtelco.net.co',
+        'movistar.com.co', 'claro.com.co', 'avantel.net.co', 'metropluscr.com', 'racsa.co.cr',
+        'ice.co.cr', 'yahoo.com.cr', 'hotmail.com.cr', 'outlook.com.cr', 'gmail.com.cr',
+        'live.com.cr', 'cwpanama.net', 'cwp.net.pa', '+movil.com.pa', 'yahoo.com.pa',
+        'hotmail.com.pa', 'outlook.com.pa', 'gmail.com.pa', 'live.com.pa', 'cotas.com.bo',
+        'entel.bo', 'viva.com.bo', 'yahoo.com.bo', 'hotmail.com.bo', 'outlook.com.bo',
+        'gmail.com.bo', 'live.com.bo', 'antel.com.uy', 'claro.com.uy', 'movistar.com.uy',
+        'coopservitel.com.py', 'tigo.com.py', 'claro.com.py', 'yahoo.com.py', 'hotmail.com.py',
+        'outlook.com.py', 'gmail.com.py', 'live.com.py', 'movistar.com.ec', 'cnt.net.ec',
+        'claro.com.ec', 'etapaonline.net.ec', 'yahoo.com.ec', 'hotmail.com.ec', 'outlook.com.ec',
+        'gmail.com.ec', 'live.com.ec', 'kolbi.cr', 'kölbi.cr', 'telecable.cr',
+        'cabletica.com', 'cablecolor.cr', 'tigo.com.gt', 'claro.com.gt', 'movistar.com.gt',
+        'yahoo.com.gt', 'hotmail.com.gt', 'outlook.com.gt', 'gmail.com.gt', 'live.com.gt',
+        'tigo.com.hn', 'claro.com.hn', 'hondutel.hn', 'yahoo.com.hn', 'hotmail.com.hn',
+        'outlook.com.hn', 'gmail.com.hn', 'live.com.hn', 'tigo.com.sv', 'claro.com.sv',
+        'digicel.sv', 'yahoo.com.sv', 'hotmail.com.sv', 'outlook.com.sv', 'gmail.com.sv',
+        'live.com.sv', 'claro.com.ni', 'movistar.com.ni', 'yahoo.com.ni', 'hotmail.com.ni',
+        'outlook.com.ni', 'gmail.com.ni', 'live.com.ni', 'cable-modem.net', 'cableonda.net',
+        'cablecolor.com', 'amnet.co.cr', 'cablevisionsacr.com', 'tigo.com.co', 'une.net',
+        'emcali.com.co', 'epm.net.co', 'metrotel.net.co', 'movistar.com.pe', 'claro.com.pe',
+        'bitel.com.pe', 'entel.pe', 'yahoo.es.pe', 'nextel.net.ar', 'telecentro.net.ar',
+        'movistar.com.ar', 'claro.com.ar', 'personal.com.ar', 'telefonica.net.ar', 'iplan.com.ar',
+        'cablehogar.net.ar', 'cablevisionfibertel.com.ar', 'gigared.net.ar', 'favanet.com.ar', 'telecom.net.ar',
+        'movistar.cl', 'claro.cl', 'entel.cl', 'wom.cl', 'gtdmanquehue.cl',
+        'mundo.cl', 'tutopia.cl', 'netglobalis.net', 'firstcom.cl', 'telmex.cl',
+        'movistar.com.uy', 'claro.uy', 'dedicado.com.uy', 'montevideo.com.uy', 'movistar.com.ve',
+        'cantv.com.ve', 'digitel.com.ve', 'movilnet.com.ve', 'inter.net.ve', 'cvnet.net.ve',
+        'supercable.com.ve', 'aba.net.ve', 'telcel.net.ve', 'movistar.net.ve', 'gmail.co.za',
+        'yahoo.co.za', 'hotmail.co.za', 'outlook.co.za', 'live.co.za', 'webmail.co.za',
+        'mweb.co.za', 'iafrica.com', 'vodamail.co.za', 'telkomsa.net', 'absamail.co.za',
+        'mtn.co.za', 'vodacom.co.za', 'cell-c.co.za', 'telkom.net', 'lando.co.za',
+        'axxess.co.za', 'webafrica.co.za', 'cybersmart.co.za', 'imaginet.co.za', 'dotsure.co.za',
+        'gmail.com.ng', 'yahoo.com.ng', 'hotmail.com.ng', 'outlook.com.ng', 'live.com.ng',
+        'ymail.com.ng', 'aol.com.ng', 'mail.com.ng', 'zoho.com.ng', 'fastmail.com.ng',
+        'gmail.co.ke', 'yahoo.co.ke', 'hotmail.co.ke', 'outlook.co.ke', 'live.co.ke',
+        'safaricom.co.ke', 'orange.co.ke', 'airtel.co.ke', 'telkom.co.ke', 'jambo.co.ke',
+        'gmail.com.eg', 'yahoo.com.eg', 'hotmail.com.eg', 'outlook.com.eg', 'live.com.eg',
+        'tedata.net.eg', 'vodafone.com.eg', 'link.net.eg', 'noor.net.eg', 'soficom.com.eg',
+        'gmail.co.il', 'yahoo.co.il', 'hotmail.co.il', 'outlook.co.il', 'walla.co.il',
+        'walla.com', 'netvision.net.il', '012.net.il', 'bezeqint.net', 'zahav.net.il',
+        'gmail.com.sa', 'yahoo.com.sa', 'hotmail.com.sa', 'outlook.com.sa', 'live.com.sa',
+        'stc.com.sa', 'mobily.com.sa', 'zain.com.sa', 'saudi.net.sa', 'jawwy.tv',
+        'gmail.ae', 'yahoo.ae', 'hotmail.ae', 'outlook.ae', 'live.ae',
+        'eim.ae', 'emirates.net.ae', 'etisalat.ae', 'du.ae', 'hotmail.com.ae',
+        'gmail.com.au', 'yahoo.com.au', 'hotmail.com.au', 'outlook.com.au', 'live.com.au',
+        'bigpond.net.au', 'optusnet.com.au', 'tpg.com.au', 'iinet.net.au', 'westnet.com.au',
+        'dodo.com.au', 'internode.on.net', 'adam.com.au', 'aapt.net.au', 'eftel.com',
+        'gmail.co.nz', 'yahoo.co.nz', 'hotmail.co.nz', 'outlook.co.nz', 'live.co.nz',
+        'xtra.co.nz', 'clear.net.nz', 'paradise.net.nz', 'slingshot.co.nz', 'orcon.net.nz',
+        'snap.net.nz', 'ihug.co.nz', 'vodafone.co.nz', '2degrees.nz', 'inspire.net.nz',
+        'gmail.co.jp', 'yahoo.co.jp', 'hotmail.co.jp', 'outlook.co.jp', 'live.jp',
+        'ezweb.ne.jp', 'docomo.ne.jp', 'softbank.ne.jp', 'i.softbank.jp', 'nifty.com',
+        'biglobe.ne.jp', 'so-net.ne.jp', 'ocn.ne.jp', 'plala.or.jp', 'dion.ne.jp',
+        'gmail.co.kr', 'yahoo.co.kr', 'hotmail.co.kr', 'outlook.co.kr', 'live.co.kr',
+        'naver.com', 'hanmail.net', 'daum.net', 'nate.com', 'korea.com',
+        'gmail.com.cn', 'yahoo.com.cn', 'hotmail.com.cn', 'outlook.com.cn', 'live.com.cn',
+        'qq.com', '163.com', '126.com', 'sina.com', 'sohu.com',
+        'yeah.net', '188.com', '139.com', 'wo.com.cn', 'vip.sina.com',
+        'gmail.com.sg', 'yahoo.com.sg', 'hotmail.com.sg', 'outlook.com.sg', 'live.com.sg',
+        'singnet.com.sg', 'starhub.net.sg', 'pacific.net.sg', 'mail.com.sg', 'fastmail.com.sg',
+        'gmail.com.my', 'yahoo.com.my', 'hotmail.com.my', 'outlook.com.my', 'live.com.my',
+        'tm.net.my', 'streamyx.com', 'maxis.com.my', 'celcom.com.my', 'digi.com.my',
+        'gmail.co.th', 'yahoo.co.th', 'hotmail.co.th', 'outlook.co.th', 'live.co.th',
+        'hotmail.com.th', 'sanook.com', 'thaimail.com', 'truemail.co.th', 'gmx.co.th',
+        'gmail.com.ph', 'yahoo.com.ph', 'hotmail.com.ph', 'outlook.com.ph', 'live.com.ph',
+        'ymail.com.ph', 'rocketmail.com.ph', 'aol.com.ph', 'pldt.net', 'globe.com.ph',
+        'gmail.co.id', 'yahoo.co.id', 'hotmail.co.id', 'outlook.co.id', 'live.co.id',
+        'telkomsel.co.id', 'indosat.net.id', 'xl.co.id', 'cbn.net.id', 'centrin.net.id',
+        'gmail.com.vn', 'yahoo.com.vn', 'hotmail.com.vn', 'outlook.com.vn', 'live.com.vn',
+        'ymail.com.vn', 'vnn.vn', 'hn.vnn.vn', 'fpt.vn', 'vnpt.vn',
+        'gmail.com.pk', 'yahoo.com.pk', 'hotmail.com.pk', 'outlook.com.pk', 'live.com.pk',
+        'mobilink.net.pk', 'ufone.com.pk', 'zong.com.pk', 'ptcl.net.pk', 'paknet.com.pk',
+        'gmail.com.bd', 'yahoo.com.bd', 'hotmail.com.bd', 'outlook.com.bd', 'live.com.bd',
+        'btcl.net.bd', 'grameenphone.com', 'robi.com.bd', 'banglalink.net', 'airtel.com.bd',
+        'gmail.lk', 'yahoo.lk', 'hotmail.lk', 'outlook.lk', 'live.lk',
+        'sltnet.lk', 'mobitel.lk', 'dialog.lk', 'etisalat.lk', 'hutch.lk',
+        'rediff.com', 'rediffmail.com', 'indiatimes.com', 'sify.com', 'in.com',
+        'vsnl.net', 'bsnl.in', 'mtnl.net.in', 'sancharnet.in', 'airtelmail.in',
+        'vodafone.in', 'idea.net.in', 'tatamail.com', 'jio.com', 'jiomeet.com',
+    );
+
+    /**
+     * Constructor
+     * Initialize hooks for email validation
+     */
+    public function __construct() {
+        // Hook into CF7 email field validation
+        add_filter( 'wpcf7_validate_email', array( $this, 'validate_email_before_sending' ), 10, 2 );
+        add_filter( 'wpcf7_validate_email*', array( $this, 'validate_email_before_sending' ), 10, 2 );
+    }
+
+    /**
+     * Validate email domain against blocked list
+     *
+     * @param WPCF7_Validation $result The validation result object
+     * @param WPCF7_FormTag $tag The form tag object
+     * @return WPCF7_Validation Modified validation result
+     */
+    public function validate_email_before_sending( $result, $tag ) {
+        // Only validate on page-demo.php template
+        if ( ! $this->is_demo_page() ) {
+            return $result;
+        }
+
+        // Get the field name
+        $name = $tag->name;
+
+        // Get the submitted email value
+        $email = isset( $_POST[ $name ] ) ? trim( $_POST[ $name ] ) : '';
+
+        // If empty, let CF7's required validation handle it
+        if ( empty( $email ) ) {
+            return $result;
+        }
+
+        // Extract domain from email
+        $email_parts = explode( '@', $email );
+        if ( count( $email_parts ) !== 2 ) {
+            return $result; // Invalid email format, let CF7's validation handle it
+        }
+
+        $domain = strtolower( trim( $email_parts[1] ) );
+
+        // Check if domain is in blocked list (exact match)
+        if ( in_array( $domain, $this->blocked_domains, true ) ) {
+            $result->invalidate( $tag, __( 'Please use your corporate email address.', 'blast-2025' ) );
+            return $result;
+        }
+
+        // Check for typos using Levenshtein distance (catches common misspellings)
+        foreach ( $this->blocked_domains as $blocked_domain ) {
+            $distance = levenshtein( $domain, $blocked_domain );
+
+            // If distance is 1 or less, it's likely a typo (e.g., "gmial.com" vs "gmail.com")
+            if ( $distance <= 1 && $distance > 0 ) {
+                $result->invalidate( $tag, __( 'Please use your corporate email address.', 'blast-2025' ) );
+                return $result;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Check if current page is using the page-demo.php template
+     *
+     * @return bool True if on demo page template, false otherwise
+     */
+    private function is_demo_page() {
+        $post_id = 0;
+
+        // Method 1: Try to get from CF7's unit (form) post data
+        if ( isset( $_POST['_wpcf7_unit_tag'] ) ) {
+            // Unit tag format is like: wpcf7-f123-p456-o1 where 456 is the post ID
+            $unit_tag = sanitize_text_field( $_POST['_wpcf7_unit_tag'] );
+            if ( preg_match( '/-p(\d+)-/', $unit_tag, $matches ) ) {
+                $post_id = absint( $matches[1] );
+            }
+        }
+
+        // Method 2: Try _wpcf7_container_post
+        if ( ! $post_id && isset( $_POST['_wpcf7_container_post'] ) ) {
+            $post_id = absint( $_POST['_wpcf7_container_post'] );
+        }
+
+        // Method 3: Try to get from global $post
+        if ( ! $post_id ) {
+            global $post;
+            if ( $post && isset( $post->ID ) ) {
+                $post_id = $post->ID;
+            }
+        }
+
+        // Method 4: Check HTTP_REFERER as last resort
+        if ( ! $post_id && isset( $_SERVER['HTTP_REFERER'] ) ) {
+            $referer = esc_url_raw( $_SERVER['HTTP_REFERER'] );
+            $referer_post_id = url_to_postid( $referer );
+            if ( $referer_post_id ) {
+                $post_id = $referer_post_id;
+            }
+        }
+
+        // No post ID found
+        if ( ! $post_id ) {
+            return false;
+        }
+
+        // Check if this page uses the page-demo.php template
+        $template = get_page_template_slug( $post_id );
+
+        return ( $template === 'page-demo.php' );
+    }
+}
+
+// Initialize the email validation handler
+new Blast_Contact_Forms_Handler();

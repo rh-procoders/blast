@@ -8,13 +8,24 @@
  */
 
 .page-template-page-demo {
-  display : flex;
+  display    : flex;
+
+  height     : auto;
+  min-height : 100%;
 
   .main {
+	position    : relative;
+
 	flex        : 1 1 100%;
 
 	display     : grid;
 	place-items : center;
+
+	padding     : 30px; // unchanged on desktop
+
+	@include tablet {
+	  padding : 0;
+	}
   }
 
   // Featured Image - set as background
@@ -54,20 +65,96 @@
 
 	position              : relative;
 	background-color      : #F4F4F4;
-	border-radius         : 70px;
+	border-radius         : 4.375rem; // 70px
 
 	width                 : 100%;
-	max-width             : 1520px;
-	min-height            : 580px;
+	max-width             : 1520px; // unchanged desktop
+	min-height            : 580px; // unchanged desktop
 
 	display               : grid;
 	grid-template-columns : var(--demo-content-col) calc( 100% - var(--demo-content-col) );
 
+	@include tablet-lg {
+	  grid-template-columns : 60% 40%;
+	}
+
+	@include tablet {
+	  display        : flex;
+	  flex-direction : column;
+
+	  border-radius  : 0;
+	}
+
+	&__close {
+	  // reset button
+	  padding    : 0;
+
+	  // size
+	  display    : flex;
+
+	  span {
+		display : flex;
+		color   : white;
+
+		@include tablet {
+		  color : #000B40;
+		}
+
+		svg {
+		  fill    : currentColor;
+		  stroke  : currentColor;
+
+		  display : flex;
+
+		  width   : 20px;
+		  height  : 20px;
+
+		  @include tablet {
+			width  : 12px;
+			height : 12px;
+		  }
+		}
+	  }
+
+	  // positioning
+	  z-index    : 1;
+	  position   : absolute;
+	  top        : calc((3.75rem - (20px * 0.5)) * -1); // 60px
+	  right      : calc((6.25rem - (20px * 0.5)) * -1); // 100px
+
+	  // Style
+	  cursor     : pointer;
+
+	  transition : transform ease .3s;
+
+	  &:hover,
+	  &:focus {
+		transform : rotate(180deg);
+	  }
+
+	  @media(max-width : 1710px) {
+		top   : -20px;
+		right : -20px;
+	  }
+
+	  @media(max-height : 720px) {
+		top   : -20px;
+		right : -20px;
+	  }
+
+	  @include tablet {
+		top   : 30px !important;
+		right : 30px !important;
+	  }
+	}
+
 	&__form {
-	  --demo-section-el-pt : 60px;
-	  --demo-section-el-pr : 100px;
-	  --demo-section-el-pb : 60px;
-	  --demo-section-el-pl : 80px;
+	  position             : relative;
+
+	  --demo-section-el-pt : 3.75rem; // 60px
+	  --demo-section-el-pr : 6.25rem; // 100px
+	  --demo-section-el-pb : 3.75rem; // 60px
+	  --demo-section-el-pl : 5rem; // 80px
 
 	  order                : 2;
 
@@ -79,22 +166,75 @@
 	  display              : flex;
 	  flex-direction       : column;
 
+	  @include tablet-lg {
+		--demo-section-el-pt : 36px;
+		--demo-section-el-pr : 36px;
+		--demo-section-el-pb : 36px;
+		--demo-section-el-pl : 36px;
+	  }
+
+	  @include tablet {
+		order : 1;
+	  }
+
+	  // column division effect
+	  &:before {
+		content          : "";
+		position         : absolute;
+
+		top              : 40px;
+		left             : 0;
+		height           : calc(100% - (40px * 2));
+
+		width            : 2px;
+		background-color : #FFFFFF;
+
+		@include tablet {
+		  top    : auto;
+
+		  left   : 30px;
+		  right  : 30px;
+		  bottom : 0;
+
+		  height : 2px;
+		  width  : calc(100% - (30px * 2));
+		}
+	  }
+
 	  &-label {
 		font-family : $font-family-tertiary;
-		font-size   : 18px;
+		font-size   : max(16px, 1.125rem); // 18px
 		font-weight : 500;
 		line-height : 1.1;
+
+		@include mobile {
+		  font-size : 16px;
+		}
 	  }
 
 	  &-title {
-		margin      : 30px 0 0;
+		margin      : max(16px, 1.875rem) 0 0; // 30px
 
 		font-family : $font-family-primary;
-		font-size   : 40px;
+		font-size   : max(30px, 2.5rem); // 40px
 		font-weight : 400;
 		line-height : 1.1;
 
 		color       : #000B40;
+
+		@include mobile {
+		  margin-top : 16px;
+		}
+
+		br {
+		  @include mobile-sm {
+			display : none;
+		  }
+		}
+
+		@include mobile-sm {
+		  max-width : 260px;
+		}
 
 		strong {
 		  font-family : $font-family-tertiary;
@@ -115,13 +255,19 @@
 			content          : "";
 
 			position         : absolute;
-			bottom           : 3px;
+			bottom           : max(2.25px, 0.1875rem); // 3px scaled proportionally
 			left             : 0;
-			width            : calc(100% + 6px);
-			height           : calc(40px - 8px);
+			width            : calc(100% + max(4.5px, 0.375rem)); // 6px scaled proportionally
+			height           : calc(max(30px, 2.5rem) - max(6px, 0.5rem)); // 40px - 8px scaled proportionally
 
-			border-radius    : 6px;
+			border-radius    : 6px; // unchanged
 			background-color : #FF654A;
+
+			@include mobile {
+			  bottom : 2.25px;
+			  width  : calc(100% + 4.5px);
+			  height : calc(30px - 6px);
+			}
 		  }
 		}
 	  }
@@ -129,9 +275,15 @@
 	  &-content {
 		flex-grow  : 1;
 		display    : flex;
-		margin-top : 40px;
+		margin-top : max(30px, 2.5rem); // 40px
+
+		@include mobile {
+		  margin-top : 30px;
+		}
 
 		> .wpcf7 {
+		  width          : 100%;
+
 		  display        : flex;
 		  flex-direction : column;
 		}
@@ -161,7 +313,7 @@
 
 			// Visual Progress Bar Track (background/container)
 			&__track {
-			  margin-top       : 8px;
+			  margin-top       : 6px;
 			  position         : relative;
 
 			  width            : 100%;
@@ -194,24 +346,33 @@
 			flex-grow  : 1;
 			display    : flex;
 
-			margin-top : 20px;
+			margin-top : max(16px, 1.25rem); // 20px
 			overflow   : visible;
+
+			@include mobile {
+			  margin-top : 16px;
+			}
 
 			// Multi-Step Form Plugin generates a p-tag inside filedset
 			fieldset {
+
 			  p {
 				margin : 0 !important;
+			  }
+
+			  @include mobile {
+				min-height : 280px;
 			  }
 			}
 
 			.wpcf7-form-control-wrap {
 
 			  &[data-name="consent-marketing"] {
-				margin-top : 16px;
+				margin-top : 16px; // unchanged
 			  }
 
 			  &[data-name="consent-privacy"] {
-				margin-top : 10px;
+				margin-top : 10px; // unchanged
 			  }
 
 			  .wpcf7-not-valid-tip {
@@ -232,8 +393,12 @@
 				  gap     : 10px;
 				  display : flex;
 
+				  @include mobile {
+					flex-direction : column;
+				  }
+
 				  + .wpcf7-form-control-wrap {
-					margin-top : 10px;
+					margin-top : 10px; // unchanged
 				  }
 				}
 			  }
@@ -257,20 +422,52 @@
 					top       : 50%;
 					transform : translateY(-50%);
 					right     : -30px;
+
+					@include mobile {
+					  width  : 20px;
+					  height : 20px;
+					  right  : -24px;
+
+					  &:before {
+						transform-origin : 6px 6px;
+					  }
+					}
 				  }
 
 				  .cf7mls_next {
+					transition : all ease .3s;
+
+					.button-text {
+					  transition : all ease .3s;
+					}
+
+					.button-arrow-wrapper {
+					  transition : all ease .3s;
+					}
 
 					&.sending {
-
 					  & + .wpcf7-spinner {
 						visibility : visible;
+					  }
+					}
+
+					&.has-error {
+					  background-color : #FF654A;
+					  border-color     : #FF654A;
+
+					  .button-text {
+						color : #FFFFFF;
+					  }
+
+					  .button-arrow-wrapper {
+						background-color : #FFFFFF;
+						color            : var(--wp--preset--color--dark-blue);
 					  }
 					}
 				  }
 
 				  &:last-of-type {
-					margin-top  : 24px;
+					margin-top  : 24px; // minimal button spacing top
 					margin-left : auto;
 				  }
 				}
@@ -289,8 +486,32 @@
 				  display    : flex;
 
 				  .wpcf7-submit {
-					margin-top  : 24px;
+					margin-top  : 24px; // minimal button spacing top
 					margin-left : auto;
+
+					transition  : all ease .3s;
+
+					.button-text {
+					  transition : all ease .3s;
+					}
+
+					.button-arrow-wrapper {
+					  transition : all ease .3s;
+					}
+
+					&.has-error {
+					  background-color : #FF654A !important;
+					  border-color     : #FF654A;
+
+					  .button-text {
+						color : #FFFFFF;
+					  }
+
+					  .button-arrow-wrapper {
+						background-color : #FFFFFF;
+						color            : var(--wp--preset--color--dark-blue);
+					  }
+					}
 				  }
 
 				  .wpcf7-spinner {
@@ -299,6 +520,16 @@
 					top       : calc(50% + 12px);
 					right     : -30px;
 					transform : translateY(-50%);
+
+					@include mobile {
+					  width  : 20px;
+					  height : 20px;
+					  right  : -24px;
+
+					  &:before {
+						transform-origin : 6px 6px;
+					  }
+					}
 				  }
 				}
 
@@ -322,10 +553,17 @@
 
 				color       : #FA423C;
 
+				@include mobile {
+				  line-height : 1.3;
+				  max-width   : 140px;
+				  bottom      : 12px;
+				}
+
 				.wpcf7-icon-wraning {
 				  margin-right        : 6px;
 
-				  width               : 24px;
+				  width               : 100%;
+				  max-width           : 24px;
 				  height              : 24px;
 
 				  // Hide default CF7 SVG paths
@@ -347,6 +585,8 @@
 
 				  display     : flex !important;
 				  align-items : center;
+
+
 				}
 			  }
 			}
@@ -357,7 +597,7 @@
 			border      : none;
 
 			margin      : 0;
-			padding     : 0 0 0 calc(24px + 9px);
+			padding     : 0 0 0 calc(24px + 6px);
 
 			position    : absolute;
 			left        : 0;
@@ -370,6 +610,14 @@
 			min-height  : 24px;
 
 			color       : #FA423C;
+
+			@include mobile {
+			  bottom      : 12px;
+			  line-height : 1.3;
+			  max-width   : 160px;
+
+
+			}
 
 			&:before {
 			  content             : "";
@@ -394,18 +642,29 @@
 	}
 
 	&__content {
-	  --demo-section-el-pt : 55px;
-	  --demo-section-el-pr : 80px;
-	  --demo-section-el-pb : 60px;
-	  --demo-section-el-pl : 80px;
+	  --demo-section-el-pt : 3.4375rem; // 55px
+	  --demo-section-el-pr : 5rem; // 80px
+	  --demo-section-el-pb : 3.75rem; // 60px
+	  --demo-section-el-pl : 5rem; // 80px
 
 	  order                : 1;
 
 	  padding              : var(--demo-section-el-pt) var(--demo-section-el-pr) var(--demo-section-el-pb) var(--demo-section-el-pl);
 
+	  @include tablet-lg {
+		--demo-section-el-pt : 36px;
+		--demo-section-el-pr : 36px;
+		--demo-section-el-pb : 36px;
+		--demo-section-el-pl : 36px;
+	  }
+
+	  @include tablet {
+		order : 2;
+	  }
+
 	  &-title {
 		font-family : $font-family-primary;
-		font-size   : 24px;
+		font-size   : 24px; // unchanged
 		font-weight : 400;
 		line-height : 1.1;
 
@@ -413,6 +672,20 @@
 		  font-family : $font-family-tertiary;
 		  font-weight : 600;
 		}
+	  }
+	}
+
+	&__form,
+	&__content {
+	  @include tablet {
+		--demo-section-el-pt : 60px;
+		--demo-section-el-pr : 30px;
+		--demo-section-el-pb : 60px;
+		--demo-section-el-pl : 30px;
+
+		width                : 100%;
+		max-width            : 720px;
+		margin               : 0 auto;
 	  }
 	}
 
@@ -448,13 +721,24 @@
 	}
 
 	&__testimonial {
-	  --demo-section-el-pt : 28px;
-	  --demo-section-el-pr : 28px;
-	  --demo-section-el-pb : 28px;
-	  --demo-section-el-pl : 28px;
+	  --demo-section-el-pt : 28px; // 28px
+	  --demo-section-el-pr : 40px; // 40px
+	  --demo-section-el-pb : 30px; // 30px
+	  --demo-section-el-pl : 40px; // 40px
 
-	  margin-top           : 41px;
+	  margin-top           : 40px;
 	  position             : relative;
+
+	  @include mobile {
+		--demo-section-el-pt : 30px;
+		--demo-section-el-pr : 30px;
+		--demo-section-el-pb : 30px;
+		--demo-section-el-pl : 30px;
+	  }
+
+	  @include mobile-sm {
+		max-width : 320px;
+	  }
 
 	  .clip-path {
 		padding-top      : var(--demo-section-el-pt);
@@ -465,6 +749,12 @@
 		background-color : #FFFFFF;
 
 		clip-path        : polygon(90.625% 0%, 90.625% 0%, 91.886% 0.004%, 93.022% 0.032%, 94.043% 0.109%, 94.955% 0.258%, 95.768% 0.504%, 96.49% 0.871%, 97.128% 1.383%, 97.692% 2.064%, 98.189% 2.938%, 98.627% 4.031%, 98.627% 4.031%, 98.999% 5.318%, 99.297% 6.776%, 99.529% 8.43%, 99.703% 10.305%, 99.828% 12.423%, 99.912% 14.81%, 99.963% 17.489%, 99.989% 20.484%, 99.999% 23.821%, 100% 27.523%, 100% 72.477%, 100% 72.477%, 99.999% 76.179%, 99.989% 79.515%, 99.963% 82.511%, 99.912% 85.191%, 99.828% 87.577%, 99.703% 89.696%, 99.529% 91.57%, 99.297% 93.224%, 98.999% 94.682%, 98.627% 95.969%, 98.627% 95.969%, 98.189% 97.062%, 97.692% 97.936%, 97.128% 98.617%, 96.49% 99.129%, 95.768% 99.496%, 94.955% 99.742%, 94.043% 99.891%, 93.022% 99.968%, 91.886% 99.996%, 90.625% 100%, 22.131% 100%, 22.131% 100%, 21.56% 99.999%, 21.044% 99.993%, 20.579% 99.976%, 20.159% 99.944%, 19.78% 99.89%, 19.438% 99.809%, 19.126% 99.697%, 18.841% 99.548%, 18.578% 99.357%, 18.332% 99.118%, 18.332% 99.118%, 17.961% 98.654%, 17.608% 98.103%, 17.273% 97.468%, 16.96% 96.756%, 16.668% 95.969%, 16.4% 95.114%, 16.158% 94.193%, 15.942% 93.212%, 15.754% 92.175%, 15.596% 91.086%, 15.596% 91.086%, 15.514% 90.363%, 15.449% 89.59%, 15.398% 88.753%, 15.36% 87.839%, 15.333% 86.833%, 15.315% 85.721%, 15.303% 84.488%, 15.298% 83.122%, 15.296% 81.608%, 15.295% 79.931%, 15.295% 79.931%, 15.295% 78.255%, 15.293% 76.74%, 15.287% 75.374%, 15.276% 74.142%, 15.258% 73.03%, 15.23% 72.023%, 15.192% 71.109%, 15.141% 70.272%, 15.076% 69.499%, 14.995% 68.776%, 14.995% 68.776%, 14.837% 67.688%, 14.649% 66.651%, 14.433% 65.67%, 14.19% 64.749%, 13.922% 63.893%, 13.631% 63.107%, 13.317% 62.394%, 12.983% 61.76%, 12.63% 61.208%, 12.259% 60.744%, 12.259% 60.744%, 12.013% 60.505%, 11.749% 60.314%, 11.464% 60.165%, 11.153% 60.053%, 10.81% 59.973%, 10.431% 59.919%, 10.012% 59.886%, 9.546% 59.869%, 9.03% 59.863%, 8.459% 59.862%, 7.648% 59.862%, 7.648% 59.862%, 6.859% 59.861%, 6.146% 59.849%, 5.504% 59.818%, 4.927% 59.756%, 4.407% 59.655%, 3.939% 59.504%, 3.516% 59.294%, 3.132% 59.013%, 2.781% 58.654%, 2.457% 58.204%, 2.457% 58.204%, 2.221% 57.803%, 1.994% 57.364%, 1.777% 56.888%, 1.57% 56.377%, 1.373% 55.832%, 1.187% 55.255%, 1.013% 54.646%, 0.851% 54.009%, 0.701% 53.343%, 0.565% 52.65%, 0.565% 52.65%, 0.412% 51.698%, 0.289% 50.667%, 0.194% 49.541%, 0.122% 48.299%, 0.071% 46.925%, 0.036% 45.399%, 0.015% 43.703%, 0.005% 41.818%, 0.001% 39.727%, 0% 37.411%, 0% 27.523%, 0% 27.523%, 0.001% 23.821%, 0.011% 20.484%, 0.037% 17.489%, 0.088% 14.81%, 0.172% 12.423%, 0.297% 10.305%, 0.471% 8.43%, 0.703% 6.776%, 1.001% 5.318%, 1.373% 4.031%, 1.373% 4.031%, 1.811% 2.938%, 2.308% 2.064%, 2.872% 1.383%, 3.51% 0.871%, 4.232% 0.504%, 5.044% 0.258%, 5.957% 0.109%, 6.978% 0.032%, 8.114% 0.004%, 9.375% 0%, 90.625% 0%);
+
+		@include mobile-sm {
+		  padding-bottom : 98px;
+
+		  clip-path      : polygon(80.952% 0%, 80.952% 0%, 83.514% 0.002%, 85.823% 0.019%, 87.897% 0.064%, 89.751% 0.151%, 91.403% 0.295%, 92.869% 0.509%, 94.166% 0.808%, 95.31% 1.206%, 96.32% 1.717%, 97.21% 2.356%, 97.21% 2.356%, 97.966% 3.108%, 98.572% 3.96%, 99.043% 4.927%, 99.397% 6.023%, 99.651% 7.261%, 99.821% 8.655%, 99.925% 10.221%, 99.978% 11.972%, 99.997% 13.922%, 100% 16.086%, 100% 83.914%, 100% 83.914%, 99.997% 86.078%, 99.978% 88.028%, 99.925% 89.779%, 99.821% 91.345%, 99.651% 92.739%, 99.397% 93.977%, 99.043% 95.073%, 98.572% 96.04%, 97.966% 96.892%, 97.21% 97.644%, 97.21% 97.644%, 96.32% 98.283%, 95.31% 98.794%, 94.166% 99.192%, 92.869% 99.491%, 91.403% 99.706%, 89.751% 99.849%, 87.897% 99.936%, 85.823% 99.981%, 83.514% 99.998%, 80.952% 100%, 37.33% 100%, 37.33% 100%, 36.522% 100%, 35.791% 99.997%, 35.132% 99.992%, 34.537% 99.98%, 33.999% 99.961%, 33.513% 99.932%, 33.069% 99.892%, 32.663% 99.839%, 32.287% 99.771%, 31.934% 99.686%, 31.934% 99.686%, 31.253% 99.468%, 30.605% 99.2%, 29.995% 98.883%, 29.425% 98.52%, 28.898% 98.115%, 28.419% 97.671%, 27.99% 97.189%, 27.614% 96.674%, 27.296% 96.127%, 27.039% 95.552%, 27.039% 95.552%, 26.938% 95.254%, 26.857% 94.936%, 26.794% 94.593%, 26.747% 94.219%, 26.713% 93.807%, 26.69% 93.354%, 26.677% 92.851%, 26.67% 92.294%, 26.667% 91.678%, 26.667% 90.995%, 26.667% 90.995%, 26.666% 90.312%, 26.664% 89.695%, 26.657% 89.138%, 26.643% 88.636%, 26.62% 88.182%, 26.586% 87.771%, 26.539% 87.397%, 26.476% 87.053%, 26.395% 86.736%, 26.295% 86.437%, 26.295% 86.437%, 26.037% 85.862%, 25.719% 85.316%, 25.344% 84.8%, 24.915% 84.319%, 24.435% 83.874%, 23.909% 83.469%, 23.338% 83.107%, 22.728% 82.79%, 22.08% 82.521%, 21.4% 82.303%, 21.4% 82.303%, 21.046% 82.218%, 20.67% 82.15%, 20.264% 82.097%, 19.821% 82.057%, 19.334% 82.029%, 18.796% 82.009%, 18.202% 81.998%, 17.542% 81.992%, 16.812% 81.99%, 16.003% 81.989%, 13.333% 81.989%, 13.333% 81.989%, 11.807% 81.988%, 10.429% 81.981%, 9.188% 81.96%, 8.074% 81.92%, 7.074% 81.854%, 6.177% 81.755%, 5.371% 81.617%, 4.645% 81.434%, 3.987% 81.199%, 3.386% 80.905%, 3.386% 80.905%, 3.14% 80.76%, 2.901% 80.608%, 2.67% 80.447%, 2.447% 80.28%, 2.232% 80.105%, 2.025% 79.923%, 1.826% 79.734%, 1.636% 79.539%, 1.456% 79.338%, 1.284% 79.13%, 1.284% 79.13%, 0.936% 78.622%, 0.657% 78.067%, 0.44% 77.454%, 0.277% 76.773%, 0.161% 76.015%, 0.082% 75.171%, 0.035% 74.23%, 0.01% 73.182%, 0.001% 72.019%, 0% 70.729%, 0% 16.086%, 0% 16.086%, 0.003% 13.922%, 0.022% 11.972%, 0.075% 10.221%, 0.179% 8.655%, 0.349% 7.261%, 0.603% 6.023%, 0.957% 4.927%, 1.428% 3.96%, 2.034% 3.108%, 2.79% 2.356%, 2.79% 2.356%, 3.68% 1.717%, 4.69% 1.206%, 5.834% 0.808%, 7.131% 0.509%, 8.597% 0.295%, 10.249% 0.151%, 12.103% 0.064%, 14.177% 0.019%, 16.486% 0.002%, 19.048% 0%, 80.952% 0%);
+		}
 	  }
 
 	  &-quote {
@@ -493,6 +783,10 @@
 		display     : flex;
 		align-items : center;
 
+		@include mobile-sm {
+		  margin-left : 0;
+		}
+
 		&-image {
 		  border        : 2px solid #FFFFFF;
 		  border-radius : 20px;
@@ -502,6 +796,10 @@
 		  aspect-ratio  : 1/1;
 		  overflow      : hidden;
 
+		  @include mobile {
+			max-width : 40px;
+		  }
+
 		  img {
 			object-fit      : cover;
 			object-position : 50% 50%;
@@ -510,10 +808,14 @@
 
 		&-name {
 		  font-family : $font-family-secondary;
-		  font-size   : 16px;
+		  font-size   : max(14px, 1rem); // 16px
 		  font-style  : normal;
 		  font-weight : 500;
 		  line-height : 1.2;
+
+		  @include mobile {
+			font-size : 14px;
+		  }
 		}
 	  }
 
@@ -527,6 +829,12 @@
 		position : absolute;
 		left     : 25px;
 		bottom   : 15px;
+
+		@include mobile-sm {
+		  left   : 18px;
+		  bottom : 10px;
+
+		}
 	  }
 	}
 
@@ -550,13 +858,17 @@
 		margin      : 0;
 
 		font-family : $font-family-primary;
-		font-size   : 70px;
+		font-size   : max(48px, 4.375rem); // 70px
 		font-weight : 600;
 		line-height : 1;
 
 		color       : #000B40;
 
 		max-width   : 780px;
+
+		@include mobile {
+		  max-width : 300px;
+		}
 
 		strong {
 		  font-family : $font-family-tertiary;
@@ -569,11 +881,112 @@
 		margin-bottom : 0;
 
 		font-family   : $font-family-secondary;
-		font-size     : 20px;
+		font-size     : max(16px, 1.25rem); // 20px
 		font-weight   : 400;
 		line-height   : 1.4;
 
 		color         : #000B40;
+
+		@include mobile {
+		  margin-top : 20px;
+
+
+		}
+	  }
+
+	  &-socials {
+		margin-top : 60px;
+	  }
+
+	  &-socials_label {
+		font-family : $font-family-tertiary;
+		font-size   : max(16px, 1.125rem); // 18px
+		line-height : 1.1;
+
+		font-weight : 500;
+
+		color       : #FF654A;
+	  }
+
+	  &-socials_links {
+		margin-top      : 16px;
+
+		gap             : 16px;
+		display         : flex;
+		justify-content : center;
+
+		.success_social_btn {
+		  display         : flex;
+		  align-items     : center;
+
+		  padding         : 14px 20px 14px 14px;
+		  border-radius   : 20px;
+		  background      : #FFFFFF;
+
+		  text-decoration : none !important;
+
+		  position        : relative;
+		  overflow        : hidden;
+		  transition      : var(--transition);
+
+		  &-icon {
+			width            : 40px;
+			height           : 40px;
+			border-radius    : 10px;
+
+			padding          : 12px;
+
+			background-color : #F4F4F4;
+		  }
+
+		  &-text {
+			margin-left    : 30px;
+
+			font-family    : $font-family-primary;
+			font-size      : 16px;
+			line-height    : 1.1;
+			font-weight    : 400;
+
+			color          : #000B40;
+
+			padding-bottom : 5px; // hack
+
+			// Hover effect - same as site buttons
+			position       : relative;
+			display        : block;
+			transition     : transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+			&::before {
+			  content     : attr(data-hover-text);
+			  position    : absolute;
+			  top         : 0;
+			  left        : 0;
+			  width       : 100%;
+			  height      : 100%;
+			  display     : flex;
+			  align-items : center;
+			  transition  : transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			  transform   : translateY(-400%);
+			}
+		  }
+
+		  &-arrow {
+			margin-left : 10px;
+
+			display     : flex;
+		  }
+
+		  &:hover,
+		  &:focus {
+			.success_social_btn-text {
+			  transform : translateY(300%);
+
+			  &::before {
+				transform : translateY(-300%);
+			  }
+			}
+		  }
+		}
 	  }
 	}
 

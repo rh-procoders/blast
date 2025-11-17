@@ -8,8 +8,6 @@
 (function () {
     'use strict';
 
-    console.log( 'page-demo loaded...' );
-
     /**
      * Show Success Screen
      * Called from CF7's on_sent_ok additional setting
@@ -27,10 +25,6 @@
                 behavior: 'smooth',
                 block: 'center'
             } );
-
-            console.log( 'Success screen activated' );
-        } else {
-            console.error( 'demoShowSuccess: .demo-section not found' );
         }
     };
 
@@ -103,8 +97,6 @@
             // Update the visual bar fill width
             progressFill.style.width = percentage + '%';
             progressFill.setAttribute( 'data-progress', currentStep );
-
-            console.log( 'Progress bar updated: Step', currentStep, 'of', totalSteps, '(' + percentage.toFixed( 2 ) + '%)' );
         }
 
         // Initial update on page load
@@ -146,8 +138,6 @@
                 attributeFilter: ['class']
             } );
         } );
-
-        console.log( 'CF7 Multi-Step progress bar initialized' );
     }
 
     /**
@@ -161,12 +151,144 @@
             const demoSection = event.target.closest( '.demo-section' );
 
             if (demoSection) {
-                console.log( 'CF7 form submitted successfully, showing success screen' );
                 window.demoShowSuccess();
             }
         }, false );
+    }
 
-        console.log( 'CF7 success handler initialized' );
+    /**
+     * CF7 Button Error State Handler
+     * Adds error class to buttons when validation fails
+     */
+    function initButtonErrorStates() {
+        const form = document.querySelector( '.demo-section form.wpcf7-form' );
+
+        if (!form) {
+            return;
+        }
+
+        /**
+         * Add error class to the appropriate button
+         */
+        function addErrorClassToButton() {
+            // Find the current active fieldset
+            const currentFieldset = form.querySelector( '.fieldset-cf7mls.cf7mls_current_fs' );
+
+            if (currentFieldset) {
+                // Try to find Next button in current fieldset
+                const nextButton = currentFieldset.querySelector( '.cf7mls_next' );
+                if (nextButton && !nextButton.classList.contains( 'has-error' )) {
+                    nextButton.classList.add( 'has-error' );
+                } else {
+                    // No Next button found - must be final step with Submit button
+                    const submitButton = form.querySelector( '.wpcf7-submit' );
+                    if (submitButton && !submitButton.classList.contains( 'has-error' )) {
+                        submitButton.classList.add( 'has-error' );
+                    }
+                }
+            } else {
+                // No current fieldset - fallback to Submit button
+                const submitButton = form.querySelector( '.wpcf7-submit' );
+                if (submitButton && !submitButton.classList.contains( 'has-error' )) {
+                    submitButton.classList.add( 'has-error' );
+                }
+            }
+        }
+
+        /**
+         * Remove error class from all buttons
+         */
+        function removeErrorClassFromButtons() {
+            const allButtons = form.querySelectorAll( '.cf7mls_next.has-error, .wpcf7-submit.has-error' );
+            allButtons.forEach( button => {
+                button.classList.remove( 'has-error' );
+            } );
+        }
+
+        // Method 1: Listen for CF7 validation error event
+        document.addEventListener( 'wpcf7invalid', function ( event ) {
+            if (event.target === form) {
+                addErrorClassToButton();
+            }
+        }, false );
+
+        // Method 2: Watch for validation error message appearing (MutationObserver)
+        const observer = new MutationObserver( function ( mutations ) {
+            mutations.forEach( function ( mutation ) {
+                // Check if validation errors div became visible
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.classList.contains( 'wpcf7-validation-errors' )) {
+                        const isVisible = target.style.display !== 'none' && target.style.display !== '';
+                        if (isVisible) {
+                            addErrorClassToButton();
+                        }
+                    }
+                }
+            } );
+        } );
+
+        // Observe all validation error containers
+        const errorContainers = form.querySelectorAll( '.wpcf7-response-output' );
+        errorContainers.forEach( container => {
+            observer.observe( container, {
+                attributes: true,
+                attributeFilter: ['style', 'class']
+            } );
+        } );
+
+        // Method 3: Watch for "sending" class removal, then check for errors
+        form.addEventListener( 'click', function ( event ) {
+            const clickedButton = event.target.closest( '.cf7mls_next, .wpcf7-submit' );
+
+            if (clickedButton) {
+                // Remove error class when user clicks (they're trying again)
+                if (clickedButton.classList.contains( 'has-error' )) {
+                    clickedButton.classList.remove( 'has-error' );
+                }
+
+                // Watch for when "sending" class is removed (validation complete)
+                const buttonObserver = new MutationObserver( function ( mutations ) {
+                    mutations.forEach( function ( mutation ) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            const button = mutation.target;
+
+                            // Check if "sending" class was just removed
+                            if (!button.classList.contains( 'sending' )) {
+                                // Small delay to ensure DOM is updated
+                                setTimeout( function () {
+                                    // Check for validation errors
+                                    const errorMessage = form.querySelector( '.wpcf7-response-output.wpcf7-validation-errors' );
+                                    const hasVisibleErrorMessage = errorMessage && errorMessage.offsetParent !== null;
+                                    const hasInvalidFields = form.querySelector( '.wpcf7-not-valid, .cf7mls-invalid' ) !== null;
+                                    const hasErrorTips = form.querySelector( '.wpcf7-not-valid-tip' ) !== null;
+
+                                    if (hasVisibleErrorMessage || hasInvalidFields || hasErrorTips) {
+                                        addErrorClassToButton();
+                                    }
+
+                                    // Stop observing after check
+                                    buttonObserver.disconnect();
+                                }, 50 );
+                            }
+                        }
+                    } );
+                } );
+
+                // Start observing the button for class changes
+                buttonObserver.observe( clickedButton, {
+                    attributes: true,
+                    attributeFilter: ['class']
+                } );
+            }
+        } );
+
+        // Remove error class on successful form submission
+        document.addEventListener( 'wpcf7mailsent', function ( event ) {
+            if (event.target === form) {
+                removeErrorClassFromButtons();
+            }
+        }, false );
     }
 
     /**
@@ -175,6 +297,7 @@
     function initPage() {
         initProgressBar();
         initSuccessHandler();
+        initButtonErrorStates();
     }
 
     // Initialize when DOM is ready

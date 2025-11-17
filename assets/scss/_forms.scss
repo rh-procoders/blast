@@ -97,6 +97,9 @@ input[type="color"] {
 	// caret-color  : transparent; // Hide native caret for custom 2px version
   }
 
+  &::placeholder {
+	color : #999DB2;
+  }
 }
 
 input[type="checkbox"],
@@ -472,26 +475,26 @@ label {
 
 /* Chrome / Safari / Edge */
 .intl-tel-input .country-list::-webkit-scrollbar {
-  width: 4px;             /* matches your spec */
+  width : 4px; /* matches your spec */
 }
 
 .intl-tel-input .country-list::-webkit-scrollbar-track {
-  background: transparent;
+  background : transparent;
 }
 
 .intl-tel-input .country-list::-webkit-scrollbar-thumb {
-  background: #000B40;    /* your color */
-  border-radius: 31px;    /* your radius */
+  background    : #000B40; /* your color */
+  border-radius : 31px; /* your radius */
 }
 
 .intl-tel-input .country-list::-webkit-scrollbar-thumb:hover {
-  background: #000f60;    /* optional hover tweak */
+  background : #000F60; /* optional hover tweak */
 }
 
 /* Firefox */
 .intl-tel-input .country-list {
-  scrollbar-width: thin;                      /* ~4–6px depending on platform */
-  scrollbar-color: #000B40 transparent;       /* thumb + track */
+  scrollbar-width : thin; /* ~4–6px depending on platform */
+  scrollbar-color : #000B40 transparent; /* thumb + track */
 }
 
 
