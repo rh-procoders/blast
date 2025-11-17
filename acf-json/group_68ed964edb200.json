@@ -561,6 +561,72 @@
                     "parent_repeater": "field_6913c89199106"
                 }
             ]
+        },
+        {
+            "key": "field_691aff260e077",
+            "label": "Footer Badges",
+            "name": "footer_badges",
+            "aria-label": "",
+            "type": "repeater",
+            "conditional_logic": 0,
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_691aff400e078",
+                    "label": "Image",
+                    "name": "badge_image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 0,
+                    "preview_size": "medium",
+                    "parent_repeater": "field_691aff260e077"
+                },
+                {
+                    "key": "field_691b0beca75fe",
+                    "label": "Badge link",
+                    "name": "badge_link",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "allow_in_bindings": 0,
+                    "parent_repeater": "field_691aff260e077"
+                }
+            ]
         }
     ],
     "location": [
@@ -582,5 +648,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763377181
+    "modified": 1763380218
 }
