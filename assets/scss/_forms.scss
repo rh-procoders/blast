@@ -121,7 +121,6 @@ label {
   //margin-bottom : 1.5rem;
 }
 
-
 // Custom Caret - Uses "I" character to match input height exactly
 .custom-caret {
   position       : absolute;
@@ -150,9 +149,7 @@ label {
   }
 }
 
-
 // Search Form Styles
-
 
 // Contact 7 Styles
 .wpcf7-form {
@@ -164,12 +161,200 @@ label {
 	// Position relative for custom caret positioning
 	position : relative;
 	display  : block; // Ensure it's a block element for proper positioning
+
+	// Phone field
+	.intl-tel-input {
+	  --cf7-phone-pl : 20px;
+	  --cf7-phone-w  : calc(var(--cf7-phone-pl) + 20px + 74px + 6px);
+
+	  // Drop-down
+	  .flag-container {
+		padding  : 0;
+
+		position : unset; // reset positioning so .country-list can take full-width
+
+		.selected-flag {
+		  position         : absolute;
+		  z-index          : 3;
+
+		  padding-left     : var(--cf7-phone-pl);
+		  width            : var(--cf7-phone-w) !important;
+
+		  background-color : transparent !important;
+
+		  &:after {
+			content    : "";
+			position   : absolute;
+			top        : 16px;
+			right      : 0;
+
+			width      : 1px;
+			height     : calc(100% - 32px);
+			background : #CBCEDE;
+
+			z-index    : 1;
+		  }
+
+		  // flag
+		  .iti-flag {
+
+		  }
+
+		  // prefix
+		  .selected-dial-code {
+			font-family : $font-family-tertiary;
+			font-size   : font-size('base'); // 16px
+			font-weight : 500;
+			line-height : 1.4;
+
+			color       : #000B40;
+		  }
+
+		  // caret
+		  .iti-arrow {
+			right             : 10px;
+
+			border            : none;
+
+			width             : 12px;
+			height            : 7px;
+			background-image  : url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2712%27%20height%3D%277%27%20viewBox%3D%270%200%2012%207%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M0.53125%200.53125L5.53125%205.53125L10.5312%200.53125%27%20stroke%3D%27%23000B40%27%20stroke-width%3D%271.5%27/%3E%3C/svg%3E");
+			background-repeat : no-repeat;
+			background-size   : contain;
+
+			transition        : transform ease .3s;
+		  }
+
+		  // Arrow rotation handled at .intl-tel-input level below
+		}
+
+		.country-list {
+		  top           : calc(100% - 10px);
+
+		  width         : 100%;
+
+		  padding-top   : calc(10px + 16px);
+		  border        : none;
+		  border-radius : 0px 0px 14px 14px;
+		  box-shadow    : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.10);
+
+		  &.dropup {
+			bottom : auto !important;
+			margin : 0 !important;
+		  }
+		}
+	  }
+
+	  // Input
+	  .wpcf7-phonetext {
+		padding-left : calc(var(--cf7-phone-w) + 16px) !important;
+
+		z-index      : 2;
+	  }
+
+	  // Dropdown OPEN state - detect when country-list is visible
+	  &:has(.country-list:not(.hide)) {
+
+		// Style the phone input when dropdown is open
+		.wpcf7-phonetext {
+		  border-color : #000B40 !important;
+		  box-shadow   : none;
+		}
+
+		// Rotate the arrow when dropdown is open
+		.iti-arrow {
+		  transform : rotate(180deg);
+		}
+	  }
+	}
   }
 
   &-control {
 
 	&.wpcf7-not-valid {
 	  border-color : #FA423C !important;
+	}
+
+	// Checkbox - Acceptance
+	&.wpcf7-acceptance {
+
+	  .wpcf7-list-item {
+		margin-left : 0;
+
+		label {
+		  display      : flex;
+		  position     : relative;
+		  padding-left : calc(24px + 16px);
+
+		  input[type="checkbox"] {
+
+			&:checked + span {
+
+			  &:before {
+				background-color : #000B40;
+				border-color     : #000B40;
+			  }
+
+			  &:after {
+				opacity : 1;
+			  }
+			}
+		  }
+
+		  span {
+			font-family : $font-family-secondary;
+			font-size   : font-size('xs'); // 12px
+			font-weight : 400;
+			line-height : 1.4;
+
+			&:before,
+			&:after {
+			  content    : "";
+			  position   : absolute;
+
+			  top        : 0;
+			  left       : 0;
+
+			  width      : 24px;
+			  height     : 24px;
+
+			  transition : all ease .3s;
+			}
+
+			&:before {
+			  border-radius    : 8px;
+			  background-color : #FFFFFF;
+			  border           : 1px solid transparent;
+			}
+
+			&:after {
+			  display             : grid;
+			  place-items         : center;
+
+			  background-image    : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8' fill='none'%3E%3Cpath d='M0.75 4.002L3.26346 6.75L8.75 0.75' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+			  background-repeat   : no-repeat;
+			  background-position : center;
+			  background-size     : 10px 8px;
+
+			  opacity             : 0;
+
+			  transition          : opacity ease .3s;
+			}
+
+			a {
+			  color           : #000B40;
+			  text-decoration : none;
+
+			  transition      : color ease .3s;
+
+			  &:hover,
+			  &:focus {
+				color : #FF654A;
+			  }
+			}
+		  }
+		}
+	  }
 	}
   }
 
@@ -277,4 +462,36 @@ label {
 	}
   }
 }
+
+
+/* Make country list scrollable */
+.intl-tel-input .country-list {
+  // max-height: 260px;      /* whatever height you want */
+  // overflow-y: auto;
+}
+
+/* Chrome / Safari / Edge */
+.intl-tel-input .country-list::-webkit-scrollbar {
+  width: 4px;             /* matches your spec */
+}
+
+.intl-tel-input .country-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.intl-tel-input .country-list::-webkit-scrollbar-thumb {
+  background: #000B40;    /* your color */
+  border-radius: 31px;    /* your radius */
+}
+
+.intl-tel-input .country-list::-webkit-scrollbar-thumb:hover {
+  background: #000f60;    /* optional hover tweak */
+}
+
+/* Firefox */
+.intl-tel-input .country-list {
+  scrollbar-width: thin;                      /* ~4–6px depending on platform */
+  scrollbar-color: #000B40 transparent;       /* thumb + track */
+}
+
 
