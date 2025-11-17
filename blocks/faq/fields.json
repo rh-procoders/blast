@@ -1,0 +1,43 @@
+{
+  "key": "group_faq_block",
+  "title": "FAQ Block",
+  "fields": [
+    {
+      "key": "field_faq_heading",
+      "label": "Heading",
+      "name": "heading",
+      "type": "text",
+      "default_value": "FAQ"
+    },
+    {
+      "key": "field_faq_items",
+      "label": "FAQ Items",
+      "name": "faq_items",
+      "type": "repeater",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_faq_question",
+          "label": "Question",
+          "name": "question",
+          "type": "text"
+        },
+        {
+          "key": "field_faq_answer",
+          "label": "Answer",
+          "name": "answer",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/faq"
+      }
+    ]
+  ]
+}

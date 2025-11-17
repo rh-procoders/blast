@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "acf/trusted-enterprises",
+	"title": "Trusted Enterprises",
+	"description": "Trusted enterprises section with heading, features grid, and CTA button",
+	"category": "blast",
+	"icon": "admin-page",
+	"keywords": ["trusted", "enterprises", "features"],
+	"acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "blockVersion": 3
+    },
+	"supports": {
+		"align": ["full", "wide"],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+    "usesContext": ["postId", "postType", "queryId"],
+    "textdomain": "blast-2025",
+    "editorScript": "file:./js/script.js",
+    "editorStyle": "file:./css/editor-style.css",
+    "style": "file:./css/view-style.css",
+    "viewScript": "file:./js/script.js"
+}
