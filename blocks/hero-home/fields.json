@@ -3,8 +3,35 @@
     "title": "Hero Home Settings",
     "fields": [
         {
+            "key": "field_hero_local_video_files",
+            "label": "Local Video Files",
+            "name": "local_video_files",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Upload video files in different formats (MP4, WebM, OGV). The player will use the first compatible format.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_hero_local_video_file",
+                    "label": "Video File",
+                    "name": "video_file",
+                    "type": "file",
+                    "instructions": "Upload video file (MP4, WebM, OGV, etc.)",
+                    "return_format": "array",
+                    "library": "uploadedTo"
+                }
+            ]
+        },
+        {
             "key": "field_hero_youtube_video",
-            "label": "YouTube Video",
+            "label": "YouTube Video URL",
             "name": "youtube_video",
             "aria-label": "",
             "type": "url",
@@ -18,6 +45,23 @@
             },
             "default_value": "",
             "placeholder": "https://www.youtube.com/watch?v=..."
+        },
+        {
+            "key": "field_hero_vimeo_video",
+            "label": "Vimeo Video URL",
+            "name": "vimeo_video",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Enter the Vimeo video URL (will be auto-embedded with autoplay)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https://vimeo.com/..."
         },
         {
             "key": "field_hero_video_autoplay",
@@ -60,34 +104,6 @@
             "ui": 1
         },
         {
-            "key": "field_hero_images",
-            "label": "Hero Images",
-            "name": "hero_images",
-            "aria-label": "",
-            "type": "gallery",
-            "instructions": "Upload up to 3 images for the hero section. Recommended: square format, 400x400px or larger.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "library": "all",
-            "min": 0,
-            "max": 3,
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "jpg,jpeg,png,webp",
-            "insert": "append",
-            "preview_size": "medium"
-        },
-        {
             "key": "field_hero_animation_enabled",
             "label": "Enable Animations",
             "name": "animation_enabled",
@@ -126,6 +142,23 @@
             "ui_on_text": "On",
             "ui_off_text": "Off",
             "ui": 1
+        },
+        {
+            "key": "field_hero_video_poster",
+            "label": "Video Poster Image",
+            "name": "video_poster",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Thumbnail image displayed before video plays",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all"
         }
     ],
     "location": [
