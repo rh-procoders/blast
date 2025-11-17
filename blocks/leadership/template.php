@@ -65,11 +65,12 @@ $wrapper_attributes = get_block_wrapper_attributes([
                         <div class="leadership-member__image-wrapper">
                             <?php if ($photo): ?>
                                 <img 
-                                    src="<?php echo esc_url($photo['sizes']['medium'] ?? $photo['url']); ?>" 
+                                    src="<?php echo esc_url($photo['url']); ?>" 
                                     alt="<?php echo esc_attr($name); ?>"
                                     class="leadership-member__image"
                                     width="<?php echo esc_attr($photo['width']); ?>"
                                     height="<?php echo esc_attr($photo['height']); ?>"
+                                    lazyloading="lazy"
                                 >
                             <?php endif; ?>
                             
