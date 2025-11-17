@@ -1,0 +1,7 @@
+// Import root CSS custom properties for editor
+@import "../../../assets/scss/variable";
+@import "../../../assets/scss/root";
+
+.editor-styles-wrapper {
+    @import "styles";
+}  

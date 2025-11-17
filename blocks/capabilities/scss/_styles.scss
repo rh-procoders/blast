@@ -1,0 +1,169 @@
+@import "../../../assets/scss/variable";
+
+// Capabilities Block Styles
+.cap-capabilities-section {
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    .cap-container {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .cap-content-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+
+        @include tablet{
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+    }
+
+    .cap-left-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 70px 0px;
+        @include tablet{
+            padding: 0px 0px;
+        }
+    }
+
+    // Tag Styles
+    .cap-tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #FF654A;
+        color: #FFFFFF;
+        padding: 10px 14px;
+        border-radius: 20px;
+        width: fit-content;
+        margin-bottom: 50px;
+        font-family: $font-family-tertiary;
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 500;
+        line-height: 110%; /* 15.4px */
+    }
+
+    // Heading Styles
+    .cap-heading {
+        color: #000B40;
+        font-size: 50px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+        margin-bottom: 20px;
+
+        @include tablet{
+            font-size: 34px;
+        }
+    }
+
+    // Description Styles
+    .cap-description {
+        color: #000B40;
+        font-family: $font-family-secondary;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 170%; /* 30.6px */
+        margin-bottom: 50px;
+
+        @media (max-width: 768px) {
+            max-width: 100%;
+            margin-bottom: 25px;
+        }
+    }
+
+    // Features Section
+    .cap-features {
+        max-width: 606px;
+        .cap-features-label {
+            color: #000B40;
+            font-family: $font-family-tertiary;
+            font-size: 18px;
+            font-style: italic;
+            font-weight: 600;
+            line-height: 110%; /* 19.8px */
+            margin-bottom: 20px;
+        }
+
+        .cap-features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+
+            @media (max-width: 768px) {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .cap-feature-item {
+                padding: 0;
+                background-color: #fff;
+                padding: 16px 24px;
+                border-radius: 10px;
+                p {
+                    color: #000B40;
+                    font-family: $font-family-secondary;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 140%; /* 19.6px */
+                }
+            }
+        }
+    }
+
+    // Right Side Image
+    .cap-right-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+        aspect-ratio: 800 / 740;
+
+        .cap-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 40px;
+            display: block;
+            @include tablet{
+                border-radius: 15px;
+            }
+
+        }
+
+        .cap-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F4F4F4;
+            border-radius: 8px;
+            border: 2px dashed #CCC;
+            color: #999;
+            font-size: 16px;
+            min-height: 300px;
+        }
+    }
+
+    // Responsive Design
+    @media (max-width: 768px) {
+        .cap-tag {
+            margin-bottom: 16px;
+            font-size: 11px;
+            padding: 5px 12px;
+        }
+    }
+
+}

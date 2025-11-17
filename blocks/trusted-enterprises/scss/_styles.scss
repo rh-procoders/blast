@@ -1,0 +1,195 @@
+@import "../../../assets/scss/variable";
+
+// Trusted Enterprises Block Styles
+.te-trusted-enterprises {
+    width: 100%;
+    padding: 80px 30px;
+    background-image: url('../../../img/te-trusted-enterprises-bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    .te-container {
+        margin: 0 auto;
+        border-radius: 163px;
+        border: 19px solid #FFF;
+        background: rgba(244, 244, 244, 0.80);
+        backdrop-filter: blur(33.849998474121094px);
+        @include tablet-lg{
+            border-radius: 90px;
+        }
+        @include tablet{
+            border: 8px solid #FFF;
+            border-radius: 60px;
+        }
+    }
+    
+    .te-content-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 60px;
+        align-items: flex-start;
+        padding: 100px 90px 110px;
+        position: relative;
+        overflow: hidden;
+
+        @include tablet-lg {
+            gap: 60px;
+            padding: 80px;
+            grid-template-columns: 1fr;
+        }
+
+        @include mobile {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+    }
+
+    // Heading Section
+    .te-heading-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: relative;
+        z-index: 1;
+    }
+
+    .te-heading {
+        color: #000B40;
+        font-size: var(--wp--preset--font-size--fs-2-extra-large);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+
+        // Styling for specific words
+        strong {
+            font-family: $font-family-tertiary;
+        }
+
+        @media (max-width: 768px) {
+            font-size: max(24px, 2.5rem);
+        }
+    }
+
+    // Features Section
+    .te-features-section {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        position: relative;
+        z-index: 1;
+
+        @media (max-width: 768px) {
+            gap: 30px;
+        }
+    }
+
+    .te-features-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px 70px;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+
+        .te-feature-item {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+
+            .te-feature-title {
+                color: #000B40;
+                font-size: var(--wp--preset--font-size--fs-medium-large);
+                font-style: normal;
+                font-weight: 400;
+                line-height: 100%; /* 40px */
+            }
+
+            .te-feature-description {
+                color: #000B40;
+                font-family: $font-family-secondary;
+                font-size: 1rem;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 154%; /* 24.64px */
+            }
+        }
+    }
+
+    // CTA Wrapper & Button
+    .te-cta-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background-color: #fff;
+        border-radius: 70px;
+        @media (max-width: 768px) {
+            justify-content: center;
+            width: fit-content;
+            padding: 50px 42px;
+            border-radius: 40px;
+        }
+    }
+
+    .te-cta-button {
+        text-decoration: none;
+        color: #FFFFFF;
+
+
+    }
+
+    // Responsive adjustments
+    @include tablet{
+        padding: 60px 20px;
+
+        .te-container {
+            padding: 0 16px;
+        }
+
+        .te-content-wrapper {
+            border-radius: 16px;
+            padding: 80px 40px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 40px 16px;
+
+        .te-content-wrapper {
+            gap: 24px;
+            padding: 24px 16px;
+            border-radius: 12px;
+        }
+
+        .te-heading {
+            font-size: 22px;
+        }
+
+        .te-features-grid {
+
+            .te-feature-item {
+                gap: 8px;
+
+                .te-feature-title {
+                    font-size: 15px;
+                }
+
+                .te-feature-description {
+                    font-size: 13px;
+                }
+            }
+        }
+
+        .te-cta-button {
+            font-size: 13px;
+            padding: 12px 24px;
+
+            .te-cta-icon {
+                font-size: 14px;
+            }
+        }
+    }
+}

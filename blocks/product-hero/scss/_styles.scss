@@ -1,0 +1,187 @@
+@import "../../../assets/scss/variable";
+
+.product-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 84px 0px;
+    overflow: hidden; 
+    margin: 122px 30px 0px 30px;
+    border-radius: 50px;
+    @include mobile {
+        margin: 0px;
+        padding: 122px var(--wp--preset--spacing--30) 60px;
+    }
+
+    // Main container
+    &__container {
+        position: relative;
+        z-index: 2;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 830px 1fr;
+        gap: 30px;
+        align-items: center;
+        width: 100%;
+        @include desktop{
+            grid-template-columns: 630px 1fr;
+            padding: 0 30px;
+        }
+        @include tablet-lg {
+            grid-template-columns: 530px 1fr;
+            gap: 20px;
+            padding: 0 20px;
+        }
+        
+        @include tablet {
+            grid-template-columns: 1fr;
+            gap: 60px;
+            padding: 0 60px;
+        }
+        @include mobile {
+            padding: 0 var(--wp--preset--spacing--30);
+        }
+    }
+    
+    // Left content area
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 700px;
+        margin: 0 auto;
+        
+        @include tablet {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        
+        // Override Gutenberg block styles for hero context
+        .wp-block-heading {
+            margin-bottom: 20px !important;
+            font-weight: 400;
+            @include mobile {
+                br{
+                    display: none;
+                }
+            }
+            &:first-child {
+                margin-top: 0 !important;
+            }
+        }
+        
+        p{
+            margin-bottom: 30px !important;
+            @include mobile-sm{
+                max-width: 279px;
+            }
+        }
+        
+        .wp-block-buttons {  
+            .wp-block-button {
+                margin-bottom: 10px;
+                margin-right: 15px;
+            }
+        }
+    }
+    
+    // Right media area
+    &__media {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    // Video container
+    &__media-container {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+    }
+    
+    &__video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; // 16:9 aspect ratio
+        height: 0;
+        border-radius: 40px;
+        overflow: hidden;
+        // border: 2px solid rgba(255, 255, 255, 1);
+    }
+    
+    &__video-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+    
+    // Video placeholder
+    &__video-placeholder {
+        width: 100%;
+        padding-bottom: 56.25%; // 16:9 aspect ratio
+        position: relative;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px dashed rgba(255, 255, 255, 0.3);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    &__placeholder-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: rgba(255, 255, 255, 0.7);
+        
+        svg {
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        
+        p {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        small {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    }
+
+
+
+    + .animation-section{
+        margin-top: -70px;
+        z-index: 1;
+    }
+    
+}
+
+
+
+// Full width alignment
+.alignfull .product-hero{
+    &__container {
+        max-width: 100%;
+        padding: 0 40px;
+        
+        @media (max-width: 768px) {
+            padding: 0 20px;
+        }
+    }
+}
+
+// Wide alignment  
+.alignwide .product-hero {
+    &__container {
+        max-width: 1680px;
+    }
+}

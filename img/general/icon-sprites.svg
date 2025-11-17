@@ -146,4 +146,9 @@
         <path d="M14.4648 15.6375L17.0867 13.0156" fill="none" stroke-width="1.5" stroke-linecap="square"/>
         <path d="M14.4648 10.3984L17.0867 13.0203" fill="none" stroke-width="1.5" stroke-linecap="square"/>
     </symbol>
+
+    <symbol id="icon-animation-plus" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 0L8.59382 5.40618L14 7L8.59382 8.59382L7 14L5.40618 8.59382L0 7L5.40618 5.40618L7 0Z" fill="currentColor"/>
+    </symbol>
+
 </svg>

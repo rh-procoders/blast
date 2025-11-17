@@ -23,6 +23,13 @@
         border-color: var(--wp--preset--color--coral);
     }
 
+    &.has-white-background-color{
+        .button-arrow-wrapper{
+            background-color: var(--wp--preset--color--dark-blue);
+            color: var(--wp--preset--color--white);
+        }
+    }
+
     .button-text {
         font-size: 16px;
         line-height: 110%;
