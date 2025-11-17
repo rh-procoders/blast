@@ -4,4 +4,10 @@
 
 .editor-styles-wrapper {
     @import "styles";
+    .animation-layer.animation-layer--spline, .animation-layer.animation-layer--lottie{
+        pointer-events: none;
+    }
+    .animation-section__container{
+        z-index: 8;
+    }
 }  
