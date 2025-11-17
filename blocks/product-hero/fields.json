@@ -124,6 +124,50 @@
             "ui_on_text": "On",
             "ui_off_text": "Off",
             "ui": 1
+        },
+        {
+            "key": "field_hero__prod_video_mp4",
+            "label": "HTML5 Video Files",
+            "name": "video_files",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Upload video files in different formats (MP4, WebM, OGV). The player will use the first compatible format.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_hero__prod_video_file",
+                    "label": "Video File",
+                    "name": "video_file",
+                    "type": "file",
+                    "instructions": "Upload video file (MP4, WebM, OGV, etc.)",
+                    "return_format": "array",
+                    "library": "uploadedTo"
+                }
+            ]
+        },
+        {
+            "key": "field_hero__prod_video_poster",
+            "label": "Video Poster Image",
+            "name": "video_poster",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Thumbnail image displayed before video plays",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all"
         }
     ],
     "location": [

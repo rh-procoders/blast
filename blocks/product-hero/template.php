@@ -30,6 +30,8 @@ $youtube_video = get_field('youtube_video');
 $video_autoplay = get_field('video_autoplay');
 $video_loop = get_field('video_loop');
 $animation_enabled = get_field('animation_enabled');
+$video_files = get_field('video_files');
+$video_poster = get_field('video_poster');
 
 if($animation_enabled){
     $classes .= ' product-hero--animate';
@@ -97,7 +99,30 @@ $inner_blocks = '<InnerBlocks template="' . esc_attr( wp_json_encode( $allowed_b
         <!-- Right Video Area -->
         <div class="product-hero__media">
             <div class="product-hero__media-container">
-                <?php if ($youtube_embed_url): ?>
+                <?php if (!empty($video_files) && is_array($video_files)): ?>
+                    <!-- HTML5 Video Player -->
+                    <div class="product-hero__video-wrapper">
+                        <video 
+                            class="product-hero__html5-video"
+                            playsinline
+                            width="100%"
+                            height="auto"
+                            <?php if ($video_autoplay): ?>autoplay muted<?php endif; ?>
+                            <?php if ($video_loop): ?>loop<?php endif; ?>
+                            <?php if ($video_poster): ?>poster="<?php echo esc_url($video_poster); ?>"<?php endif; ?>>
+                            <?php foreach ($video_files as $video_item): 
+                                
+                                $video_url = $video_item['video_file']['url'] ?? '';
+                                $mime_type = $video_item['video_file']['mime_type'] ?? '';
+                                ?>
+                                <?php if (!empty($video_url) && !empty($mime_type)): ?>
+                                    <source src="<?php echo esc_url($video_url); ?>" type="<?php echo esc_attr($mime_type); ?>">
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                <?php elseif ($youtube_embed_url): ?>
                     <div class="product-hero__video-wrapper">
                         <iframe 
                             class="product-hero__video-iframe"
@@ -124,7 +149,7 @@ $inner_blocks = '<InnerBlocks template="' . esc_attr( wp_json_encode( $allowed_b
                                 <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
                             </svg>
                             <p>Video Placeholder</p>
-                            <small>Add a YouTube URL in the block settings</small>
+                            <small>Add a YouTube URL or HTML5 video files in the block settings</small>
                         </div>
                     </div>
                 <?php endif; ?>
