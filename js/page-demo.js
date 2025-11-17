@@ -10,6 +10,30 @@
 
     console.log( 'page-demo loaded...' );
 
+    /**
+     * Show Success Screen
+     * Called from CF7's on_sent_ok additional setting
+     * Adds modifier class to show success content and hide form/content
+     */
+    window.demoShowSuccess = function () {
+        const demoSection = document.querySelector( '.demo-section' );
+
+        if (demoSection) {
+            // Add success modifier class
+            demoSection.classList.add( 'demo-section--success' );
+
+            // Optional: Smooth scroll to center the success message
+            demoSection.scrollIntoView( {
+                behavior: 'smooth',
+                block: 'center'
+            } );
+
+            console.log( 'Success screen activated' );
+        } else {
+            console.error( 'demoShowSuccess: .demo-section not found' );
+        }
+    };
+
     // Back button functionality - return to referrer or homepage
     const backButton = document.querySelector( '[data-demo-back]' );
     if (backButton) {
@@ -127,10 +151,30 @@
     }
 
     /**
+     * CF7 Form Submission Success Handler
+     * Listens for successful form submission and shows success screen
+     */
+    function initSuccessHandler() {
+        // Listen for CF7 mail sent event (only on this page's form)
+        document.addEventListener( 'wpcf7mailsent', function ( event ) {
+            // Verify the form is within our demo-section
+            const demoSection = event.target.closest( '.demo-section' );
+
+            if (demoSection) {
+                console.log( 'CF7 form submitted successfully, showing success screen' );
+                window.demoShowSuccess();
+            }
+        }, false );
+
+        console.log( 'CF7 success handler initialized' );
+    }
+
+    /**
      * Initialize all page scripts when DOM is ready
      */
     function initPage() {
         initProgressBar();
+        initSuccessHandler();
     }
 
     // Initialize when DOM is ready

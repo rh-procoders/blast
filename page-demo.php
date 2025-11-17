@@ -22,6 +22,11 @@ $right_label  = $fields_right["tpl-demo-right__label"] ?? null;
 $right_title  = $fields_right["tpl-demo-right__title"] ?? null;
 $right_cf7_id = $fields_right["tpl-demo-right__cf7-id"] ?? null;
 
+// ACF Fields - Thank You Content
+$fields_submit_success     = get_field( 'tpl-demo-submit_success' );
+$submit_success_heading    = $fields_submit_success["tpl-demo-submit_success__heading"] ?? null;
+$submit_success_subheading = $fields_submit_success["tpl-demo-submit_success__subheading"] ?? null;
+
 ?>
 
 <figure class="demo__bg">
@@ -132,11 +137,55 @@ $right_cf7_id = $fields_right["tpl-demo-right__cf7-id"] ?? null;
                 <svg class="demo-section__testimonial-artwork"
                      xmlns="http://www.w3.org/2000/svg"
                      width="49" height="38" viewBox="0 0 49 38" fill="none">
-                    <path d="M3.04371 36.3111C1.67776 37.069 0 36.0813 0 34.5191V26.5171V2.04938C0 0.917537 0.917537 0 2.04938 0H19.6649C20.7967 0 21.7143 0.917537 21.7143 2.04938V24.7446C21.7143 25.4893 21.3104 26.1753 20.6592 26.5366L3.04371 36.3111Z" fill="#000B40"/>
-                    <path d="M30.1783 20.8563C28.8125 21.6082 27.1406 20.6201 27.1406 19.061V11.0344V2.04938C27.1406 0.917538 28.0582 0 29.19 0H46.8055C47.9374 0 48.8549 0.917537 48.8549 2.04938V9.36344C48.8549 10.1105 48.4484 10.7985 47.7939 11.1587L30.1783 20.8563Z" fill="#000B40"/>
+                    <path d="M3.04371 36.3111C1.67776 37.069 0 36.0813 0 34.5191V26.5171V2.04938C0 0.917537 0.917537 0 2.04938 0H19.6649C20.7967 0 21.7143 0.917537 21.7143 2.04938V24.7446C21.7143 25.4893 21.3104 26.1753 20.6592 26.5366L3.04371 36.3111Z"
+                          fill="#000B40"/>
+                    <path d="M30.1783 20.8563C28.8125 21.6082 27.1406 20.6201 27.1406 19.061V11.0344V2.04938C27.1406 0.917538 28.0582 0 29.19 0H46.8055C47.9374 0 48.8549 0.917537 48.8549 2.04938V9.36344C48.8549 10.1105 48.4484 10.7985 47.7939 11.1587L30.1783 20.8563Z"
+                          fill="#000B40"/>
                 </svg>
             </div>
         <?php endif; ?>
+    </div>
+
+    <!-- Success Section (Hidden by default, shown after form submission) -->
+    <div class="demo-section__success">
+        <?php if ( $submit_success_heading ) : ?>
+            <h2 class="demo-section__success-heading">
+                <?= wp_kses_post( $submit_success_heading ); ?>
+            </h2>
+        <?php endif; ?>
+
+        <?php if ( $submit_success_subheading ) : ?>
+            <p class="demo-section__success-subheading">
+                <?= wp_kses_post( $submit_success_subheading ); ?>
+            </p>
+        <?php endif; ?>
+
+        <div class="demo-section__success-socials">
+            <span class="">
+                <?= __( "Meanwhile visit us on", 'blast-2025' ) ?>
+            </span>
+
+            <div class="wp-block-button is-style-outline is-style-outline--1">
+                <a class="wp-block-button__link wp-element-button has-arrow-icon">
+                    <span class="button-text" data-hover-text="Explore the platform">
+                        Explore the platform
+                    </span>
+                    <span class="button-arrow-wrapper">
+                        <svg class="svg-icon icon-arrow-right" width="14" height="10" viewBox="0 0 14 10"
+                             fill="currentColor">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0441 4.59009H0.75H12.0441Z"></path>
+                            <path d="M12.0441 4.59009H0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.21875 8.1195L12.7482 4.59009L9.21875 8.1195Z"></path>
+                            <path d="M9.21875 8.1195L12.7482 4.59009" stroke="currentColor" stroke-width="1.5"
+                                  stroke-linecap="square"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.21875 1.06067L12.7482 4.59008L9.21875 1.06067Z"></path>
+                            <path d="M9.21875 1.06067L12.7482 4.59008" stroke="currentColor" stroke-width="1.5"
+                                  stroke-linecap="square"></path>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
     </div>
 
 </section>
