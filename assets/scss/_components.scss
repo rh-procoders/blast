@@ -221,6 +221,9 @@ ul.nostyle {
 	}
   }
 
+  &__info {
+	display : flex;
+  }
 
   &__name {
 	font-family : $font-family-secondary;

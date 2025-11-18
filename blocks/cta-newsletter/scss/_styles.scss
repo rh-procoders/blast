@@ -116,6 +116,12 @@
 	  &-control {
 
 	  }
+
+	  &.sent {
+		.submit-wrapper {
+		  display : none;
+		}
+	  }
 	}
   }
 

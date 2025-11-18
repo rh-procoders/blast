@@ -188,26 +188,9 @@ html {
 		margin-left   : 0;
 		padding-left  : 30px;
 
-		list-style    : none;
-
 		li {
 		  position   : relative;
 		  margin-top : 6px;
-
-		  &:before {
-			content          : "";
-
-			position         : absolute;
-			top              : 50%;
-			left             : calc((4px + 6px) * -1);
-			transform        : translateY(-50%);
-
-			width            : 4px;
-			height           : 4px;
-
-			background-color : #FF654A;
-			border-radius    : 1px;
-		  }
 
 		  @include mobile {
 			margin-top : 20px;
@@ -227,6 +210,38 @@ html {
 
 		  margin-top    : 20px;
 		  margin-bottom : 40px;
+		}
+	  }
+
+	  ul.wp-block-list {
+		list-style : none;
+
+		li {
+
+		  &:before {
+			content          : "";
+
+			position         : absolute;
+			top              : 50%;
+			left             : calc((4px + 6px) * -1);
+			transform        : translateY(-50%);
+
+			width            : 4px;
+			height           : 4px;
+
+			background-color : #FF654A;
+			border-radius    : 1px;
+		  }
+		}
+	  }
+
+	  ol.wp-block-list {
+
+		li {
+
+		  &::marker {
+			font-weight : 700;
+		  }
 		}
 	  }
 
@@ -329,7 +344,7 @@ html {
 	&__title {
 	  font-size      : max(26px, 3.75rem); // 60px
 	  line-height    : 1.1;
-	  font-weight    : 400;
+	  font-weight    : 600;
 
 	  letter-spacing : calc(-1 * max(0.48px, 0.075rem)); // -1.2px
 
@@ -378,7 +393,7 @@ html {
 	  .post-date {
 		font-family : $font-family-secondary;
 
-		font-size   : 14px;
+		font-size   : 16px;
 		font-weight : 500;
 		line-height : 1.2;
 

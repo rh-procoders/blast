@@ -61,11 +61,9 @@ $reading_time = bs_get_reading_time();
             </h3>
 
             <!-- Excerpt -->
-            <?php if ( has_excerpt() ): ?>
-                <div class="blog-filter-item__excerpt">
-                    <?= wp_kses_post( get_the_excerpt() ) ?>
-                </div>
-            <?php endif; ?>
+            <div class="blog-filter-item__excerpt">
+                <?= wp_kses_post( get_the_excerpt() ) ?>
+            </div>
 
             <!-- Footer -->
             <div class="blog-filter-item__footer">
