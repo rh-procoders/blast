@@ -25,6 +25,10 @@ html {
 	--bs-entry-padding-x : 30px;
 
 	padding-top          : var(--header-h);
+
+	@media(max-width : 1440px) {
+	  --bs-grid-template : 100%;
+	}
   }
 
   .entry-content {
@@ -42,12 +46,24 @@ html {
 	gap                   : var(--bs-grid-gap);
 	justify-content       : center;
 
+	@media(max-width : 1440px) {
+	  max-width    : 860px;
+	  margin-left  : auto;
+	  margin-right : auto;
+	}
+
 	&__sidebar-left {
 
+	  @media (max-width : 1440px) {
+		display : none;
+	  }
 	}
 
 	&__sidebar-right {
 
+	  @media (max-width : 1440px) {
+		display : none;
+	  }
 	}
 
 	&__the-content {
@@ -188,6 +204,11 @@ html {
 		margin-left   : 0;
 		padding-left  : 30px;
 
+		@include tablet {
+		  padding-left : 22px;
+		  line-height  : 1.4;
+		}
+
 		li {
 		  position   : relative;
 		  margin-top : 6px;
@@ -231,6 +252,15 @@ html {
 
 			background-color : #FF654A;
 			border-radius    : 1px;
+
+			@include tablet {
+			  width     : 6px;
+			  height    : 6px;
+
+			  top       : 10px;
+			  left      : -22px; // same as ul padding
+			  transform : none;
+			}
 		  }
 		}
 	  }
@@ -260,6 +290,10 @@ html {
 		padding          : 4.375rem 7.5rem; // 70px 120px
 		border-radius    : 31.223px; // unchanged
 
+		@include tablet {
+		  padding : 50px 31px 50px 32px;
+		}
+
 		p {
 		  position    : relative;
 		  z-index     : 1;
@@ -270,6 +304,10 @@ html {
 		  font-weight : 400;
 		  line-height : 1.5;
 
+		  @include tablet {
+			font-size : 22px;
+		  }
+
 		  strong {
 			font-family : $font-family-tertiary;
 			font-weight : 600;
@@ -278,22 +316,33 @@ html {
 
 		&:after {
 		  content             : "";
-		  background-image    : url("../../img/blockquote-bg_desktop.svg");
+		  background-image    : url("../../img/blockquote-bg_desktop.png");
 		  background-repeat   : no-repeat;
 		  background-position : center;
+		  background-size     : contain;
 
 		  position            : absolute;
 
-		  width               : 406px;
-		  height              : 235px;
-		  bottom              : 0;
-		  right               : 0;
+		  width               : calc(711px * 0.75);
+		  height              : calc(827px * 0.75);
+
+		  top                 : -90px;
+		  left                : calc((100% - 310px));
+
+		  @include mobile {
+			top : -40px;
+		  }
 		}
 
 		@include mobile {
 		  margin-top    : 40px;
 		  margin-bottom : 40px;
+
+		  margin-left   : - 20px;
+		  margin-right  : -20px;
 		}
+
+
 	  }
 	}
 
@@ -383,10 +432,16 @@ html {
 	  .post-author {
 		gap : 10px;
 
-		&__name {
-		  br {
-			display : none;
+		&__avatar {
+
+		  @include mobile {
+			width         : 36px;
+			border-radius : 10px;
 		  }
+		}
+
+		&__name {
+
 		}
 	  }
 
@@ -398,6 +453,10 @@ html {
 		line-height : 1.2;
 
 		color       : #999DB2;
+
+		@include mobile {
+		  font-size : 14px;
+		}
 	  }
 	}
 
@@ -432,6 +491,12 @@ html {
 	gap                   : var(--bs-grid-gap);
 	justify-content       : center;
 
+	@media(max-width : 1440px) {
+	  max-width    : 860px;
+	  margin-left  : auto;
+	  margin-right : auto;
+	}
+
 	&__wrapper {
 	  grid-column      : 2; // Place in center column
 
@@ -439,6 +504,10 @@ html {
 	  padding          : max(40px, 3.75rem); // 60px
 
 	  background-color : #FFFFFF;
+
+	  @media(max-width : 1440px) {
+		grid-column : unset;
+	  }
 	}
 
 	.post-author {
@@ -447,15 +516,24 @@ html {
 	  flex-wrap  : wrap;
 
 	  &__avatar {
-		width         : 150px;
+		width         : max(120px, 9.375rem); // 150px
 		border-width  : 3px;
-		border-radius : 40px;
+		border-radius : max(30px, 2.5rem); // 40px
+
+		@include mobile {
+		  width         : 120px;
+		  border-radius : 30px;
+		}
 	  }
 
 	  &__info {
 		gap            : 3px;
 		display        : flex;
 		flex-direction : column;
+
+		@include mobile {
+		  flex : 1 1 100%;
+		}
 	  }
 
 	  &__name {
@@ -476,14 +554,16 @@ html {
 		font-size   : max(24px, 1.875rem); // 30px
 		font-weight : 400;
 		line-height : 1.2;
+
+		@include mobile {
+		  font-size : 24px;
+		}
 	  }
 
 	  &__bio {
 		flex : 1 1 100%;
 	  }
 	}
-
-
   }
 
   .entry-related {
@@ -500,12 +580,22 @@ html {
 	gap                   : var(--bs-grid-gap);
 	justify-content       : center;
 
+	@media(max-width : 1440px) {
+	  max-width    : 860px;
+	  margin-left  : auto;
+	  margin-right : auto;
+	}
+
 	@include mobile {
 	  margin-top : 100px;
 	}
 
 	&__wrapper {
 	  grid-column : 2; // Place in center column
+
+	  @media(max-width : 1440px) {
+		grid-column : unset;
+	  }
 	}
 
 	&__heading {
