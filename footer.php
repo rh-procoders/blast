@@ -124,7 +124,7 @@
                             ?>
                             <a href="<?php echo esc_url($social_link ? $social_link['url'] : '#'); ?>"
                                 class="footer-social__link"
-                                target="_blank"
+                                target="<?= esc_attr($social_link ? $social_link['target'] : '_blank'); ?>"
                                 rel="noopener noreferrer">
                                 <img src="<?php echo esc_url($social_icon ? $social_icon['url'] : '#'); ?>" alt="<?php echo esc_attr($social_icon ? $social_icon['alt'] : 'alt'); ?>" />
                             </a>

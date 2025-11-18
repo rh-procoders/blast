@@ -187,6 +187,7 @@ $submit_success_subheading = $fields_submit_success["tpl-demo-submit_success__su
                         $social_icon = $social['icon'] ?? null;
                         ?>
                         <a href="<?= esc_url( $social_link ? $social_link['url'] : '#' ) ?>"
+                           target="<?= esc_attr($social_link ? $social_link['target'] : '_blank'); ?>"
                            class="success_social_btn">
                             <!-- social icon here -->
                             <img class="success_social_btn-icon"
