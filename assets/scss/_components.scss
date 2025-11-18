@@ -737,3 +737,133 @@ body .cky-consent-container {
 	}
   }
 }
+
+// CookieYes - Modal styles
+body {
+  // Overlay
+  .cky-overlay {
+	background : rgba(0, 11, 64, 0.80);
+	opacity    : 1;
+  }
+
+  // Modal
+  .cky-modal {
+	--cky-br      : 40px;
+
+	border-radius : var(--cky-br);
+
+	// Wrapper
+	.cky-preference-center {
+	  border-radius : var(--cky-br);
+
+	}
+
+	.cky-preference-header {
+	  border         : none;
+
+	  padding-top    : 60px;
+	  padding-left   : 60px;
+	  padding-right  : 60px;
+	  padding-bottom : 40px;
+
+		.cky-preference-title {
+		font-family    : $font-family-primary;
+		font-size      : 34px;
+		font-weight    : 600;
+		line-height    : 1.2;
+		letter-spacing : -0.68px;
+
+		color          : #000B40 !important;
+	  }
+
+	  .cky-btn-close {
+		
+	  }
+	}
+
+	.cky-preference-body-wrapper {
+
+	}
+
+	.cky-footer-wrapper {
+
+	  .cky-footer-shadow {
+		// Override the default gradient to mimic box-shadow: 0 -5px 32.9px 0 rgba(255, 101, 74, 0.20)
+		background : linear-gradient(to top, rgba(255, 101, 74, 0.20), transparent) !important;
+		height     : 33px; // Approximately the blur radius
+	  }
+
+	  .cky-prefrence-btn-wrapper {
+		border  : none;
+		padding : 40px;
+
+		gap     : 20px;
+
+		.cky-btn {
+		  margin        : 0;
+
+		  font-family   : $font-family-primary;
+		  font-size     : 16px;
+		  font-weight   : 600;
+		  line-height   : 1;
+
+		  color         : #000B40 !important;
+
+		  border-radius : 16px;
+		  padding       : 18px 22px;
+
+		  border-width  : 1px;
+		  border-style  : solid;
+		  border-color  : #000B40 !important;
+
+		  transition    : all ease .3s;
+
+		  &.cky-btn-customize,
+		  &.cky-btn-reject {
+
+		  }
+
+		  &.cky-btn-customize {
+
+		  }
+
+		  &.cky-btn-reject {
+
+		  }
+
+		  &.cky-btn-accept {
+			color            : #FFFFFF !important;
+			border-color     : #FF654A !important;
+			background-color : #FF654A !important;
+		  }
+
+		  &:hover,
+		  &:focus {
+			opacity : 1 !important;
+
+			&.cky-btn-preferences,
+			&.cky-btn-reject {
+			  color            : #FFFFFF !important;
+			  border-color     : #FF654A !important;
+			  background-color : #FF654A !important;
+			}
+
+			&.cky-btn-preferences {
+
+			}
+
+			&.cky-btn-reject {
+
+			}
+
+			&.cky-btn-accept {
+			  color            : #000B40 !important;
+			  border-color     : #000B40 !important;
+			  background-color : transparent !important;
+			}
+		  }
+		}
+	  }
+	}
+  }
+}

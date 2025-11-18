@@ -243,9 +243,8 @@ html {
 			content          : "";
 
 			position         : absolute;
-			top              : 50%;
+			top              : 16px;
 			left             : calc((4px + 6px) * -1);
-			transform        : translateY(-50%);
 
 			width            : 4px;
 			height           : 4px;
