@@ -794,3 +794,28 @@ class Blast_Contact_Forms_Handler {
 
 // Initialize the email validation handler
 new Blast_Contact_Forms_Handler();
+
+/**
+ * Modify CookieYes modal HTML to add custom class
+ *
+ * Uses output buffering to intercept the HTML output and add a custom class
+ * to the cky-preference-body-wrapper element for custom styling
+ */
+add_action( 'wp_footer', function() {
+	ob_start( function( $html ) {
+		// Only modify if the CookieYes template script exists
+		if ( strpos( $html, 'id="ckyBannerTemplate"' ) !== false ) {
+			// Add custom class to cky-preference-body-wrapper
+			$html = str_replace(
+				'class="cky-preference-body-wrapper"',
+				'class="cky-preference-body-wrapper cky-custom-modal"',
+				$html
+			);
+		}
+		return $html;
+	} );
+}, 1 );
+
+add_action( 'wp_footer', function() {
+	ob_end_flush();
+}, 999 );
