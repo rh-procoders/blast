@@ -26,7 +26,7 @@
             border-radius: 50px;
 
         }
-        
+
    }
 
    &__grid{
@@ -144,7 +144,44 @@
                 line-height: 160%; /* 25.6px */
                 margin-bottom: 23px;
             }
-        }
+
+		  .wpcf7-response-output {
+			max-width     : 320px;
+			margin-left   : auto !important;
+			margin-right  : auto !important;
+
+			padding       : 10px 20px !important;
+			border-radius : 6px !important;
+			border        : 1px solid #FFFFFF !important;
+			background    : #FE8B5E !important;
+
+			font-family   : $font-family-tertiary;
+			font-size     : font-size('base'); // 16px
+			font-weight   : 400;
+			line-height   : 1.4;
+
+			color         : #FFFFFF;
+		  }
+
+		  .wpcf7-form {
+
+			&-control {
+
+			  &-wrap {
+
+				.wpcf7-not-valid-tip {
+				  color: #FA423C;
+				}
+			  }
+			}
+
+			&.sent {
+			  .submit-wrapper {
+				display : none;
+			  }
+			}
+		  }
+		}
     }
 
     .footer-social{
@@ -241,7 +278,7 @@
             }
         }
     }
-    
+
     &__bg-image-bottom{
         position: absolute;
         bottom: 0px;

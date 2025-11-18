@@ -40,10 +40,19 @@
 	  height              : 386px;
 
 	  @container (max-width: 768px) {
-		background-image : url("../images/cta_newsletter-bg--mobile.png");
+		background-image : url("../images/cta_newsletter-bg--mobile-v2.png");
 
-		width            : 315px;
-		height           : 317px;
+		width            : 1044.459px;
+		height           : 855.552px;
+		transform        : rotate(-24.705deg);
+		flex-shrink      : 0;
+
+		bottom           : auto;
+		top              : 20px;
+		left             : -49.61685823754789%;
+
+		//width            : 315px;
+		//height           : 317px;
 	  }
 	}
 
@@ -115,6 +124,12 @@
 
 	  &-control {
 
+	  }
+
+	  &.sent {
+		.submit-wrapper {
+		  display : none;
+		}
 	  }
 	}
   }

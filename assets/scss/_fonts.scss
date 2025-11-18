@@ -72,6 +72,16 @@
   font-display: swap;
 }
 
+// WixMadeforText-Medium (500)
+@font-face {
+  font-family: 'WixMadeforText';
+  src: url('../fonts/Wix_Madefor_Text/WixMadeforText-Medium.woff2') format('woff2'),
+  url('../fonts/Wix_Madefor_Text/WixMadeforText-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 // WixMadeforText-Regular (400)
 @font-face {
   font-family: 'WixMadeforText';

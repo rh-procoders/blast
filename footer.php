@@ -138,13 +138,20 @@
                         <?php foreach ($footer_badges as $badge):
                             $badge_image = $badge['badge_image'] ?? null;
                             $badge_link = $badge['badge_link'] ?? null;
+                            $has_link = !empty($badge_link) && !empty($badge_link['url']);
                             ?>
-                            <a href="<?php echo esc_url($badge_link ? $badge_link['url'] : '#'); ?>"
-                                class="footer-badges__link"
-                                target="_blank"
-                                rel="noopener noreferrer">
-                                <img src="<?php echo esc_url($badge_image ? $badge_image['url'] : '#'); ?>" alt="<?php echo esc_attr($badge_image ? $badge_image['alt'] : 'alt'); ?>" />
-                            </a>
+                            <?php if ($has_link): ?>
+                                <a href="<?php echo esc_url($badge_link['url']); ?>"
+                                    class="footer-badges__link"
+                                    target="<?= esc_attr($badge_link['target'] ?: '_blank'); ?>"
+                                    rel="noopener noreferrer">
+                                    <img src="<?php echo esc_url($badge_image ? $badge_image['url'] : '#'); ?>" alt="<?php echo esc_attr($badge_image ? $badge_image['alt'] : 'alt'); ?>" />
+                                </a>
+                            <?php else: ?>
+                                <span class="footer-badges__link">
+                                    <img src="<?php echo esc_url($badge_image ? $badge_image['url'] : '#'); ?>" alt="<?php echo esc_attr($badge_image ? $badge_image['alt'] : 'alt'); ?>" />
+                                </span>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
