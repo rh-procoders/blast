@@ -601,3 +601,269 @@ ul.nostyle {
 	transform : translateX(-50%) translateY(-4px);
   }
 }
+
+// CookieYes - Consent Bar
+body .cky-consent-container {
+  width : 500px;
+
+  // Left-alignment Styles
+  &.cky-box-bottom-left {
+
+	@media(max-width : 576px) {
+	  left   : 24px;
+	  bottom : 24px;
+	  width  : calc(100% - (24px * 2));
+	}
+
+  }
+
+  .cky-consent-bar {
+	border        : none;
+	padding       : 50px;
+
+	border-radius : 40px;
+	box-shadow    : 36px 30px 74.9px 0 rgba(255, 108, 102, 0.18);
+
+	@media(max-width : 576px) {
+	  border-radius : 24px;
+	  padding       : 24px;
+	}
+
+	.cky-notice {
+
+	  .cky-title {
+		display : none !important;
+	  }
+
+	  &-group {
+
+	  }
+
+	  &-des {
+		font-family : $font-family-secondary;
+		font-size   : 20px;
+		font-weight : 500;
+		line-height : 1.4;
+
+		color       : #000B40 !important;
+
+		@media(max-width : 576px) {
+		  font-size : 18px;
+		}
+
+		p {
+		  font-family : inherit;
+		  font-size   : inherit;
+		  font-weight : inherit;
+		  line-height : inherit;
+
+		  color       : inherit;
+		}
+	  }
+
+	  &-btn-wrapper {
+		margin-top : 40px;
+
+		gap        : 20px;
+		display    : flex;
+
+		.cky-btn {
+		  margin        : 0;
+
+		  font-family   : $font-family-primary;
+		  font-size     : 16px;
+		  font-weight   : 600;
+		  line-height   : 1;
+
+		  color         : #000B40 !important;
+
+		  border-radius : 16px;
+		  padding       : 18px 22px;
+
+		  border-width  : 1px;
+		  border-style  : solid;
+		  border-color  : #000B40 !important;
+
+
+		  transition    : all ease .3s;
+
+		  &.cky-btn-customize,
+		  &.cky-btn-reject {
+
+		  }
+
+		  &.cky-btn-customize {
+
+
+		  }
+
+		  &.cky-btn-reject {
+
+		  }
+
+		  &.cky-btn-accept {
+			color            : #FFFFFF !important;
+			border-color     : #FF654A !important;
+			background-color : #FF654A !important;
+		  }
+
+		  &:hover,
+		  &:focus {
+			opacity : 1 !important;
+
+			&.cky-btn-customize,
+			&.cky-btn-reject {
+			  color            : #FFFFFF !important;
+			  border-color     : #FF654A !important;
+			  background-color : #FF654A !important;
+			}
+
+			&.cky-btn-customize {
+
+			}
+
+			&.cky-btn-reject {
+
+			}
+
+			&.cky-btn-accept {
+			  color            : #000B40 !important;
+			  border-color     : #000B40 !important;
+			  background-color : transparent !important;
+			}
+		  }
+		}
+	  }
+	}
+  }
+}
+
+// CookieYes - Modal styles
+body {
+  // Overlay
+  .cky-overlay {
+	background : rgba(0, 11, 64, 0.80);
+	opacity    : 1;
+  }
+
+  // Modal
+  .cky-modal {
+	--cky-br      : 40px;
+
+	border-radius : var(--cky-br);
+
+	// Wrapper
+	.cky-preference-center {
+	  border-radius : var(--cky-br);
+
+	}
+
+	.cky-preference-header {
+	  border         : none;
+
+	  padding-top    : 60px;
+	  padding-left   : 60px;
+	  padding-right  : 60px;
+	  padding-bottom : 40px;
+
+		.cky-preference-title {
+		font-family    : $font-family-primary;
+		font-size      : 34px;
+		font-weight    : 600;
+		line-height    : 1.2;
+		letter-spacing : -0.68px;
+
+		color          : #000B40 !important;
+	  }
+
+	  .cky-btn-close {
+
+	  }
+	}
+
+	.cky-preference-body-wrapper {
+
+	}
+
+	.cky-footer-wrapper {
+
+	  .cky-footer-shadow {
+		// Override the default gradient to mimic box-shadow: 0 -5px 32.9px 0 rgba(255, 101, 74, 0.20)
+		background : linear-gradient(to top, rgba(255, 101, 74, 0.20), transparent) !important;
+		height     : 33px; // Approximately the blur radius
+	  }
+
+	  .cky-prefrence-btn-wrapper {
+		border  : none;
+		padding : 40px;
+
+		gap     : 20px;
+
+		.cky-btn {
+		  margin        : 0;
+
+		  font-family   : $font-family-primary;
+		  font-size     : 16px;
+		  font-weight   : 600;
+		  line-height   : 1;
+
+		  color         : #000B40 !important;
+
+		  border-radius : 16px;
+		  padding       : 18px 22px;
+
+		  border-width  : 1px;
+		  border-style  : solid;
+		  border-color  : #000B40 !important;
+
+		  transition    : all ease .3s;
+
+		  &.cky-btn-customize,
+		  &.cky-btn-reject {
+
+		  }
+
+		  &.cky-btn-customize {
+
+		  }
+
+		  &.cky-btn-reject {
+
+		  }
+
+		  &.cky-btn-accept {
+			color            : #FFFFFF !important;
+			border-color     : #FF654A !important;
+			background-color : #FF654A !important;
+		  }
+
+		  &:hover,
+		  &:focus {
+			opacity : 1 !important;
+
+			&.cky-btn-preferences,
+			&.cky-btn-reject {
+			  color            : #FFFFFF !important;
+			  border-color     : #FF654A !important;
+			  background-color : #FF654A !important;
+			}
+
+			&.cky-btn-preferences {
+
+			}
+
+			&.cky-btn-reject {
+
+			}
+
+			&.cky-btn-accept {
+			  color            : #000B40 !important;
+			  border-color     : #000B40 !important;
+			  background-color : transparent !important;
+			}
+		  }
+		}
+	  }
+	}
+  }
+}
