@@ -35,12 +35,12 @@
 	  background-repeat   : no-repeat;
 	  background-position : center;
 
-	  background-image    : url("../images/cta_newsletter-bg--desktop.svg");
+	  background-image    : url("../images/cta_newsletter-bg--desktop.png");
 	  width               : 1496px;
 	  height              : 386px;
 
 	  @container (max-width: 768px) {
-		background-image : url("../images/cta_newsletter-bg--mobile.svg");
+		background-image : url("../images/cta_newsletter-bg--mobile.png");
 
 		width            : 315px;
 		height           : 317px;
