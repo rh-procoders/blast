@@ -583,9 +583,8 @@
 	}
 
 	&__categories {
-	  gap       : 10px;
-	  display   : flex;
-	  flex-wrap : wrap;
+	  display : contents; // => makes it display inline with date
+	  // it's child items become child items of __meta
 	}
 
 	&__category {
