@@ -360,15 +360,24 @@ ul.nostyle {
 		  }
 
 		  a {
-			font-family     : $font-family-secondary;
-			font-size       : font-size('base'); // 16px
-			font-weight     : normal;
-			line-height     : 1.4;
+			font-family        : $font-family-secondary;
+			font-size          : font-size('base'); // 16px
+			font-weight        : normal;
+			line-height        : 1.4;
 
-			color           : #000B40;
-			text-decoration : none !important;
+			color              : #000B40;
+			text-decoration    : none !important;
 
-			transition      : color ease .3s;
+			transition         : color ease .3s;
+
+			// Elipsis - no more than 2 lines
+			overflow           : hidden;
+			text-overflow      : ellipsis;
+			display            : -webkit-box;
+			-webkit-line-clamp : 2;
+			-webkit-box-orient : vertical;
+			// max-height: calc(11.25rem + 5px);
+			// padding-bottom: 5px;
 
 			&:hover,
 			&:focus {
