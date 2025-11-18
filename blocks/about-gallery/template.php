@@ -82,11 +82,9 @@ $wrapper_attributes = get_block_wrapper_attributes([
                         <?php if ($image): ?>
                             <div class="about-gallery-item__image-wrapper">
                                 <img 
-                                    src="<?php echo esc_url($image['sizes']['medium'] ?? $image['url']); ?>" 
+                                    src="<?php echo esc_url($image['sizes']['large'] ?? $image['url']); ?>" 
                                     alt="<?php echo esc_attr($image['alt'] ?: 'Gallery image'); ?>"
                                     class="about-gallery-item__image"
-                                    width="<?php echo esc_attr($image['sizes']['medium_width'] ?? $image['width']); ?>"
-                                    height="<?php echo esc_attr($image['sizes']['medium_height'] ?? $image['height']); ?>"
                                 >
                             </div>
                         <?php endif; ?>
