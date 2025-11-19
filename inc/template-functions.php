@@ -796,26 +796,8 @@ class Blast_Contact_Forms_Handler {
 new Blast_Contact_Forms_Handler();
 
 /**
- * Modify CookieYes modal HTML to add custom class
+ * CookieYes SimpleBar initialization
  *
- * Uses output buffering to intercept the HTML output and add a custom class
- * to the cky-preference-body-wrapper element for custom styling
+ * SimpleBar is now initialized via JavaScript in main.js
+ * This ensures it works with both static HTML and dynamically injected CookieYes modals
  */
-add_action( 'wp_footer', function() {
-	ob_start( function( $html ) {
-		// Add custom class and data-simplebar attribute to cky-preference-body-wrapper
-		// Works for both template-based and direct-render CookieYes implementations
-		if ( strpos( $html, 'cky-preference-body-wrapper' ) !== false ) {
-			$html = str_replace(
-				'class="cky-preference-body-wrapper"',
-				'class="cky-preference-body-wrapper using-simplebar" data-simplebar data-simplebar-auto-hide="false"',
-				$html
-			);
-		}
-		return $html;
-	} );
-}, 1 );
-
-add_action( 'wp_footer', function() {
-	ob_end_flush();
-}, 999 );
