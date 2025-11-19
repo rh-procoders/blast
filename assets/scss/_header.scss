@@ -262,40 +262,23 @@ header.site-header {
             top: 7px!important;
             width: 100%!important;
             left: 0px!important;
+            transform: rotate(45deg);
+          }
+
+          &:nth-child(2){
+            opacity: 0;
           }
 
           &:nth-child(3){
             width: 100%!important;
             left: 0px!important;
             bottom: 7px!important;
+            transform: rotate(-45deg);
           }
         }
       }
-    .toggle-icon:before, .toggle-icon:after {
-      background: #fff!important;
-    }
     .toggle-text{
       opacity: 0;
-    }
-    .toggle-icon {
-      opacity: 1;
-      border-color: transparent!important;
-      border-bottom: 0;
-
-      &:before,
-      &:after {
-        background: $c-white;
-        bottom: 0;
-        margin: auto;
-      }
-
-      &:before {
-        transform: rotate(135deg);
-      }
-
-      &:after {
-        transform: rotate(45deg);
-      }
     }
   }
 }
