@@ -69,6 +69,15 @@ function blast_blog_filter_shortcode( array $atts ): string
                        name="blog-filter-search"
                        placeholder="<?= esc_attr__( 'Search', 'blast-2025' ) ?>"
                        value="<?= esc_attr( $current_search ) ?>"/>
+                <button type="button"
+                        class="blog-filter__search-clear"
+                        aria-label="<?= esc_attr__( 'Clear search', 'blast-2025' ) ?>"
+                        style="<?= empty( $current_search ) ? 'display: none;' : '' ?>">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path d="M11.0625 11.0625L1.06271 1.0625" fill="none" stroke-width="1.5" stroke-linecap="square"/>
+                        <path d="M1.0625 11.0625L11.0623 1.0625" fill="none" stroke-width="1.5" stroke-linecap="square"/>
+                    </svg>
+                </button>
                 <?php sprite_svg( 'icon-filter-search', 20, 20 ) ?>
             </div>
 
@@ -192,6 +201,7 @@ function blast_blog_filter_shortcode( array $atts ): string
 
                 const grid = filterContainer.querySelector( '.blog-filter__grid' );
                 const searchInput = filterContainer.querySelector( '#blog-filter-search' );
+                const searchClearBtn = filterContainer.querySelector( '.blog-filter__search-clear' );
                 const categoryLinks = filterContainer.querySelectorAll( '.blog-filter__category-item' );
                 const loadMoreBtn = filterContainer.querySelector( '.blog-filter__load-more-btn' );
                 const loadMoreContainer = filterContainer.querySelector( '.blog-filter__load-more' );
@@ -388,7 +398,50 @@ function blast_blog_filter_shortcode( array $atts ): string
                     loadPosts( 1, false );
                 }, 300 );
 
-                searchInput.addEventListener( 'input', debouncedSearch );
+                searchInput.addEventListener( 'input', function() {
+                    // Show/hide clear button based on input value
+                    if (searchClearBtn) {
+                        if (searchInput.value.trim().length > 0) {
+                            searchClearBtn.style.display = '';
+                        } else {
+                            searchClearBtn.style.display = 'none';
+                        }
+                    }
+
+                    // Trigger debounced search
+                    debouncedSearch();
+                } );
+
+                /**
+                 * Handle search clear button click
+                 */
+                if (searchClearBtn) {
+                    searchClearBtn.addEventListener( 'click', function() {
+                        // Only proceed if there was text to clear
+                        const hadText = searchInput.value.trim().length > 0;
+
+                        // Clear the input
+                        searchInput.value = '';
+
+                        // Hide the clear button
+                        searchClearBtn.style.display = 'none';
+
+                        // If there was text, trigger search to update posts
+                        if (hadText) {
+                            currentSearch = '';
+                            currentPage = 1;
+
+                            // Update URL
+                            updateURL( currentCategory, currentSearch );
+
+                            // Load posts
+                            loadPosts( 1, false );
+                        }
+
+                        // Focus back on input for better UX
+                        searchInput.focus();
+                    } );
+                }
 
                 /**
                  * Handle load more click
