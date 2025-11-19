@@ -889,7 +889,7 @@ body {
 		border : none;
 
 		.cky-accordion-item {
-		  margin-top : 40px;
+		  margin-top : 2.5rem; // 40px
 
 		  .cky-accordion-chevron {
 			display : none;
@@ -927,6 +927,10 @@ body {
 		  line-height : 1.1;
 
 		  color       : #FF654A !important;
+
+		  @include mobile-sm {
+			font-size : 12px;
+		  }
 		}
 
 		.cky-switch {
