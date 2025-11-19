@@ -61,14 +61,12 @@ $reading_time = bs_get_reading_time();
 				<?= esc_html( get_the_title() ) ?>
 			</h3>
 
-			<!-- Excerpt -->
-			<?php if ( has_excerpt() ): ?>
-				<div class="related-post-item__excerpt">
-					<?= wp_kses_post( get_the_excerpt() ) ?>
-				</div>
-			<?php endif; ?>
+            <!-- Excerpt -->
+            <div class="related-post-item__excerpt">
+                <?= wp_kses_post( get_the_excerpt() ) ?>
+            </div>
 
-			<!-- Footer: Author (inline name) -->
+            <!-- Footer: Author (inline name) -->
 			<div class="related-post-item__footer">
 				<?php
 				get_template_part( 'template-parts/components/author', null, [
