@@ -8,6 +8,7 @@
     overflow: hidden; 
     margin: 122px 30px 0px 30px;
     border-radius: 50px;
+    
     @include mobile {
         margin: 0px;
         padding: 122px var(--wp--preset--spacing--30) 60px;
@@ -19,7 +20,8 @@
         z-index: 2;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: 830px 1fr;
+        grid-template-columns: 630px 1fr;
+        padding-left: 30px;
         gap: 30px;
         align-items: center;
         width: 100%;

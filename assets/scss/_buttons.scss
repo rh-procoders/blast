@@ -24,7 +24,10 @@
     }
 
     &.has-white-background-color{
+            color: var(--wp--preset--color--dark-blue);
+
         .button-arrow-wrapper{
+            color: var(--wp--preset--color--dark-blue);
             background-color: var(--wp--preset--color--dark-blue);
             color: var(--wp--preset--color--white);
         }

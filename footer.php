@@ -187,6 +187,41 @@
         <img src="<?php echo THEME_URI ?>/img/footer-bg-graph.png" alt="footer graphic" class="main-footer__bg-image-bottom" loading="lazy"/>
 
     </div>
+    <?php
+    $current_page_id = get_the_ID();
+    $popup_title = get_field( 'popup_title', 'option' );
+    $popup_text = get_field( 'popup_description', 'option' );
+    $button = get_field( 'popup_link', 'option' );
+    $hide_to_specific_page = get_field( 'hide_to_specific_page', 'option' );
+    if ( ! ( is_array( $hide_to_specific_page ) && in_array( $current_page_id, $hide_to_specific_page ) ) ) :
+    ?>                      
+    <div class="popup-modal">
+        <div class="popup-modal__content">
+            <span class="popup-modal__close-button popup-modal__close-button-js-toggle">&times;</span>
+            <div class="popup-modal__body">
+                <?php if ($popup_title): ?>
+                    <h3 class="popup-modal__title"><?php echo esc_html($popup_title); ?></h3>
+                <?php endif; ?>
+                <?php if ($popup_text): ?>
+                    <p class="popup-modal__text"><?php echo esc_html($popup_text); ?></p>
+                <?php endif; ?>
+                <?php if ($button): ?>
+                    <a  href="<?php echo esc_url($button['url']); ?>"  class="btn has-white-background-color">
+                        <span class="button-text"
+                            data-hover-text="<?php echo esc_html($button['title'] ?: 'Open Jobs'); ?>">
+                            <?php echo esc_html($button['title'] ?: 'Get Started'); ?>
+                    </span>
+
+                    <span class="button-arrow-wrapper">
+                        <?php sprite_svg( 'icon-arrow-right', 14, 10 ) ?>
+                    </span>
+                </a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+
 
     <?php $footer_image_placeholder = get_field( 'footer_image_placeholder', 'option' ); ?>
     <?php if ( $footer_image_placeholder ) : ?>

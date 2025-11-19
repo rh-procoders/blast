@@ -104,7 +104,9 @@ $inner_blocks = '<InnerBlocks template="' . esc_attr( wp_json_encode( $allowed_b
 <section <?php echo $wrapper_attributes; ?>>
     <!-- Background Gradient Overlay -->
     <div class="hero-home__gradient-overlay">
-        <img src="<?php echo THEME_URI ?>/img/hero-home-bg-desktop.png" alt="">
+        <img src="<?php echo THEME_URI ?>/img/hero-home-bg-desktop.png" alt="hero-home-bg-desktop" class="desktop-only">
+        <img src="<?php echo THEME_URI ?>/img/home-hero-mobile-bg.png" alt="home-hero-mobile" class="mobile-only">
+        
     </div>
     
     <!-- Container -->

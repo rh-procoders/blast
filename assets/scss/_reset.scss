@@ -635,3 +635,105 @@ input:-webkit-autofill:active{
 	position: relative;
 	z-index: 2;
 }
+.border-radius-30{
+	border-radius: 30px;
+}
+.border-radius-40{
+	border-radius: 40px;
+}
+.border-radius-80{
+	border-radius: 80px;
+	@include tablet{
+		border-radius: 40px;
+	}
+}
+.error404{
+	.site-main{
+		min-height: calc(100vh - 200px);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		padding: 162px 80px 100px;
+		@include tablet{
+			padding: 120px 40px 80px;
+		}
+		@include mobile{
+			padding: 120px 20px 80px;
+		}
+		.inner-wrapper{
+			background-color: #fff;
+			border-radius: 70px;
+			width: 100%;
+			padding: 200px 30px;
+			position: relative;
+			@include tablet{
+				border-radius: 40px;
+			}
+		}
+		.left-image{
+			position: absolute;
+			left: 12%;
+			bottom: 207px;
+			z-index: 1;
+			height: 153px;
+			width: 153px;
+			object-fit: contain;
+			@include desktop-lg{
+				bottom: 107px;
+				left: 7%;
+			}
+			@include tablet{
+				bottom: 67px;
+			}
+			@include mobile{
+				left: 36px;
+				bottom: 77px;
+				width: 72px;
+				height: 72px;
+			}
+		}
+		.right-image{
+			position: absolute;
+			right: 10%;
+			top: 103px;
+			z-index: 1;
+			height: 123px;
+			width: 123px;
+			object-fit: contain;
+			@include tablet{
+				top: 36px;
+			}
+			@include mobile{
+				right: 20px;
+				top: 36px;
+				height: 68px;
+				width: 68px;
+			}
+		}
+		.content-wrapper{
+			text-align: center;
+			max-width: 900px;
+			margin: 0 auto;
+			h1{
+				font-family: $font-family-tertiary;
+				margin-bottom: 20px;
+				@include mobile{
+					font-size: 36px;
+				}
+			}
+			p{
+				font-size: 18px;
+				margin-bottom: 40px;
+				@include mobile{
+					font-size: 16px;
+				}
+			}
+			.btn{
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+	}
+}
