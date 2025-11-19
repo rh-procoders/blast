@@ -9,6 +9,9 @@ function load_scripts() {
 	wp_enqueue_style( 'main', THEME_URI . '/assets/css/style.css', array(), filemtime(THEME_DIR . '/assets/css/style.css'), false );
 	wp_enqueue_style( 'style', get_stylesheet_uri(), array(), filemtime(THEME_DIR . '/style.css') );
 
+	// SimpleBar scrollbar plugin
+	wp_enqueue_style( 'simplebar', THEME_URI . '/css/plugins/simplebar/simplebar.min.css' );
+	wp_enqueue_script( 'simplebar', THEME_URI . '/js/plugins/simplebar/simplebar.min.js', array(), null, true );
 
 	// Register non global style and scripts
     wp_enqueue_script( 'jquery-local', THEME_URI . '/js/plugins/jquery.min.js', '', '3.7.1', false );
