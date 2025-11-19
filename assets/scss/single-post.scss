@@ -133,12 +133,13 @@ html {
 		  margin-top  : 40px;
 
 		  font-family : $font-family-secondary;
+		  font-size   : 18px;
 		  font-weight : 700;
 		  line-height : 2;
 
 		  @include mobile {
 			font-weight : 600;
-			line-height : 1.4;
+			line-height : 1.2;
 		  }
 		}
 	  }
@@ -194,7 +195,7 @@ html {
 
 	  .wp-block-list {
 		margin-top    : 0;
-		margin-bottom : max(40px, 3.75rem); // 60px
+		margin-bottom : 20px;
 
 		font-family   : $font-family-secondary;
 		font-size     : 18px;
@@ -227,10 +228,7 @@ html {
 		}
 
 		@include mobile {
-
-
 		  margin-top    : 20px;
-		  margin-bottom : 40px;
 		}
 	  }
 
