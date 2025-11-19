@@ -803,9 +803,9 @@ new Blast_Contact_Forms_Handler();
  */
 add_action( 'wp_footer', function() {
 	ob_start( function( $html ) {
-		// Only modify if the CookieYes template script exists
-		if ( strpos( $html, 'id="ckyBannerTemplate"' ) !== false ) {
-			// Add custom class and data-simplebar attribute to cky-preference-body-wrapper
+		// Add custom class and data-simplebar attribute to cky-preference-body-wrapper
+		// Works for both template-based and direct-render CookieYes implementations
+		if ( strpos( $html, 'cky-preference-body-wrapper' ) !== false ) {
 			$html = str_replace(
 				'class="cky-preference-body-wrapper"',
 				'class="cky-preference-body-wrapper using-simplebar" data-simplebar data-simplebar-auto-hide="false"',
