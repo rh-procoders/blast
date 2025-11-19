@@ -228,7 +228,7 @@ html {
 		}
 
 		@include mobile {
-		  margin-top    : 20px;
+		  margin-top : 20px;
 		}
 	  }
 
@@ -692,6 +692,7 @@ html {
 		left            : 0;
 		bottom          : 0;
 		width           : 100%;
+		height          : 100%;
 
 		object-fit      : cover;
 		object-position : 50% 50%;
