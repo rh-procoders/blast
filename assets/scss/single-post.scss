@@ -599,8 +599,8 @@ html {
 	  margin-bottom  : max(40px, 3.75rem); // 60px
 
 	  font-family    : $font-family-primary;
-	  font-size      : max(40px, 3.75rem); // 60px
-	  font-weight    : 400;
+	  font-size      : max(30px, 3.75rem); // 60px
+	  font-weight    : 600;
 	  line-height    : 1.1;
 	  letter-spacing : calc(-1 * max(0.8px, 0.075rem)); // -1.2px
 
@@ -609,15 +609,19 @@ html {
 	  color          : var(--wp--preset--color--dark-blue);
 
 	  @include tablet {
-		font-size      : 40px;
 		margin-bottom  : 40px;
 		letter-spacing : -0.8px;
 	  }
 
+	  @include mobile {
+		font-size : 30px;
+	  }
+
 	  // Emphasize "like" word
 	  strong {
-		font-weight : 600;
-		font-style  : italic;
+		font-family : $font-family-tertiary;
+
+		font-weight : 700;
 	  }
 	}
 
