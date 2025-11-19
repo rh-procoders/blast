@@ -4,7 +4,7 @@ body:has(~ #site-navigation.active) {
 
 header.site-header {
   position: fixed;
-  z-index: 9;
+  z-index: 999999; // big z-index so cookies plugin doesn't go over it
   width: 100%;
   top: 20px;
   left: 0;
@@ -107,7 +107,7 @@ header.site-header {
         right: 0;
         width: 0vw;
         overflow: hidden;
-        background: var(--color-gray);
+        background: #FFFFFF;
         transition: .3s all;
         z-index: 9;
         transform: translateX(100%);
@@ -123,7 +123,7 @@ header.site-header {
         .navigation-buttons{
           padding: 0px 35px 35px;
         }
-        
+
       }
     }
     nav {
@@ -183,9 +183,9 @@ header.site-header {
               text-align: left;
               width: 100%;
               font-size: 24px;
-              color: #fff;
+              color: #000B40;
             }
-  
+
             &:hover {
               text-decoration: none;
               color: var(--wp--preset--color--coral);
@@ -199,12 +199,12 @@ header.site-header {
             padding-right: 20px;
           }
           &.current-menu-item{
-              a{ 
+              a{
                 color: var(--wp--preset--color--coral);
               }
 
             }
-        }       
+        }
 
 
         .sub-menu{
@@ -215,7 +215,7 @@ header.site-header {
           background-color: transparent;
           padding: 20px 0px 0px 0px;
           display: none;
-          
+
           li{
             border-bottom: 1px solid #E5E5E5;
             a{
@@ -257,7 +257,7 @@ header.site-header {
     }
     .toggle-icon{
         .toggle-icon-bar{
-          background: #fff!important;
+          background: #000B40!important;
           &:nth-child(1){
             top: 7px!important;
             width: 100%!important;
