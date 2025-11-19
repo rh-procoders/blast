@@ -50,7 +50,8 @@ if ($youtube_video) {
     if ($video_id) {
         $autoplay_param = $video_autoplay ? '&autoplay=1&mute=1' : '';
         $loop_param = $video_loop ? '&loop=1&playlist=' . $video_id : '';
-        $youtube_embed_url = "https://www.youtube.com/embed/{$video_id}?controls=0&showinfo=0&rel=0&modestbranding=1{$autoplay_param}{$loop_param}";
+        // Force HD quality (720p or higher) with fs=1 for fullscreen
+        $youtube_embed_url = "https://www.youtube.com/embed/{$video_id}?controls=1&showinfo=0&rel=0&modestbranding=1&fs=1&vq=hd1080{$autoplay_param}{$loop_param}";
     }
 }
 
