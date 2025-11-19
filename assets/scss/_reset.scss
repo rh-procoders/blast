@@ -635,7 +635,18 @@ input:-webkit-autofill:active{
 	position: relative;
 	z-index: 2;
 }
-
+.border-radius-30{
+	border-radius: 30px;
+}
+.border-radius-40{
+	border-radius: 40px;
+}
+.border-radius-80{
+	border-radius: 80px;
+	@include tablet{
+		border-radius: 40px;
+	}
+}
 .error404{
 	.site-main{
 		min-height: calc(100vh - 200px);
@@ -657,6 +668,9 @@ input:-webkit-autofill:active{
 			width: 100%;
 			padding: 200px 30px;
 			position: relative;
+			@include tablet{
+				border-radius: 40px;
+			}
 		}
 		.left-image{
 			position: absolute;
