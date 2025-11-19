@@ -629,6 +629,14 @@ body .cky-consent-container {
 	  padding       : 24px;
 	}
 
+	.cky-notice-content-wrapper {
+	  padding : 0;
+
+	  + div {
+		display : none;
+	  }
+	}
+
 	.cky-notice {
 
 	  .cky-title {
@@ -766,7 +774,7 @@ body {
 	  padding-right  : 60px;
 	  padding-bottom : 40px;
 
-		.cky-preference-title {
+	  .cky-preference-title {
 		font-family    : $font-family-primary;
 		font-size      : 34px;
 		font-weight    : 600;
@@ -777,12 +785,146 @@ body {
 	  }
 
 	  .cky-btn-close {
+		position            : absolute;
+		top                 : 40px;
+		right               : 40px;
+
+		background-image    : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 13 13' fill='none'%3E%3Cpath d='M11.4141 1.41406L1.41406 11.4141' stroke='%23000B40' stroke-width='2' stroke-linecap='square'/%3E%3Cpath d='M11.4141 11.4141L1.41406 1.41406' stroke='%23000B40' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E") !important;
+		background-repeat   : no-repeat !important;
+		background-size     : 13px 13px !important;
+		background-position : center !important;
+
+		transition          : transform ease .3s;
+
+		&:hover,
+		&:focus {
+		  transform : rotate(180deg);
+		}
+
+		img {
+		  display : none;
+		}
 
 	  }
 	}
 
 	.cky-preference-body-wrapper {
+	  padding-left  : 60px;
+	  padding-right : 60px;
 
+	  &.using-simplebar {
+		// Hide default scrollbar for simplebar
+		// Firefox
+		scrollbar-width : none;
+
+		// Chrome, Safari, Edge
+		&::-webkit-scrollbar {
+		  display : none;
+		}
+
+		.simplebar-track {
+
+
+		  &.simplebar-vertical {
+			width : 6px;
+			right : 10px;
+		  }
+
+		  .simplebar-scrollbar {
+			&:before {
+			  left             : 0;
+			  right            : 0;
+
+			  opacity          : 1;
+			  background-color : #000B40;
+			}
+		  }
+		}
+	  }
+
+	  .cky-preference-content-wrapper {
+		padding : 0 0 10px;
+		border  : none;
+
+		p {
+		  margin-bottom : 10px;
+
+		  &:last-child {
+			margin-bottom : 0;
+		  }
+		}
+
+		.cky-show-desc-btn {
+		  font-family     : $font-family-secondary;
+		  font-size       : 18px;
+		  font-weight     : 400;
+		  line-height     : 1.4;
+
+		  color           : #FF654A !important;
+		  text-decoration : underline;
+		}
+	  }
+
+	  .cky-accordion {
+		border : none;
+
+		.cky-accordion-item {
+		  margin-top : 40px;
+
+		  .cky-accordion-chevron {
+			display : none;
+		  }
+		}
+	  }
+
+	  .cky-accordion-header {
+		flex-wrap       : wrap;
+		justify-content : flex-start;
+
+		.cky-accordion-btn {
+		  order          : 2;
+
+		  font-family    : $font-family-primary;
+		  font-size      : 24px;
+		  font-weight    : 600;
+		  line-height    : 1.2;
+		  letter-spacing : -0.48px;
+		}
+
+		.cky-always-active {
+		  order       : 1;
+		  flex        : 1 1 100%;
+
+		  font-family : $font-family-tertiary;
+		  font-size   : 14px;
+		  font-weight : 600;
+		  line-height : 1.1;
+
+		  color       : #FF654A;
+		}
+
+		.cky-switch {
+		  order : 3;
+
+		  input[type="checkbox"] {
+			background : #FF654A;
+
+			&:before {
+
+			}
+		  }
+		}
+	  }
+
+	  // general
+	  p {
+		font-family : $font-family-secondary;
+		font-size   : 18px;
+		font-weight : 400;
+		line-height : 1.4;
+
+		color       : #000B40;
+	  }
 	}
 
 	.cky-footer-wrapper {
