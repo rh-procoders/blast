@@ -758,6 +758,13 @@ body {
   .cky-modal {
 	--cky-br      : 40px;
 
+	@media (max-width : 576px) {
+	  --cky-br   : 24px;
+
+	  max-width  : calc(100% - (24px * 2));
+	  max-height : calc(100% - (24px * 2));
+	}
+
 	border-radius : var(--cky-br);
 
 	// Wrapper
@@ -769,10 +776,10 @@ body {
 	.cky-preference-header {
 	  border         : none;
 
-	  padding-top    : 60px;
-	  padding-left   : 60px;
-	  padding-right  : 60px;
-	  padding-bottom : 40px;
+	  padding-top    : 3.75rem; // 60px
+	  padding-left   : 3.75rem; // 60px
+	  padding-right  : 3.75rem; // 60px
+	  padding-bottom : 2.5rem; // 40px
 
 	  .cky-preference-title {
 		font-family    : $font-family-primary;
@@ -782,12 +789,16 @@ body {
 		letter-spacing : -0.68px;
 
 		color          : #000B40 !important;
+
+		@include mobile {
+		  font-size : calc(34px * 0.75);
+		}
 	  }
 
 	  .cky-btn-close {
 		position            : absolute;
-		top                 : 40px;
-		right               : 40px;
+		top                 : 2.5rem; // 40px
+		right               : 2.5rem; // 40px
 
 		background-image    : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 13 13' fill='none'%3E%3Cpath d='M11.4141 1.41406L1.41406 11.4141' stroke='%23000B40' stroke-width='2' stroke-linecap='square'/%3E%3Cpath d='M11.4141 11.4141L1.41406 1.41406' stroke='%23000B40' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E") !important;
 		background-repeat   : no-repeat !important;
@@ -809,8 +820,9 @@ body {
 	}
 
 	.cky-preference-body-wrapper {
-	  padding-left  : 60px;
-	  padding-right : 60px;
+	  padding-left  : 3.75rem; // 60px
+	  padding-right : 3.75rem; // 60px
+
 
 	  &.using-simplebar {
 		// Hide default scrollbar for simplebar
@@ -862,7 +874,15 @@ body {
 
 		  color           : #FF654A !important;
 		  text-decoration : underline;
+
+		  @include mobile-sm {
+			font-size : 16px;
+		  }
 		}
+	  }
+
+	  .cky-horizontal-separator {
+		display : none;
 	  }
 
 	  .cky-accordion {
@@ -891,6 +911,10 @@ body {
 		  letter-spacing : -0.48px;
 
 		  color          : #000B40 !important;
+
+		  @include mobile {
+			font-size : calc(24px * 0.75);
+		  }
 		}
 
 		.cky-always-active {
@@ -902,7 +926,7 @@ body {
 		  font-weight : 600;
 		  line-height : 1.1;
 
-		  color       : #FF654A;
+		  color       : #FF654A !important;
 		}
 
 		.cky-switch {
@@ -928,6 +952,10 @@ body {
 		line-height : 1.4;
 
 		color       : #000B40;
+
+		@include mobile-sm {
+		  font-size : 16px;
+		}
 	  }
 	}
 
@@ -941,9 +969,13 @@ body {
 
 	  .cky-prefrence-btn-wrapper {
 		border  : none;
-		padding : 40px;
+		padding : 2.5rem; // 40px
 
 		gap     : 20px;
+
+		@include mobile-sm {
+		  gap : 10px;
+		}
 
 		.cky-btn {
 		  margin        : 0;
