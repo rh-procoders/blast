@@ -805,10 +805,10 @@ add_action( 'wp_footer', function() {
 	ob_start( function( $html ) {
 		// Only modify if the CookieYes template script exists
 		if ( strpos( $html, 'id="ckyBannerTemplate"' ) !== false ) {
-			// Add custom class to cky-preference-body-wrapper
+			// Add custom class and data-simplebar attribute to cky-preference-body-wrapper
 			$html = str_replace(
 				'class="cky-preference-body-wrapper"',
-				'class="cky-preference-body-wrapper cky-custom-modal"',
+				'class="cky-preference-body-wrapper using-simplebar" data-simplebar data-simplebar-auto-hide="false"',
 				$html
 			);
 		}
