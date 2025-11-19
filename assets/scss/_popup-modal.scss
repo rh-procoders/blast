@@ -4,7 +4,6 @@
     bottom: 60px;
     right: 60px;
     width: 666px;
-    background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,6 +17,23 @@
     background-position: right bottom;
     background-repeat: no-repeat;
     color: #fff;
+    display: none;
+    @include desktop{
+        bottom: 40px;
+        right: 40px;
+        padding: 40px 40px 30px 40px;
+        width: 555px;
+    }
+    @include tablet-lg{
+        padding: 40px 30px 30px;
+        width: 455px;
+    }
+    @include mobile{
+        width: 100%;
+        max-width: 320px;
+        bottom: 20px;
+        right: 20px;
+    }
     
     &__close-button{
         position: absolute;
@@ -33,17 +49,39 @@
         color: #fff;
         cursor: pointer;
         font-size: 24px;
+        @include tablet-lg{
+            top: 16px;
+            right: 16px;
+            width: 20px;
+            height: 20px;
+            font-size: 20px;
+        }
     }
     &__title{
         font-size: 40px;
         font-weight: 600;
         max-width: 440px;
         margin-bottom: 10px;
+        @include tablet-lg{
+            font-size: 32px;
+        }
+        @include mobile{
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        @include mobile-sm{
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
     }
     &__text{
         font-family: $font-family-secondary;
         font-size: 18px;
         margin-bottom: 58px;
+         @include tablet-lg{
+            font-size: 16px;
+            margin-bottom: 30px;
+         }
     }
     .button-text{
         font-weight: 700;

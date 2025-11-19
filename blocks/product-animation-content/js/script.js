@@ -5,6 +5,39 @@
 (function() {
     'use strict';
 
+    // Polyfill for closest() method if not supported
+    if (!Element.prototype.closest) {
+        Element.prototype.closest = function(s) {
+            var el = this;
+            do {
+                if (Element.prototype.matches.call(el, s)) return el;
+                el = el.parentElement || el.parentNode;
+            } while (el !== null && el.nodeType === 1);
+            return null;
+        };
+    }
+
+    // Polyfill for matches() method if not supported
+    if (!Element.prototype.matches) {
+        Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+    }
+
+    // Helper function to find closest element
+    function findClosest(element, selector) {
+        if (!element) return null;
+        if (element.closest) {
+            return element.closest(selector);
+        }
+        // Fallback for older browsers
+        while (element) {
+            if (element.matches && element.matches(selector)) {
+                return element;
+            }
+            element = element.parentElement;
+        }
+        return null;
+    }
+
     // Initialize Lottie animations when DOM is ready
     function initLottieAnimations() {
         const lottieElements = document.querySelectorAll('.pac-lottie');
@@ -56,7 +89,7 @@
 
         // Close content when clicking outside
         document.addEventListener('click', (e) => {
-            const dotsContainer = e.target.closest('.pac-dots-container');
+            const dotsContainer = findClosest(e.target, '.pac-dots-container');
             
             if (!dotsContainer) {
                 contentDots.forEach((dot) => {
@@ -126,7 +159,7 @@
 
     // Also adjust on first hover
     document.addEventListener('mouseenter', (e) => {
-        if (e.target.closest('.pac-content-dot')) {
+        if (findClosest(e.target, '.pac-content-dot')) {
             setTimeout(adjustTooltipPosition, 50);
         }
     }, true);

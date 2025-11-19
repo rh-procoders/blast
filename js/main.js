@@ -54,6 +54,10 @@
                 },
             });
         }
+        setTimeout(() => {
+            console.log('Showing popup modal');
+            $('body').find('.popup-modal').fadeIn();
+        }, 2000);
 
         $('body').on('click', '.popup-modal__close-button-js-toggle', function(e){
             e.preventDefault();

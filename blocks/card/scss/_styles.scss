@@ -109,18 +109,28 @@
         align-items: center;
         justify-content: space-between;
         margin-top: 10px;
+        gap: 30px 10px;
+        flex-wrap: wrap;
     }
     &__author{
         display: grid;
         grid-template-columns: 50px 1fr;
         gap: 20px;
         align-items: center;
+        @include mobile{
+            grid-template-columns: 40px 1fr;
+            gap: 10px;
+        } 
         &-image{
             width: 50px;
             height: 50px;
             border-radius: 16px;
             border: 2px solid #F4F4F4;
             overflow: hidden;
+            @include mobile{
+                width: 40px;
+                height: 40px;
+            }
             img{
                 width: 100%;
                 height: 100%;
