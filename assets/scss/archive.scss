@@ -378,6 +378,33 @@
 	  //font-size        : font-size('base'); // -> 16px
 	  //font-weight      : font-weight('medium'); // -> 500
 	  //line-height      : 1.4;
+
+	  padding-right : 80px !important;
+	}
+
+	&-clear {
+	  padding    : 0;
+	  cursor     : pointer;
+
+	  display    : flex;
+
+	  position   : absolute;
+	  top        : 50%;
+	  right      : 60px;
+	  transform  : translateY(-50%);
+
+	  color      : var(--wp--preset--color--dark-blue);
+	  transition : color ease .3s;
+
+	  svg {
+		fill   : currentColor;
+		stroke : currentColor;
+	  }
+
+	  &:hover,
+	  &:focus {
+		color : var(--wp--preset--color--coral);
+	  }
 	}
 
 	.svg-icon {
