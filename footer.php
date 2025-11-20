@@ -193,7 +193,8 @@
     $popup_text = get_field( 'popup_description', 'option' );
     $button = get_field( 'popup_link', 'option' );
     $hide_to_specific_page = get_field( 'hide_to_specific_page', 'option' );
-    if ( ! ( is_array( $hide_to_specific_page ) && in_array( $current_page_id, $hide_to_specific_page ) ) ) :
+    $enable_modal = get_field( 'enable_popup_modal', 'option' ) ?: false;
+    if ( ! ( is_array( $hide_to_specific_page ) && in_array( $current_page_id, $hide_to_specific_page ) ||  $enable_modal == false)):
     ?>                      
     <div class="popup-modal">
         <div class="popup-modal__content">

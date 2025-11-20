@@ -650,6 +650,27 @@
             "selected": 0
         },
         {
+            "key": "field_691ede9965e25",
+            "label": "Enable Modal",
+            "name": "enable_popup_modal",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_691c43c9b83b7",
             "label": "Title",
             "name": "popup_title",
@@ -722,7 +743,10 @@
                 "class": "",
                 "id": ""
             },
-            "post_type": "",
+            "post_type": [
+                "post",
+                "page"
+            ],
             "post_status": "",
             "taxonomy": "",
             "return_format": "id",
@@ -753,5 +777,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763460407
+    "modified": 1763631057
 }
