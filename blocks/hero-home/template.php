@@ -143,30 +143,53 @@ $inner_blocks = '<InnerBlocks template="' . esc_attr( wp_json_encode( $allowed_b
                             <?php endforeach; ?>
                             Your browser does not support the video tag.
                         </video>
+                        <?php if (!$video_autoplay && $video_poster): ?>
+                            <div class="hero-home__video-play-overlay">
+                                <button class="hero-home__play-button hero-home__play-button-style" aria-label="Play video">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php elseif ($youtube_embed_url): ?>
                     <!-- YouTube Embed -->
                     <div class="hero-home__video-wrapper">
                         <iframe 
                             class="hero-home__video-iframe"
+                            id="youtube-video-<?php echo esc_attr($block['id']); ?>"
                             src="<?php echo esc_url($youtube_embed_url); ?>"
                             title="Hero Video"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
+                            allowfullscreen
+                            style="<?php if (!$video_autoplay && $video_poster): ?>display: none;<?php endif; ?>">
                         </iframe>
+                        <?php if (!$video_autoplay && $video_poster): ?>
+                            <div class="hero-home__video-play-overlay" data-video-type="youtube" data-video-id="youtube-video-<?php echo esc_attr($block['id']); ?>">
+                                <img src="<?php echo esc_url($video_poster); ?>" alt="Video thumbnail" class="hero-home__poster-image hero-home__play-button">
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php elseif ($vimeo_embed_url): ?>
                     <!-- Vimeo Embed -->
                     <div class="hero-home__video-wrapper">
                         <iframe 
                             class="hero-home__video-iframe"
+                            id="vimeo-video-<?php echo esc_attr($block['id']); ?>"
                             src="<?php echo esc_url($vimeo_embed_url); ?>"
                             title="Hero Video"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
+                            allowfullscreen
+                            style="<?php if (!$video_autoplay && $video_poster): ?>display: none;<?php endif; ?>">
                         </iframe>
+                        <?php if (!$video_autoplay && $video_poster): ?>
+                            <div class="hero-home__video-play-overlay" data-video-type="vimeo" data-video-id="vimeo-video-<?php echo esc_attr($block['id']); ?>">
+                                <img src="<?php echo esc_url($video_poster); ?>" alt="Video thumbnail" class="hero-home__play-button hero-home__poster-image">
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php else: ?>
                     <!-- Placeholder when no video is set -->

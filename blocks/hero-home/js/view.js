@@ -19,6 +19,19 @@ function initHeroBlock(block) {
         optimizeVideoLoading(videoIframe);
     }
     
+    // Handle click-to-play for local HTML5 videos with poster
+    const playOverlay = block.querySelector('.hero-home__video-play-overlay');
+    const htmlVideo = block.querySelector('.hero-home__html5-video');
+    if (playOverlay && htmlVideo) {
+        handleClickToPlay(playOverlay, htmlVideo);
+    }
+    
+    // Handle click-to-play for embedded videos (YouTube/Vimeo)
+    const embeddedOverlays = block.querySelectorAll('.hero-home__video-play-overlay[data-video-type]');
+    embeddedOverlays.forEach(overlay => {
+        handleClickToPlayEmbedded(overlay);
+    });
+    
     // Handle animation triggers if animations are enabled
     if (block.classList.contains('hero-home--animate')) {
         handleScrollAnimations(block);
@@ -42,6 +55,69 @@ function optimizeVideoLoading(iframe) {
                     <small>Please check the YouTube URL</small>
                 </div>
             `;
+        }
+    });
+}
+
+function handleClickToPlay(overlay, videoElement) {
+    const playButton = overlay.querySelector('.hero-home__play-button');
+    
+    if (playButton) {
+        playButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Play the video
+            videoElement.play();
+            
+            // Hide the overlay
+            overlay.style.opacity = '0';
+            overlay.style.pointerEvents = 'none';
+            overlay.style.transition = 'opacity 0.3s ease';
+        });
+    }
+    
+    // Hide overlay when video starts playing
+    videoElement.addEventListener('play', function() {
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+    });
+    
+    // Show overlay when video is paused (if it's at the beginning)
+    videoElement.addEventListener('pause', function() {
+        if (videoElement.currentTime === 0) {
+            overlay.style.opacity = '1';
+            overlay.style.pointerEvents = 'auto';
+        }
+    });
+}
+
+function handleClickToPlayEmbedded(overlay) {
+    const playButton = overlay.querySelector('.hero-home__play-button');
+    const videoId = overlay.dataset.videoId;
+    const videoType = overlay.dataset.videoType;
+    const iframe = document.getElementById(videoId);
+    
+    if (!playButton || !iframe) return;
+    
+    playButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Show the iframe
+        iframe.style.display = 'block';
+        
+        // Hide the overlay
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+        
+        // Trigger play based on video type
+        if (videoType === 'youtube') {
+            // YouTube: trigger play via postMessage if possible
+            iframe.src = iframe.src + (iframe.src.includes('?') ? '&autoplay=1' : '?autoplay=1');
+        } else if (videoType === 'vimeo') {
+            // Vimeo: trigger play via postMessage if possible
+            iframe.src = iframe.src + (iframe.src.includes('?') ? '&autoplay=1' : '?autoplay=1');
         }
     });
 }

@@ -110,7 +110,75 @@
         height: 100%;
         border: 0;
     }
-    
+
+    &__html5-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+    }
+
+    // Video play overlay (shows when not autoplaying)
+    &__video-play-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        opacity: 1;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        img{
+            transition: transform 0.3s ease;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+        }
+        &:hover{
+            img{
+                transition: transform 0.3s ease;
+                transform: scale(1.1);
+            }
+        }
+    }
+
+     &__play-button-style {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: #FF654A;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 24px rgba(255, 101, 74, 0.4);
+
+        svg {
+            width: 100%;
+            height: 100%;
+            color: #FFFFFF;
+            padding-left: 4px;
+        }
+
+        &:hover {
+            background: #FF5233;
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px rgba(255, 101, 74, 0.6);
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+
     // Video placeholder
     &__video-placeholder {
         width: 100%;
@@ -171,7 +239,6 @@
         }
     }
 }
-
 // Wide alignment  
 .alignwide .hero-home {
     &__container {
