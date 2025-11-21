@@ -5,6 +5,11 @@
  */
 (function(){
 
+    // Track user location for demo back button (skip demo template pages)
+    if ( !document.body || !document.body.classList.contains( 'page-template-page-demo' ) ) {
+        sessionStorage.setItem( 'blast_return_url', window.location.href );
+    }
+
     // Create cross browser requestAnimationFrame method:
     window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function(f) {
         setTimeout(f, 1000 / 60);
