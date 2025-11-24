@@ -200,7 +200,7 @@
             },
             pin: true,
             pinSpacing: false,
-            markers: true,
+            markers: false,
             onUpdate: self => {
                 let scaleValue = Math.max(0.5, 1 - self.progress); // set minimum scale of 0.5
                 if (window.innerWidth < 1499) {
