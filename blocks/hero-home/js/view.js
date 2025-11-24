@@ -116,37 +116,48 @@ function handleClickToPlayEmbedded(overlay) {
         
         // Trigger play based on video type
         if (videoType === 'youtube') {
-            // YouTube: Update src to trigger autoplay
-            let newSrc = iframe.src;
-            // Remove existing autoplay parameter if it exists
-            newSrc = newSrc.replace(/[?&]autoplay=[^&]*/g, '');
-            // Add autoplay parameter
-            newSrc = newSrc + (newSrc.includes('?') ? '&autoplay=1' : '?autoplay=1');
-            iframe.src = newSrc;
+            // YouTube: Reload iframe with autoplay parameter
+            let currentSrc = iframe.getAttribute('src');
             
-            // Also try postMessage API for more reliable playback
-            setTimeout(() => {
-                iframe.contentWindow.postMessage({
-                    event: 'command',
-                    func: 'playVideo'
-                }, '*');
-            }, 100);
+            if (currentSrc) {
+                // Clean up existing parameters
+                let newSrc = currentSrc.split('?')[0]; // Get base URL
+                let params = new URLSearchParams(currentSrc.split('?')[1] || '');
+                
+                // Set autoplay and mute for YouTube
+                params.set('autoplay', '1');
+                params.set('mute', '1');
+                
+                // Rebuild URL
+                newSrc = newSrc + '?' + params.toString();
+                
+                // Reset iframe src to trigger reload and autoplay
+                iframe.src = '';
+                setTimeout(() => {
+                    iframe.src = newSrc;
+                }, 50);
+            }
         } else if (videoType === 'vimeo') {
-            // Vimeo: Update src to trigger autoplay
-            let newSrc = iframe.src;
-            // Remove existing autoplay parameter if it exists
-            newSrc = newSrc.replace(/[?&]autoplay=[^&]*/g, '');
-            // Add autoplay parameter
-            newSrc = newSrc + (newSrc.includes('?') ? '&autoplay=1' : '?autoplay=1');
-            iframe.src = newSrc;
+            // Vimeo: Reload iframe with autoplay parameter
+            let currentSrc = iframe.getAttribute('src');
             
-            // Also try Vimeo player API
-            setTimeout(() => {
-                if (window.Vimeo) {
-                    const player = new window.Vimeo.Player(iframe);
-                    player.play();
-                }
-            }, 100);
+            if (currentSrc) {
+                // Clean up existing parameters
+                let newSrc = currentSrc.split('?')[0]; // Get base URL
+                let params = new URLSearchParams(currentSrc.split('?')[1] || '');
+                
+                // Set autoplay for Vimeo
+                params.set('autoplay', '1');
+                
+                // Rebuild URL
+                newSrc = newSrc + '?' + params.toString();
+                
+                // Reset iframe src to trigger reload and autoplay
+                iframe.src = '';
+                setTimeout(() => {
+                    iframe.src = newSrc;
+                }, 50);
+            }
         }
     }
     
