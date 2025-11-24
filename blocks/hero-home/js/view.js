@@ -100,9 +100,12 @@ function handleClickToPlayEmbedded(overlay) {
     
     if (!playButton || !iframe) return;
     
-    playButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+    // Create handler function
+    function playVideo(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
         
         // Show the iframe
         iframe.style.display = 'block';
@@ -113,13 +116,54 @@ function handleClickToPlayEmbedded(overlay) {
         
         // Trigger play based on video type
         if (videoType === 'youtube') {
-            // YouTube: trigger play via postMessage if possible
-            iframe.src = iframe.src + (iframe.src.includes('?') ? '&autoplay=1' : '?autoplay=1');
+            // YouTube: Update src to trigger autoplay
+            let newSrc = iframe.src;
+            // Remove existing autoplay parameter if it exists
+            newSrc = newSrc.replace(/[?&]autoplay=[^&]*/g, '');
+            // Add autoplay parameter
+            newSrc = newSrc + (newSrc.includes('?') ? '&autoplay=1' : '?autoplay=1');
+            iframe.src = newSrc;
+            
+            // Also try postMessage API for more reliable playback
+            setTimeout(() => {
+                iframe.contentWindow.postMessage({
+                    event: 'command',
+                    func: 'playVideo'
+                }, '*');
+            }, 100);
         } else if (videoType === 'vimeo') {
-            // Vimeo: trigger play via postMessage if possible
-            iframe.src = iframe.src + (iframe.src.includes('?') ? '&autoplay=1' : '?autoplay=1');
+            // Vimeo: Update src to trigger autoplay
+            let newSrc = iframe.src;
+            // Remove existing autoplay parameter if it exists
+            newSrc = newSrc.replace(/[?&]autoplay=[^&]*/g, '');
+            // Add autoplay parameter
+            newSrc = newSrc + (newSrc.includes('?') ? '&autoplay=1' : '?autoplay=1');
+            iframe.src = newSrc;
+            
+            // Also try Vimeo player API
+            setTimeout(() => {
+                if (window.Vimeo) {
+                    const player = new window.Vimeo.Player(iframe);
+                    player.play();
+                }
+            }, 100);
         }
-    });
+    }
+    
+    // Add click handler to play button
+    playButton.addEventListener('click', playVideo);
+    playButton.addEventListener('touchend', playVideo);
+    
+    // Add click handler to overlay itself (for Safari compatibility - click anywhere on overlay)
+    overlay.addEventListener('click', playVideo);
+    overlay.addEventListener('touchend', playVideo);
+    
+    // Also handle direct clicks on the poster image
+    const posterImg = overlay.querySelector('.hero-home__poster-image');
+    if (posterImg) {
+        posterImg.addEventListener('click', playVideo);
+        posterImg.addEventListener('touchend', playVideo);
+    }
 }
 
 function handleScrollAnimations(block) {

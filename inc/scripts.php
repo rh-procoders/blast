@@ -18,6 +18,9 @@ function load_scripts() {
 	wp_register_style( 'splide-slider', THEME_URI . '/css/plugins/splide/splide.min.css' );
 	wp_register_script( 'splide-slider', THEME_URI . '/js/plugins/splide/splide.min.js' );
 
+    wp_register_script('gsap', THEME_URI . '/vendor/gsap/gsap.min.js', array(), null, true);
+    wp_register_script('gsap-scrolltrigger', THEME_URI . '/vendor/gsap/ScrollTrigger.min.js', array('gsap'), null, true);
+
 	// Custom forms enhancements (2px caret, etc.)
 	wp_register_script( 'custom-forms', THEME_URI . '/js/custom-forms.js', array(), filemtime(THEME_DIR . '/js/custom-forms.js'), true );
 

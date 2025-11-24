@@ -5,6 +5,9 @@
 (function() {
     'use strict';
 
+    // Store lottie instances for control
+    let lottieInstances = [];
+
     // Polyfill for closest() method if not supported
     if (!Element.prototype.closest) {
         Element.prototype.closest = function(s) {
@@ -54,6 +57,8 @@
                 if (element.hasAttribute('autoplay')) {
                     element.play();
                 }
+                // Store instance for later control
+                lottieInstances.push(element);
             }
         });
     }
@@ -143,15 +148,77 @@
         };
     }
 
+
+    // Scroll-triggered pin animation using GSAP
+    function initScrollPin() {
+        if(window.innerWidth < 1025){
+            return;
+        }
+        // Check if GSAP and ScrollTrigger are available
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+            console.warn('GSAP and ScrollTrigger are required for scroll pin functionality');
+            return;
+        }
+
+        const lottieContainer = document.querySelector('.pac-lottie');
+        const mainContainer = document.querySelector('.pac-product-animation-content');
+        const bottomImage = document.querySelector('.pac-bottom-image');
+        
+        if (!lottieContainer || !bottomImage) {
+            return;
+        }
+
+        // Register ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Create pin animation
+        ScrollTrigger.create({
+            trigger: lottieContainer,
+            start: "top 25%",
+            end: () => {
+                const bottomImageRect = bottomImage.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+                return `+=${bottomImageRect.height + 100}`;
+            },
+            pin: true,
+            pinSpacing: false,
+            markers: false,
+            onUpdate: self => {
+                if(self.progress >= 0.7){
+                    let opacityValue = (self.progress - 0.6) / 0.4;
+                    $('.pac-lottie-container').css('opacity', 1 - opacityValue);
+                    $('.pac-bottom-image').css('opacity', opacityValue);
+                    lottieInstances.forEach(instance => instance.pause());
+                }else{
+                    $('.pac-lottie-container').css('opacity', '1');
+                    $('.pac-bottom-image').css('opacity', '0');
+                    lottieInstances.forEach(instance => instance.play());
+                }
+            },
+            onToggle: (self) => {
+                if(self.isActive){
+                    $('.pac-dots-container').fadeOut();
+                    
+                }else{
+                    $('.pac-dots-container').fadeIn();
+                    
+                }
+            }
+        });
+    }
+
+
     // Initialize on DOM ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             initLottieAnimations();
             initDotInteractions();
+            initScrollPin();
         });
     } else {
         initLottieAnimations();
         initDotInteractions();
+        initScrollPin();
     }
 
     // Reinitialize on window resize for responsive tooltip positioning

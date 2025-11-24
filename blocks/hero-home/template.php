@@ -51,8 +51,8 @@ if ($youtube_video) {
     if ($video_id) {
         $autoplay_param = $video_autoplay ? '&autoplay=1&mute=1' : '';
         $loop_param = $video_loop ? '&loop=1&playlist=' . $video_id : '';
-        // Force HD quality (720p or higher) with fs=1 for fullscreen
-        $youtube_embed_url = "https://www.youtube.com/embed/{$video_id}?controls=1&showinfo=0&rel=0&modestbranding=1&fs=1&vq=hd1080{$autoplay_param}{$loop_param}";
+        // Force HD quality (720p or higher) with fs=1 for fullscreen, enable=js for API
+        $youtube_embed_url = "https://www.youtube.com/embed/{$video_id}?controls=1&showinfo=0&rel=0&modestbranding=1&fs=1&vq=hd1080&enablejsapi=1{$autoplay_param}{$loop_param}";
     }   
 }
 
@@ -168,7 +168,12 @@ $inner_blocks = '<InnerBlocks template="' . esc_attr( wp_json_encode( $allowed_b
                         </iframe>
                         <?php if (!$video_autoplay && $video_poster): ?>
                             <div class="hero-home__video-play-overlay" data-video-type="youtube" data-video-id="youtube-video-<?php echo esc_attr($block['id']); ?>">
-                                <img src="<?php echo esc_url($video_poster); ?>" alt="Video thumbnail" class="hero-home__poster-image hero-home__play-button">
+                                <img src="<?php echo esc_url($video_poster); ?>" alt="Video thumbnail" class="hero-home__poster-image">
+                                <button class="hero-home__play-button hero-home__play-button-style" aria-label="Play video">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
+                                    </svg>
+                                </button>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -187,7 +192,12 @@ $inner_blocks = '<InnerBlocks template="' . esc_attr( wp_json_encode( $allowed_b
                         </iframe>
                         <?php if (!$video_autoplay && $video_poster): ?>
                             <div class="hero-home__video-play-overlay" data-video-type="vimeo" data-video-id="vimeo-video-<?php echo esc_attr($block['id']); ?>">
-                                <img src="<?php echo esc_url($video_poster); ?>" alt="Video thumbnail" class="hero-home__play-button hero-home__poster-image">
+                                <img src="<?php echo esc_url($video_poster); ?>" alt="Video thumbnail" class="hero-home__poster-image">
+                                <button class="hero-home__play-button hero-home__play-button-style" aria-label="Play video">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
+                                    </svg>
+                                </button>
                             </div>
                         <?php endif; ?>
                     </div>

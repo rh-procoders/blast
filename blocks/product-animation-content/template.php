@@ -3,6 +3,8 @@
  * Product Animation Content Block
  */
 
+
+
 $heading = get_field('heading') ?: 'Preemptive by Design. <strong>Resilient</strong> by Nature.';
 $second_title = get_field('second_title') ?: '';
 $description = get_field('description') ?: '';
@@ -93,13 +95,15 @@ if (!empty($content_items)) {
 
         <div class="pac-bottom">
             <h3 class="h2 pac-heading"><?php echo wp_kses_post($second_title); ?></h3>
-            <?php if ($bottom_image) : ?>
-                <img src="<?php echo esc_url($bottom_image['url']); ?>" alt="<?php echo esc_attr($bottom_image['alt']); ?>" loading="lazy" class="desktop-only pac-bottom-image-desktop">
-            <?php endif; ?>
-
-            <?php if ($bottom_image_mobile) : ?>
-                <img src="<?php echo esc_url($bottom_image_mobile['url']); ?>" alt="<?php echo esc_attr($bottom_image_mobile['alt']); ?>" loading="lazy" class="mobile-only pac-bottom-image-mobile">
-            <?php endif; ?>
+            <div class="pac-bottom-image">
+                <?php if ($bottom_image) : ?>
+                    <img src="<?php echo esc_url($bottom_image['url']); ?>" alt="<?php echo esc_attr($bottom_image['alt']); ?>" loading="lazy" class="desktop-only pac-bottom-image-desktop">
+                <?php endif; ?>
+                
+                <?php if ($bottom_image_mobile) : ?>
+                    <img src="<?php echo esc_url($bottom_image_mobile['url']); ?>" alt="<?php echo esc_attr($bottom_image_mobile['alt']); ?>" loading="lazy" class="mobile-only pac-bottom-image-mobile">
+                <?php endif; ?>
+            </div>
 
         </div>
     </div>
