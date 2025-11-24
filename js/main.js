@@ -56,12 +56,22 @@
         }
         setTimeout(() => {
             console.log('Showing popup modal');
-            $('body').find('.popup-modal').fadeIn();
+            // Check if modal was recently closed
+            const modalClosedTime = localStorage.getItem('popupModalClosedTime');
+            const currentTime = new Date().getTime();
+            const threeHoursInMs = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
+            
+            if (!modalClosedTime || (currentTime - parseInt(modalClosedTime)) > threeHoursInMs) {
+                $('body').find('.popup-modal').fadeIn();
+            }
         }, 5000);
 
         $('body').on('click', '.popup-modal__close-button-js-toggle', function(e){
             e.preventDefault();
             $(this).parents('.popup-modal').fadeOut();
+            
+            // Store the current timestamp in localStorage
+            localStorage.setItem('popupModalClosedTime', new Date().getTime().toString());
         })
 
         handleMenuToggle();
