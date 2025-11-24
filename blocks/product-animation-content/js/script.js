@@ -184,16 +184,18 @@
             pinSpacing: false,
             markers: false,
             onUpdate: self => {
+                let scaleValue = Math.max(0.5, 1 - self.progress); // set minimum scale of 0.5
+                
+                // Use GSAP to apply scale to work properly with ScrollTrigger's transforms
+                gsap.set('.pac-lottie-container .pac-lottie', { scale: scaleValue });
+                
                 if(self.progress >= 0.7){
-                    let opacityValue = (self.progress - 0.6) / 0.4;
-                    $('.pac-lottie-container').css('opacity', 1 - opacityValue);
-                    $('.pac-bottom-image').css('opacity', opacityValue);
                     lottieInstances.forEach(instance => instance.pause());
                 }else{
-                    $('.pac-lottie-container').css('opacity', '1');
-                    $('.pac-bottom-image').css('opacity', '0');
                     lottieInstances.forEach(instance => instance.play());
                 }
+                
+                console.log('Scroll progress:', self.progress);
             },
             onToggle: (self) => {
                 if(self.isActive){
@@ -201,6 +203,7 @@
                     
                 }else{
                     $('.pac-dots-container').fadeIn();
+                    
                     
                 }
             }

@@ -94,11 +94,11 @@
     }
 
     .pac-bottom-image{
-        opacity: 0;
-        transition: opacity 0.4s linear;
-        @include tablet {
-            opacity: 1;
-        }
+        // opacity: 0;
+        // transition: opacity 0.4s linear;
+        // @include tablet {
+        //     opacity: 1;
+        // }
     }
 
     // Dots Container - Positioned Absolutely Over Lottie
