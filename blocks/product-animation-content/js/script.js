@@ -154,6 +154,7 @@
         if(window.innerWidth < 1025){
             return;
         }
+
         // Check if GSAP and ScrollTrigger are available
         if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
             console.warn('GSAP and ScrollTrigger are required for scroll pin functionality');
@@ -161,6 +162,8 @@
         }
 
         const lottieContainer = document.querySelector('.pac-lottie');
+        const lottieContainerWrapper = document.querySelector('.pac-content-wrapper');
+        
         const mainContainer = document.querySelector('.pac-product-animation-content');
         const bottomImage = document.querySelector('.pac-bottom-image');
         
@@ -176,15 +179,36 @@
             trigger: lottieContainer,
             start: "top 25%",
             end: () => {
-                const bottomImageRect = bottomImage.getBoundingClientRect();
-                const viewportHeight = window.innerHeight;
-                return `+=${bottomImageRect.height + 100}`;
+                let mainContainerHeight = mainContainer.getBoundingClientRect().height;
+
+                let lottieContainerHeight = lottieContainerWrapper.getBoundingClientRect().height;
+                const bottomImageRect = bottomImage.getBoundingClientRect().height;
+                const windowHeight = lottieContainerHeight / bottomImageRect * 10;
+                let imagePosition = lottieContainerHeight;
+                //return `+=${imagePosition + ( 0.28 * bottomImage.getBoundingClientRect().height ) }`;
+
+                // Adjust factor for smaller screens
+                let factor = 0.28;
+                if (window.innerWidth < 1299) {
+                    factor = 0.3;
+                }
+                if (window.innerWidth < 1220) {
+                    factor = 0.35;
+                }
+                return `+=${imagePosition + ( factor * bottomImage.getBoundingClientRect().height ) }`;
+                
             },
             pin: true,
             pinSpacing: false,
-            markers: false,
+            markers: true,
             onUpdate: self => {
                 let scaleValue = Math.max(0.5, 1 - self.progress); // set minimum scale of 0.5
+                if (window.innerWidth < 1499) {
+                    scaleValue = Math.max(0.4, 0.4 + (0.7 * (1 - self.progress)));
+                }
+                if (window.innerWidth < 1299) {
+                    scaleValue = Math.max(0.3, 0.3 + (0.7 * (1 - self.progress)));
+                }
                 
                 // Use GSAP to apply scale to work properly with ScrollTrigger's transforms
                 gsap.set('.pac-lottie-container .pac-lottie', { scale: scaleValue });
@@ -193,6 +217,12 @@
                     lottieInstances.forEach(instance => instance.pause());
                 }else{
                     lottieInstances.forEach(instance => instance.play());
+                }
+
+                if(self.progress >= 0.95){
+                    $('.pac-product-animation-content .pac-bottom .pac-heading').css('opacity', '1');
+                }else{
+                     $('.pac-product-animation-content .pac-bottom .pac-heading').css('opacity', '0');
                 }
                 
                 console.log('Scroll progress:', self.progress);
@@ -203,7 +233,6 @@
                     
                 }else{
                     $('.pac-dots-container').fadeIn();
-                    
                     
                 }
             }

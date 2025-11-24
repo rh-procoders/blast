@@ -92,7 +92,15 @@
             font-size: 14px;
         }
     }
-
+    .pac-bottom{
+        .pac-heading{
+            opacity: 0;
+            transition: opacity 0.4s linear;
+            @include tablet {
+                opacity: 1;
+            }
+        }
+    }
     .pac-bottom-image{
         // opacity: 0;
         // transition: opacity 0.4s linear;
@@ -284,8 +292,7 @@
     
     .pac-bottom{
         text-align: center;
-        margin-top: 115px;
-
+        padding-top: 115px;
         @include tablet{
             text-align: left;
         }
@@ -308,6 +315,9 @@
             width: 100%;
             height: auto;
             max-width: 1412px;
+            @include desktop{
+                max-width: 1100px;
+            }
             @include tablet{
                 max-width: 500px;
                 margin-left: auto;

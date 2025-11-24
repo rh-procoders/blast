@@ -7,6 +7,7 @@
 	"category": "blast",
 	"icon": "admin-page",
 	"keywords": ["animation", "product", "lottie", "interactive"],
+	"version": "1.0.1",
 	"acf": {
         "mode": "preview",
         "renderTemplate": "template.php",
