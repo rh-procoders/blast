@@ -32,6 +32,45 @@
 <body <?php body_class(); ?>>
 
 <?php wp_body_open(); ?>
+<?php if ( get_field( 'enable_top_bar', 'option' ) == 1 ) : ?>
+
+<!-- Top Announcement Banner -->
+<div class="top-banner">
+    <div class="top-banner__container">
+        <div class="top-banner__content">
+            <div class="top-banner__text">
+            <?php the_field( 'top_bar_content', 'option' ); ?>    
+            </div>
+        </div>
+        <div class="top-banner__action">
+            <?php $top_bar_link = get_field( 'top_bar_link', 'option' ); ?>
+            <?php if ( $top_bar_link ) : ?>
+                <a href="<?php echo esc_url( $top_bar_link['url'] ); ?>" target="<?php echo esc_attr( $top_bar_link['target'] ); ?>" class="top-banner__link">
+                    <span><?php echo esc_html( $top_bar_link['title'] ); ?></span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="20" height="20" rx="7.64706" fill="#000B40"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.1123 9.72656H6.46875H13.1123Z" fill="white"/>
+                        <path d="M13.1123 9.72656H6.46875" stroke="white" stroke-width="0.882353" stroke-linecap="square"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.4531 11.8027L13.5292 9.72656L11.4531 11.8027Z" fill="white"/>
+                        <path d="M11.4531 11.8027L13.5292 9.72656" stroke="white" stroke-width="0.882353" stroke-linecap="square"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.4531 7.64844L13.5292 9.72456L11.4531 7.64844Z" fill="white"/>
+                        <path d="M11.4531 7.64844L13.5292 9.72456" stroke="white" stroke-width="0.882353" stroke-linecap="square"/>
+                    </svg>
+
+                </a>
+            <?php endif; ?>
+
+        </div>
+        <button class="top-banner__close" aria-label="Close banner">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<?php endif; ?>
+
 <header id="masthead" class="site-header">
     <div class="container container--xl">
         <div class="content-wrap">

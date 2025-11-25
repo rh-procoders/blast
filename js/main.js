@@ -26,6 +26,25 @@
     document.addEventListener("DOMContentLoaded", () => {
         "use strict";
 
+        // Handle top banner close button
+        const bannerCloseBtn = document.querySelector('.top-banner__close');
+        if (bannerCloseBtn) {
+            bannerCloseBtn.addEventListener('click', function() {
+                const banner = document.querySelector('.top-banner');
+                if (banner) {
+                    banner.style.animation = 'slideUp 0.3s ease forwards';
+                    setTimeout(() => {
+                        banner.style.display = 'none';
+                        // Adjust header top position back to normal
+                        const header = document.querySelector('header.site-header');
+                        if (header) {
+                            header.style.top = '20px';
+                        }
+                    }, 300);
+                }
+            });
+        }
+
         $('.menu').on('click', '.menu-item-has-children > a', function(e){
             e.preventDefault();
             $('.site-navigation').find('.open-submenu').not($(this).parents('.menu-item-has-children')).removeClass('open-submenu');

@@ -747,7 +747,17 @@ body .cky-consent-container {
 }
 
 // CookieYes - Modal styles
+
 body {
+	:root {
+	  --cky-br      : 40px;
+	  @media (max-width : 576px) {
+		--cky-br   : 24px;
+	  
+		max-width  : calc(100% - (24px * 2));
+		max-height : calc(100% - (24px * 2));
+	  }
+	}
   // Overlay
   .cky-overlay {
 	background : rgba(0, 11, 64, 0.80);
@@ -756,14 +766,6 @@ body {
 
   // Modal
   .cky-modal {
-	--cky-br      : 40px;
-
-	@media (max-width : 576px) {
-	  --cky-br   : 24px;
-
-	  max-width  : calc(100% - (24px * 2));
-	  max-height : calc(100% - (24px * 2));
-	}
 
 	border-radius : var(--cky-br);
 
