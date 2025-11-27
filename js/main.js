@@ -178,4 +178,20 @@
             subtree: true
         });
     }
+
+    // Header scroll effect
+    function handleHeaderScroll() {
+        const header = document.querySelector('.site-header');
+        if (!header) return;
+        
+        const scrollThreshold = 300;
+        
+        if (window.scrollY > scrollThreshold) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+
+    window.addEventListener('scroll', handleHeaderScroll);
 })();

@@ -375,6 +375,8 @@ header.site-header {
             color: var(--wp--preset--color--dark-blue);
             padding: 0px;
             transition: all 400ms linear;
+            font-weight: 600;
+            letter-spacing: 0;
             @include tablet {
               background-color: transparent;
               display: block;
@@ -491,4 +493,30 @@ header.site-header {
 
 .sub-menu__opener{
   display: none;
+}
+
+.site-header{
+  transition: all 0.3s ease;
+  .btn{
+    transition: all 0.3s ease;
+    .button-arrow-wrapper{
+      transition: all 0.3s ease;
+    }
+  }
+}
+.site-header.scrolled {
+  .content-wrap{
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  .content-wrap{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .btn{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    .button-arrow-wrapper{
+      height: 24px;
+    }
+  }
 }

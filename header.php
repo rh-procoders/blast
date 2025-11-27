@@ -113,7 +113,7 @@ if (  ( is_array( $choose_page_to_show_top_bar ) && in_array( $current_page_id, 
 		        );
 		        ?>
                 <?php if ( have_rows( 'navigation_buttons', 'option' ) ) : ?>
-                    <div class="navigation-buttons">
+                <div class="navigation-buttons mobile-only">
                     <?php while ( have_rows( 'navigation_buttons', 'option' ) ) : the_row(); ?>
                         <?php
                         $link = get_sub_field( 'link' );
@@ -144,6 +144,37 @@ if (  ( is_array( $choose_page_to_show_top_bar ) && in_array( $current_page_id, 
                 </div>
                 <?php endif; ?>
             </nav><!-- #site-navigation -->
+            <?php if ( have_rows( 'navigation_buttons', 'option' ) ) : ?>
+            <div class="navigation-buttons desktop-only">
+                <?php while ( have_rows( 'navigation_buttons', 'option' ) ) : the_row(); ?>
+                    <?php
+                    $link = get_sub_field( 'link' );
+                    $button_style = get_sub_field( 'button_style' );
+                    if($button_style == 'primary_dark'){
+                        $button_class = 'has-dark-blue-background-color has-background wp-element-button has-arrow-icon';
+                    } elseif($button_style == 'secondary_bright'){
+                        $button_class = 'has-coral-solid-gradient-background has-background wp-element-button has-arrow-icon';
+                    } else {
+                        $button_class = 'wp-element-button has-arrow-icon tertiary-button';
+                    }
+                    ?>
+                    <?php if ( $link ) : ?>
+                        <a class="wp-block-button__link btn <?php echo esc_attr( $button_class ); ?>" href="<?php echo esc_url( $link['url'] ); ?>" target="<?php echo esc_attr( $link['target'] ); ?>">
+                            <span class="button-text" data-hover-text="<?php echo esc_html( $link['title'] ); ?>"><?php echo esc_html( $link['title'] ); ?></span>
+                            <span class="button-arrow-wrapper"><svg class="svg-icon icon-arrow-right" width="14" height="10" viewBox="0 0 14 10" fill="currentColor">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0441 4.59009H0.75H12.0441Z"></path>
+                                    <path d="M12.0441 4.59009H0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.21875 8.1195L12.7482 4.59009L9.21875 8.1195Z"></path>
+                                    <path d="M9.21875 8.1195L12.7482 4.59009" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.21875 1.06067L12.7482 4.59008L9.21875 1.06067Z"></path>
+                                    <path d="M9.21875 1.06067L12.7482 4.59008" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
+                                </svg>
+                            </span>
+                        </a>
+                    <?php endif; ?>
+                <?php endwhile; ?>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 </header><!-- #masthead -->

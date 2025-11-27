@@ -86,7 +86,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
         
         <!-- Card Heading -->
         <h3 class="h4 card-block__heading">
-            <?php echo esc_html($card_heading); ?>
+            <?php echo $card_heading; ?>
         </h3>
         
         <!-- Card Description -->
