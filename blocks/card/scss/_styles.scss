@@ -23,7 +23,7 @@
     &__image {
         position: relative;
         width: 100%;
-        aspect-ratio: 600 / 320; // 1.875:1 ratio
+        aspect-ratio: 600 / 300; // 1.875:1 ratio
         overflow: hidden;
         border-radius: 30px;
         margin-bottom: 30px;
@@ -85,9 +85,9 @@
     
     // Heading
     &__heading {   
-        font-weight: font-weight('bold'); // 700
+        font-weight: 700!important;
         color: var(--wp--preset--color--dark-blue);
-        line-height: 120%; /* 40.8px */
+        line-height: 120%!important;
         letter-spacing: -0.68px;
         margin: 0; // 0 0 16px 0
         max-width: 460px;

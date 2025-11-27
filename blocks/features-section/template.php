@@ -77,16 +77,14 @@ $wrapper_attributes = get_block_wrapper_attributes([
                                      alt="<?php echo esc_attr($feature['title']); ?> icon"
                                      loading="lazy">
                             <?php endif; ?>
-                        </div>
-                        
-                        <!-- Feature Content -->
-                        <div class="features-section__content">
-                            
                             <!-- Feature Title -->
                             <h3 class="features-section__title">
                                 <?php echo $feature['title']; ?>
                             </h3>
-                            
+                        </div>
+                        
+                        <!-- Feature Content -->
+                        <div class="features-section__content">
                             <!-- Feature Description -->
                             <p class="features-section__description">
                                 <?php echo esc_html($feature['description']); ?>

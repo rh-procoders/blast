@@ -13,10 +13,10 @@
         position: relative;
         border-radius: 70px;
         background-color: #F4F4F4;
-        padding: 100px 100px 60px 100px;
-        margin-bottom: 200px;
-        width: 100%;
-        max-width: calc(100% - 60px);
+        padding: 80px 80px 60px 80px;
+        margin-bottom: 80px;
+        width: calc(100% - 110px);
+        max-width: 1700px;
         overflow: hidden;
         @include desktop{
             padding: 80px 50px 40px 50px;

@@ -136,7 +136,7 @@
         
         blockquote {
             font-family: $font-family-primary; // WixMadeforText
-            font-size: 24px;
+            font-size: 22px;
             line-height: 130%;
             font-weight: font-weight('regular'); // 400
             color: var(--wp--preset--color--dark-blue);
@@ -149,6 +149,7 @@
             strong {
                 font-family: $font-family-tertiary; // Tomorrow
                 font-style: normal;
+                font-style: italic;   
             }
         }
     }

@@ -110,12 +110,20 @@
         flex-direction: column;
         height: 100%;
         transition: transform 0.3s ease;
-        max-width: 300px;
+        //max-width: 300px;
     }
     
     &__icon {
-        margin-bottom: 40px;
-        
+        margin-bottom: 10px;
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        gap: 23px;
+        @include mobile{
+            grid-template-columns: 1fr;
+            justify-items: flex-start;
+            text-align: flex-start;
+            gap: 10px;
+        }
         img {
             width: 80px;
             height: 80px;
@@ -133,7 +141,7 @@
         font-size: 30px;
         font-weight: 600;
         line-height: 120%;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
         letter-spacing: -0.6px;
     }
     
