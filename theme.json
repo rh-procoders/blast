@@ -138,6 +138,11 @@
 					"name": "Paragraph L - 20px"
 				},
                 {
+					"slug": "fs-xlarge-paragraph",
+					"size": "1.5rem",
+					"name": "Paragraph XL - 24px"
+				},
+                {
                   "slug": "fs-tag",
                   "size": "max(12px, 0.875rem)",
                   "name": "Tag - 14px"
