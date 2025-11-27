@@ -52,7 +52,8 @@ $wrapper_attributes = get_block_wrapper_attributes([
 
 <section <?php echo $wrapper_attributes; ?>>
 
-    <img src="<?php echo THEME_URI ?>/img/featured-top-bg.svg" alt="top background graphic" class="features-section__bg-image-top">
+    <img src="<?php echo THEME_URI ?>/blocks/features-section/img/featured-top-bg.png" alt="top background graphic" class="features-section__bg-image-top desktop-only">
+    <img src="<?php echo THEME_URI ?>/blocks/features-section/img/featured-top-bg-mobile.png" alt="top background graphic" class="features-section__bg-image-top mobile-only">
     
     <div class="features-section__container container container--xl">
         
@@ -103,8 +104,6 @@ $wrapper_attributes = get_block_wrapper_attributes([
         <?php endif; ?>
         
     </div>
-
-    <img src="<?php echo THEME_URI ?>/img/featured-bottom-bg.svg" alt="bottom background graphic" class="features-section__bg-image-bottom">
     
 </section>
 

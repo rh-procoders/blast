@@ -1,41 +1,35 @@
 @import "../../../assets/scss/variable";
 
 .features-section {
-    padding: 270px 0 200px; // 120px top/bottom
+    padding: 170px 0 200px; // 120px top/bottom
     position: relative;
     border-radius: 0px 0px border-radius('xl') border-radius('xl'); // 70px
     overflow: hidden;
     margin-top: -70px;
     position: relative;
     z-index: 0;
+    border-bottom: 19px solid #fff;
+    border-left: 19px solid #fff;
+    border-right: 19px solid #fff;
+
 
     @include mobile{
         padding: 170px 0px 100px;
+        border-bottom: 10px solid #fff;
+        border-left: 10px solid #fff;
+        border-right: 10px solid #fff;
     }
 
-    &__bg-image-bottom{
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        pointer-events: none;
-        user-select: none;
-        z-index: 1;
-        filter: blur(3px);
-    }
     &__bg-image-top{
         position: absolute;
         top: 0;
         right: 0;
         pointer-events: none;
-        user-select: none;
-        z-index: 1;
-        height: 60%;
-        width: 60%;
-        object-fit: contain;
-        object-position: right;
-        filter: blur(3px);
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.5;
+        filter: blur(133.031494140625px);
     }
     
     &__container {
@@ -56,6 +50,7 @@
     &__heading {
         font-family: $font-family-primary; // NeuePlak
         line-height: 110%;
+        letter-spacing: -0.04em;
     }
     
     &__grid {

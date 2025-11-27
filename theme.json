@@ -29,6 +29,12 @@
                     "gradient": "linear-gradient(32deg, #FFF2D9 6.44%, #FFD993 30.71%, #FF735B 67.95%)",
                     "name": "Coral Light"
                 }
+                ,
+				{
+                    "slug": "white-light",
+                    "gradient": "linear-gradient(90deg, #F4F4F4 0%, #ffffff 100%)",
+                    "name": "White Light"
+                }
 
             ]
         },
