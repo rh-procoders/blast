@@ -31,6 +31,9 @@
       gap: 0px;
       align-items: flex-start;
     }
+    @include mobile-sm {
+      padding: 0 20px 0px 16px;
+    }
   }
 
   &__content {
@@ -49,6 +52,22 @@
 
     @include mobile {
       font-size: 14px;
+    }
+    @include mobile-sm{
+      font-size: 12px;
+    }
+    img{
+      width: 31px;
+      height: 31px;
+      object-fit: contain;
+      @include mobile {
+        width: 24px;
+        height: 24px;
+      }
+      @include mobile-sm {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 
@@ -110,6 +129,9 @@
     right: 30px;
     @include tablet {
       right: 16px;
+    }
+    @include mobile-sm {
+      right: 10px;
     }
 
     &:hover,
@@ -184,6 +206,9 @@ header.site-header {
     background-color: var(--color-white);
     padding: 14px 14px 14px 30px;
     border-radius: 23px;
+     @include mobile-sm {
+      padding: 13px 18px;
+     }
     .custom-logo-link{
       display: block;
       margin: 0px;
@@ -193,6 +218,9 @@ header.site-header {
         height: auto;
         @include tablet {
           max-width: 180px;
+        }
+        @include mobile-sm {
+          max-width: 65px;
         }
       }
     }
@@ -212,6 +240,11 @@ header.site-header {
         height: 50px;
         text-align: center;
         justify-content: center;
+        @include mobile-sm {
+          width: 40px;
+          height: 16px;
+          padding: 0px 10px;
+        }
         .toggle-text {
           font-size: 18px;
           font-weight: 700;
@@ -227,6 +260,9 @@ header.site-header {
           border-bottom: 0px;
           transition: .3s all;
           border-radius: 1px;
+          @include mobile-sm {
+            height: 12px;
+          }
           .toggle-icon-bar{
             height: 3px;
             background: var(--wp--preset--color--dark-blue);
@@ -235,17 +271,23 @@ header.site-header {
             width: 100%;
             transition: .3s all;
             border-radius: 1px;
+            @include mobile-sm {
+              height: 2px;
+            }
             &:nth-child(1){
               top: 0px;
-              width: 16px;
+              width: 12px;
               left: 4px;
             }
             &:nth-child(2){
               top: 7px;
+              @include mobile-sm {
+                top: 5px;
+              }
             }
             &:nth-child(3){
               bottom: 0px;
-              width: 16px;
+              width: 12px;
               left: 4px;
             }
           }
@@ -422,6 +464,9 @@ header.site-header {
             width: 100%!important;
             left: 0px!important;
             transform: rotate(45deg);
+            @include mobile-sm {
+              top: 5px!important;
+            } 
           }
 
           &:nth-child(2){
@@ -433,6 +478,9 @@ header.site-header {
             left: 0px!important;
             bottom: 7px!important;
             transform: rotate(-45deg);
+            @include mobile-sm {
+              top: 5px!important;
+            } 
           }
         }
       }

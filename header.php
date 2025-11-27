@@ -32,7 +32,12 @@
 <body <?php body_class(); ?>>
 
 <?php wp_body_open(); ?>
-<?php if ( get_field( 'enable_top_bar', 'option' ) == 1 ) : ?>
+<?php 
+$choose_page_to_show_top_bar = get_field( 'choose_page_to_show_top_bar', 'option' );
+$enable_top_bar = get_field( 'enable_top_bar', 'option' );
+$current_page_id = get_the_ID();
+
+if (  ( is_array( $choose_page_to_show_top_bar ) && in_array( $current_page_id, $choose_page_to_show_top_bar ) &&  $enable_top_bar == true)): ?>
 
 <!-- Top Announcement Banner -->
 <div class="top-banner">
