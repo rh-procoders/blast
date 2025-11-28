@@ -1057,3 +1057,11 @@ body {
 	border-top-left-radius: 70px;
 	border-top-right-radius: 70px;
 }
+
+/* Target the Columns block specifically */
+.custon-gap-columns {
+    /* Apply a larger vertical gap (row-gap) */
+    row-gap: var(--wp--preset--spacing--20)!important; 
+    /* Apply a smaller horizontal gap (column-gap) */
+    column-gap: var(--wp--preset--spacing--80)!important; 
+}

@@ -205,9 +205,32 @@ header.site-header {
     background-color: var(--color-white);
     padding: 14px 14px 14px 30px;
     border-radius: 23px;
+    @include tablet {
+      gap: 5px;
+    }
      @include mobile-sm {
       padding: 13px 18px;
      }
+
+    .navigation-buttons{
+
+      @include tablet {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+        .wp-block-button__link{
+          padding: 6px 12px;
+          border-radius: 8px;
+          .button-text{
+            font-size: 12px;
+            margin-top: -3px;
+          }
+          .button-arrow-wrapper{
+            display: none;
+          }
+        }
+      }
+    }
     .custom-logo-link{
       display: block;
       margin: 0px;

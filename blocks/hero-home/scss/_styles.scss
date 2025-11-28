@@ -6,6 +6,9 @@
     align-items: center;
     padding: 168px 0 170px;
     overflow: hidden;
+    @include mobile{
+        padding: 190px 0 130px;
+    }
     
     // Gradient background overlay
     &__gradient-overlay {
@@ -42,7 +45,7 @@
         
         @include mobile {
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: 50px;
         }
     }
     
@@ -62,6 +65,9 @@
         // Override Gutenberg block styles for hero context
         .wp-block-heading {
             margin-bottom: 20px !important;
+            @include mobile{
+                margin-bottom: 10px!important;
+            }
             &:first-child {
                 margin-top: 0 !important;
             }
@@ -69,6 +75,9 @@
         
         p{
             margin-bottom: 30px !important;
+            @include mobile{
+                margin-bottom: 20px!important;
+            }
         }
         
         .wp-block-buttons {        
@@ -222,6 +231,9 @@
     + .animation-section{
         margin-top: -70px;
         z-index: 1;
+        @include mobile{
+            margin-top: -50px;
+        }
     }
     
 }
@@ -234,7 +246,7 @@
         max-width: 100%;
         padding: 0 40px;
         
-        @media (max-width: 768px) {
+        @include mobile{
             padding: 0 20px;
         }
     }

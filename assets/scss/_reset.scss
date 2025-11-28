@@ -1,7 +1,7 @@
 @import "_variable";
 html {
 	box-sizing: border-box;
-	font-size: 16px;
+	font-size: max(16px, 1rem);
 	line-height: 1.5;
 	height: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -17,6 +17,7 @@ html {
 	@include tablet {
 		--scrollbar-width: 0px !important;
 	}
+
 }
 
 body {
