@@ -1065,3 +1065,10 @@ body {
     /* Apply a smaller horizontal gap (column-gap) */
     column-gap: var(--wp--preset--spacing--80)!important; 
 }
+
+.rounded-image{
+	border-radius: 50px;
+	@include mobile {
+		border-radius: 30px;
+	}
+}

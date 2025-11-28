@@ -10,6 +10,7 @@ html {
 	-moz-osx-font-smoothing: grayscale;
 	padding: 0 !important;
 	--scrollbar-width: 0px;
+	scroll-padding-top: 100px;
 	@include desktop-lg {
 		font-size: clamp(8px,8px + .573vw,16px);
 	}
