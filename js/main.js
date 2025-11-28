@@ -38,7 +38,7 @@
                         // Adjust header top position back to normal
                         const header = document.querySelector('header.site-header');
                         if (header) {
-                            header.style.top = '20px';
+                            header.style.top = '0px';
                         }
                     }, 300);
                 }
