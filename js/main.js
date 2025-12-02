@@ -38,9 +38,10 @@
                         // Adjust header top position back to normal
                         const header = document.querySelector('header.site-header');
                         if (header) {
-                            header.style.top = '0px';
+                            banner.remove();
+                            //header.style.top = '0px';
                         }
-                    }, 300);
+                    }, 100);
                 }
             });
         }
