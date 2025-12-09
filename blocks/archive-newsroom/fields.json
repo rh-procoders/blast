@@ -1,0 +1,363 @@
+{
+    "key": "group_archive_newsroom_block",
+    "title": "Archive Newsroom Block",
+    "fields": [
+        {
+            "key": "field_archive_newsroom_posts_per_page",
+            "label": "Posts Per Page",
+            "name": "posts_per_page",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Number of posts to display per page",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 6,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 1,
+            "max": 50,
+            "step": ""
+        },
+        {
+            "key": "field_archive_newsroom_grid_columns",
+            "label": "Grid Columns",
+            "name": "grid_columns",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Number of columns in the grid",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33.33",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "1": "1 Column",
+                "2": "2 Columns",
+                "3": "3 Columns",
+                "4": "4 Columns"
+            },
+            "default_value": 1,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_archive_newsroom_show_pagination",
+            "label": "Show Pagination",
+            "name": "show_pagination",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Display pagination links",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33.33",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_archive_newsroom_show_featured_image",
+            "label": "Show Featured Image",
+            "name": "show_featured_image",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Display post featured images",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33.33",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_archive_newsroom_show_excerpt",
+            "label": "Show Excerpt",
+            "name": "show_excerpt",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Display post excerpts",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33.33",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_archive_newsroom_excerpt_length",
+            "label": "Excerpt Length",
+            "name": "excerpt_length",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Maximum number of characters for excerpt",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_archive_query_show_excerpt",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "33.33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 150,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 50,
+            "max": 500,
+            "step": ""
+        },
+        {
+            "key": "field_archive_newsroom_show_date",
+            "label": "Show Date",
+            "name": "show_date",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Display post publish date",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33.33",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_archive_newsroom_show_author",
+            "label": "Show Author",
+            "name": "show_author",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Display post author",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_archive_newsroom_show_categories",
+            "label": "Show Categories",
+            "name": "show_categories",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Display post categories",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_archive_newsroom_show_read_more",
+            "label": "Show Read More Button",
+            "name": "show_read_more",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Display read more button",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_archive_newsroom_read_more_text",
+            "label": "Read More Text",
+            "name": "read_more_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Custom text for read more button",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_archive_newsroom_show_read_more",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Read More",
+            "placeholder": "Read More",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_archive_newsroom_order_by",
+            "label": "Order By",
+            "name": "order_by",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "How to order the posts",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "date": "Date",
+                "title": "Title",
+                "menu_order": "Menu Order",
+                "rand": "Random"
+            },
+            "default_value": "date",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_archive_newsroom_order",
+            "label": "Order",
+            "name": "order",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Ascending or descending order",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "DESC": "Descending",
+                "ASC": "Ascending"
+            },
+            "default_value": "DESC",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_6938089f86315",
+            "label": "Choose Featured Posts",
+            "name": "choose_featured_posts",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "newsroom"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "return_format": "object",
+            "multiple": 1,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/archive-newsroom"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1765279927
+}

@@ -1,14 +1,14 @@
 <?php
-add_action( 'init', 'services_cpt' );
+add_action( 'init', 'newsroom_cpt' );
 /**
  * Register a book post type.
  *
  * @link http://codex.wordpress.org/Function_Reference/register_post_type
  */
-if( ! function_exists( 'services_cpt' ) ) :
-	function services_cpt() {
-		$popular = 'Services';
-		$singular = 'Service';
+if( ! function_exists( 'newsroom_cpt' ) ) :
+	function newsroom_cpt() {
+		$popular = 'Newsroom';
+		$singular = 'Newsroom Post';
 		$labels = array(
 			'name' => $popular,
 			'singular_name' => $singular,

@@ -1,0 +1,54 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acf/archive-newsroom",
+    "title": "Archive Newsroom",
+    "description": "Display posts from different post types in a customizable grid layout with pagination",
+    "category": "theme",
+    "icon": "grid-view",
+    "keywords": ["archive", "posts", "grid", "query", "pagination"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "customClassName": true,
+        "spacing": {
+            "margin": ["top", "bottom"],
+            "padding": ["top", "bottom"]
+        },
+        "color": {
+            "background": true,
+            "gradients": true,
+            "text": false
+        },
+        "typography": {
+            "fontSize": false,
+            "lineHeight": false
+        }
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "section_title": "Latest Posts",
+                "post_type": "post",
+                "posts_per_page": 6,
+                "grid_columns": 3,
+                "show_pagination": true,
+                "show_excerpt": true,
+                "show_date": true,
+                "show_author": false,
+                "excerpt_length": 150
+            }
+        }
+    },
+    "usesContext": ["postId", "postType", "queryId"],
+    "textdomain": "blast-2025",
+    "editorStyle": "file:./css/editor-style.css",
+    "style": "file:./css/view-style.css",
+    "viewScript": "file:./js/view.js"
+}
