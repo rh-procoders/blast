@@ -99,23 +99,7 @@ if (  ( is_array( $choose_page_to_show_top_bar ) && in_array( $current_page_id, 
             <nav id="site-navigation" class="main-navigation">
                 
                 <div class="main-nav-wrapper">
-                    <div class="mobile-menu-top">
-                        <div class="mobile-menu-top__left">
-                            <?php 
-                            $logo_dark = get_field( 'cyts__logo-dark', 'option' ); ?>
-                             <a href="<?= get_home_url() ?>" rel="home">
-                                <img src="<?= $logo_dark['url'] ?>" width="<?= $logo_dark['width'] ?>"
-                                    height="<?= $logo_dark['height'] ?>" alt="Brand Logo">
-                             </a>
-                             <span class="mobile-menu-top__back">Back</span>
-                            
-                        </div>
-                        <div class="mobile-menu-top__right">
-                            <button class="mobile-menu-top__close" aria-label="<?php esc_attr_e( 'Close Menu', 'blast-wp' ); ?>">
-                                <?php echo return_sprite_svg( 'icon-dialog-close', 24, 24 ); ?>
-                            </button>
-                        </div>
-                    </div>
+
                     <?php
                     wp_nav_menu(
                         array(
@@ -125,10 +109,53 @@ if (  ( is_array( $choose_page_to_show_top_bar ) && in_array( $current_page_id, 
                         )
                     );
                     ?>
-                    <?php if ( have_rows( 'navigation_buttons', 'option' ) ) : ?>
-         
-            <?php endif; ?>
                 </div>
+                <div class="mobile-bottom-actions">
+                    <div class="site-branding">
+                        <?php
+                        the_custom_logo();
+
+                        $blast_wp_description = get_bloginfo( 'description', 'display' );
+                        if ( $blast_wp_description || is_customize_preview() ) : ?>
+                            <p class="site-description">
+                                <?php echo $blast_wp_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                ?>
+                            </p>
+                        <?php
+                        endif; ?>
+                    </div><!-- .site-branding -->
+           
+       
+                    <div class="navigation-buttons">
+                        <?php while ( have_rows( 'navigation_buttons', 'option' ) ) : the_row(); ?>
+                            <?php
+                            $link = get_sub_field( 'link' );
+                            $button_style = get_sub_field( 'button_style' );
+                            if($button_style == 'primary_dark'){
+                                $button_class = 'has-dark-blue-background-color has-background wp-element-button has-arrow-icon';
+                            } elseif($button_style == 'secondary_bright'){
+                                $button_class = 'has-coral-solid-gradient-background has-background wp-element-button has-arrow-icon';
+                            } else {
+                                $button_class = 'wp-element-button has-arrow-icon tertiary-button';
+                            }
+                            ?>
+                            <?php if ( $link ) : ?>
+                                <a class="wp-block-button__link btn <?php echo esc_attr( $button_class ); ?>" href="<?php echo esc_url( $link['url'] ); ?>" target="<?php echo esc_attr( $link['target'] ); ?>">
+                                    <span class="button-text" data-hover-text="<?php echo esc_html( $link['title'] ); ?>"><?php echo esc_html( $link['title'] ); ?></span>
+                                    <span class="button-arrow-wrapper"><svg class="svg-icon icon-arrow-right" width="14" height="10" viewBox="0 0 14 10" fill="currentColor">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0441 4.59009H0.75H12.0441Z"></path>
+                                            <path d="M12.0441 4.59009H0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.21875 8.1195L12.7482 4.59009L9.21875 8.1195Z"></path>
+                                            <path d="M9.21875 8.1195L12.7482 4.59009" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.21875 1.06067L12.7482 4.59008L9.21875 1.06067Z"></path>
+                                            <path d="M9.21875 1.06067L12.7482 4.59008" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
+                                        </svg>
+                                    </span>
+                                </a>
+                            <?php endif; ?>
+                        <?php endwhile; ?>
+                    </div>
+                 </div>
             </nav><!-- #site-navigation -->
            
             <div class="navigation-buttons">
@@ -172,6 +199,7 @@ if (  ( is_array( $choose_page_to_show_top_bar ) && in_array( $current_page_id, 
             </button>
             
         </div>
+        
     </header><!-- #masthead -->
 
 <main class="main">

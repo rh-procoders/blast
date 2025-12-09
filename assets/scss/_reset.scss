@@ -61,6 +61,18 @@ body {
 	}
 }
 
+html {
+scroll-behavior : smooth;
+
+	&.no-scroll {
+		overflow : hidden !important;
+
+		body {
+			overflow : hidden !important;
+		}
+	}
+}
+
 
 *,
 *::before,

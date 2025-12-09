@@ -94,8 +94,8 @@
         justify-content: center;
         @include mobile-sm {
           width: 40px;
-          height: 16px;
-          padding: 0px 10px;
+          height: 17px;
+          padding: 0px;
         }
         .toggle-text {
           font-size: 18px;
@@ -107,14 +107,11 @@
         .toggle-icon {
           position: relative;
           display: block;
-          width: 25px;
+          width: 40px;
           height: 17px;
           border-bottom: 0px;
           transition: .3s all;
           border-radius: 1px;
-          @include mobile-sm {
-            height: 12px;
-          }
           .toggle-icon-bar{
             height: 3px;
             background: var(--wp--preset--color--dark-blue);
@@ -128,24 +125,61 @@
             }
             &:nth-child(1){
               top: 0px;
-              width: 12px;
-              left: 4px;
+              width: 80%;
+              left: 10%;
             }
             &:nth-child(2){
               top: 7px;
-              @include mobile-sm {
-                top: 5px;
-              }
             }
             &:nth-child(3){
               bottom: 0px;
-              width: 12px;
-              left: 4px;
+              width: 80%;
+              left: 10%;
             }
           }
         }
       
       }
+      
+      // Menu open state
+      &[aria-expanded="true"] {
+        .toggle-icon-bar {
+          &:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+          }
+          &:nth-child(2) {
+            opacity: 0;
+          }
+          &:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+          }
+        }
+      }
+    }
+    .mobile-bottom-actions{
+        display: none;
+        @include tablet {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            justify-content: space-between;
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            padding: 20px 30px 30px;
+            align-items: center;
+            z-index: 9999;
+            background-color: #F4F4F4;
+            .navigation-buttons{
+              padding: 0px;
+                .wp-block-button__link{
+                    .button-arrow-wrapper{
+                        display: flex!important;
+                    }
+                }
+            }
+        }
     }
   }
+
 }

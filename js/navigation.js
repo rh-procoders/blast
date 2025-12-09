@@ -10,6 +10,7 @@
  */
 
 (function () {
+    const masthead = document.getElementById( 'masthead' );
     const siteNavigation = document.getElementById( 'site-navigation' );
     const body = document.body;
 
@@ -18,13 +19,13 @@
         return;
     }
 
-    const button = siteNavigation.getElementsByTagName( 'button' )[0];
+    const menuTopTitle = document.querySelector( '.menu-top-title' );
+    const button = document.querySelector( '.menu-toggle' );
     const closeButton = siteNavigation.querySelector( '.mobile-menu-top__close' );
     const backButton = siteNavigation.querySelector( '.mobile-menu-top__back' );
 
-console.log('Toggling navigation menu', typeof button);
     // Return early if the button doesn't exist.
-    if ('undefined' === typeof button) {
+    if (!button) {
         return;
     }
 
@@ -41,15 +42,17 @@ console.log('Toggling navigation menu', typeof button);
     }
 
 
-
     // Toggle the .toggled class and the aria-expanded value each time the button is clicked.
     button.addEventListener(
         'click',
         function () {
             
             siteNavigation.classList.toggle( 'toggled' );
-
-            if (button.getAttribute( 'aria-expanded' ) === 'true') {
+            console.log('Navigation toggled, has toggled class:', siteNavigation.classList.contains('toggled'));
+            
+            const isExpanded = button.getAttribute( 'aria-expanded' ) === 'true';
+            
+            if (isExpanded) {
                 button.setAttribute( 'aria-expanded', 'false' );
                 document.documentElement.classList.remove( 'no-scroll' );
             } else {
@@ -59,35 +62,51 @@ console.log('Toggling navigation menu', typeof button);
         }
     );
 
-    closeButton.addEventListener(
+    menuTopTitle.addEventListener(
         'click',
         function () {
-            siteNavigation.classList.remove( 'toggled' );
-            button.setAttribute( 'aria-expanded', 'false' );
-            document.documentElement.classList.remove( 'no-scroll' );
+            // Close all open mega menus first
+            document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
+                .forEach(openMenu => openMenu.classList.remove('mega-open'));
         }
     );
 
-    backButton.addEventListener(
-        'click',
-        function () {
-            // Find the closest parent with the class 'sub-megamenu-open' and remove it
-            const parentMenu = this.closest( '.sub-megamenu-open' );
-            if (parentMenu) {
-                parentMenu.classList.remove( 'sub-megamenu-open' );
-            } 
-        }
-    );
+    if (closeButton) {
+        closeButton.addEventListener(
+            'click',
+            function () {
+
+                siteNavigation.classList.remove( 'toggled' );
+                button.setAttribute( 'aria-expanded', 'false' );
+                document.documentElement.classList.remove( 'no-scroll' );
+            }
+        );
+    }
+
+    if (backButton) {
+        backButton.addEventListener(
+            'click',
+            function () {
+
+                // Find the closest parent with the class 'sub-megamenu-open' and remove it
+                const parentMenu = this.closest( '.sub-megamenu-open' );
+                if (parentMenu) {
+                    parentMenu.classList.remove( 'sub-megamenu-open' );
+                } 
+            }
+        );
+    }
 
     // Remove the .toggled class and set aria-expanded to false when the user clicks outside the navigation.
     document.addEventListener(
         'click',
         function ( event ) {
-            const isClickInside = siteNavigation.contains( event.target );
+            const isClickInside = siteNavigation.contains( event.target ) || button.contains( event.target );
 
             if (!isClickInside) {
                 siteNavigation.classList.remove( 'toggled' );
                 button.setAttribute( 'aria-expanded', 'false' );
+                document.documentElement.classList.remove( 'no-scroll' );
             }
         }
     );
