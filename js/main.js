@@ -11,17 +11,6 @@
     };
 
 
-    //Mobile menu toggle
-    function handleMenuToggle() {
-        const menuToggle = document.getElementById('menu_toggle_button');
-        menuToggle.addEventListener('click', () => {
-            document.getElementById('masthead').classList.toggle('active');
-        });
-
-        
-    }
-
-
     // DOCUMENT READY //
     document.addEventListener("DOMContentLoaded", () => {
         "use strict";
@@ -46,14 +35,6 @@
             });
         }
 
-        $('.menu').on('click', '.menu-item-has-children > a', function(e){
-            e.preventDefault();
-            $('.site-navigation').find('.open-submenu').not($(this).parents('.menu-item-has-children')).removeClass('open-submenu');
-            $('.site-navigation').find('.sub-menu').not($(this).parents('.menu-item-has-children').find('.sub-menu')).slideUp();    
-            $(this).parents('.menu-item-has-children').toggleClass('open-submenu');
-            $(this).parents('.menu-item-has-children').find('.sub-menu').slideToggle();
-  
-        });
 
         // Initialize Fancybox for WordPress gallery blocks
         if (typeof Fancybox !== 'undefined') {
@@ -94,7 +75,6 @@
             localStorage.setItem('popupModalClosedTime', new Date().getTime().toString());
         })
 
-        handleMenuToggle();
 
     });
 
@@ -106,29 +86,7 @@
         }
     });
 
-    function isInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-      }
-      
-      function handleScroll() {
-        const elements = document.querySelectorAll('.circle-animation');
-        elements.forEach(el => {
-          if (isInViewport(el)) {
-            el.classList.add('active');
-          }
-        });
-      }
-      
-      // Run on scroll and also on load
-      window.addEventListener('scroll', handleScroll);
-      window.addEventListener('load', handleScroll);
-
+ 
     /**
      * Initialize SimpleBar on CookieYes modal
      * Works with both static and dynamically injected CookieYes modals

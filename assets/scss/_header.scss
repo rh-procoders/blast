@@ -1,237 +1,67 @@
-// Top Banner Styles
-.top-banner {
-  background: #FF654A;
-  padding: 9px 0;
-  position: fixed;
-  z-index: 999998;
-  animation: slideDown 0.3s ease;
-  width: 100%;
-  + .site-header{
-    top: 60px;
-    @include mobile {
-      top: 70px;
-    }
-  }
-  &__container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 0 40px;
-    gap: 10px;
+.site {
+  position : relative;
 
-    @include tablet {
-      padding: 0 40px 0px 20px;
-    }
+  // Styles from here
+  &-header {
+	--cy-branding-ml   : 48px;
+	--cy-navigation-mr : 58px;
 
-    @include mobile {
-      padding: 0 40px 0px 16px;
-      flex-direction: column;
-      gap: 0px;
-      align-items: flex-start;
-    }
-    @include mobile-sm {
-      padding: 0 20px 0px 16px;
-    }
-  }
+	min-height         : var(--cy-header-h);
 
-  &__content {
-    display: flex;
-    align-items: center;
+	position           : absolute;
+	display            : flex;
+	width              : 100%;
 
-  }
+	z-index            : 10;
+	top                : 0;
+	transition         : background-color 400ms ease;
 
-  &__text {
-    font-family: $font-family-tertiary;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.4;
-    color: #FFFFFF;
-    margin: 0;
-    p{
+	@include desktop {
+	  --cy-branding-ml : 49px;
+	}
+	@include tablet-lg{
+	  --cy-branding-ml   : 32px;
+	  --cy-navigation-mr : 32px;
 
-      @include mobile {
-        font-size: 14px;
-      }
-    }
-    img{
-      width: 31px;
-      height: 31px;
-      object-fit: contain;
-      @include mobile {
-        width: 24px;
-        height: 24px;
-      }
-      @include mobile-sm {
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
+	}
+	@include tablet {
+	  --cy-branding-ml   : 0px;
+	  --cy-navigation-mr : 0px;
+	}
 
-  &__action {
-    display: flex;
-    align-items: center;
-  }
+	&.hiddeNavBar {
+	  transform : translateY(calc(-100% - 20px));
+	}
 
-  &__link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 0px;
-    border-radius: 8px;
-    color: #FFFFFF;
-    text-decoration: none;
-    font-family: $font-family-primary;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.2;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    span{
-      margin-top: -6px;
-      display: block;
-    }
+	&.header-top-animation {
+	  //background-color : rgba(23, 24, 69, .91);
+	  transition       : transform 400ms ease, background-color 400ms ease, height 400ms linear;
+	  min-height       : 90px;
+	}
 
-    @include mobile {
-      font-size: 12px;
-      padding: 4px 0px;
-    }
-
-    &:hover,
-    &:focus {
-      transform: translateX(2px);
-    }
-
-  }
-
-  &__icon {
-    width: 14px;
-    height: 14px;
-    stroke-width: 2;
-    flex-shrink: 0;
-  }
-
-  &__close {
-    border: none;
-    padding: 8px;
-    border-radius: 6px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-    position: absolute;
-    right: 30px;
-    @include tablet {
-      right: 16px;
-    }
-    @include mobile-sm {
-      right: 10px;
-    }
-
-    &:hover,
-    &:focus {
-      background-color: rgba(255, 255, 255, 0.25);
-    }
-
-    svg {
-      width: 12px;
-      height: 12px;
-      stroke: currentColor;
-      stroke-width: 1.5;
-    }
-  }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-}
-
-// Adjust header top position when banner is visible
-header.site-header {
-  top: 80px;
-
-  @include tablet {
-    top: 60px;
-  }
-}
-
-body:has(~ #site-navigation.active) {
-  overflow: hidden;
-}
-
-
-header.site-header {
-  position: fixed;
-  z-index: 999999; // big z-index so cookies plugin doesn't go over it
-  width: 100%;
-  top: 20px;
-  left: 0;
-  background-color: transparent;
-
-  @include tablet {
-    padding: 18px 0;
-    top: 0px;
-  }
-
-  .content-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 860px;
-    margin: 0 auto;
-    background-color: var(--color-white);
-    padding: 14px 14px 14px 30px;
-    border-radius: 23px;
-    @include tablet {
-      gap: 5px;
-    }
-     @include mobile-sm {
-      padding: 13px 18px;
-     }
-
-    .navigation-buttons{
-
-      @include tablet {
-        flex-grow: 1;
+      .content-wrap {
         display: flex;
-        justify-content: flex-end;
-        .wp-block-button__link{
-          padding: 6px 12px;
-          border-radius: 8px;
-          .button-text{
-            font-size: 12px;
-            margin-top: -3px;
-          }
-          .button-arrow-wrapper{
-            display: none;
-          }
+        align-items: center;
+        justify-content: space-between;
+        max-width: 860px;
+        margin: 0 auto;
+        background-color: var(--color-white);
+        padding: 14px 14px 14px 30px;
+        border-radius: 23px;
+        width: 100%;
+        position: relative;
+        top: 20px;
+        transition: all 400ms ease;
+        @include tablet {
+            gap: 5px;
         }
-      }
-    }
-    .custom-logo-link{
+        @include mobile-sm {
+            padding: 13px 18px;
+        }
+
+	}
+
+	.custom-logo-link{
       display: block;
       margin: 0px;
       .custom-logo{
@@ -246,9 +76,9 @@ header.site-header {
         }
       }
     }
+
     .menu-toggle {
       display: none;
-
       @include tablet {
         display: flex;
         align-items: center;
@@ -314,232 +144,8 @@ header.site-header {
             }
           }
         }
+      
       }
-    }
-    .site-navigation{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 60px;
-
-      @include tablet {
-        position: absolute;
-        height: 100vh;
-        overflow: scroll;
-        top: 0;
-        right: 0;
-        width: 0vw;
-        overflow: hidden;
-        background: #FFFFFF;
-        transition: .3s all;
-        z-index: 9;
-        transform: translateX(100%);
-        opacity: 0;
-        visibility: hidden;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-
-        .menu-main-menu-container{
-          padding: 150px 35px 35px;
-        }
-        .navigation-buttons{
-          padding: 0px 35px 35px;
-        }
-
-      }
-    }
-    nav {
-      @include tablet {
-          position: absolute;
-          height: 100vh;
-          overflow: scroll;
-          top: 0;
-          right: 0;
-          width: 0vw;
-          overflow: hidden;
-          background: var(--color-gray);
-          transition: .3s all;
-          z-index: 9;
-          transform: translateX(100%);
-          opacity: 0;
-          visibility: hidden;
-
-          .menu-main-menu-container{
-            padding: 150px 35px 35px;
-            width: 100%;
-            margin-top: 0px;
-          }
-      }
-
-      ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        gap: 32px;
-        font-size: 16px;
-
-        @include tablet {
-          flex-direction: column;
-          margin-top: 80px;
-          overflow: auto;
-          padding-bottom: 60px;
-        }
-        li {
-          margin: -7px 0px 0px;
-          @include tablet {
-            display: block;
-            width: 100%;
-          }
-          a {
-            color: var(--wp--preset--color--dark-blue);
-            padding: 0px;
-            transition: all 400ms linear;
-            font-weight: 600;
-            letter-spacing: 0;
-            @include tablet {
-              background-color: transparent;
-              display: block;
-              margin-left: 0px;
-              margin-right: auto;
-              text-align: left;
-              width: 100%;
-              font-size: 24px;
-              color: #000B40;
-            }
-
-            &:hover {
-              text-decoration: none;
-              color: var(--wp--preset--color--coral);
-            }
-          }
-          &.menu-item-has-children{
-            background-image: url("data:image/svg+xml,%3Csvg width='12' height='7' viewBox='0 0 12 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.636353 0.636719L5.63635 5.63672L10.6364 0.636719' stroke='%23000B40' stroke-width='1.8'/%3E%3C/svg%3E%0A");
-            background-size: 12px 7px;
-            background-repeat: no-repeat;
-            background-position: center right;
-            padding-right: 20px;
-          }
-          &.current-menu-item{
-              a{
-                color: var(--wp--preset--color--coral);
-              }
-
-            }
-        }
-
-
-        .sub-menu{
-          position: absolute;
-          left: 0px;
-          top: 36px;
-          width: 280px;
-          background-color: transparent;
-          padding: 20px 0px 0px 0px;
-          display: none;
-
-          li{
-            border-bottom: 1px solid #E5E5E5;
-            a{
-              padding: 11px 20px;
-              border-radius: 0px;
-              display: block;
-            }
-          }
-          @include tablet{
-            padding-top: 0;
-            position: relative;
-            top: 0;
-            width: 90%;
-            height: fit-content;
-            margin-top: 10px;
-            left: 5%;
-            li{
-                a{
-                  font-size: 16px;
-                }
-            }
-          }
-        }
-      }
-    }
-  }
-  &.active{
-    .site-navigation{
-      width: 100vw!important;
-      transform: translateX(0px)!important;
-      opacity: 1;
-      visibility: visible;
-      overflow: auto;
-      background-repeat: no-repeat;
-    }
-    .menu-toggle{
-      background-color: transparent;
-      border-color: transparent;
-    }
-    .toggle-icon{
-        .toggle-icon-bar{
-          background: #000B40!important;
-          &:nth-child(1){
-            top: 7px!important;
-            width: 100%!important;
-            left: 0px!important;
-            transform: rotate(45deg);
-            @include mobile-sm {
-              top: 5px!important;
-            } 
-          }
-
-          &:nth-child(2){
-            opacity: 0;
-          }
-
-          &:nth-child(3){
-            width: 100%!important;
-            left: 0px!important;
-            bottom: 7px!important;
-            transform: rotate(-45deg);
-            @include mobile-sm {
-              top: 5px!important;
-            } 
-          }
-        }
-      }
-    .toggle-text{
-      opacity: 0;
-    }
-  }
-}
-
-.sub-menu__opener{
-  display: none;
-}
-
-.site-header{
-  transition: all 0.3s ease;
-  .btn{
-    transition: all 0.3s ease;
-    .button-arrow-wrapper{
-      transition: all 0.3s ease;
-    }
-  }
-}
-.site-header.scrolled {
-  .content-wrap{
-    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
-  }
-  .content-wrap{
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  .btn{
-    padding-top: 8px;
-    padding-bottom: 8px;
-    .button-arrow-wrapper{
-      height: 24px;
     }
   }
 }

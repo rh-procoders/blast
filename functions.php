@@ -182,6 +182,13 @@ require get_template_directory() . '/inc/ajax-handlers.php';
  */
 require get_template_directory() . '/inc/acf.php';
 
+
+/**
+ * Megamenu Walker Class
+ */
+require get_template_directory() . '/inc/megamenu-walker.php';
+
+
 /**
  * Enable JSON file uploads for Lottie animations
  *
@@ -343,3 +350,4 @@ function blast_preload_hero_home_images() {
     }
 }
 add_action('wp_head', 'blast_preload_hero_home_images');
+

@@ -1,0 +1,267 @@
+/**
+ * File navigation.js.
+ *
+ * Handles toggling the navigation menu for small screens and enables TAB key
+ * navigation support for dropdown menus.
+ *
+ * This file will be auto-enqueued
+ *
+ * @package blast_Wp
+ */
+
+(function () {
+    const siteNavigation = document.getElementById( 'site-navigation' );
+    const body = document.body;
+
+    // Return early if the navigation doesn't exist.
+    if (!siteNavigation) {
+        return;
+    }
+
+    const button = siteNavigation.getElementsByTagName( 'button' )[0];
+    const closeButton = siteNavigation.querySelector( '.mobile-menu-top__close' );
+    const backButton = siteNavigation.querySelector( '.mobile-menu-top__back' );
+
+console.log('Toggling navigation menu', typeof button);
+    // Return early if the button doesn't exist.
+    if ('undefined' === typeof button) {
+        return;
+    }
+
+    const menu = siteNavigation.getElementsByTagName( 'ul' )[0];
+
+    // Hide menu toggle button if menu is empty and return early.
+    if ('undefined' === typeof menu) {
+        button.style.display = 'none';
+        return;
+    }
+
+    if (!menu.classList.contains( 'nav-menu' )) {
+        menu.classList.add( 'nav-menu' );
+    }
+
+
+
+    // Toggle the .toggled class and the aria-expanded value each time the button is clicked.
+    button.addEventListener(
+        'click',
+        function () {
+            
+            siteNavigation.classList.toggle( 'toggled' );
+
+            if (button.getAttribute( 'aria-expanded' ) === 'true') {
+                button.setAttribute( 'aria-expanded', 'false' );
+                document.documentElement.classList.remove( 'no-scroll' );
+            } else {
+                button.setAttribute( 'aria-expanded', 'true' );
+                document.documentElement.classList.add( 'no-scroll' );
+            }
+        }
+    );
+
+    closeButton.addEventListener(
+        'click',
+        function () {
+            siteNavigation.classList.remove( 'toggled' );
+            button.setAttribute( 'aria-expanded', 'false' );
+            document.documentElement.classList.remove( 'no-scroll' );
+        }
+    );
+
+    backButton.addEventListener(
+        'click',
+        function () {
+            // Find the closest parent with the class 'sub-megamenu-open' and remove it
+            const parentMenu = this.closest( '.sub-megamenu-open' );
+            if (parentMenu) {
+                parentMenu.classList.remove( 'sub-megamenu-open' );
+            } 
+        }
+    );
+
+    // Remove the .toggled class and set aria-expanded to false when the user clicks outside the navigation.
+    document.addEventListener(
+        'click',
+        function ( event ) {
+            const isClickInside = siteNavigation.contains( event.target );
+
+            if (!isClickInside) {
+                siteNavigation.classList.remove( 'toggled' );
+                button.setAttribute( 'aria-expanded', 'false' );
+            }
+        }
+    );
+
+    // Get all the link elements within the menu.
+    const links = menu.querySelectorAll( '.menu-link' );
+
+
+    // Get all the link elements with children within the menu.
+    const linksWithChildren = menu.querySelectorAll( '.menu-item-has-children > a, .page_item_has_children > a' );
+
+    // Toggle focus each time a menu link is focused or blurred.
+    for (const link of links) {
+        link.addEventListener( 'focus', toggleFocus, true );
+        link.addEventListener( 'click', toggleFocus, true );
+        link.addEventListener( 'blur', toggleFocus, true );
+    }
+
+    // Toggle focus each time a menu link with children receive a touch event.
+    for (const link of linksWithChildren) {
+        link.addEventListener( 'touchstart', toggleFocus, false );
+    }
+
+    /**
+     * Sets or removes .focus class on an element.
+     */
+    function toggleFocus( event ) {
+        if (event.type === 'focus' || event.type === 'blur' || event.type === 'click') {
+            let self = this;
+            // Move up through the ancestors of the current link until we hit .nav-menu.
+            while (!self.classList.contains( 'nav-menu' )) {
+                // On li elements toggle the class .focus.
+                if ('li' === self.tagName.toLowerCase()) {
+                    self.classList.toggle( 'focus' );
+                }
+                self = self.parentNode;
+            }
+        }
+
+        if (event.type === 'touchstart') {
+            const menuItem = this.parentNode;
+            event.preventDefault();
+            for (const link of menuItem.parentNode.children) {
+                if (menuItem !== link) {
+                    link.classList.remove( 'focus' );
+                }
+            }
+            menuItem.classList.toggle( 'focus' );
+        }
+    }
+
+    // Header animation on scroll
+    const topBar = document.querySelector( '.top-bar-block' );
+    const header = document.getElementById( "masthead" );
+
+    // Add 'top-positioned' class if the user is at the top of the page initially
+    if (scrollY === 0) {
+        header.classList.add( "top-positioned" );
+    }
+
+    // Scroll Event
+    let lastY = scrollY;
+
+    const MAX_SCROLL_DELTA = 5, NAV_HEIGHT = header.offsetHeight;
+
+    /* ── use a safe fallback ─────────────────────────────────── */
+    // 0 when .top-bar-block isn’t present
+    const TOP_BAR_HEIGHT = topBar ? topBar.offsetHeight : 0;
+    /* ────────────────────────────────────────────────────────── */
+
+    addEventListener( "scroll", () => {
+
+        const delta = scrollY - lastY;
+
+
+        // Add or remove 'hiddeNavBar' class based on scroll direction
+        if (Math.abs( delta ) > MAX_SCROLL_DELTA) {
+            header.classList.toggle( "hiddeNavBar", delta > 0 && scrollY > NAV_HEIGHT + TOP_BAR_HEIGHT );
+            lastY = scrollY;
+
+            // Set the 'top' property of the inline style
+            if (header.classList.contains( 'hiddeNavBar' )) {
+                header.style.position = `fixed`;
+            }
+
+            if (scrollY < TOP_BAR_HEIGHT) {
+                header.style.position = `absolute`;
+            }
+            if (scrollY < NAV_HEIGHT + TOP_BAR_HEIGHT) {
+                header.classList.remove( "header-top-animation" );
+            } else {
+                header.classList.add( "header-top-animation" );
+            }
+        }
+
+        // Add or remove 'top-positioned' class based on scroll position
+        if (scrollY === 0) {
+            header.classList.add( "top-positioned" );
+        } else {
+            header.classList.remove( "top-positioned" );
+        }
+    } );
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuItems = document.querySelectorAll('.menu-item.is-mega-menu');
+
+        menuItems.forEach(item => {
+            const link = item.querySelector('span.menu-link');
+            const megaMenu = item.querySelector('.mega-columns');
+      
+
+            if (!megaMenu || !link) return;
+
+            // --- Hover Support (Desktop) ---
+            item.addEventListener('mouseenter', () => {
+                if (!isTouchDevice()) {
+                    // Close all open mega menus first
+                    document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
+                        .forEach(openMenu => openMenu.classList.remove('mega-open'));
+
+                    // Open the current one
+                    megaMenu.classList.add('mega-open');
+                }
+            });
+
+            // --- Click Toggle (Touch Devices Only) ---
+            link.addEventListener('click', function (e) {
+              
+                    e.preventDefault();
+
+                    // Close all open mega menus first
+                    document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
+                        .forEach(openMenu => openMenu.classList.remove('mega-open'));
+
+                    // Toggle class name to parent for mobile usage
+
+                    siteNavigation.classList.toggle('sub-megamenu-open');
+                    // Toggle current
+                    megaMenu.classList.add('mega-open');
+                
+            });
+        });
+
+        // --- Outside Click to Close ---
+        document.addEventListener('click', function (e) {
+            
+            if (!e.target.closest('.menu-item.is-mega-menu')) {
+
+                menuItems.forEach(item => {
+                    
+                    const megaMenuOpen = item.querySelector('.mega-columns');
+                    megaMenuOpen.classList.remove('mega-open')
+
+                });
+            }
+        });
+
+        // --- Helper: Detect Touch Device ---
+        function isTouchDevice() {
+            return window.matchMedia('(pointer: coarse)').matches;
+        }
+    });
+
+    let lastScrollTop = 0;
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+        if (scrollTop > 20) {
+            document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
+                        .forEach(openMenu => openMenu.classList.remove('mega-open'));
+        }
+    });
+
+
+}());
