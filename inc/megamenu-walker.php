@@ -105,9 +105,12 @@ class Custom_Mega_Menu_Walker extends Walker_Nav_Menu {
                                         'alt'   => wp_strip_all_tags( $feature['title'] ),
                                     )
                                 );
+                    
+                    // Open link tag if not popup
                     if (!empty($feature['link']) && !$is_popup) {
-                        $output .= '<a href="' . esc_url($feature['link']['url']) . '" class="cy-btn cy-btn--link-light-blue cy-btn--has-icon">';
+                        $output .= '<a href="' . esc_url($feature['link']['url']) . '" class="featured-link">';
                     }
+                    
                     $output .= '<div class="feature-block">';
                     if (!empty($feature['top_label_title'])) {
                         $output .= '<span class="top-label">' . esc_html($feature['top_label_title']) . '</span>';
@@ -141,11 +144,12 @@ class Custom_Mega_Menu_Walker extends Walker_Nav_Menu {
 
                     }
 
+                    $output .= '</div>'; // end feature-block
+                    
+                    // Close link tag if not popup
                     if (!empty($feature['link']) && !$is_popup) {
                         $output .= '</a>';
                     }
-
-                    $output .= '</div>';
                 }
 
                 if($cta_bottom){

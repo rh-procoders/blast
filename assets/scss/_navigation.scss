@@ -764,16 +764,30 @@
 		border-radius    : 0px 14px 14px 0px;
 		height           : fit-content;
 
+        padding: 30px 20px;
+
         @include tablet {
            display: none;
         }
+
+        .featured-link{
+                text-decoration: none;
+                padding: 30px 20px;
+                border-radius: 14px;
+                &:hover{
+                    box-shadow: 36px 30px 74.9px 0 rgba(255, 108, 102, 0.18);
+                    .featured-title{
+                        text-decoration: none;
+                    }
+                }
+            }
 
 		.feature-block {
 		  display        : flex;
 		  flex-direction : column;
 		  gap            : 17px;
 		  height         : fit-content;
-
+            
 		  img {
 			aspect-ratio  : 324 / 174;
 			width         : 100%;
