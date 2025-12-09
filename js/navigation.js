@@ -62,14 +62,17 @@
         }
     );
 
-    menuTopTitle.addEventListener(
-        'click',
-        function () {
-            // Close all open mega menus first
-            document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
-                .forEach(openMenu => openMenu.classList.remove('mega-open'));
-        }
-    );
+    // Add event listeners to ALL menu top titles, not just the first one
+    document.querySelectorAll('.menu-top-title').forEach(function(menuTopTitle) {
+        menuTopTitle.addEventListener(
+            'click',
+            function () {
+                // Close all open mega menus first
+                document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
+                    .forEach(openMenu => openMenu.classList.remove('mega-open'));
+            }
+        );
+    });
 
     if (closeButton) {
         closeButton.addEventListener(

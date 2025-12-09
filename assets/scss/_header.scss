@@ -53,10 +53,11 @@
         top: 20px;
         transition: all 400ms ease;
         @include tablet {
-            gap: 5px;
+            gap: 15px;
         }
         @include mobile-sm {
             padding: 13px 18px;
+            gap: 10px;
         }
 
 	}

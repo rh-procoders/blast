@@ -142,7 +142,7 @@ class Custom_Mega_Menu_Walker extends Walker_Nav_Menu {
                     }
 
                     if (!empty($feature['link']) && !$is_popup) {
-                        $output .= '</a">';
+                        $output .= '</a>';
                     }
 
                     $output .= '</div>';
