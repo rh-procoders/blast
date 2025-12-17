@@ -86,14 +86,7 @@ if (  ( is_array( $choose_page_to_show_top_bar ) && in_array( $current_page_id, 
                 <?php
                 the_custom_logo();
 
-                $blast_wp_description = get_bloginfo( 'description', 'display' );
-                if ( $blast_wp_description || is_customize_preview() ) : ?>
-                    <p class="site-description">
-                        <?php echo $blast_wp_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                        ?>
-                    </p>
-                <?php
-                endif; ?>
+              ?>
             </div><!-- .site-branding -->
 
             <nav id="site-navigation" class="main-navigation">
@@ -115,14 +108,7 @@ if (  ( is_array( $choose_page_to_show_top_bar ) && in_array( $current_page_id, 
                         <?php
                         the_custom_logo();
 
-                        $blast_wp_description = get_bloginfo( 'description', 'display' );
-                        if ( $blast_wp_description || is_customize_preview() ) : ?>
-                            <p class="site-description">
-                                <?php echo $blast_wp_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                ?>
-                            </p>
-                        <?php
-                        endif; ?>
+                       ?>
                     </div><!-- .site-branding -->
            
        
