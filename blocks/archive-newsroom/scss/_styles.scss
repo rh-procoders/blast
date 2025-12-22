@@ -1,0 +1,200 @@
+@import "../../../assets/scss/variable";
+// Archive newsroom Block Styles
+.archive-newsroom-block {
+    .newsroom-archive{
+        &__featured{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            @include tablet-lg{
+                gap: 40px;
+                margin-bottom: 40px;
+            }
+
+            @include mobile{
+                grid-template-columns: 1fr;
+                margin-bottom: 30px;
+                gap: 30px;
+            }
+        }
+        &__grid{
+            max-width: 1580px;
+        }
+    }
+
+    .newsroom-item{
+        display: flex;
+        flex-direction: column;
+        gap: 21px;
+        
+        @include mobile{
+            gap: 15px;
+        }
+        &__link {
+            background-image: url('../../../img/newsroom_card_bg.png');
+            background-position: left bottom;
+            background-size: contain;
+            background-repeat: no-repeat;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.3s ease;
+            border-radius: 40px;
+            background-color: #FFF;
+            padding: 60px 60px 70px;
+            @include tablet-lg{
+                padding: 40px 40px 50px;
+            }
+            @include mobile{
+                padding: 20px 20px 30px;
+                border-radius: 20px;
+            }
+            &:hover {
+                box-shadow: 26px 20px 54.9px 0 rgba(255, 108, 102, 0.18);
+            } 
+        }
+        &__image-figure{
+            width: 100%;
+            border-radius: 30px;
+            background: #F4F4F4;
+            height: 182px;
+            @include mobile{
+                height: 146px;
+                border-radius: 20px;
+            }
+            img{
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+                padding: 20px 70px;
+                @include mobile{
+                    padding: 40px 30px;
+                }
+            }
+        }
+        &__date-text{
+            color: #000B40;
+            font-family: $font-family-secondary;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%; /* 22.4px */
+        }
+        &__title{
+            color: #000B40;
+            font-size: 46px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 120%; /* 55.2px */
+            letter-spacing: -0.92px;
+            margin-bottom: 20px;
+            @include mobile{
+                font-size: 24px;
+                line-height: 120%; /* 28.8px */
+                letter-spacing: -0.48px;
+            }
+        }
+        &__excerpt{
+            color: #000;
+            font-family: $font-family-secondary;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 120%; /* 24px */
+            letter-spacing: -0.4px;
+        }
+    }
+
+    .archive-newsroom__list{
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        margin-bottom: 60px;
+        @include tablet-lg{
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        @include mobile{
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .newsroom-item{
+            display: grid;
+            grid-template-columns: 1fr 440px;
+            gap: 140px;
+            @include tablet-lg{
+                gap: 40px;
+                grid-template-columns: 1fr 340px;
+            }
+            @include mobile{
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            &__image-wrapper{
+                width: 100%;
+                height: 100%;
+                order: 2;
+                border-radius: 30px;
+                background: #F4F4F4;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                @include mobile{
+                    width: 100%;
+                    height: 146px;
+                    order: 0;
+                    border-radius: 20px;
+                }
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    padding: 20px 70px;
+                    @include mobile{
+                        padding: 40px 30px;
+                    }
+                }   
+            }
+        }
+    }
+    
+}
+
+// Grid column specific classes
+.archive-newsroom-block {
+    &.grid-cols-1 .archive-newsroom-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    &.grid-cols-2 .archive-newsroom-grid {
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    &.grid-cols-3 .archive-newsroom-grid {
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    
+    &.grid-cols-4 .archive-newsroom-grid {
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        @media (min-width: 1200px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+}

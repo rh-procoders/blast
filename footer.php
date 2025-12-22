@@ -10,7 +10,7 @@
  */
 
 ?>
-
+<?php $social_links = get_field('social_media_links', 'option'); ?>
 
 <footer id="footer" class="main-footer">
 
@@ -29,6 +29,21 @@
                         </a>
                     <?php endif; ?>
                 </div>
+                <?php if ($social_links): ?>
+                    <div class="footer-social mobile-only">
+                        <?php foreach ($social_links as $social):
+                            $social_link = $social['link'] ?? null;
+                            $social_icon = $social['icon'] ?? null;
+                            ?>
+                            <a href="<?php echo esc_url($social_link ? $social_link['url'] : '#'); ?>"
+                                class="footer-social__link"
+                                target="<?= esc_attr($social_link ? $social_link['target'] : '_blank'); ?>"
+                                rel="noopener noreferrer">
+                                <img src="<?php echo esc_url($social_icon ? $social_icon['url'] : '#'); ?>" alt="<?php echo esc_attr($social_icon ? $social_icon['alt'] : 'alt'); ?>" />
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <!-- Footer Navigation Columns -->
@@ -115,9 +130,9 @@
 
                 </div>
                 <!-- Social Media Icons -->
-                <?php $social_links = get_field('social_media_links', 'option'); ?>
+                
                 <?php if ($social_links): ?>
-                    <div class="footer-social">
+                    <div class="footer-social desktop-only">
                         <?php foreach ($social_links as $social):
                             $social_link = $social['link'] ?? null;
                             $social_icon = $social['icon'] ?? null;
@@ -184,7 +199,8 @@
         </div>
 
         <!-- Background Elements -->
-        <img src="<?php echo THEME_URI ?>/img/footer-bg-graph.png" alt="footer graphic" class="main-footer__bg-image-bottom" loading="lazy"/>
+        <img src="<?php echo THEME_URI ?>/img/footer-bg-graph.png" alt="footer graphic" class="main-footer__bg-image-bottom desktop-only" loading="lazy"/>
+        <img src="<?php echo THEME_URI ?>/img/footer-bg-graph-mobile.webp" alt="footer graphic" class="main-footer__bg-image-bottom mobile-only" loading="lazy"/>
 
     </div>
     <?php

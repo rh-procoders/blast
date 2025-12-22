@@ -3,9 +3,8 @@
 
 h1, .h1 {
   font-size: var(--wp--preset--font-size--fs-2-extra-large);
-  letter-spacing: -0.04em;
   line-height: 110%;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-regular;
   @include mobile-sm {
     font-size: 56px;
   }

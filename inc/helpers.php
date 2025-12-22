@@ -27,6 +27,60 @@ function sprite_svg( $spriteName, $svgWidth = '24', $svgHeight = '24', $return =
 	}
 }
 
+if ( ! function_exists( 'return_sprite_svg' ) ) :
+
+    /**
+     *  returns SVG Icon from set sprite
+     *
+     *  Can dynamically set sprite source used when called
+     *  sprite source has to be uploaded to /assets/images/icons/ folder
+     *
+     * @param string $sprite_name sprite icon name.
+     * @param int    $svg_width sprite icon width.
+     * @param int    $svg_height sprite icon height.
+     * @param string $sprite_source sprite source file.
+     *
+     * @return string
+     *
+     * @throws Exception Throws error if sprite image directory is incorrect.
+     */
+    function return_sprite_svg(
+        string $sprite_name,
+        int $svg_width = 24,
+        int $svg_height = 24,
+        string $sprite_source = '/img/icons/icons.svg'
+    ): string {
+
+        // Detect if $sprite_source contains '/images/'.
+        if ( str_contains( $sprite_source, '/img/' ) ) {
+            // Get the substring after '/images/'.
+            $sprite_source = substr( $sprite_source, strpos( $sprite_source, '/img/icons/' ) );
+        } else {
+            throw new Exception( 'Sprite Source Dir Incorrect! Upload to /img/icons/' );
+        }
+
+        $svg = get_stylesheet_directory_uri() . '/' . $sprite_source . '?ver=' . filemtime( get_template_directory() . '/' . $sprite_source ) . '#' . $sprite_name;
+
+        $icon_html = '<svg class="svg-icon ' . $sprite_name . '" width="' . $svg_width . '" height="' . $svg_height . '"><use xlink:href="' . $svg . '"></use></svg>';
+
+        // Define allowed attributes for SVG.
+        $allowed_html = array(
+            'svg' => array(
+                'class'  => true,
+                'width'  => true,
+                'height' => true,
+            ),
+            'use' => array(
+                'xlink:href' => true,
+            ),
+        );
+
+        // Sanitize the SVG HTML output using wp_kses with the allowed attributes.
+        return wp_kses( $icon_html, $allowed_html );
+    }
+endif;
+
+
 
 // Plugin ACF Svg icon field
 add_filter( 'acf/fields/svg_icon/file_path', 'tc_acf_svg_icon_file_path' );

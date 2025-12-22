@@ -182,6 +182,13 @@ require get_template_directory() . '/inc/ajax-handlers.php';
  */
 require get_template_directory() . '/inc/acf.php';
 
+
+/**
+ * Megamenu Walker Class
+ */
+require get_template_directory() . '/inc/megamenu-walker.php';
+
+
 /**
  * Enable JSON file uploads for Lottie animations
  *
@@ -330,3 +337,17 @@ function add_fancybox_to_gallery_block($content) {
     return $modifiedContent;
 }
 add_filter('the_content', 'add_fancybox_to_gallery_block');
+
+/**
+ * Preload hero-home block background images only when the block is present
+ */
+function blast_preload_hero_home_images() {
+    if (has_block('acf/hero-home')) {
+        ?>
+        <link rel="preload" as="image" href="<?php echo esc_url(THEME_URI . '/blocks/hero-home/img/hero-home-bg-desktop.webp'); ?>" media="(min-width: 768px)">
+        <link rel="preload" as="image" href="<?php echo esc_url(THEME_URI . '/blocks/hero-home/img/home-hero-mobile-bg.webp'); ?>" media="(max-width: 767px)">
+        <?php
+    }
+}
+add_action('wp_head', 'blast_preload_hero_home_images');
+

@@ -52,7 +52,8 @@ $wrapper_attributes = get_block_wrapper_attributes([
 
 <section <?php echo $wrapper_attributes; ?>>
 
-    <img src="<?php echo THEME_URI ?>/img/featured-top-bg.svg" alt="top background graphic" class="features-section__bg-image-top">
+    <img src="<?php echo THEME_URI ?>/blocks/features-section/img/featured-top-bg.png" alt="top background graphic" class="features-section__bg-image-top desktop-only">
+    <img src="<?php echo THEME_URI ?>/blocks/features-section/img/featured-top-bg-mobile.png" alt="top background graphic" class="features-section__bg-image-top mobile-only">
     
     <div class="features-section__container container container--xl">
         
@@ -77,16 +78,14 @@ $wrapper_attributes = get_block_wrapper_attributes([
                                      alt="<?php echo esc_attr($feature['title']); ?> icon"
                                      loading="lazy">
                             <?php endif; ?>
-                        </div>
-                        
-                        <!-- Feature Content -->
-                        <div class="features-section__content">
-                            
                             <!-- Feature Title -->
                             <h3 class="features-section__title">
                                 <?php echo $feature['title']; ?>
                             </h3>
-                            
+                        </div>
+                        
+                        <!-- Feature Content -->
+                        <div class="features-section__content">
                             <!-- Feature Description -->
                             <p class="features-section__description">
                                 <?php echo esc_html($feature['description']); ?>
@@ -105,8 +104,6 @@ $wrapper_attributes = get_block_wrapper_attributes([
         <?php endif; ?>
         
     </div>
-
-    <img src="<?php echo THEME_URI ?>/img/featured-bottom-bg.svg" alt="bottom background graphic" class="features-section__bg-image-bottom">
     
 </section>
 

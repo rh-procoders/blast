@@ -1,7 +1,7 @@
 @import "_variable";
 html {
 	box-sizing: border-box;
-	font-size: 16px;
+	font-size: max(16px, 1rem);
 	line-height: 1.5;
 	height: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -10,6 +10,7 @@ html {
 	-moz-osx-font-smoothing: grayscale;
 	padding: 0 !important;
 	--scrollbar-width: 0px;
+	scroll-padding-top: 100px;
 	@include desktop-lg {
 		font-size: clamp(8px,8px + .573vw,16px);
 	}
@@ -17,6 +18,7 @@ html {
 	@include tablet {
 		--scrollbar-width: 0px !important;
 	}
+
 }
 
 body {
@@ -56,6 +58,18 @@ body {
 		// --wp--preset--font-size--large: 25px;
 		// --wp--preset--font-size--medium:20px;
 		// --wp--preset--font-size--small:18px;
+	}
+}
+
+html {
+scroll-behavior : smooth;
+
+	&.no-scroll {
+		overflow : hidden !important;
+
+		body {
+			overflow : hidden !important;
+		}
 	}
 }
 

@@ -103,7 +103,6 @@
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
-        backdrop-filter: blur(2px);
         padding: 30px;
     }
     
@@ -153,9 +152,10 @@
         color: var(--wp--preset--color--dark-blue);
         font-size: 30px;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 600;
         line-height: 110%; /* 33px */
         letter-spacing: -0.6px;
+        padding-bottom: 4px;
     }
     
     &__title {

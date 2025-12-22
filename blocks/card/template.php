@@ -86,7 +86,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
         
         <!-- Card Heading -->
         <h3 class="h4 card-block__heading">
-            <?php echo esc_html($card_heading); ?>
+            <?php echo $card_heading; ?>
         </h3>
         
         <!-- Card Description -->
@@ -95,6 +95,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
                 <?php echo esc_html($card_description); ?>
             </p>
         <?php endif; ?>
+        <?php if(get_field('show_author') || $button_label): ?>
         <div class="card-block__footer">
             <?php if(get_field('show_author')): ?>
                 <div class="card-block__author">
@@ -128,6 +129,8 @@ $wrapper_attributes = get_block_wrapper_attributes([
                 </div>
             <?php endif; ?>
         </div>
+        <?php endif; ?>
+
         
     </div>
     

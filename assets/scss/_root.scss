@@ -110,5 +110,12 @@
     @include mobile {
         --section-pt: #{spacing('4xl')};
         --section-pb: #{spacing('4xl')};
+
+        --wp--preset--spacing--20: 20px;
+
+        --wp--preset--font-size--fs-small-paragraph:16px;
+        --wp--preset--font-size--fs-medium-paragraph:16px;
+
+        --wp--preset--spacing--200:100px;
     }
 }

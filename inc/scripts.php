@@ -58,6 +58,7 @@ function load_scripts() {
     //     filemtime(THEME_DIR . '/blocks/faq/css/view-style.css')
     // );
 	wp_enqueue_script( 'main', THEME_URI . '/js/main.js', array(), filemtime(THEME_DIR . '/js/main.js'), true );
+	wp_enqueue_script( 'navigation', THEME_URI . '/js/navigation.js', array(), filemtime(THEME_DIR . '/js/navigation.js'), true );
 
     // wp_enqueue_script( 'lottie-player', get_template_directory_uri() . '/js/plugins/lottie-player.js', '', '1.7.1', false );
 
@@ -131,7 +132,3 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 
 
 // /wp-content/themes/blast-2025/js/plugins/lottie-player.js
-
-
-// Editor styles are now properly handled via add_editor_style() in theme setup
-// This ensures proper loading in block editor iframes without conflicts

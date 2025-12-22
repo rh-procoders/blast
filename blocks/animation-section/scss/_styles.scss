@@ -113,6 +113,10 @@
         @include desktop-lg{
             padding: 80px 30px 40px!important; // Adjust padding for mobile
         }
+        @include mobile {
+            padding: 60px 20px 30px!important; // Adjust padding for mobile
+            min-height: 300px;
+        }
     }
     
     &__content {
@@ -120,5 +124,10 @@
         position: relative;
         z-index: 3; // Ensure text content is above everything
         width: 100%;
+        .paragraph-section{
+            @include mobile{
+                font-size: 16px;
+            }
+        }
     }
 }

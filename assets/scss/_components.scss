@@ -747,7 +747,17 @@ body .cky-consent-container {
 }
 
 // CookieYes - Modal styles
+
 body {
+	:root {
+	  --cky-br      : 40px;
+	  @media (max-width : 576px) {
+		--cky-br   : 24px;
+	  
+		max-width  : calc(100% - (24px * 2));
+		max-height : calc(100% - (24px * 2));
+	  }
+	}
   // Overlay
   .cky-overlay {
 	background : rgba(0, 11, 64, 0.80);
@@ -756,14 +766,6 @@ body {
 
   // Modal
   .cky-modal {
-	--cky-br      : 40px;
-
-	@media (max-width : 576px) {
-	  --cky-br   : 24px;
-
-	  max-width  : calc(100% - (24px * 2));
-	  max-height : calc(100% - (24px * 2));
-	}
 
 	border-radius : var(--cky-br);
 
@@ -1048,4 +1050,25 @@ body {
 	  }
 	}
   }
+}
+
+
+.border-top-edges{
+	border-top-left-radius: 70px;
+	border-top-right-radius: 70px;
+}
+
+/* Target the Columns block specifically */
+.custon-gap-columns {
+    /* Apply a larger vertical gap (row-gap) */
+    row-gap: var(--wp--preset--spacing--20)!important; 
+    /* Apply a smaller horizontal gap (column-gap) */
+    column-gap: var(--wp--preset--spacing--80)!important; 
+}
+
+.rounded-image{
+	border-radius: 50px;
+	@include mobile {
+		border-radius: 30px;
+	}
 }

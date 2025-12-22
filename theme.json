@@ -29,6 +29,12 @@
                     "gradient": "linear-gradient(32deg, #FFF2D9 6.44%, #FFD993 30.71%, #FF735B 67.95%)",
                     "name": "Coral Light"
                 }
+                ,
+				{
+                    "slug": "white-light",
+                    "gradient": "linear-gradient(90deg, #F4F4F4 0%, #ffffff 100%)",
+                    "name": "White Light"
+                }
 
             ]
         },
@@ -53,10 +59,10 @@
 			"spacingSizes": [
 				{"size": "0.625rem", "slug": "10","name": "0.625rem (10px)"},
 				{"size": "1rem", "slug": "16","name": "1rem (16px)"},
-				{"size": "1.125rem", "slug": "20","name": "1.125rem (20px)"},
+				{"size": "1.25rem", "slug": "20","name": "1.25rem (20px)"},
 				{"size": "1.25rem", "slug": "20-24","name": "1.25rem (20-24px)"},
 				{"size": "1.5rem", "slug": "24","name": "1.5rem (24px)"},
-				{"size": "1.875rem", "slug": "30","name": "1.875rem (30px)"},
+				{"size": "30px", "slug": "30","name": "1.875rem (30px)"},
 				{"size": "2.5rem", "slug": "40","name": "2.5rem (40px)"},
 				{"size": "3.75rem", "slug": "60","name": "3.75rem (60px)"},
 				{"size": "5rem", "slug": "80","name": "5rem (80px)"},
@@ -138,6 +144,11 @@
 					"name": "Paragraph L - 20px"
 				},
                 {
+					"slug": "fs-xlarge-paragraph",
+					"size": "1.5rem",
+					"name": "Paragraph XL - 24px"
+				},
+                {
                   "slug": "fs-tag",
                   "size": "max(12px, 0.875rem)",
                   "name": "Tag - 14px"
@@ -153,6 +164,27 @@
 			"core/heading": {
 				"typography": {
 					"fontFamily": true
+				}
+			},
+			"core/group": {
+				"spacing": {
+					"blockGap": true,
+					"padding": true,
+					"margin": true
+				}
+			},
+			"core/row": {
+				"spacing": {
+					"blockGap": true,
+					"padding": true,
+					"margin": true
+				}
+			},
+			"core/columns": {
+				"spacing": {
+					"blockGap": true,
+					"padding": true,
+					"margin": true
 				}
 			}
 		}

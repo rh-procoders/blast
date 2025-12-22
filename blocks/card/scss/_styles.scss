@@ -13,20 +13,31 @@
     color: inherit;
     padding: 40px;
     // Hover effects
+    @include mobile{
+        border-radius: 20px;
+        padding: 20px 20px 30px 20px;
+    }
     &:hover {
         box-shadow: 36px 30px 74.9px 0 rgba(255, 108, 102, 0.18);
         text-decoration: none;
         color: inherit;
+        @include mobile{
+            box-shadow: 0px 0px 0px 0px;
+        }
     }
     
     // Image section with aspect ratio 600x320
     &__image {
         position: relative;
         width: 100%;
-        aspect-ratio: 600 / 320; // 1.875:1 ratio
+        aspect-ratio: 600 / 300; // 1.875:1 ratio
         overflow: hidden;
         border-radius: 30px;
         margin-bottom: 30px;
+        @include mobile{
+            border-radius: 14px;
+            margin-bottom: 16px;
+        }
         
         // Fallback for browsers that don't support aspect-ratio
         @supports not (aspect-ratio: 600 / 320) {
@@ -63,7 +74,9 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
-        padding-bottom: 20px;
+        @include mobile{
+            gap: 16px;
+        }
     }
     &__tag-wrapper{
         display: flex;
@@ -82,13 +95,17 @@
         line-height: 110%;
         width: fit-content;
         color: #fff;
+        @include mobile{
+            font-size: 12px;
+            padding: 8px 10px;
+        }
     }
     
     // Heading
     &__heading {   
-        font-weight: font-weight('bold'); // 700
+        font-weight: 700!important;
         color: var(--wp--preset--color--dark-blue);
-        line-height: 120%; /* 40.8px */
+        line-height: 120%!important;
         letter-spacing: -0.68px;
         margin: 0; // 0 0 16px 0
         max-width: 460px;
@@ -158,8 +175,6 @@
 // Mobile responsive adjustments
 @media (max-width: 767px) {
     .card-block {
-        padding: spacing('xl'); // 32px on mobile
-        
         &__icon i {
             font-size: font-size('2xl'); // 20px on mobile
         }

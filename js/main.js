@@ -16,29 +16,30 @@
     };
 
 
-    //Mobile menu toggle
-    function handleMenuToggle() {
-        const menuToggle = document.getElementById('menu_toggle_button');
-        menuToggle.addEventListener('click', () => {
-            document.getElementById('masthead').classList.toggle('active');
-        });
-
-        
-    }
-
-
     // DOCUMENT READY //
     document.addEventListener("DOMContentLoaded", () => {
         "use strict";
 
-        $('.menu').on('click', '.menu-item-has-children > a', function(e){
-            e.preventDefault();
-            $('.site-navigation').find('.open-submenu').not($(this).parents('.menu-item-has-children')).removeClass('open-submenu');
-            $('.site-navigation').find('.sub-menu').not($(this).parents('.menu-item-has-children').find('.sub-menu')).slideUp();    
-            $(this).parents('.menu-item-has-children').toggleClass('open-submenu');
-            $(this).parents('.menu-item-has-children').find('.sub-menu').slideToggle();
-  
-        });
+        // Handle top banner close button
+        const bannerCloseBtn = document.querySelector('.top-banner__close');
+        if (bannerCloseBtn) {
+            bannerCloseBtn.addEventListener('click', function() {
+                const banner = document.querySelector('.top-banner');
+                if (banner) {
+                    banner.style.animation = 'slideUp 0.3s ease forwards';
+                    setTimeout(() => {
+                        banner.style.display = 'none';
+                        // Adjust header top position back to normal
+                        const header = document.querySelector('header.site-header');
+                        if (header) {
+                            banner.remove();
+                            //header.style.top = '0px';
+                        }
+                    }, 100);
+                }
+            });
+        }
+
 
         // Initialize Fancybox for WordPress gallery blocks
         if (typeof Fancybox !== 'undefined') {
@@ -61,15 +62,24 @@
         }
         setTimeout(() => {
             console.log('Showing popup modal');
-            $('body').find('.popup-modal').fadeIn();
+            // Check if modal was recently closed
+            const modalClosedTime = localStorage.getItem('popupModalClosedTime');
+            const currentTime = new Date().getTime();
+            const threeHoursInMs = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
+            
+            if (!modalClosedTime || (currentTime - parseInt(modalClosedTime)) > threeHoursInMs) {
+                $('body').find('.popup-modal').fadeIn();
+            }
         }, 5000);
 
         $('body').on('click', '.popup-modal__close-button-js-toggle', function(e){
             e.preventDefault();
             $(this).parents('.popup-modal').fadeOut();
+            
+            // Store the current timestamp in localStorage
+            localStorage.setItem('popupModalClosedTime', new Date().getTime().toString());
         })
 
-        handleMenuToggle();
 
     });
 
@@ -81,29 +91,7 @@
         }
     });
 
-    function isInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-      }
-      
-      function handleScroll() {
-        const elements = document.querySelectorAll('.circle-animation');
-        elements.forEach(el => {
-          if (isInViewport(el)) {
-            el.classList.add('active');
-          }
-        });
-      }
-      
-      // Run on scroll and also on load
-      window.addEventListener('scroll', handleScroll);
-      window.addEventListener('load', handleScroll);
-
+ 
     /**
      * Initialize SimpleBar on CookieYes modal
      * Works with both static and dynamically injected CookieYes modals
@@ -154,4 +142,20 @@
             subtree: true
         });
     }
+
+    // Header scroll effect
+    function handleHeaderScroll() {
+        const header = document.querySelector('.site-header');
+        if (!header) return;
+        
+        const scrollThreshold = 300;
+        
+        if (window.scrollY > scrollThreshold) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+
+    window.addEventListener('scroll', handleHeaderScroll);
 })();
