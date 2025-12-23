@@ -62,14 +62,20 @@
         }
     );
 
-    // Add event listeners to ALL menu top titles, not just the first one
+    // Add event listeners to ALL menu top titles, not just the first one (mobile only)
     document.querySelectorAll('.menu-top-title').forEach(function(menuTopTitle) {
         menuTopTitle.addEventListener(
             'click',
             function () {
-                // Close all open mega menus first
-                document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
-                    .forEach(openMenu => openMenu.classList.remove('mega-open'));
+                // Only close menus on mobile (1024px and below)
+                if (window.matchMedia('(max-width: 1024px)').matches) {
+                    // Close all open mega menus first
+                    document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
+                        .forEach(openMenu => {
+                            openMenu.classList.remove('mega-open');
+                            openMenu.closest('.menu-item.is-mega-menu').classList.remove('mega-menu-active');
+                        });
+                }
             }
         );
     });
@@ -229,28 +235,36 @@
                 if (!isTouchDevice()) {
                     // Close all open mega menus first
                     document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
-                        .forEach(openMenu => openMenu.classList.remove('mega-open'));
+                        .forEach(openMenu => {
+                            openMenu.classList.remove('mega-open');
+                            openMenu.closest('.menu-item.is-mega-menu').classList.remove('mega-menu-active');
+                        });
 
                     // Open the current one
                     megaMenu.classList.add('mega-open');
+                    item.classList.add('mega-menu-active');
                 }
             });
 
             // --- Click Toggle (Touch Devices Only) ---
             link.addEventListener('click', function (e) {
-              
+
                     e.preventDefault();
 
                     // Close all open mega menus first
                     document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
-                        .forEach(openMenu => openMenu.classList.remove('mega-open'));
+                        .forEach(openMenu => {
+                            openMenu.classList.remove('mega-open');
+                            openMenu.closest('.menu-item.is-mega-menu').classList.remove('mega-menu-active');
+                        });
 
                     // Toggle class name to parent for mobile usage
 
                     siteNavigation.classList.toggle('sub-megamenu-open');
                     // Toggle current
                     megaMenu.classList.add('mega-open');
-                
+                    item.classList.add('mega-menu-active');
+
             });
         });
 
@@ -260,9 +274,10 @@
             if (!e.target.closest('.menu-item.is-mega-menu')) {
 
                 menuItems.forEach(item => {
-                    
+
                     const megaMenuOpen = item.querySelector('.mega-columns');
-                    megaMenuOpen.classList.remove('mega-open')
+                    megaMenuOpen.classList.remove('mega-open');
+                    item.classList.remove('mega-menu-active');
 
                 });
             }
@@ -281,7 +296,10 @@
 
         if (scrollTop > 20) {
             document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
-                        .forEach(openMenu => openMenu.classList.remove('mega-open'));
+                        .forEach(openMenu => {
+                            openMenu.classList.remove('mega-open');
+                            openMenu.closest('.menu-item.is-mega-menu').classList.remove('mega-menu-active');
+                        });
         }
     });
 

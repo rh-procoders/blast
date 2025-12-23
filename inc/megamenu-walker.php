@@ -105,12 +105,12 @@ class Custom_Mega_Menu_Walker extends Walker_Nav_Menu {
                                         'alt'   => wp_strip_all_tags( $feature['title'] ),
                                     )
                                 );
-                    
+
                     // Open link tag if not popup
                     if (!empty($feature['link']) && !$is_popup) {
                         $output .= '<a href="' . esc_url($feature['link']['url']) . '" class="featured-link">';
                     }
-                    
+
                     $output .= '<div class="feature-block">';
                     if (!empty($feature['top_label_title'])) {
                         $output .= '<span class="top-label">' . esc_html($feature['top_label_title']) . '</span>';
@@ -129,8 +129,15 @@ class Custom_Mega_Menu_Walker extends Walker_Nav_Menu {
                         $output .= $image;
                     }
 
-                    if (!empty($feature['title'])) {
-                        $output .= '<div class="h3 featured-title">' . esc_html($feature['title']) . '</div>';
+                    if ( ! empty( $feature['title'] ) ) {
+                        $output .= '<div class="h3 featured-title">'
+                            . '<span class="featured-title__the-title">'
+                            . esc_html( $feature['title'] )
+                            . '</span>'
+                            . '<span class="featured-title__the-icon">'
+                            . return_sprite_svg( 'icon-arrow-right', 14, 10 )
+                            . '</span>'
+                            . '</div>';
                     }
 
                     if ($is_popup) {
@@ -145,7 +152,7 @@ class Custom_Mega_Menu_Walker extends Walker_Nav_Menu {
                     }
 
                     $output .= '</div>'; // end feature-block
-                    
+
                     // Close link tag if not popup
                     if (!empty($feature['link']) && !$is_popup) {
                         $output .= '</a>';

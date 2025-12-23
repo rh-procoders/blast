@@ -207,7 +207,7 @@
 	&.header-top-animation {
 	  //background-color : rgba(23, 24, 69, .91);
 	  transition       : transform 400ms ease, background-color 400ms ease, height 400ms linear;
-	  min-height       : 90px;
+	  min-height       : 84px;
 	}
 
       .content-wrap {
@@ -310,9 +310,9 @@
             }
           }
         }
-      
+
       }
-      
+
       // Menu open state
       &[aria-expanded="true"] {
         .toggle-icon-bar {
