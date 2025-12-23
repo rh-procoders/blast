@@ -28,18 +28,18 @@
         }
     };
 
-    // Back button functionality - return to referrer or homepage
+    // Back button functionality - return to previous page or homepage
     const backButton = document.querySelector( '[data-demo-back]' );
     if (backButton) {
         backButton.addEventListener( 'click', function ( e ) {
             e.preventDefault();
 
-            // Get referrer (previous page)
-            const referrer = document.referrer;
+            // Get stored return URL from sessionStorage (set by main.js)
+            const returnUrl = sessionStorage.getItem( 'blast_return_url' );
 
-            // Go back to referrer if exists and is same domain, otherwise homepage
-            if (referrer && referrer.includes( window.location.hostname )) {
-                window.location.href = referrer;
+            // Go back to stored URL if exists, otherwise homepage
+            if (returnUrl && returnUrl.includes( window.location.hostname )) {
+                window.location.href = returnUrl;
             } else {
                 window.location.href = '/';
             }

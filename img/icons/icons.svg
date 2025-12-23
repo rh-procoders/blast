@@ -81,7 +81,13 @@
             <path fill-rule="evenodd" clip-rule="evenodd" d="M19.7811 11.6178C19.9215 11.7584 20.0004 11.949 20.0004 12.1478C20.0004 12.3465 19.9215 12.5372 19.7811 12.6778L13.6841 18.7748C13.6137 18.8451 13.53 18.9007 13.4379 18.9384C13.3458 18.976 13.2472 18.995 13.1477 18.9942C13.0482 18.9933 12.9499 18.9727 12.8584 18.9335C12.767 18.8943 12.6843 18.8373 12.6151 18.7658L10.2121 16.2818C10.075 16.1386 10.0002 15.947 10.004 15.7488C10.0079 15.5506 10.09 15.362 10.2324 15.2242C10.3748 15.0864 10.5661 15.0106 10.7642 15.0133C10.9624 15.016 11.1515 15.0971 11.2901 15.2388L13.1631 17.1748L18.7211 11.6178C18.8617 11.4773 19.0523 11.3984 19.2511 11.3984C19.4498 11.3984 19.6404 11.4773 19.7811 11.6178Z" fill="#00B3F2"/>
         </symbol>
 
-
-
+        <symbol id="icon-arrow-right" viewBox="0 0 14 10" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0441 4.59009H0.75H12.0441Z"/>
+            <path d="M12.0441 4.59009H0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.21875 8.1195L12.7482 4.59009L9.21875 8.1195Z"/>
+            <path d="M9.21875 8.1195L12.7482 4.59009" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.21875 1.06067L12.7482 4.59008L9.21875 1.06067Z"/>
+            <path d="M9.21875 1.06067L12.7482 4.59008" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+        </symbol>
     </defs>
 </svg>
