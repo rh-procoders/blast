@@ -549,7 +549,7 @@
 	}
 
 	&.columns-3 {
-	  width                 : 1328px;
+	  width                 : 1018px;
 	  grid-template-columns : repeat(3, 1fr);
 	}
 
@@ -633,11 +633,11 @@
 	  flex-direction : column;
 
 	  @include tablet-lg {
-		padding : 32px 16px 42px 16px;
+		//padding : 32px 16px 42px 16px;
 	  }
 
 	  @include tablet {
-		padding : 0px 35px 0px 35px;
+		//padding : 0px 35px 0px 35px;
 	  }
 
 	  .menu-top-title, .top-label {
