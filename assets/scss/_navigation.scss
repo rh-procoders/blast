@@ -41,6 +41,21 @@
     justify-content: center;
     gap: 60px;
 
+  .mobile-menu-main-title {
+	color: #FF654A;
+	font-family: $font-family-tertiary;
+	font-size: 14px;
+	font-style: italic;
+	font-weight: 500;
+	line-height: 110%;
+	width: 100%;
+	cursor: default;
+
+	@media(min-width: 1025px) {
+	  display: none;
+	}
+  }
+
     @include tablet {
         position: absolute;
         height: 100vh;
@@ -298,27 +313,10 @@
 		margin-left      : auto;
 		text-align       : left;
 
-
-
         @include tablet{
             width: 100%;
             gap: 30px;
         }
-
-		.mobile-menu-main-title {
-			color: #FF654A;
-			font-family: $font-family-tertiary;
-			font-size: 14px;
-			font-style: italic;
-			font-weight: 500;
-			line-height: 110%;
-			width: 100%;
-			cursor: default;
-
-		  @media(min-width: 1025px) {
-			display: none;
-		  }
-		}
 
 		.menu-item {
 		  width : 100%;
