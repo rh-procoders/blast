@@ -41,6 +41,11 @@
         menu.classList.add( 'nav-menu' );
     }
 
+    // Add "Menu" title for mobile at the top of the navigation
+    const mobileMenuTitle = document.createElement( 'div' );
+    mobileMenuTitle.classList.add( 'mobile-menu-main-title' );
+    mobileMenuTitle.textContent = 'Menu';
+    menu.insertBefore( mobileMenuTitle, menu.firstChild );
 
     // Toggle the .toggled class and the aria-expanded value each time the button is clicked.
     button.addEventListener(
