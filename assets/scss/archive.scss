@@ -1,7 +1,8 @@
 @import "_variable";
 
 // General Archive Styles
-.blog {
+.blog,
+.page-template-events {
   --header-h : 122px;
 
   @include tablet {

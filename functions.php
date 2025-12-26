@@ -351,3 +351,15 @@ function blast_preload_hero_home_images() {
 }
 add_action('wp_head', 'blast_preload_hero_home_images');
 
+/**
+ * Add custom body class for Events page template
+ */
+function blast_add_events_body_class( $classes ) {
+	// Check if it's the events page by slug (auto-detected template)
+	if ( is_page( 'events' ) ) {
+		$classes[] = 'page-template-events';
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'blast_add_events_body_class' );
+

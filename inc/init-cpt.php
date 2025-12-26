@@ -8,7 +8,8 @@ function load_custom_post_type_files()
 {
 
     $cpt_files = apply_filters('load_custom_post_type_files', array(
-		'inc/post-types/newsroom'
+		'inc/post-types/newsroom',
+		'inc/post-types/events'
 	));
 
 	foreach($cpt_files as $cpt_file) get_template_part($cpt_file);
