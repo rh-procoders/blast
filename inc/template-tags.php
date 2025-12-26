@@ -224,3 +224,70 @@ function bs_get_reading_time( ?int $post_id = null ): int
     // Minimum 1 minute
     return max( 1, $reading_time );
 }
+
+/**
+ * Format event meta information (date and location) as HTML markup
+ *
+ * Date formatting logic:
+ * - Single date or same dates: "Month dd, yyyy" (e.g., "May 24, 2023")
+ * - Different dates: "Month dd-dd, yyyy" (e.g., "May 24-25, 2023")
+ *
+ * @param string|null $start_date Event start date in Y-m-d format
+ * @param string|null $end_date   Event end date in Y-m-d format
+ * @param string|null $location   Event location
+ * @return string HTML markup with formatted event meta
+ */
+function blast_format_event_meta( ?string $start_date, ?string $end_date, ?string $location ): string
+{
+	$formatted_date = '';
+
+	// Format the date if start_date exists
+	if ( $start_date ) {
+		try {
+			$start = new DateTime( $start_date );
+
+			// Check if end_date exists and is different from start_date
+			if ( $end_date && $end_date !== $start_date ) {
+				$end = new DateTime( $end_date );
+
+				// Check if dates are in the same month and year
+				if ( $start->format( 'Y-m' ) === $end->format( 'Y-m' ) ) {
+					// Same month: "Mon dd-dd, yyyy"
+					$formatted_date = $start->format( 'M j' ) . '-' . $end->format( 'j, Y' );
+				} else {
+					// Different months: "Mon dd - Mon dd, yyyy"
+					$formatted_date = $start->format( 'M j' ) . ' - ' . $end->format( 'M j, Y' );
+				}
+			} else {
+				// Single date or same dates: "Mon dd, yyyy"
+				$formatted_date = $start->format( 'M j, Y' );
+			}
+		} catch ( Exception $e ) {
+			// If date parsing fails, return empty string
+			$formatted_date = '';
+		}
+	}
+
+	// Build the HTML markup
+	$output = '<div class="event-meta">';
+
+	// Add date if available
+	if ( $formatted_date ) {
+		$output .= '<div class="event-meta__item event-meta__date">';
+		$output .= sprite_svg( 'icon-calendar-2', 24, 24, true );
+		$output .= '<span>' . esc_html( $formatted_date ) . '</span>';
+		$output .= '</div>';
+	}
+
+	// Add location if available
+	if ( $location ) {
+		$output .= '<div class="event-meta__item event-meta__location">';
+		$output .= sprite_svg( 'icon-marker', 24, 24, true );
+		$output .= '<span>' . esc_html( $location ) . '</span>';
+		$output .= '</div>';
+	}
+
+	$output .= '</div>';
+
+	return $output;
+}

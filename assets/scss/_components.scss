@@ -236,7 +236,8 @@ ul.nostyle {
 
 // Sticky Sidebar
 .entry-content__sidebar-left,
-.entry-content__sidebar-right {
+.entry-content__sidebar-right,
+.events-sidebar {
 
   .sticky-sidebar {
 	position   : sticky;
@@ -749,15 +750,16 @@ body .cky-consent-container {
 // CookieYes - Modal styles
 
 body {
-	:root {
-	  --cky-br      : 40px;
-	  @media (max-width : 576px) {
-		--cky-br   : 24px;
-	  
-		max-width  : calc(100% - (24px * 2));
-		max-height : calc(100% - (24px * 2));
-	  }
+  :root {
+	--cky-br : 40px;
+	@media (max-width : 576px) {
+	  --cky-br   : 24px;
+
+	  max-width  : calc(100% - (24px * 2));
+	  max-height : calc(100% - (24px * 2));
 	}
+  }
+
   // Overlay
   .cky-overlay {
 	background : rgba(0, 11, 64, 0.80);
@@ -1053,22 +1055,45 @@ body {
 }
 
 
-.border-top-edges{
-	border-top-left-radius: 70px;
-	border-top-right-radius: 70px;
+.border-top-edges {
+  border-top-left-radius  : 70px;
+  border-top-right-radius : 70px;
 }
 
 /* Target the Columns block specifically */
 .custon-gap-columns {
-    /* Apply a larger vertical gap (row-gap) */
-    row-gap: var(--wp--preset--spacing--20)!important; 
-    /* Apply a smaller horizontal gap (column-gap) */
-    column-gap: var(--wp--preset--spacing--80)!important; 
+  /* Apply a larger vertical gap (row-gap) */
+  row-gap    : var(--wp--preset--spacing--20) !important;
+  /* Apply a smaller horizontal gap (column-gap) */
+  column-gap : var(--wp--preset--spacing--80) !important;
 }
 
-.rounded-image{
-	border-radius: 50px;
-	@include mobile {
-		border-radius: 30px;
-	}
+.rounded-image {
+  border-radius : 50px;
+  @include mobile {
+	border-radius : 30px;
+  }
+}
+
+// Events Date/Location Meta
+.event-meta {
+  font-family : $font-family-secondary;
+  font-size   : 16px;
+  font-weight : 600;
+  line-height : 1.59019;
+
+  gap         : 16px;
+  display     : flex;
+  flex-wrap   : wrap;
+
+
+  &__item {
+	gap         : 8px;
+	display     : flex;
+	align-items : center;
+  }
+
+  .svg-icon {
+	stroke : currentColor;
+  }
 }

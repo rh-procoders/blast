@@ -8,10 +8,9 @@
  */
 
 wp_enqueue_style('blast-archive');
+wp_enqueue_style('blast-events');
 
 get_header();
-
-
 
 // Display the current page's content
 while (have_posts()): the_post();
