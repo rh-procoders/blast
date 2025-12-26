@@ -51,12 +51,12 @@
     button.addEventListener(
         'click',
         function () {
-            
+
             siteNavigation.classList.toggle( 'toggled' );
             console.log('Navigation toggled, has toggled class:', siteNavigation.classList.contains('toggled'));
-            
+
             const isExpanded = button.getAttribute( 'aria-expanded' ) === 'true';
-            
+
             if (isExpanded) {
                 button.setAttribute( 'aria-expanded', 'false' );
                 document.documentElement.classList.remove( 'no-scroll' );
@@ -106,7 +106,7 @@
                 const parentMenu = this.closest( '.sub-megamenu-open' );
                 if (parentMenu) {
                     parentMenu.classList.remove( 'sub-megamenu-open' );
-                } 
+                }
             }
         );
     }
@@ -228,16 +228,52 @@
     document.addEventListener('DOMContentLoaded', function () {
         const menuItems = document.querySelectorAll('.menu-item.is-mega-menu');
 
+        // Query normal (non-megamenu) menu items
+        const normalItems = document.querySelectorAll('.menu-item.is-not-mega');
+
+        // --- Shared close timer ---
+        let closeTimer = null;
+        const scheduleClose = (ms) => {
+            if (closeTimer) clearTimeout(closeTimer);
+
+            closeTimer = setTimeout(() => {
+                document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
+                    .forEach(openMenu => {
+                        openMenu.classList.remove('mega-open');
+                        openMenu.closest('.menu-item.is-mega-menu').classList.remove('mega-menu-active');
+                    });
+            }, ms);
+        };
+
+        const cancelScheduledClose = () => {
+            if (closeTimer) {
+                clearTimeout(closeTimer);
+                closeTimer = null;
+            }
+        };
+
+        // --- Normal items: close instantly on hover (desktop only) ---
+        normalItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                if (!isTouchDevice()) {
+                    scheduleClose(0); // immediate close
+                }
+            });
+        });
+
         menuItems.forEach(item => {
             const link = item.querySelector('span.menu-link');
             const megaMenu = item.querySelector('.mega-columns');
-      
+
 
             if (!megaMenu || !link) return;
 
             // --- Hover Support (Desktop) ---
             item.addEventListener('mouseenter', () => {
                 if (!isTouchDevice()) {
+                    // Cancel any scheduled close
+                    cancelScheduledClose();
+
                     // Close all open mega menus first
                     document.querySelectorAll('.menu-item.is-mega-menu .mega-columns.mega-open')
                         .forEach(openMenu => {
@@ -273,9 +309,29 @@
             });
         });
 
+        // --- Global mouseover: delayed close when hovering outside megamenu areas (desktop only) ---
+        document.addEventListener('mouseover', (e) => {
+            if (isTouchDevice()) return;
+
+            // If hovering a normal item, we've already handled instant close above
+            if (e.target.closest('.menu-item.is-not-mega')) return;
+
+            // If not inside a megamenu item or its panel, schedule delayed close
+            if (!e.target.closest('.menu-item.is-mega-menu') && !e.target.closest('.mega-columns')) {
+                scheduleClose(250); // delayed close after 500ms
+            }
+        });
+
+        // --- Navigation mouseleave: delayed close when leaving the nav (desktop only) ---
+        siteNavigation.addEventListener('mouseleave', () => {
+            if (!isTouchDevice()) {
+                scheduleClose(250); // delayed close after 500ms
+            }
+        });
+
         // --- Outside Click to Close ---
         document.addEventListener('click', function (e) {
-            
+
             if (!e.target.closest('.menu-item.is-mega-menu')) {
 
                 menuItems.forEach(item => {
