@@ -198,4 +198,146 @@ if ( ! empty( $event_type_slug ) ) {
     <?php
     endif; ?>
 
+    <?php
+    // Add error state handling for events form (only for event_type === 'events')
+    if ( $is_event && $event_form_shortcode ) : ?>
+        <script>
+        (function() {
+            'use strict';
+
+            /**
+             * CF7 Button Error State Handler for Events Form
+             * Adds error class to submit button when validation fails
+             * Scoped to forms inside .entry-content__the-form only
+             */
+            function initEventFormErrorStates() {
+                const formContainer = document.querySelector('.entry-content__the-form');
+
+                if (!formContainer) {
+                    return;
+                }
+
+                const form = formContainer.querySelector('form.wpcf7-form');
+
+                if (!form) {
+                    return;
+                }
+
+                /**
+                 * Add error class to the submit button
+                 */
+                function addErrorClassToButton() {
+                    const submitButton = form.querySelector('.wpcf7-submit');
+                    if (submitButton && !submitButton.classList.contains('has-error')) {
+                        submitButton.classList.add('has-error');
+                    }
+                }
+
+                /**
+                 * Remove error class from submit button
+                 */
+                function removeErrorClassFromButton() {
+                    const submitButton = form.querySelector('.wpcf7-submit.has-error');
+                    if (submitButton) {
+                        submitButton.classList.remove('has-error');
+                    }
+                }
+
+                // Method 1: Listen for CF7 validation error event
+                document.addEventListener('wpcf7invalid', function(event) {
+                    if (event.target === form) {
+                        addErrorClassToButton();
+                    }
+                }, false);
+
+                // Method 2: Watch for validation error message appearing (MutationObserver)
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        // Check if validation errors div became visible
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                            const target = mutation.target;
+                            if (target.classList.contains('wpcf7-validation-errors')) {
+                                const isVisible = target.style.display !== 'none' && target.style.display !== '';
+                                if (isVisible) {
+                                    addErrorClassToButton();
+                                }
+                            }
+                        }
+                    });
+                });
+
+                // Observe all validation error containers
+                const errorContainers = form.querySelectorAll('.wpcf7-response-output');
+                errorContainers.forEach(container => {
+                    observer.observe(container, {
+                        attributes: true,
+                        attributeFilter: ['style', 'class']
+                    });
+                });
+
+                // Method 3: Watch for "sending" class removal, then check for errors
+                form.addEventListener('click', function(event) {
+                    const clickedButton = event.target.closest('.wpcf7-submit');
+
+                    if (clickedButton) {
+                        // Remove error class when user clicks (they're trying again)
+                        if (clickedButton.classList.contains('has-error')) {
+                            clickedButton.classList.remove('has-error');
+                        }
+
+                        // Watch for when "sending" class is removed (validation complete)
+                        const buttonObserver = new MutationObserver(function(mutations) {
+                            mutations.forEach(function(mutation) {
+                                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                                    const button = mutation.target;
+
+                                    // Check if "sending" class was just removed
+                                    if (!button.classList.contains('sending')) {
+                                        // Small delay to ensure DOM is updated
+                                        setTimeout(function() {
+                                            // Check for validation errors
+                                            const errorMessage = form.querySelector('.wpcf7-response-output.wpcf7-validation-errors');
+                                            const hasVisibleErrorMessage = errorMessage && errorMessage.offsetParent !== null;
+                                            const hasInvalidFields = form.querySelector('.wpcf7-not-valid') !== null;
+                                            const hasErrorTips = form.querySelector('.wpcf7-not-valid-tip') !== null;
+
+                                            if (hasVisibleErrorMessage || hasInvalidFields || hasErrorTips) {
+                                                addErrorClassToButton();
+                                            }
+
+                                            // Stop observing after check
+                                            buttonObserver.disconnect();
+                                        }, 50);
+                                    }
+                                }
+                            });
+                        });
+
+                        // Start observing the button for class changes
+                        buttonObserver.observe(clickedButton, {
+                            attributes: true,
+                            attributeFilter: ['class']
+                        });
+                    }
+                });
+
+                // Remove error class on successful form submission
+                document.addEventListener('wpcf7mailsent', function(event) {
+                    if (event.target === form) {
+                        removeErrorClassFromButton();
+                    }
+                }, false);
+            }
+
+            // Initialize when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initEventFormErrorStates);
+            } else {
+                // DOM already loaded
+                initEventFormErrorStates();
+            }
+        })();
+        </script>
+    <?php endif; ?>
+
 </article><!-- #post-<?php the_ID(); ?> -->
