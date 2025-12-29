@@ -43,12 +43,12 @@ if ( ! empty( $event_type_slug ) ) {
 
         <div class="entry-content__the-content">
 
-            <!-- Back to Blog -->
+            <!-- Back to Events -->
             <a class="entry-content__backlink"
                href="<?= get_post_type_archive_link( 'post' ) ?>">
                 <?php sprite_svg( 'icon-arrow-right', 14, 10 ) ?>
 
-                <?= __( "Back to Blog", 'blast-2025' ) ?>
+                <?= __( "Back to Events", 'blast-2025' ) ?>
             </a>
 
             <div class="entry-content__wrapper">
@@ -105,13 +105,15 @@ if ( ! empty( $event_type_slug ) ) {
         // Only show form section for "events" type (not webinars)
         if ( $is_event && $event_form_shortcode ) : ?>
             <div class="entry-content__the-form">
-                <?php
-                if ( $event_form_title ) : ?>
-                    <h3 class="h4"><?= wp_kses_post( $event_form_title ) ?></h3>
-                <?php
-                endif; ?>
+                <div class="sticky-sidebar">
+                    <?php
+                    if ( $event_form_title ) : ?>
+                        <h3 class="h4"><?= wp_kses_post( $event_form_title ) ?></h3>
+                    <?php
+                    endif; ?>
 
-                <?= do_shortcode( $event_form_shortcode ); ?>
+                    <?= do_shortcode( $event_form_shortcode ); ?>
+                </div>
             </div>
         <?php endif; ?>
 

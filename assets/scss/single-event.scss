@@ -30,134 +30,164 @@
 		}
 
 		&__the-form {
-		  --font-pt        : 36px;
-		  --font-px        : 40px;
-		  --font-pb        : 40px;
+		  --font-pt : 36px;
+		  --font-px : 40px;
+		  --font-pb : 40px;
 
-		  align-self       : flex-start;
+		  .sticky-sidebar {
+			max-height       : 95dvh;
 
-		  padding          : var(--font-pt) var(--font-px) var(--font-pb);
+			align-self       : flex-start;
 
-		  background-color : #FFFFFF;
-		  border-radius    : 40px;
+			padding          : var(--font-pt) var(--font-px) var(--font-pb);
 
-		  .h4 {
-			font-weight    : 600;
-			line-height    : 1.1;
-			letter-spacing : -0.68px;
-		  }
+			background-color : #FFFFFF;
+			border-radius    : 40px;
 
-		  .wpcf7-form {
-			margin-top     : 28px;
+			.h4 {
+			  font-weight    : 600;
+			  line-height    : 1.1;
+			  letter-spacing : -0.68px;
+			}
 
-			gap            : 28px;
-			display        : flex !important;
-			flex-direction : column;
+			.wpcf7-form {
+			  margin-top     : 28px;
 
-			&-control-wrap {
-			  margin-top : 12px;
+			  gap            : 28px;
+			  display        : flex !important;
+			  flex-direction : column;
 
-			  // Validation error tips (field-level)
-			  .wpcf7-not-valid-tip {
-				margin-top  : 6px;
+			  &-control-wrap {
+				margin-top : 12px;
+
+				// Validation error tips (field-level)
+				.wpcf7-not-valid-tip {
+				  margin-top  : 6px;
+
+				  font-family : $font-family-secondary;
+				  font-size   : font-size('xs'); // 12px
+				  font-weight : 600;
+				  line-height : 1.4;
+
+				  color       : #FA423C;
+				}
+			  }
+
+			  // Submit Button Wrapper
+			  .wp-block-button {
+				position        : relative;
+
+				display         : flex;
+				justify-content : flex-end;
+
+				// Submit Button
+				.wpcf7-submit {
+				  transition : all ease .3s;
+
+				  .button-text {
+					transition : all ease .3s;
+				  }
+
+				  .button-arrow-wrapper {
+					transition : all ease .3s;
+				  }
+
+				  // Error State
+				  &.has-error {
+					background-color : #FF654A !important;
+					border-color     : #FF654A;
+
+					.button-text {
+					  color : #FFFFFF;
+					}
+
+					.button-arrow-wrapper {
+					  background-color : #FFFFFF;
+					  color            : var(--wp--preset--color--dark-blue);
+					}
+				  }
+				}
+
+				// Spinner Styling
+				.wpcf7-spinner {
+				  position  : absolute;
+				  margin    : 0;
+				  top       : 50%;
+				  right     : -30px;
+				  transform : translateY(-50%);
+
+				  @include mobile {
+					width  : 20px;
+					height : 20px;
+					right  : -24px;
+
+					&:before {
+					  transform-origin : 6px 6px;
+					}
+				  }
+				}
+			  }
+
+			  // Form-level validation errors
+			  .wpcf7-response-output {
+				border      : none;
+
+				margin      : 0;
+				padding     : 0 0 0 calc(24px + 6px);
 
 				font-family : $font-family-secondary;
 				font-size   : font-size('xs'); // 12px
 				font-weight : 600;
-				line-height : 1.4;
+				line-height : 24px; // hack - same as icon
+				min-height  : 24px;
 
 				color       : #FA423C;
-			  }
-			}
 
-			// Submit Button Wrapper
-			.wp-block-button {
-			  position        : relative;
+				//display     : flex;
+				//align-items : center;
 
-			  display         : flex;
-			  justify-content : flex-end;
+				// Error Icon
+				&:before {
+				  content             : "";
+				  position            : absolute;
 
-			  // Submit Button
-			  .wpcf7-submit {
-				transition : all ease .3s;
+				  left                : 0;
 
-				.button-text {
-				  transition : all ease .3s;
-				}
+				  width               : 24px;
+				  height              : 24px;
 
-				.button-arrow-wrapper {
-				  transition : all ease .3s;
-				}
-
-				// Error State
-				&.has-error {
-				  background-color : #FF654A !important;
-				  border-color     : #FF654A;
-
-				  .button-text {
-					color : #FFFFFF;
-				  }
-
-				  .button-arrow-wrapper {
-					background-color : #FFFFFF;
-					color            : var(--wp--preset--color--dark-blue);
-				  }
+				  // Custom error icon
+				  background-image    : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M12 3C16.971 3 21 7.029 21 12C21 16.971 16.971 21 12 21C7.029 21 3 16.971 3 12C3 7.029 7.029 3 12 3Z' fill='%23FA423C' stroke='%23FA423C' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 12.5V7.5' stroke='%23F4F3F3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.999 16C11.861 16 11.749 16.112 11.75 16.25C11.75 16.388 11.862 16.5 12 16.5C12.138 16.5 12.25 16.388 12.25 16.25C12.25 16.112 12.138 16 11.999 16' stroke='%23F4F3F3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+				  background-repeat   : no-repeat;
+				  background-position : center;
+				  background-size     : contain;
 				}
 			  }
 
-			  // Spinner Styling
-			  .wpcf7-spinner {
-				position  : absolute;
-				margin    : 0;
-				top       : 50%;
-				right     : -30px;
-				transform : translateY(-50%);
+			  &:not(.invalid) {
+				.wpcf7-response-output {
+				  display : none !important;
+				}
+			  }
 
-				@include mobile {
-				  width  : 20px;
-				  height : 20px;
-				  right  : -24px;
+			  &.submitting {
+				.wpcf7-response-output {
+				  display : none !important;
+				}
+			  }
 
+			  &.sent {
+				.wpcf7-response-output {
+				  display : block !important;
+
+				  color   : #00D277;
+
+				  // Error Icon
 				  &:before {
-					transform-origin : 6px 6px;
+					// Custom error icon
+					background-image : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M12 3C16.971 3 21 7.029 21 12C21 16.971 16.971 21 12 21C7.029 21 3 16.971 3 12C3 7.029 7.029 3 12 3Z' fill='%2300D277' stroke='%2300D277' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 12.5L10.5 15L16 9.5' stroke='%23F4F3F3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 				  }
 				}
-			  }
-			}
-
-			// Form-level validation errors
-			.wpcf7-response-output {
-			  border      : none;
-
-			  margin      : 0;
-			  padding     : 0 0 0 calc(24px + 6px);
-
-			  font-family : $font-family-secondary;
-			  font-size   : font-size('xs'); // 12px
-			  font-weight : 600;
-			  line-height : 24px; // hack - same as icon
-			  min-height  : 24px;
-
-			  color       : #FA423C;
-
-			  //display     : flex;
-			  //align-items : center;
-
-			  // Error Icon
-			  &:before {
-				content             : "";
-				position            : absolute;
-
-				left                : 0;
-
-				width               : 24px;
-				height              : 24px;
-
-				// Custom error icon
-				background-image    : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M12 3C16.971 3 21 7.029 21 12C21 16.971 16.971 21 12 21C7.029 21 3 16.971 3 12C3 7.029 7.029 3 12 3Z' fill='%23FA423C' stroke='%23FA423C' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 12.5V7.5' stroke='%23F4F3F3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.999 16C11.861 16 11.749 16.112 11.75 16.25C11.75 16.388 11.862 16.5 12 16.5C12.138 16.5 12.25 16.388 12.25 16.25C12.25 16.112 12.138 16 11.999 16' stroke='%23F4F3F3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-				background-repeat   : no-repeat;
-				background-position : center;
-				background-size     : contain;
 			  }
 			}
 		  }

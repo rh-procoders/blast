@@ -1,0 +1,69 @@
+@import "../../../assets/scss/variable";
+
+.speakers {
+
+  &__content {
+
+	display               : grid;
+	grid-template-columns : repeat(2, 1fr);
+
+	grid-row-gap          : max(24px, 2.5rem); // 40px
+	grid-column-gap       : max(24px, 3.75rem); // 60px
+
+	max-width             : 520px;
+
+	@include mobile {
+	  grid-row-gap    : 24px;
+	  grid-column-gap : 24px;
+	}
+  }
+
+  &__item {
+	gap         : max(12px, 1.25rem); // 20px
+	display     : flex;
+	align-items : center;
+  }
+
+  &__avatar {
+	aspect-ratio  : 1/1;
+	max-width     : max(42px, 5rem); // 80px
+
+	border-radius : max(12.267px, 21.333px);
+	border        : 2px solid #F4F4F4;
+
+	@include mobile {
+	  max-width    : 42px;
+	  border-width : 1px;
+	}
+  }
+
+  &__person {
+	gap            : 4px;
+	display        : flex;
+	flex-direction : column;
+
+	&-name {
+	  font-size      : max(18px, 1.5rem); // 24px
+	  font-weight    : 600;
+	  line-height    : 1.2;
+
+	  letter-spacing : -0.48px;
+
+	  @include mobile {
+		font-size      : 18px;
+		letter-spacing : -0.36px;
+	  }
+	}
+
+	&-position {
+	  font-size   : max(18px, 1.5rem); // 24px
+	  font-weight : 400;
+	  line-height : 1.2;
+
+	  @include mobile {
+		font-size : 18px;
+	  }
+	}
+  }
+}
+
