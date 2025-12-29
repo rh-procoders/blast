@@ -39,8 +39,43 @@ textarea {
   //border-radius : var(--border-radius-xs);
   //transition    : var(--transition);
 
+  // Typography
+  font-family      : $font-family-tertiary;
+  font-size        : font-size('base');
+  font-weight      : 500;
+  line-height      : 1.4;
+
+  // Sizing
+  width            : 100%;
+  // padding          : 19px 20px 19px 20px;
+  padding-top      : 17.8px; // remove 1px border & then some
+  padding-bottom   : 17.8px; // remove 1px border & then some
+  padding-left     : 19px; // remove 1px border
+  padding-right    : 19px; // remove 1px border & then some
+
+  // Styles
+  border-width     : 1px;
+  border-style     : solid;
+  border-color     : transparent;
+
+  background-color : #FFFFFF;
+  border-radius    : 12px;
+  box-shadow       : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.10);
+
+  min-height       : 140px;
+  height           : 140px;
+  resize           : block;
+
+  transition       : all ease .3s;
+
+  &:hover {
+	box-shadow : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.20);
+  }
+
   &:focus {
-	//border-color : var(--Light-blue);
+	box-shadow   : 4px 20px 60.6px 0 rgba(255, 101, 74, 0.20);
+	border-color : #000B40;
+	// caret-color  : transparent; // Hide native caret for custom 2px version
   }
 }
 

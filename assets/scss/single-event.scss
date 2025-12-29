@@ -34,6 +34,8 @@
 		  --font-px        : 40px;
 		  --font-pb        : 40px;
 
+		  align-self       : flex-start;
+
 		  padding          : var(--font-pt) var(--font-px) var(--font-pb);
 
 		  background-color : #FFFFFF;
@@ -45,7 +47,17 @@
 			letter-spacing : -0.68px;
 		  }
 
+		  .wpcf7-form {
+			margin-top     : 28px;
 
+			gap            : 28px;
+			display        : flex !important;
+			flex-direction : column;
+
+			&-control-wrap {
+			  margin-top : 12px;
+			}
+		  }
 		}
 
 		&__sidebar-right {
