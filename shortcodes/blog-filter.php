@@ -53,8 +53,8 @@ function blast_blog_filter_shortcode( array $atts ): string
     // Get the URL-friendly parameter name for this taxonomy
     $taxonomy_param = blast_get_taxonomy_param_name( $taxonomy );
 
-    // Get current category from URL parameter (use dynamic parameter based on taxonomy)
-    $current_category = isset( $_GET[ $taxonomy_param ] ) ? sanitize_key( $_GET[ $taxonomy_param ] ) : 'all';
+    // Get current term from URL parameter (use dynamic parameter based on taxonomy)
+    $current_term = isset( $_GET[ $taxonomy_param ] ) ? sanitize_key( $_GET[ $taxonomy_param ] ) : 'all';
     $current_search   = isset( $_GET['search'] ) ? sanitize_text_field( $_GET['search'] ) : '';
 
     $is_archive = $atts['is_archive'] === 'true';
@@ -130,7 +130,7 @@ function blast_blog_filter_shortcode( array $atts ): string
                         <?php foreach ($terms as $term): ?>
                             <li>
                                 <a href="?<?= esc_attr( $taxonomy_param ) ?>=<?= esc_attr( $term->slug ) ?>"
-                                   class="blog-filter__category-item <?= $current_category === $term->slug ? 'blog-filter__category-item--active' : '' ?>"
+                                   class="blog-filter__category-item <?= $current_term === $term->slug ? 'blog-filter__category-item--active' : '' ?>"
                                    data-term="<?= esc_attr( $term->slug ) ?>">
                                     <?= esc_html( $term->name ) ?>
                                 </a>
@@ -186,21 +186,21 @@ function blast_blog_filter_shortcode( array $atts ): string
                         ],
                     ];
                 }
-            } elseif ( $current_category !== 'all' ) {
+            } elseif ( $current_term !== 'all' ) {
                 // Filter by URL parameter (normal mode)
                 if ( $taxonomy === 'category' ) {
-                    $category = get_category_by_slug( $current_category );
+                    $category = get_category_by_slug( $current_term );
                     if ( $category ) {
                         $args['category__in'] = [ $category->term_id ];
                     }
                 } elseif ( $taxonomy === 'tag' ) {
-                    $tag = get_term_by( 'slug', $current_category, 'post_tag' );
+                    $tag = get_term_by( 'slug', $current_term, 'post_tag' );
                     if ( $tag ) {
                         $args['tag_id'] = $tag->term_id;
                     }
                 } else {
                     // General handling for any custom taxonomy
-                    $term = get_term_by( 'slug', $current_category, $taxonomy );
+                    $term = get_term_by( 'slug', $current_term, $taxonomy );
                     if ( $term ) {
                         $args['tax_query'] = [
                             [
@@ -281,7 +281,7 @@ function blast_blog_filter_shortcode( array $atts ): string
                 const taxId = categoryBar.getAttribute( 'data-tax-id' ) || '';
                 const loadType = categoryBar.getAttribute( 'data-load-type' ) || 'button';
 
-                let currentTerm = '<?= esc_js( $current_category ) ?>';
+                let currentTerm = '<?= esc_js( $current_term ) ?>';
                 let currentSearch = '<?= esc_js( $current_search ) ?>';
                 let currentPage = 1;
                 let isLoading = false;
