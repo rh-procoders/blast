@@ -95,7 +95,8 @@ function blast_blog_filter_shortcode( array $atts ): string
              data-taxonomy-param="<?= esc_attr( $taxonomy_param ) ?>"
              data-is-archive="<?= esc_attr( $is_archive ? 'true' : 'false' ) ?>"
              data-tax-id="<?= esc_attr( $tax_id ?? '' ) ?>"
-             data-load-type="<?= esc_attr( sanitize_key( $atts['load_type'] ) ) ?>">
+             data-load-type="<?= esc_attr( sanitize_key( $atts['load_type'] ) ) ?>"
+             data-posts-per-page="<?= esc_attr( intval( $atts['posts_per_page'] ) ) ?>">
 
             <!-- Search Input -->
             <div class="blog-filter__search">
@@ -280,6 +281,7 @@ function blast_blog_filter_shortcode( array $atts ): string
                 const isArchive = categoryBar.getAttribute( 'data-is-archive' ) === 'true';
                 const taxId = categoryBar.getAttribute( 'data-tax-id' ) || '';
                 const loadType = categoryBar.getAttribute( 'data-load-type' ) || 'button';
+                const postsPerPage = parseInt( categoryBar.getAttribute( 'data-posts-per-page' ) ) || 4;
 
                 let currentTerm = '<?= esc_js( $current_term ) ?>';
                 let currentSearch = '<?= esc_js( $current_search ) ?>';
@@ -356,6 +358,7 @@ function blast_blog_filter_shortcode( array $atts ): string
                     formData.append( 'taxonomy', taxonomy );
                     formData.append( 'is_archive', isArchive ? 'true' : 'false' );
                     formData.append( 'tax_id', taxId );
+                    formData.append( 'posts_per_page', postsPerPage );
 
                     fetch( '<?= esc_url( admin_url( 'admin-ajax.php' ) ) ?>', {
                         method: 'POST',

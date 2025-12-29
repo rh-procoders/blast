@@ -87,7 +87,7 @@ function blast_events_hero_shortcode( array $atts ): string
                         endif; ?>
 
                         <a class="btn has-coral-background-color"
-                           href="#!">
+                           href="<?= esc_url( $post_permalink ) ?>">
                             <span class="button-text"
                                   data-hover-text="<?= __( 'Register', 'blast-2025' ); ?>">
                                 <?= __( 'Register', 'blast-2025' ); ?>

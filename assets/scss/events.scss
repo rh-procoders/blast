@@ -4,7 +4,7 @@
   --main-grid-gap : 3.75rem; // 60px
 
   .container--events-filter {
-	max-width : calc(270px + var(--main-grid-gap) + 1140px + var(--main-grid-gap) + 270px + (var(--wp--preset--spacing--30) + 2));
+	max-width : calc(270px + var(--main-grid-gap) + 1140px + var(--main-grid-gap) + 270px + (var(--wp--preset--spacing--30) * 2));
   }
 
   .wp-block-group.container--events-filter {
@@ -37,7 +37,9 @@
   .archive-hero {
 
 	&__slide-content {
-	  gap : 12px;
+	  position : relative;
+
+	  gap      : 12px;
 	}
 
 	&__featured-badge {
@@ -99,8 +101,47 @@
   // Events Archive - Filter
   .blog-filter {
 
-	&__grid {
+	&__bar {
+	  padding : 0;
+	}
 
+	&__categories {
+	  justify-content : flex-end;
+	}
+
+	&__grid {
+	  --bs-filter-grid-gap  : max(32px, 2.5rem); // 40px
+
+	  max-width             : none;
+	  padding               : 0;
+
+	  grid-template-columns : repeat(3, 1fr);
+	}
+
+	&-item {
+	  --bs-filter-item-pt : max(20px, 1.5rem); // 24px
+	  --bs-filter-item-pr : max(20px, 1.5rem); // 24px
+	  --bs-filter-item-pb : max(24px, 1.875rem); // 30px
+	  --bs-filter-item-pl : max(20px, 1.5rem); // 24px
+
+	  &__title {
+		margin-top : max(16px, 1.25rem); // 20px
+	  }
+
+	  &__excerpt {
+		margin-top : 12px;
+	  }
+
+	  &__footer {
+		margin-top : auto;
+
+		.event-meta {
+		  margin-top      : 16px;
+
+		  gap             : 4px;
+		  justify-content : space-between;
+		}
+	  }
 	}
   }
 }

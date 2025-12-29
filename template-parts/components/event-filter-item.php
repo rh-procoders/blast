@@ -16,6 +16,10 @@ if ( $categories ) {
 
 // Get reading time
 $reading_time = bs_get_reading_time();
+
+$event_start_date = get_field( 'epo__start-date' ) ?? null;
+$event_end_date   = get_field( 'epo__end-date' ) ?? null;
+$event_location   = get_field( 'epo__location' ) ?? null;
 ?>
 
 <a href="<?= esc_url( get_permalink() ) ?>" class="blog-filter-item__link">
@@ -47,8 +51,15 @@ $reading_time = bs_get_reading_time();
 
             <!-- Footer -->
             <div class="blog-filter-item__footer">
-
-
+                <?php
+                if ( $event_start_date || $event_end_date || $event_location ) : ?>
+                    <?= blast_format_event_meta(
+                            $event_start_date,
+                            $event_end_date,
+                            $event_location
+                    ); ?>
+                <?php
+                endif; ?>
             </div>
         </div>
     </article>

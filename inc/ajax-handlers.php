@@ -30,7 +30,7 @@ function blast_filter_posts(): void
 
     // Validate and sanitize inputs
     $paged          = isset($_POST['page']) ? max(1, intval($_POST['page'])) : 1;
-    $posts_per_page = 4; // Fixed: always 4 posts
+    $posts_per_page = isset($_POST['posts_per_page']) ? max(1, intval($_POST['posts_per_page'])) : 4;
     $post_type      = isset($_POST['post_type']) ? sanitize_key($_POST['post_type']) : 'post';
     $term_slug      = isset($_POST['term']) ? sanitize_key($_POST['term']) : '';
     $search         = isset($_POST['search']) ? sanitize_text_field($_POST['search']) : '';
