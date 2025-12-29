@@ -4,7 +4,8 @@ html {
   scroll-behavior : smooth;
 }
 
-.single-post {
+.single-post,
+.single-events {
   --header-h : 122px;
 
   @include tablet {

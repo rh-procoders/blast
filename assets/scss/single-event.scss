@@ -1,0 +1,65 @@
+@import "_variable";
+
+.single-events {
+
+
+  .entry-content {
+
+	// shared styles
+	&--events,
+	&--webinars {
+
+	  .entry-content {
+
+	  }
+	}
+
+	// "event_types" = events
+	&--events {
+	  --bs-event-grid-content-w : minmax(auto, 850px);
+	  --bs-event-grid-form-w    : max(375px, 30rem); // 480px
+	  --bs-grid-gap             : 3.75rem; // 60px
+
+	  --bs-grid-template        : var(--bs-event-grid-content-w) var(--bs-event-grid-form-w) var(--bs-grid-col-right);
+
+	  .entry-content {
+
+
+		&__the-content {
+
+		}
+
+		&__the-form {
+		  --font-pt        : 36px;
+		  --font-px        : 40px;
+		  --font-pb        : 40px;
+
+		  padding          : var(--font-pt) var(--font-px) var(--font-pb);
+
+		  background-color : #FFFFFF;
+		  border-radius    : 40px;
+
+		  .h4 {
+			font-weight    : 600;
+			line-height    : 1.1;
+			letter-spacing : -0.68px;
+		  }
+
+
+		}
+
+		&__sidebar-right {
+
+		}
+	  }
+	}
+
+	// "event_types" = webinars
+	&--webinars {
+
+	  .entry-content {
+
+	  }
+	}
+  }
+}

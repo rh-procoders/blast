@@ -280,6 +280,16 @@ function wpdocs_theme_slug_widgets_init() {
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
 	) );
+
+    register_sidebar( array(
+            'name'          => __( 'Event Footer Widget', 'blast-2025' ),
+            'id'            => 'event-footer-widget',
+            'description'   => __( 'Widgets in this area will be shown after the author section on single events.', 'blast-2025' ),
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+    ) );
 }
 add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 
