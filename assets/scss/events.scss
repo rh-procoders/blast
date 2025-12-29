@@ -33,7 +33,12 @@
 	}
   }
 
+  // Events Archive - Hero
   .archive-hero {
+
+	&__slide-content {
+	  gap : 12px;
+	}
 
 	&__featured-badge {
 	  background   : transparent;
@@ -42,6 +47,30 @@
 	  border-color : #FF654A;
 
 	  color        : #FF654A;
+	}
+
+	&__title {
+	  margin-top : calc(16px - 12px);
+	}
+
+	&__excerpt {
+
+	}
+
+	.event-meta {
+	  margin-top : calc(16px - 12px);
+	}
+
+	.btn {
+	  margin-top : calc(20px - 12px);
+
+	  &.has-coral-background-color {
+		color : #FFFFFF;
+
+		.button-arrow-wrapper {
+		  color : var(--wp--preset--color--coral);
+		}
+	  }
 	}
 
 	&__thumbnails {
@@ -62,6 +91,16 @@
 		width    : 100%;
 		height   : 100%;
 	  }
+	}
+
+
+  }
+
+  // Events Archive - Filter
+  .blog-filter {
+
+	&__grid {
+
 	}
   }
 }

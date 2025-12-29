@@ -85,6 +85,18 @@ function blast_events_hero_shortcode( array $atts ): string
                             ); ?>
                         <?php
                         endif; ?>
+
+                        <a class="btn has-coral-background-color"
+                           href="#!">
+                            <span class="button-text"
+                                  data-hover-text="<?= __( 'Register', 'blast-2025' ); ?>">
+                                <?= __( 'Register', 'blast-2025' ); ?>
+                            </span>
+
+                            <span class="button-arrow-wrapper">
+                                <?php sprite_svg( 'icon-arrow-right', 14, 10 ); ?>
+                            </span>
+                        </a>
                     </div>
                 </div>
             </div>

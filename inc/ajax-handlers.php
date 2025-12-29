@@ -31,7 +31,8 @@ function blast_filter_posts(): void
     // Validate and sanitize inputs
     $paged          = isset($_POST['page']) ? max(1, intval($_POST['page'])) : 1;
     $posts_per_page = 4; // Fixed: always 4 posts
-    $category_slug  = isset($_POST['category']) ? sanitize_key($_POST['category']) : '';
+    $post_type      = isset($_POST['post_type']) ? sanitize_key($_POST['post_type']) : 'post';
+    $term_slug      = isset($_POST['term']) ? sanitize_key($_POST['term']) : '';
     $search         = isset($_POST['search']) ? sanitize_text_field($_POST['search']) : '';
     $taxonomy       = isset($_POST['taxonomy']) ? sanitize_key($_POST['taxonomy']) : 'category';
     $is_archive     = isset($_POST['is_archive']) && $_POST['is_archive'] === 'true';
@@ -39,7 +40,7 @@ function blast_filter_posts(): void
 
     // Build query args
     $args = [
-        'post_type'      => 'post',
+        'post_type'      => $post_type,
         'post_status'    => 'publish',
         'orderby'        => 'date',
         'order'          => 'DESC',
@@ -70,18 +71,39 @@ function blast_filter_posts(): void
             $args['tag_id'] = $tax_id;
         } elseif ($taxonomy === 'author') {
             $args['author'] = $tax_id;
+        } else {
+            // General handling for any custom taxonomy
+            $args['tax_query'] = [
+                [
+                    'taxonomy' => $taxonomy,
+                    'field'    => 'term_id',
+                    'terms'    => $tax_id,
+                ],
+            ];
         }
-    } elseif (!empty($category_slug) && $category_slug !== 'all') {
+    } elseif (!empty($term_slug) && $term_slug !== 'all') {
         // Filter by URL parameter (normal mode)
         if ($taxonomy === 'category') {
-            $category = get_category_by_slug($category_slug);
+            $category = get_category_by_slug($term_slug);
             if ($category) {
                 $args['category__in'] = [$category->term_id];
             }
         } elseif ($taxonomy === 'tag') {
-            $tag = get_term_by('slug', $category_slug, 'post_tag');
+            $tag = get_term_by('slug', $term_slug, 'post_tag');
             if ($tag) {
                 $args['tag_id'] = $tag->term_id;
+            }
+        } else {
+            // General handling for any custom taxonomy
+            $term = get_term_by('slug', $term_slug, $taxonomy);
+            if ($term) {
+                $args['tax_query'] = [
+                    [
+                        'taxonomy' => $taxonomy,
+                        'field'    => 'term_id',
+                        'terms'    => $term->term_id,
+                    ],
+                ];
             }
         }
     }
@@ -97,7 +119,13 @@ function blast_filter_posts(): void
             $query->the_post();
 
             ob_start();
-            get_template_part('template-parts/components/blog-filter-item');
+
+            if ( $post_type === 'events' ) {
+                get_template_part( 'template-parts/components/event-filter-item' );
+            } else {
+                get_template_part( 'template-parts/components/blog-filter-item' );
+            }
+
             $response .= ob_get_clean();
         }
 
