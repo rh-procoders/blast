@@ -319,6 +319,50 @@
             "mime_types": "",
             "allow_in_bindings": 0,
             "preview_size": "medium"
+        },
+        {
+            "key": "field_6953b04687077",
+            "label": "Related Webinars",
+            "name": "epo__related-webinars",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69539277e8667",
+                        "operator": "==",
+                        "value": "webinar"
+                    },
+                    {
+                        "field": "field_69539cc250503",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "events"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": [
+                "event_types:webinars"
+            ],
+            "return_format": "id",
+            "multiple": 1,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
         }
     ],
     "location": [
@@ -340,5 +384,5 @@
     "description": "",
     "show_in_rest": 1,
     "display_title": "",
-    "modified": 1767087616
+    "modified": 1767092475
 }

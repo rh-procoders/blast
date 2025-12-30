@@ -25,6 +25,7 @@ $event_over_message      = get_field( 'epo__message-event-over' ) ?? null;
 $webinar_video_source    = get_field( 'epo__video-source' ) ?? null;
 $webinar_video_id        = get_field( 'epo__video-id' ) ?? null;
 $webinar_video_thumbnail = get_field( 'epo__video-thumbnail' ) ?? null;
+$webinar_related         = get_field( 'epo__related-webinars' ) ?? null;
 
 // Build entry-content class with status and type modifiers
 $status_modifier     = $event_is_completed ? 'event-completed' : 'event-ongoing';
@@ -65,8 +66,24 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
                 ?>
 
                 <?php
-                // Hide thumbnail if event is completed AND type is webinar
-                if ( ! ($event_is_completed && $event_type === 'webinar') ) : ?>
+                // Show video preview for completed webinars, regular thumbnail otherwise
+                if ( $event_is_completed && $event_type === 'webinar' && $webinar_video_source && $webinar_video_id ) : ?>
+                    <div class="entry-content__video-preview"
+                         data-video-source="<?= esc_attr( $webinar_video_source ) ?>"
+                         data-video-id="<?= esc_attr( $webinar_video_id ) ?>">
+                        <?php if ( $webinar_video_thumbnail ) : ?>
+                            <img class=""
+                                 src="<?php echo esc_url( $webinar_video_thumbnail['url'] ); ?>"
+                                 alt="<?php echo esc_attr( $webinar_video_thumbnail['title'] ); ?>"
+                                 loading="lazy">
+                        <?php endif; ?>
+                        <button class="entry-content__video-play"
+                                aria-label="<?= esc_attr__( 'Play video', 'blast-2025' ) ?>">
+                            <?php sprite_svg( 'icon-play', 640, 640 ) ?>
+                        </button>
+                        <div class="entry-content__video-container"></div>
+                    </div>
+                <?php elseif ( ! ($event_is_completed && $event_type === 'webinar') ) : ?>
                     <figure class="entry-content__thumbnail">
                         <?php
                         the_post_thumbnail( 'full', [ 'class' => '', 'title' => get_the_title() ] );
@@ -92,6 +109,50 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
 
                 ?>
             </div>
+
+            <?php
+            // Related webinars section - show only if event is completed AND type is webinar AND manually selected
+            if ( $event_is_completed && $event_type === 'webinar' && ! empty( $webinar_related ) && is_array( $webinar_related ) ) :
+                // Limit to first 3 post IDs
+                $related_ids = array_slice( $webinar_related, 0, 3 );
+
+                // Query for manually selected related webinars
+                $related_query = new WP_Query( [
+                        'post_type'           => 'events',
+                        'post_status'         => 'publish',
+                        'post__in'            => $related_ids,
+                        'orderby'             => 'post__in',
+                        'posts_per_page'      => 3,
+                        'ignore_sticky_posts' => true,
+                ] );
+
+                // Only display section if we have related webinars
+                if ( $related_query->have_posts() ) : ?>
+                    <div class="entry-related">
+                        <div class="entry-related__wrapper">
+                            <!-- Section Heading -->
+                            <h2 class="entry-related__heading">
+                                <?php
+                                /* translators: "like" should be emphasized/styled */
+                                echo wp_kses_post( __( 'Watch next', 'blast-2025' ) );
+                                ?>
+                            </h2>
+
+                            <!-- Related Webinars Grid -->
+                            <div class="entry-related__grid">
+                                <?php
+                                while ($related_query->have_posts()) :
+                                    $related_query->the_post();
+                                    get_template_part( 'template-parts/components/related-webinar-item' );
+                                endwhile;
+                                wp_reset_postdata(); // Restore global post data
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                endif;
+            endif; ?>
         </div><!-- .entry-content__the-content -->
 
         <?php
@@ -133,62 +194,6 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
             </div>
         </div><!-- .entry-content__sidebar-right -->
     </div><!-- .entry-content -->
-
-    <?php
-    // Related webinars section - show only if event is completed AND type is webinar
-    if ( $event_is_completed && $event_type === 'webinar' ) :
-        // Get current event's event_types terms
-        $current_event_types = wp_get_post_terms( get_the_ID(), 'event_types', [ 'fields' => 'ids' ] );
-
-        // Only show related webinars if current event has event_types
-        if ( ! empty( $current_event_types ) && ! is_wp_error( $current_event_types ) ) :
-            // Query for related webinars
-            $related_query = new WP_Query( [
-                    'post_type'           => 'events',
-                    'post_status'         => 'publish',
-                    'posts_per_page'      => 2,
-                    'post__not_in'        => [ get_the_ID() ], // Exclude current event
-                    'tax_query'           => [
-                            [
-                                    'taxonomy' => 'event_types',
-                                    'field'    => 'term_id',
-                                    'terms'    => $current_event_types,
-                            ],
-                    ],
-                    'orderby'             => 'date',
-                    'order'               => 'DESC',
-                    'ignore_sticky_posts' => true,
-            ] );
-
-            // Only display section if we have related webinars
-            if ( $related_query->have_posts() ) : ?>
-                <div class="entry-related">
-                    <div class="entry-related__wrapper">
-                        <!-- Section Heading -->
-                        <h2 class="entry-related__heading">
-                            <?php
-                            /* translators: "like" should be emphasized/styled */
-                            echo wp_kses_post( __( 'You might also <strong>like</strong>', 'blast-2025' ) );
-                            ?>
-                        </h2>
-
-                        <!-- Related Webinars Grid -->
-                        <div class="entry-related__grid">
-                            <?php
-                            while ($related_query->have_posts()) :
-                                $related_query->the_post();
-                                get_template_part( 'template-parts/components/related-webinar-item' );
-                            endwhile;
-                            wp_reset_postdata(); // Restore global post data
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            <?php
-            endif;
-        endif;
-    endif;
-    ?>
 
     <?php
     // Post Footer Widget Area
@@ -338,6 +343,101 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
                 } else {
                     // DOM already loaded
                     initEventFormErrorStates();
+                }
+            })();
+        </script>
+    <?php endif; ?>
+
+    <?php
+    // Add video embed functionality for completed webinars
+    if ( $event_is_completed && $event_type === 'webinar' && $webinar_video_source && $webinar_video_id ) : ?>
+        <script>
+            (function () {
+                'use strict';
+
+                /**
+                 * Webinar Video Player
+                 * Handles inline video playback for completed webinars
+                 */
+                function initWebinarVideoPlayer() {
+                    const videoPreview = document.querySelector( '.entry-content__video-preview' );
+
+                    if (!videoPreview) {
+                        return;
+                    }
+
+                    const source = videoPreview.dataset.videoSource;
+                    const id = videoPreview.dataset.videoId;
+                    const thumbnail = videoPreview.querySelector( '.entry-content__video-thumbnail' );
+                    const playButton = videoPreview.querySelector( '.entry-content__video-play' );
+                    const videoContainer = videoPreview.querySelector( '.entry-content__video-container' );
+
+                    if (!source || !id || !videoContainer) {
+                        console.error( 'Missing video data' );
+                        return;
+                    }
+
+                    // Handle click on the entire video preview area
+                    videoPreview.addEventListener( 'click', function ( event ) {
+                        event.preventDefault();
+
+                        // Prevent double-loading
+                        if (videoContainer.querySelector( 'iframe' )) {
+                            return;
+                        }
+
+                        // Add class to trigger CSS transitions
+                        videoPreview.classList.add( 'video-started' );
+
+                        // Wait for fade animation, then create and inject iframe
+                        setTimeout( function () {
+                            // Hide thumbnail and play button completely
+                            if (thumbnail) {
+                                thumbnail.style.display = 'none';
+                            }
+                            if (playButton) {
+                                playButton.style.display = 'none';
+                            }
+
+                            // Create iframe
+                            const iframe = document.createElement( 'iframe' );
+                            iframe.width = '560';
+                            iframe.height = '315';
+                            iframe.frameBorder = '0';
+                            iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+                            iframe.allowFullscreen = true;
+                            iframe.style.width = '100%';
+                            iframe.style.height = '100%';
+                            iframe.style.position = 'absolute';
+                            iframe.style.top = '0';
+                            iframe.style.left = '0';
+
+                            // Set iframe source based on video platform
+                            if (source === 'youtube') {
+                                iframe.id = `yt_${id}`;
+                                iframe.title = 'YouTube video player';
+                                iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&color=white&autoplay=1`;
+                            } else if (source === 'vimeo') {
+                                iframe.id = `vimeo_${id}`;
+                                iframe.title = 'Vimeo video player';
+                                iframe.src = `https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0`;
+                            } else {
+                                console.error( 'Unsupported video source:', source );
+                                return;
+                            }
+
+                            // Append iframe to video container
+                            videoContainer.appendChild( iframe );
+                        }, 300 );
+                    } );
+                }
+
+                // Initialize when DOM is ready
+                if (document.readyState === 'loading') {
+                    document.addEventListener( 'DOMContentLoaded', initWebinarVideoPlayer );
+                } else {
+                    // DOM already loaded
+                    initWebinarVideoPlayer();
                 }
             })();
         </script>
