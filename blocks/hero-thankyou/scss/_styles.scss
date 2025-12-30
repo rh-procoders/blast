@@ -1,0 +1,70 @@
+@import "../../../assets/scss/variable";
+
+.hero-ty {
+  --bs-wrapper-pt : 74px; // 74px
+  --bs-wrapper-pr : 4.375rem; // 70px
+  --bs-wrapper-pb : 73px; // 73px
+  --bs-wrapper-pl : 4.375rem; // 70px
+
+  &__wrapper {
+	position      : relative;
+	overflow      : hidden;
+	z-index       : 1;
+
+	margin        : 0 auto;
+	max-width     : 1496px;
+
+	border-radius : max(50px, 4.375rem); // 70px
+	padding       : var(--bs-wrapper-pt) var(--bs-wrapper-pr) var(--bs-wrapper-pb) var(--bs-wrapper-pl);
+	background    : linear-gradient(44deg, #FFF2D9 -9.95%, #FFD993 13.32%, #FF735B 49.01%);
+
+	@container (max-width: 768px) {
+	  --bs-wrapper-pl : 23px;
+	  --bs-wrapper-pr : 23px;
+	}
+
+	&:before {
+	  content             : "";
+	  position            : absolute;
+	  left                : 0;
+	  bottom              : 0;
+
+	  background-repeat   : no-repeat;
+	  background-position : center;
+
+	  background-image    : url("../images/cta_newsletter-bg--desktop.png");
+	  width               : 1496px;
+	  height              : 386px;
+
+	  @container (max-width: 768px) {
+		background-image : url("../images/cta_newsletter-bg--mobile-v2.png");
+
+		width            : 1044.459px;
+		height           : 855.552px;
+		transform        : rotate(-24.705deg);
+		flex-shrink      : 0;
+
+		bottom           : auto;
+		top              : 20px;
+		left             : -49.61685823754789%;
+
+		//width            : 315px;
+		//height           : 317px;
+	  }
+	}
+  }
+
+  &__content {
+	position : relative;
+	z-index  : 2;
+  }
+
+  &__heading {
+
+  }
+
+  &__subheading {
+
+  }
+}
+
