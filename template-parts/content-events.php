@@ -346,6 +346,19 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
                 }
             })();
         </script>
+
+        <script id="lp-cf7-redirect">
+            document.addEventListener( 'wpcf7mailsent', function ( event ) {
+                // Only redirect if the submitted form is inside .entry-content__the-form
+                const formContainer = event.target.closest( '.entry-content__the-form' );
+
+                if (formContainer) {
+                    setTimeout( () => {
+                        location = '<?= esc_url( home_url( '/thank-you/' ) ) ?>';
+                    }, 0 );
+                }
+            }, false );
+        </script>
     <?php endif; ?>
 
     <?php
