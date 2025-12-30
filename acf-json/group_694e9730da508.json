@@ -3,6 +3,56 @@
     "title": "CPT Events - Post Options",
     "fields": [
         {
+            "key": "field_69539277e8667",
+            "label": "Event Type",
+            "name": "epo__event-type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "event": "Event",
+                "webinar": "Webinar"
+            },
+            "default_value": "event",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_69539cc250503",
+            "label": "Event Completed?",
+            "name": "epo__event-completed",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
             "key": "field_694e97dd94f34",
             "label": "Event - Start Date",
             "name": "epo__start-date",
@@ -71,7 +121,15 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69539cc250503",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -92,7 +150,15 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69539cc250503",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -107,13 +173,26 @@
         },
         {
             "key": "field_69528486f4f9b",
-            "label": "Event over message",
-            "name": "epo__message-event-over",
+            "label": "Event Completed - message",
+            "name": "epo__event-completed-message",
             "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69539277e8667",
+                        "operator": "==",
+                        "value": "event"
+                    },
+                    {
+                        "field": "field_69539cc250503",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -125,6 +204,121 @@
             "rows": "",
             "placeholder": "",
             "new_lines": ""
+        },
+        {
+            "key": "field_695392bacfce8",
+            "label": "Video Source",
+            "name": "epo__video-source",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69539277e8667",
+                        "operator": "==",
+                        "value": "webinar"
+                    },
+                    {
+                        "field": "field_69539cc250503",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "youtube": "YouTube",
+                "vimeo": "Vimeo"
+            },
+            "default_value": "youtube",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_695392f6cfce9",
+            "label": "Video ID",
+            "name": "epo__video-id",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "(Just the ID of the video)",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69539277e8667",
+                        "operator": "==",
+                        "value": "webinar"
+                    },
+                    {
+                        "field": "field_69539cc250503",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_69539364953d7",
+            "label": "Video Thumbnail",
+            "name": "epo__video-thumbnail",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69539277e8667",
+                        "operator": "==",
+                        "value": "webinar"
+                    },
+                    {
+                        "field": "field_69539cc250503",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
         }
     ],
     "location": [
@@ -146,5 +340,5 @@
     "description": "",
     "show_in_rest": 1,
     "display_title": "",
-    "modified": 1767015892
+    "modified": 1767087616
 }

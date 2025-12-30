@@ -11,11 +11,14 @@
 
 	  .entry-content {
 
+		&__meta {
+		  margin : 0;
+		}
 	  }
 	}
 
-	// "event_types" = events
-	&--events {
+	// event ongoing - both event types have same layout
+	&--event-ongoing {
 	  --bs-event-grid-content-w : minmax(auto, 850px);
 	  --bs-event-grid-form-w    : max(375px, 30rem); // 480px
 	  --bs-grid-gap             : 3.75rem; // 60px
@@ -24,9 +27,28 @@
 
 	  .entry-content {
 
-
 		&__the-content {
 
+		}
+
+		&__thumbnail {
+		  position         : relative;
+
+		  width            : 100%;
+		  aspect-ratio     : 730 / 500;
+
+		  background-color : #F4F4F4;
+
+		  img {
+			position        : absolute;
+			top             : 0;
+			left            : 0;
+			width           : 100%;
+			height          : 100%;
+
+			object-fit      : cover;
+			object-position : center;
+		  }
 		}
 
 		&__the-form {
@@ -199,11 +221,23 @@
 	  }
 	}
 
-	// "event_types" = webinars
-	&--webinars {
 
-	  .entry-content {
+	&--event-completed {
+	  // event completed && type="event"
+	  &.entry-content--type-event {
 
+	  }
+
+	  // event completed && type="webinar"
+	  &.entry-content--type-webinar {
+		--bs-event-grid-content-w : minmax(auto, 1370px);
+		--bs-grid-gap             : 3.75rem; // 60px
+
+		--bs-grid-template        : var(--bs-event-grid-content-w) var(--bs-grid-col-right);
+
+		.entry-content {
+
+		}
 	  }
 	}
   }
