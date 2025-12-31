@@ -1083,9 +1083,13 @@ body {
   font-weight : 600;
   line-height : 1.59019;
 
-  gap         : 16px;
+  gap         : max(4px, 1rem); // 16px
   display     : flex;
   flex-wrap   : wrap;
+
+  @include mobile {
+	gap : 4px;
+  }
 
 
   &__item {

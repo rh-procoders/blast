@@ -22,18 +22,24 @@
 	gap         : max(12px, 1.25rem); // 20px
 	display     : flex;
 	align-items : center;
+
+	@include mobile {
+	  gap : 12px;
+	}
   }
 
   &__avatar {
 	aspect-ratio  : 1/1;
 	max-width     : max(42px, 5rem); // 80px
 
-	border-radius : max(12.267px, 21.333px);
+	border-radius : max(12.267px, 1.3333125rem); // 21.333px
 	border        : 2px solid #F4F4F4;
 
 	@include mobile {
-	  max-width    : 42px;
-	  border-width : 1px;
+	  border-radius : 12.267px;
+
+	  max-width     : 42px;
+	  border-width  : 1px;
 	}
   }
 

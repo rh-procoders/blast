@@ -107,6 +107,10 @@
 
 	transition      : color ease .3s;
 
+	@include mobile {
+	  padding-left : 30px;
+	}
+
 	&:hover,
 	&:focus {
 	  color : #FF654A;

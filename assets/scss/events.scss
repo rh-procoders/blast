@@ -5,6 +5,14 @@
 
   .container--events-filter {
 	max-width : calc(270px + var(--main-grid-gap) + 1140px + var(--main-grid-gap) + 270px + (var(--wp--preset--spacing--30) * 2));
+
+	@media(max-width : 1840px) {
+	  max-width : calc(1140px + var(--main-grid-gap) + 270px + (var(--wp--preset--spacing--30) * 2));
+	}
+
+	@media(max-width : 1440px) {
+	  max-width : calc(1140px + (var(--wp--preset--spacing--30) * 2));
+	}
   }
 
   .wp-block-group.container--events-filter {
@@ -20,6 +28,16 @@
 	  grid-template-columns : 270px 1fr 270px;
 	  grid-template-areas   : "offset content sidebar";
 
+	  @media(max-width : 1840px) {
+		grid-template-columns : 1fr 270px;
+		grid-template-areas   : "content sidebar";
+	  }
+
+	  @media(max-width : 1440px) {
+		grid-template-columns : 100%;
+		grid-template-areas   : "content";
+	  }
+
 	  // content
 	  .wp-block-group.is-vertical {
 		grid-area : content;
@@ -29,6 +47,10 @@
 
 	  .events-sidebar {
 		grid-area : sidebar;
+
+		@media(max-width : 1440px) {
+		  display : none;
+		}
 	  }
 	}
   }
@@ -86,16 +108,30 @@
 	  width    : 100%;
 	  height   : 100%;
 
+	  @include tablet {
+		position     : relative;
+		top          : auto;
+		left         : auto;
+		width        : 100%;
+		height       : 100%;
+
+		display      : flex;
+
+		aspect-ratio : 275/146;
+	  }
+
 	  &-image {
 		position : absolute;
 		top      : 0;
 		left     : 0;
 		width    : 100%;
 		height   : 100%;
+
+		@include tablet {
+		  position : relative;
+		}
 	  }
 	}
-
-
   }
 
   // Events Archive - Filter
@@ -116,6 +152,14 @@
 	  padding               : 0;
 
 	  grid-template-columns : repeat(3, 1fr);
+
+	  @include tablet {
+		grid-template-columns : repeat(2, 1fr);
+	  }
+
+	  @include mobile {
+		grid-template-columns : 100%;
+	  }
 	}
 
 	&-item {
@@ -123,6 +167,12 @@
 	  --bs-filter-item-pr : max(20px, 1.5rem); // 24px
 	  --bs-filter-item-pb : max(24px, 1.875rem); // 30px
 	  --bs-filter-item-pl : max(20px, 1.5rem); // 24px
+
+	  flex: 1 1 100%;
+
+	  &__link {
+
+	  }
 
 	  &__title {
 		margin-top : max(16px, 1.25rem); // 20px

@@ -37,8 +37,10 @@
 	grid-template-columns : repeat(2, 1fr);
 
 	@include mobile {
-	  margin-top : 32px;
-	  gap        : 30px;
+	  margin-top            : 32px;
+	  gap                   : 30px;
+
+	  grid-template-columns : 100%;
 	}
   }
 
