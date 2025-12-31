@@ -287,6 +287,12 @@
 
 		.entry-content {
 
+		  &__backlink {
+			@include mobile {
+			  padding-left : var(--bs-entry-padding-x);
+			}
+		  }
+
 		  &__thumbnail {
 			position         : relative;
 
