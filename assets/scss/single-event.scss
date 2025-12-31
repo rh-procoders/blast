@@ -95,8 +95,9 @@
 			border-radius    : 40px;
 
 			@media(max-width : 1120px) {
-			  position : relative;
-			  top      : auto;
+			  position   : relative;
+			  top        : auto;
+			  max-height : none;
 			}
 
 			.h4 {
@@ -332,8 +333,9 @@
 			  border-radius    : 40px;
 
 			  @media(max-width : 1120px) {
-				position : relative;
-				top      : auto;
+				position   : relative;
+				top        : auto;
+				max-height : none;
 			  }
 
 			  .h4 {
