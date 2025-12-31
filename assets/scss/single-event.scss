@@ -225,7 +225,41 @@
 	&--event-completed {
 	  // event completed && type="event"
 	  &.entry-content--type-event {
+		--bs-event-grid-content-w : minmax(auto, 850px);
+		--bs-event-grid-form-w    : max(375px, 30rem); // 480px
+		--bs-grid-gap             : 3.75rem; // 60px
 
+		--bs-grid-template        : var(--bs-event-grid-content-w) var(--bs-event-grid-form-w) var(--bs-grid-col-right);
+
+		.entry-content {
+
+		  &__the-form {
+			--font-pt : 36px;
+			--font-px : 40px;
+			--font-pb : 40px;
+
+			.sticky-sidebar {
+			  max-height       : 95dvh;
+
+			  align-self       : flex-start;
+
+			  padding          : var(--font-pt) var(--font-px) var(--font-pb);
+
+			  background-color : #FFFFFF;
+			  border-radius    : 40px;
+
+			  .h4 {
+				font-weight    : 600;
+				line-height    : 1.1;
+				letter-spacing : -0.68px;
+			  }
+
+			  .event-over-message {
+				margin-top : 32px;
+			  }
+			}
+		  }
+		}
 	  }
 
 	  // event completed && type="webinar"
@@ -351,10 +385,10 @@
 		}
 
 		.related-post-item {
-		  --bs-filter-item-pt: max(20px,1.5rem); // 24px
-		  --bs-filter-item-pr: max(20px,1.5rem); // 24px
-		  --bs-filter-item-pb: max(30px,1.75rem); // 28px
-		  --bs-filter-item-pl: max(20px,1.5rem); // 24px
+		  --bs-filter-item-pt : max(20px, 1.5rem); // 24px
+		  --bs-filter-item-pr : max(20px, 1.5rem); // 24px
+		  --bs-filter-item-pb : max(30px, 1.75rem); // 28px
+		  --bs-filter-item-pl : max(20px, 1.5rem); // 24px
 
 		  &__link {
 

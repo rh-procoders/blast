@@ -46,22 +46,32 @@ $wrapper_attributes = get_block_wrapper_attributes( [
 
     <section <?php echo $wrapper_attributes; ?>>
         <div class="<?= $block_name ?>__wrapper">
-            <div class="<?= $block_name ?>__content">
-                <?php
-                if ( $heading ) : ?>
-                    <span class="<?= $block_name ?>__heading">
-                        <?= wp_kses_post( $heading ); ?>
-                    </span>
-                <?php
-                endif; ?>
+            <div class="container">
+                <!-- Back to Events -->
+                <a class="<?= $block_name ?>__backlink"
+                   href="<?= esc_url( home_url( '/events/' ) ) ?>">
+                    <?php sprite_svg( 'icon-arrow-right', 14, 10 ) ?>
 
-                <?php
-                if ( $subheading ) : ?>
-                    <span class="<?= $block_name ?>__heading">
+                    <?= __( "Back to Events", 'blast-2025' ) ?>
+                </a>
+
+                <div class="<?= $block_name ?>__content">
+                    <?php
+                    if ( $heading ) : ?>
+                        <h1 class="<?= $block_name ?>__heading">
+                            <?= wp_kses_post( $heading ); ?>
+                        </h1>
+                    <?php
+                    endif; ?>
+
+                    <?php
+                    if ( $subheading ) : ?>
+                        <span class="<?= $block_name ?>__subheading">
                         <?= wp_kses_post( $subheading ); ?>
                     </span>
-                <?php
-                endif; ?>
+                    <?php
+                    endif; ?>
+                </div>
             </div>
         </div>
     </section>

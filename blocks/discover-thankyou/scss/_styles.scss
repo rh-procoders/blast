@@ -1,0 +1,207 @@
+@import "../../../assets/scss/variable";
+
+.discover-ty {
+  margin-top : max(60px, 6.25rem); // 100px
+
+  @include mobile {
+	margin-top : 60px;
+  }
+
+  .container {
+	max-width : 1140px;
+  }
+
+  &__heading {
+	margin      : 0;
+
+	font-family : $font-family-tertiary;
+	font-size   : max(24px, 2.5rem); // 40px
+	font-weight : 400;
+
+	text-align  : center;
+
+	span {
+	  font-weight : 700;
+	}
+
+	@include mobile {
+	  font-size : 24px;
+	}
+  }
+
+  &__posts {
+	margin-top            : max(32px, 3.75rem); // 60px
+
+	gap                   : max(30px, 3.75rem); // 60px
+	display               : grid;
+	grid-template-columns : repeat(2, 1fr);
+
+	@include mobile {
+	  margin-top : 32px;
+	  gap        : 30px;
+	}
+  }
+
+  // Post item styles (same as .related-post-item from single-post.scss)
+  &__post-item {
+	--bs-filter-item-pt : max(20px, 2.5rem); // 40px
+	--bs-filter-item-pr : max(20px, 2.5rem); // 40px
+	--bs-filter-item-pb : max(30px, 2.5rem); // 40px
+	--bs-filter-item-pl : max(20px, 2.5rem); // 40px
+
+	display             : flex;
+	flex-direction      : column;
+
+	border-radius       : max(20px, 2.5rem); // 40px
+	color               : var(--wp--preset--color--dark-blue) !important;
+	background-color    : #FFFFFF;
+
+	padding             : var(--bs-filter-item-pt) var(--bs-filter-item-pr) var(--bs-filter-item-pb) var(--bs-filter-item-pl);
+
+	@include mobile {
+	  --bs-filter-item-pt : 20px;
+	  --bs-filter-item-pr : 20px;
+	  --bs-filter-item-pb : 30px;
+	  --bs-filter-item-pl : 20px;
+
+	  border-radius       : 20px;
+	}
+
+	transition          : box-shadow ease .3s;
+
+	&:hover,
+	&:focus {
+	  box-shadow : 36px 30px 74.9px 0 rgba(255, 108, 102, 0.18);
+	}
+  }
+
+  // Link wrapper
+  &__post-item-link {
+	text-decoration : none !important;
+  }
+
+  // thumbnail
+  &__post-item-image-figure,
+  &__post-item-image-placeholder {
+	aspect-ratio  : 460 / 245;
+
+	border-radius : max(13.75px, 1.4375rem); // 23px
+	overflow      : hidden;
+
+	@include mobile {
+	  border-radius : 13.75px
+	}
+  }
+
+  &__post-item-image-figure {
+	position : relative;
+
+	img {
+	  position        : absolute;
+	  top             : 0;
+	  left            : 0;
+	  bottom          : 0;
+	  width           : 100%;
+	  height          : 100%;
+
+	  object-fit      : cover;
+	  object-position : 50% 50%;
+	}
+  }
+
+  &__post-item-image-placeholder {
+	background-color : #F4F4F4;
+  }
+
+  // Content
+  &__post-item-content {
+	flex-grow      : 1;
+
+	display        : flex;
+	flex-direction : column;
+  }
+
+  // meta
+  &__post-item-meta {
+	font-family : $font-family-tertiary; // -> 'Tomorrow'
+	font-size   : var(--wp--preset--font-size--fs-tag); // -> 12px | 14px
+	font-weight : font-weight('medium'); // -> 500
+	line-height : 1.1;
+
+	margin-top  : max(16px, 1.25rem); // 20px
+
+	gap         : 10px;
+	display     : flex;
+	flex-wrap   : wrap;
+
+	align-items : center;
+
+	@include mobile {
+	  margin-top : 16px;
+	  font-size  : 12px;
+	}
+  }
+
+  &__post-item-categories {
+	display : contents; // => makes it display inline with date
+	// it's child items become child items of __meta
+  }
+
+  &__post-item-category {
+	padding          : 7.3px 14px;
+	background-color : var(--wp--preset--color--dark-blue);
+	border-radius    : 20px;
+
+	color            : #FFFFFF;
+	text-decoration  : none !important;
+
+	@include mobile {
+	  padding : 4.9px 11.9px;
+	}
+  }
+
+  &__post-item-read-time {
+
+  }
+
+  // Title
+  &__post-item-title {
+	margin         : max(18px, 1.25rem) 0 0; // 20px top
+
+	font-size      : max(24px, 1.875rem); // 30px
+	font-weight    : font-weight('semibold');
+	line-height    : 1.2;
+	letter-spacing : calc(-1 * max(0.48px, 0.0375rem)); // -0.6px
+
+	color          : inherit;
+
+	@include mobile {
+	  margin-top     : 18px;
+	  letter-spacing : -0.48px;
+	}
+  }
+
+  // Excerpt
+  &__post-item-excerpt {
+	margin      : max(16px, 1.25rem) 0 0; // 20px top
+
+	font-family : $font-family-secondary;
+	font-weight : font-weight('regular');
+	font-size   : font-size('base'); // -> 16px
+	line-height : 1.4;
+
+	@include mobile {
+	  margin-top : 16px;
+	}
+  }
+
+  // Footer
+  &__post-item-footer {
+	margin-top : auto;
+
+	.post-author {
+	  margin-top : 30px;
+	}
+  }
+}
+

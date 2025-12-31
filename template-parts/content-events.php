@@ -21,7 +21,7 @@ $event_form_title     = get_field( 'epo__form-title' ) ?? null;
 $event_form_shortcode = get_field( 'epo__form-shortcode' ) ?? null;
 
 // Custom Fields if event is over
-$event_over_message      = get_field( 'epo__message-event-over' ) ?? null;
+$event_over_message      = get_field( 'epo__event-completed-message' ) ?? null;
 $webinar_video_source    = get_field( 'epo__video-source' ) ?? null;
 $webinar_video_id        = get_field( 'epo__video-id' ) ?? null;
 $webinar_video_thumbnail = get_field( 'epo__video-thumbnail' ) ?? null;

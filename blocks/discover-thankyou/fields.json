@@ -1,11 +1,11 @@
 {
-    "key": "group_hero_thankyou_block",
-    "title": "Hero - Thank You",
+    "key": "group_discover_thankyou_block",
+    "title": "Discover - Thank You",
     "fields": [
         {
-            "key": "field_hero_thankyou_heading",
-            "label": "Hero - Thank You",
-            "name": "hero-ty",
+            "key": "field_discover_thankyou_heading",
+            "label": "Discover - Thank You",
+            "name": "discover-ty",
             "aria-label": "",
             "type": "group",
             "instructions": "",
@@ -19,11 +19,11 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_6953f5512b734",
+                    "key": "field_6954f00ace157",
                     "label": "Heading",
-                    "name": "hero-ty__heading",
+                    "name": "discover-ty__heading",
                     "aria-label": "",
-                    "type": "textarea",
+                    "type": "text",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -32,19 +32,19 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "<span>Thank you!<\/span> We’re looking forward to meeting you.",
+                    "default_value": "<span>Discover<\/span> prevention-first cloud security resources",
                     "maxlength": "",
                     "allow_in_bindings": 0,
-                    "rows": "",
                     "placeholder": "",
-                    "new_lines": ""
+                    "prepend": "",
+                    "append": ""
                 },
                 {
-                    "key": "field_6953f4196d693",
-                    "label": "Sub Heading",
-                    "name": "hero-ty__subheading",
+                    "key": "field_6954f01fce158",
+                    "label": "Posts",
+                    "name": "discover-ty__posts",
                     "aria-label": "",
-                    "type": "textarea",
+                    "type": "post_object",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -53,12 +53,20 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "We’ll be in touch shortly!",
-                    "maxlength": "",
+                    "post_type": [
+                        "post"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "taxonomy": "",
+                    "return_format": "id",
+                    "multiple": 1,
+                    "allow_null": 0,
                     "allow_in_bindings": 0,
-                    "rows": "",
-                    "placeholder": "",
-                    "new_lines": ""
+                    "bidirectional": 0,
+                    "ui": 1,
+                    "bidirectional_target": []
                 }
             ]
         }
@@ -68,7 +76,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/hero-thankyou"
+                "value": "acf\/discover-thankyou"
             }
         ]
     ],
@@ -82,5 +90,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1767168351
+    "modified": 1767174212
 }
