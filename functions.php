@@ -280,6 +280,16 @@ function wpdocs_theme_slug_widgets_init() {
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
 	) );
+
+    register_sidebar( array(
+            'name'          => __( 'Event Footer Widget', 'blast-2025' ),
+            'id'            => 'event-footer-widget',
+            'description'   => __( 'Widgets in this area will be shown after the author section on single events.', 'blast-2025' ),
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+    ) );
 }
 add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 
@@ -350,4 +360,16 @@ function blast_preload_hero_home_images() {
     }
 }
 add_action('wp_head', 'blast_preload_hero_home_images');
+
+/**
+ * Add custom body class for Events page template
+ */
+function blast_add_events_body_class( $classes ) {
+	// Check if it's the events page by slug (auto-detected template)
+	if ( is_page( 'events' ) ) {
+		$classes[] = 'page-template-events';
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'blast_add_events_body_class' );
 

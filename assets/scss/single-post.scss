@@ -4,7 +4,8 @@ html {
   scroll-behavior : smooth;
 }
 
-.single-post {
+.single-post,
+.single-events {
   --header-h : 122px;
 
   @include tablet {
@@ -667,6 +668,13 @@ html {
 	  --bs-filter-item-pl : 20px;
 
 	  border-radius       : 20px;
+	}
+
+	transition          : box-shadow ease .3s;
+
+	&:hover,
+	&:focus {
+	  box-shadow : 36px 30px 74.9px 0 rgba(255, 108, 102, 0.18);
 	}
 
 	// Link wrapper

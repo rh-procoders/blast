@@ -69,8 +69,17 @@ function load_scripts() {
         wp_enqueue_style( 'single-post',  THEME_URI . '/assets/css/single-post.css', array(), filemtime(THEME_DIR . '/assets/css/single-post.css') );
     }
 
+    if( is_singular( 'events' ) ) {
+        wp_enqueue_style( 'single-post',  THEME_URI . '/assets/css/single-post.css', array(), filemtime(THEME_DIR . '/assets/css/single-post.css') );
+
+        wp_enqueue_style( 'single-event',  THEME_URI . '/assets/css/single-event.css', array(), filemtime(THEME_DIR . '/assets/css/single-event.css') );
+    }
+
     // Archive Page Styles
     wp_register_style( 'blast-archive', THEME_URI . '/assets/css/archive.css' );
+
+    // Events Page Styles
+    wp_register_style( 'blast-events', THEME_URI . '/assets/css/events.css' );
 
     // Demo Page Assets (only on page-demo.php template)
     if ( is_page_template( 'page-demo.php' ) ) {

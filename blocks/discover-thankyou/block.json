@@ -1,0 +1,46 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acf/discover-thankyou",
+    "title": "Discover - Thank You",
+    "description": "Discover - Thank You Section. Designed for Thank You Page",
+    "category": "theme",
+    "icon": "dashicons dashicons-columns",
+    "keywords": ["discover", "thank you", "thankyou", "thank"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "blockVersion": 3
+    },
+    "example": {
+      "attributes": {
+        "preview": true,
+        "data": {
+          "preview_image_help": "block-image-preview.png"
+        }
+      }
+    },
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "customClassName": true,
+        "spacing": {
+            "margin": ["top", "bottom"],
+            "padding": ["top", "bottom"]
+        },
+        "color": {
+            "background": true,
+            "gradients": true,
+            "text": true
+        },
+        "typography": {
+            "fontSize": false,
+            "lineHeight": false
+        }
+    },
+    "usesContext": ["postId", "postType"],
+    "textdomain": "blast-2025",
+    "editorStyle": "file:./css/editor-style.css",
+    "style": "file:./css/view-style.css",
+    "viewScript": [ "custom-forms" ]
+}

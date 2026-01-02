@@ -17,7 +17,7 @@ class Custom_Mega_Menu_Walker extends Walker_Nav_Menu {
         $is_mega_menu = get_field('enable_menga_menu', $item);
         $classes = implode( ' ', $item->classes );
 
-        $classes .= $is_mega_menu ? ' is-mega-menu ' : '';
+        $classes .= $is_mega_menu ? ' is-mega-menu' : ' is-not-mega';
         if($is_mega_menu){
             $output .= "<li class='$classes'><span class='menu-link'>{$item->title}</span>";
         }else{

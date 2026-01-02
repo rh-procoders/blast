@@ -217,8 +217,11 @@ add_action( 'wp_ajax_bs_toggle_post_featured', function () {
  * a progress indicator before the fieldset wrapper
  */
 function blast_customize_cf7_multistep_buttons( $form_html ) {
-    // Only process if the form contains multi-step buttons
-    if ( strpos( $form_html, 'cf7mls_btn' ) === false ) {
+    // Only process if the form contains multi-step buttons OR blast-styled-submit class
+    $has_multistep = strpos( $form_html, 'cf7mls_btn' ) !== false;
+    $has_styled_submit = strpos( $form_html, 'blast-styled-submit' ) !== false;
+
+    if ( ! $has_multistep && ! $has_styled_submit ) {
         return $form_html;
     }
 
@@ -228,8 +231,10 @@ function blast_customize_cf7_multistep_buttons( $form_html ) {
     $dom->loadHTML( '<?xml encoding="utf-8" ?>' . $form_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
     $xpath = new DOMXPath( $dom );
 
-    // Inject progress bar before fieldset-cf7mls-wrapper
-    blast_inject_progress_bar( $xpath, $dom );
+    // Inject progress bar before fieldset-cf7mls-wrapper (only for multi-step forms)
+    if ( $has_multistep ) {
+        blast_inject_progress_bar( $xpath, $dom );
+    }
 
     // Find all Next buttons (cf7mls_next)
     $next_buttons = $xpath->query( '//button[contains(@class, "cf7mls_next")]' );
@@ -245,8 +250,14 @@ function blast_customize_cf7_multistep_buttons( $form_html ) {
         blast_wrap_button_with_block_div( $button, $dom );
     }
 
-    // Find and convert Submit inputs to styled buttons
-    $submit_inputs = $xpath->query( '//input[contains(@class, "wpcf7-submit")]' );
+    // Find and convert Submit inputs
+    if ( $has_multistep ) {
+        // For multistep forms, convert ALL submit inputs (original behavior)
+        $submit_inputs = $xpath->query( '//input[contains(@class, "wpcf7-submit")]' );
+    } else {
+        // For regular forms, ONLY convert if they have blast-styled-submit class
+        $submit_inputs = $xpath->query( '//input[contains(@class, "blast-styled-submit")]' );
+    }
     foreach ( $submit_inputs as $input ) {
         blast_convert_submit_to_button( $input, $dom );
     }

@@ -19,35 +19,69 @@ function blast_blog_filter_shortcode( array $atts ): string
     // Parse shortcode attributes
     $atts = shortcode_atts( [
             'posts_per_page' => 4,
-            'tax'            => 'category',  // Taxonomy type: category, tag, author
+            'post_type'      => 'post',      // Post type: post, events, newsroom
+            'tax'            => '',          // Taxonomy type: category, tag, author, event_types (auto-detected if empty)
             'is_archive'     => 'false',     // Archive mode flag
             'tax_id'         => null,        // Specific taxonomy ID to filter
             'load_type'      => 'button',    // Load type: button|infinite
     ], $atts, 'blast-blog-filter' );
 
-    // Get current category from URL parameter (if not in archive mode with tax_id)
-    $current_category = isset( $_GET['category'] ) ? sanitize_key( $_GET['category'] ) : 'all';
+    // Sanitize post type
+    $post_type  = sanitize_key( $atts['post_type'] );
+
+    // Auto-detect taxonomy based on post type if not explicitly set
+    $taxonomy = ! empty( $atts['tax'] ) ? sanitize_key( $atts['tax'] ) : '';
+
+    if ( empty( $taxonomy ) ) {
+        // Post type to taxonomy mapping
+        $taxonomy_map = [
+            'post'     => 'category',
+            'events'   => 'event_types',
+            'newsroom' => 'category',  // Change if newsroom has custom taxonomy
+        ];
+
+        // Use mapped taxonomy or attempt to auto-detect
+        if ( isset( $taxonomy_map[ $post_type ] ) ) {
+            $taxonomy = $taxonomy_map[ $post_type ];
+        } else {
+            // Fallback: get first registered taxonomy for this post type
+            $taxonomies = get_object_taxonomies( $post_type, 'names' );
+            $taxonomy   = ! empty( $taxonomies ) ? $taxonomies[0] : 'category';
+        }
+    }
+
+    // Get the URL-friendly parameter name for this taxonomy
+    $taxonomy_param = blast_get_taxonomy_param_name( $taxonomy );
+
+    // Get current term from URL parameter (use dynamic parameter based on taxonomy)
+    $current_term = isset( $_GET[ $taxonomy_param ] ) ? sanitize_key( $_GET[ $taxonomy_param ] ) : 'all';
     $current_search   = isset( $_GET['search'] ) ? sanitize_text_field( $_GET['search'] ) : '';
 
-    // If tax_id is provided, we're filtering by a specific term
-    $taxonomy   = sanitize_key( $atts['tax'] );
     $is_archive = $atts['is_archive'] === 'true';
     $tax_id     = ! empty( $atts['tax_id'] ) ? absint( $atts['tax_id'] ) : null;
 
     // Get taxonomy terms based on taxonomy type (only if not filtering by tax_id)
     $terms = [];
-    if ( ! $tax_id ) {
-        if ( $taxonomy === 'category' ) {
-            $terms = get_categories( [ 'hide_empty' => true ] );
-            // Filter out Uncategorized category
+    if ( ! $tax_id && $taxonomy !== 'author' ) {
+        // Use general get_terms() for all taxonomies
+        $terms = get_terms( [
+            'taxonomy'   => $taxonomy,
+            'hide_empty' => true,
+        ] );
+
+        // Filter out Uncategorized category (only for category taxonomy)
+        if ( $taxonomy === 'category' && ! empty( $terms ) && ! is_wp_error( $terms ) ) {
             $terms = array_filter( $terms, function ( $term ) {
                 return $term->slug !== 'uncategorized';
             } );
-        } elseif ( $taxonomy === 'tag' ) {
-            $terms = get_tags( [ 'hide_empty' => true ] );
         }
-        // Note: Author taxonomy handled differently (no filter UI for authors)
+
+        // Ensure $terms is array (in case of WP_Error)
+        if ( is_wp_error( $terms ) ) {
+            $terms = [];
+        }
     }
+    // Note: Author taxonomy handled differently (no filter UI for authors)
 
     ob_start();
     ?>
@@ -56,10 +90,13 @@ function blast_blog_filter_shortcode( array $atts ): string
 
         <!-- Filter Bar -->
         <div class="blog-filter__bar container container--blog-filter"
+             data-post-type="<?= esc_attr( $post_type ) ?>"
              data-taxonomy="<?= esc_attr( $taxonomy ) ?>"
+             data-taxonomy-param="<?= esc_attr( $taxonomy_param ) ?>"
              data-is-archive="<?= esc_attr( $is_archive ? 'true' : 'false' ) ?>"
              data-tax-id="<?= esc_attr( $tax_id ?? '' ) ?>"
-             data-load-type="<?= esc_attr( sanitize_key( $atts['load_type'] ) ) ?>">
+             data-load-type="<?= esc_attr( sanitize_key( $atts['load_type'] ) ) ?>"
+             data-posts-per-page="<?= esc_attr( intval( $atts['posts_per_page'] ) ) ?>">
 
             <!-- Search Input -->
             <div class="blog-filter__search">
@@ -74,8 +111,10 @@ function blast_blog_filter_shortcode( array $atts ): string
                         aria-label="<?= esc_attr__( 'Clear search', 'blast-2025' ) ?>"
                         style="<?= empty( $current_search ) ? 'display: none;' : '' ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
-                        <path d="M11.0625 11.0625L1.06271 1.0625" fill="none" stroke-width="1.5" stroke-linecap="square"/>
-                        <path d="M1.0625 11.0625L11.0623 1.0625" fill="none" stroke-width="1.5" stroke-linecap="square"/>
+                        <path d="M11.0625 11.0625L1.06271 1.0625" fill="none" stroke-width="1.5"
+                              stroke-linecap="square"/>
+                        <path d="M1.0625 11.0625L11.0623 1.0625" fill="none" stroke-width="1.5"
+                              stroke-linecap="square"/>
                     </svg>
                 </button>
                 <?php sprite_svg( 'icon-filter-search', 20, 20 ) ?>
@@ -91,9 +130,9 @@ function blast_blog_filter_shortcode( array $atts ): string
                     <ul class="blog-filter__category-list">
                         <?php foreach ($terms as $term): ?>
                             <li>
-                                <a href="?category=<?= esc_attr( $term->slug ) ?>"
-                                   class="blog-filter__category-item <?= $current_category === $term->slug ? 'blog-filter__category-item--active' : '' ?>"
-                                   data-category="<?= esc_attr( $term->slug ) ?>">
+                                <a href="?<?= esc_attr( $taxonomy_param ) ?>=<?= esc_attr( $term->slug ) ?>"
+                                   class="blog-filter__category-item <?= $current_term === $term->slug ? 'blog-filter__category-item--active' : '' ?>"
+                                   data-term="<?= esc_attr( $term->slug ) ?>">
                                     <?= esc_html( $term->name ) ?>
                                 </a>
                             </li>
@@ -108,7 +147,7 @@ function blast_blog_filter_shortcode( array $atts ): string
             <?php
             // Build initial query based on URL parameters
             $args = [
-                    'post_type'      => 'post',
+                    'post_type'      => $post_type,
                     'post_status'    => 'publish',
                     'orderby'        => 'date',
                     'order'          => 'DESC',
@@ -138,18 +177,39 @@ function blast_blog_filter_shortcode( array $atts ): string
                     $args['tag_id'] = $tax_id;
                 } elseif ( $taxonomy === 'author' ) {
                     $args['author'] = $tax_id;
+                } else {
+                    // General handling for any custom taxonomy
+                    $args['tax_query'] = [
+                        [
+                            'taxonomy' => $taxonomy,
+                            'field'    => 'term_id',
+                            'terms'    => $tax_id,
+                        ],
+                    ];
                 }
-            } elseif ( $current_category !== 'all' ) {
+            } elseif ( $current_term !== 'all' ) {
                 // Filter by URL parameter (normal mode)
                 if ( $taxonomy === 'category' ) {
-                    $category = get_category_by_slug( $current_category );
+                    $category = get_category_by_slug( $current_term );
                     if ( $category ) {
                         $args['category__in'] = [ $category->term_id ];
                     }
                 } elseif ( $taxonomy === 'tag' ) {
-                    $tag = get_term_by( 'slug', $current_category, 'post_tag' );
+                    $tag = get_term_by( 'slug', $current_term, 'post_tag' );
                     if ( $tag ) {
                         $args['tag_id'] = $tag->term_id;
+                    }
+                } else {
+                    // General handling for any custom taxonomy
+                    $term = get_term_by( 'slug', $current_term, $taxonomy );
+                    if ( $term ) {
+                        $args['tax_query'] = [
+                            [
+                                'taxonomy' => $taxonomy,
+                                'field'    => 'term_id',
+                                'terms'    => $term->term_id,
+                            ],
+                        ];
                     }
                 }
             }
@@ -161,7 +221,13 @@ function blast_blog_filter_shortcode( array $atts ): string
             if ( $initial_query->have_posts() ):
                 while ($initial_query->have_posts()):
                     $initial_query->the_post();
-                    get_template_part( 'template-parts/components/blog-filter-item' );
+
+                    if ( $post_type === 'events' ) {
+                        get_template_part( 'template-parts/components/event-filter-item' );
+                    } else {
+                        get_template_part( 'template-parts/components/blog-filter-item' );
+                    }
+
                 endwhile;
             else:
                 ?>
@@ -176,7 +242,8 @@ function blast_blog_filter_shortcode( array $atts ): string
         </div><!-- /.blog-filter__grid -->
 
         <!-- Load More Button -->
-        <div class="blog-filter__load-more wp-block-button is-style-outline is-style-outline--1" style="<?= ! $has_more_posts ? 'display: none;' : '' ?>">
+        <div class="blog-filter__load-more wp-block-button is-style-outline is-style-outline--1"
+             style="<?= ! $has_more_posts ? 'display: none;' : '' ?>">
             <button class="blog-filter__load-more-btn btn has-arrow-icon" data-page="2">
                 <span class="button-text"
                       data-hover-text="<?= esc_attr__( 'Load More', 'blast-2025' ) ?>">
@@ -208,12 +275,15 @@ function blast_blog_filter_shortcode( array $atts ): string
                 const categoryBar = filterContainer.querySelector( '.blog-filter__bar' );
 
                 // Get taxonomy settings from data attributes
+                const postType = categoryBar.getAttribute( 'data-post-type' ) || 'post';
                 const taxonomy = categoryBar.getAttribute( 'data-taxonomy' ) || 'category';
+                const taxonomyParam = categoryBar.getAttribute( 'data-taxonomy-param' ) || 'category';
                 const isArchive = categoryBar.getAttribute( 'data-is-archive' ) === 'true';
                 const taxId = categoryBar.getAttribute( 'data-tax-id' ) || '';
                 const loadType = categoryBar.getAttribute( 'data-load-type' ) || 'button';
+                const postsPerPage = parseInt( categoryBar.getAttribute( 'data-posts-per-page' ) ) || 4;
 
-                let currentCategory = '<?= esc_js( $current_category ) ?>';
+                let currentTerm = '<?= esc_js( $current_term ) ?>';
                 let currentSearch = '<?= esc_js( $current_search ) ?>';
                 let currentPage = 1;
                 let isLoading = false;
@@ -236,14 +306,16 @@ function blast_blog_filter_shortcode( array $atts ): string
 
                 /**
                  * Update browser URL without page reload
+                 * Uses dynamic taxonomy parameter name for semantic URLs
                  */
-                function updateURL( category, search ) {
+                function updateURL( termSlug, search ) {
                     const url = new URL( window.location.href );
 
-                    if (category && category !== 'all') {
-                        url.searchParams.set( 'category', category );
+                    // Use dynamic taxonomy parameter (e.g., 'event_type' for events, 'category' for posts)
+                    if (termSlug && termSlug !== 'all') {
+                        url.searchParams.set( taxonomyParam, termSlug );
                     } else {
-                        url.searchParams.delete( 'category' );
+                        url.searchParams.delete( taxonomyParam );
                     }
 
                     if (search) {
@@ -280,11 +352,13 @@ function blast_blog_filter_shortcode( array $atts ): string
                     const formData = new FormData();
                     formData.append( 'action', 'blast_filter_posts' );
                     formData.append( 'page', page );
-                    formData.append( 'category', currentCategory );
+                    formData.append( 'post_type', postType );
+                    formData.append( 'term', currentTerm );
                     formData.append( 'search', currentSearch );
                     formData.append( 'taxonomy', taxonomy );
                     formData.append( 'is_archive', isArchive ? 'true' : 'false' );
                     formData.append( 'tax_id', taxId );
+                    formData.append( 'posts_per_page', postsPerPage );
 
                     fetch( '<?= esc_url( admin_url( 'admin-ajax.php' ) ) ?>', {
                         method: 'POST',
@@ -358,7 +432,7 @@ function blast_blog_filter_shortcode( array $atts ): string
                     link.addEventListener( 'click', function ( e ) {
                         e.preventDefault();
 
-                        const category = this.getAttribute( 'data-category' );
+                        const termSlug = this.getAttribute( 'data-term' );
                         const isActive = this.classList.contains( 'blog-filter__category-item--active' );
 
                         // Toggle behavior: if already active, deactivate (show all)
@@ -366,18 +440,18 @@ function blast_blog_filter_shortcode( array $atts ): string
                             // Deactivate: remove active class and show all posts
                             this.classList.remove( 'blog-filter__category-item--active' );
                             this.blur(); // Remove focus state so it doesn't appear active
-                            currentCategory = 'all';
+                            currentTerm = 'all';
                         } else {
                             // Activate: remove active from all, add to clicked
                             categoryLinks.forEach( l => l.classList.remove( 'blog-filter__category-item--active' ) );
                             this.classList.add( 'blog-filter__category-item--active' );
-                            currentCategory = category;
+                            currentTerm = termSlug;
                         }
 
                         currentPage = 1;
 
                         // Update URL
-                        updateURL( currentCategory, currentSearch );
+                        updateURL( currentTerm, currentSearch );
 
                         // Load posts
                         loadPosts( 1, false );
@@ -392,13 +466,13 @@ function blast_blog_filter_shortcode( array $atts ): string
                     currentPage = 1;
 
                     // Update URL
-                    updateURL( currentCategory, currentSearch );
+                    updateURL( currentTerm, currentSearch );
 
                     // Load posts
                     loadPosts( 1, false );
                 }, 300 );
 
-                searchInput.addEventListener( 'input', function() {
+                searchInput.addEventListener( 'input', function () {
                     // Show/hide clear button based on input value
                     if (searchClearBtn) {
                         if (searchInput.value.trim().length > 0) {
@@ -416,7 +490,7 @@ function blast_blog_filter_shortcode( array $atts ): string
                  * Handle search clear button click
                  */
                 if (searchClearBtn) {
-                    searchClearBtn.addEventListener( 'click', function() {
+                    searchClearBtn.addEventListener( 'click', function () {
                         // Only proceed if there was text to clear
                         const hadText = searchInput.value.trim().length > 0;
 
@@ -432,7 +506,7 @@ function blast_blog_filter_shortcode( array $atts ): string
                             currentPage = 1;
 
                             // Update URL
-                            updateURL( currentCategory, currentSearch );
+                            updateURL( currentTerm, currentSearch );
 
                             // Load posts
                             loadPosts( 1, false );

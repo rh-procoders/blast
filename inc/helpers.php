@@ -440,3 +440,30 @@ if ( ! function_exists( 'dd' ) ) {
         }
     }
 }
+
+/**
+ * Get singular form of taxonomy name for URL parameter
+ *
+ * Converts taxonomy names to user-friendly, SEO-friendly URL parameter names.
+ * Example: 'event_types' becomes 'event_type', 'post_tag' becomes 'tag'
+ *
+ * @param string $taxonomy Taxonomy name
+ * @return string Singular form for URL parameter
+ */
+function blast_get_taxonomy_param_name( string $taxonomy ): string
+{
+    // Map plural taxonomy names to singular URL-friendly parameter names
+    $param_map = [
+        'category'    => 'category',
+        'post_tag'    => 'tag',
+        'event_types' => 'event_type',
+    ];
+
+    // Return mapped name or remove trailing 's' as fallback
+    if ( isset( $param_map[ $taxonomy ] ) ) {
+        return $param_map[ $taxonomy ];
+    }
+
+    // Fallback: remove trailing 's' if exists
+    return rtrim( $taxonomy, 's' );
+}
