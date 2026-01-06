@@ -60,6 +60,7 @@ function blast_events_hero_shortcode( array $atts ): string
     $event_start_date = get_field( 'epo__start-date' ) ?? null;
     $event_end_date   = get_field( 'epo__end-date' ) ?? null;
     $event_location   = get_field( 'epo__location' ) ?? null;
+    $event_hero_label = get_field( 'epo__hero-label' ) ?? null;
     ?>
 
     <div class="archive-hero">
@@ -72,7 +73,11 @@ function blast_events_hero_shortcode( array $atts ): string
                         <div class="archive-hero__featured-badge">
                             <?php sprite_svg( 'icon-calendar-1', 16, 16 ); ?>
                             <span>
-                                <?= esc_html( __( 'Latest', 'blast-2025' ) ); ?>
+                                <?php if ( $event_hero_label ) {
+                                    echo wp_kses_post( $event_hero_label );
+                                } else {
+                                    echo esc_html( __( 'Latest', 'blast-2025' ) );
+                                } ?>
                             </span>
                         </div>
 

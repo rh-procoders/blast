@@ -143,6 +143,27 @@
             "append": ""
         },
         {
+            "key": "field_695ce6bb50bb2",
+            "label": "Event - Hero Label",
+            "name": "epo__hero-label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_69528473f4f9a",
             "label": "Form Title",
             "name": "epo__form-title",
@@ -422,5 +443,5 @@
     "description": "",
     "show_in_rest": 1,
     "display_title": "",
-    "modified": 1767695938
+    "modified": 1767696076
 }
