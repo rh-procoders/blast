@@ -98,38 +98,18 @@
 	}
 
 	&__thumbnails {
-	  position : relative;
+	  position    : relative;
+
+	  display     : flex;
+	  align-items : center;
 	}
 
 	&__thumbnail {
-	  position : absolute;
-	  top      : 0;
-	  left     : 0;
-	  width    : 100%;
-	  height   : 100%;
-
-	  @include tablet {
-		position     : relative;
-		top          : auto;
-		left         : auto;
-		width        : 100%;
-		height       : 100%;
-
-		display      : flex;
-
-		aspect-ratio : 275/146;
-	  }
+	  display      : flex;
+	  aspect-ratio : 600 / 320;
 
 	  &-image {
-		position : absolute;
-		top      : 0;
-		left     : 0;
-		width    : 100%;
-		height   : 100%;
 
-		@include tablet {
-		  position : relative;
-		}
 	  }
 	}
   }
@@ -168,7 +148,7 @@
 	  --bs-filter-item-pb : max(24px, 1.875rem); // 30px
 	  --bs-filter-item-pl : max(20px, 1.5rem); // 24px
 
-	  flex: 1 1 100%;
+	  flex                : 1 1 100%;
 
 	  &__link {
 

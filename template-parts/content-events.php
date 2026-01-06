@@ -88,7 +88,7 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
                         </button>
                         <div class="entry-content__video-container"></div>
                     </div>
-                <?php elseif ( ! ($event_is_completed && $event_type === 'webinar') ) : ?>
+                <?php elseif ( ! ($event_unlisted && $event_type === 'webinar' && $webinar_video_source && $webinar_video_id) ) : ?>
                     <figure class="entry-content__thumbnail">
                         <?php
                         the_post_thumbnail( 'full', [ 'class' => '', 'title' => get_the_title() ] );

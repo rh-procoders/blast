@@ -17,18 +17,30 @@ if ( $categories ) {
 // Get reading time
 $reading_time = bs_get_reading_time();
 
-$event_start_date = get_field( 'epo__start-date' ) ?? null;
-$event_end_date   = get_field( 'epo__end-date' ) ?? null;
-$event_location   = get_field( 'epo__location' ) ?? null;
+$event_banner_listing = get_field( 'epo__banner-listing' ) ?? null;
+$event_start_date     = get_field( 'epo__start-date' ) ?? null;
+$event_end_date       = get_field( 'epo__end-date' ) ?? null;
+$event_location       = get_field( 'epo__location' ) ?? null;
+
+// Priority: Custom ACF banner listing image > Featured image
+if ( $event_banner_listing && ! empty( $event_banner_listing['ID'] ) ) {
+	$post_thumbnail = wp_get_attachment_image( $event_banner_listing['ID'], 'large', false, [
+		'class' => 'blog-filter-item__image',
+	] );
+} else {
+	$post_thumbnail = get_the_post_thumbnail( get_the_ID(), 'large', [
+		'class' => 'blog-filter-item__image',
+	] );
+}
 ?>
 
 <a href="<?= esc_url( get_permalink() ) ?>" class="blog-filter-item__link">
     <article class="blog-filter-item card-block">
         <!-- Thumbnail -->
         <div class="blog-filter-item__image-wrapper">
-            <?php if ( has_post_thumbnail() ): ?>
+            <?php if ( $post_thumbnail ): ?>
                 <figure class="blog-filter-item__image-figure">
-                    <?php the_post_thumbnail( 'large', [ 'class' => 'blog-filter-item__image' ] ); ?>
+                    <?= $post_thumbnail ?>
                 </figure>
             <?php else: ?>
                 <div class="blog-filter-item__image-placeholder">
