@@ -23,6 +23,18 @@ function blast_events_hero_shortcode( array $atts ): string
             'orderby'        => 'date',
             'order'          => 'DESC',
             'posts_per_page' => 1,
+            'meta_query'     => [
+                    'relation' => 'OR',
+                    [
+                            'key'     => 'epo__event-unlisted',
+                            'compare' => 'NOT EXISTS',
+                    ],
+                    [
+                            'key'     => 'epo__event-unlisted',
+                            'value'   => '1',
+                            'compare' => '!=',
+                    ],
+            ],
     ];
 
     $events_query = new WP_Query( $args );

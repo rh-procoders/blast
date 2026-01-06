@@ -10,8 +10,6 @@
 	grid-row-gap          : max(24px, 2.5rem); // 40px
 	grid-column-gap       : max(24px, 3.75rem); // 60px
 
-	max-width             : 520px;
-
 	@include mobile {
 	  grid-row-gap    : 24px;
 	  grid-column-gap : 24px;
