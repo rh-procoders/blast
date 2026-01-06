@@ -28,9 +28,9 @@
 
   &__avatar {
 	aspect-ratio  : 1/1;
-	max-width     : max(42px, 5rem); // 80px
+	max-width     : max(42px, 5rem)!important; // 80px
 
-	border-radius : max(12.267px, 1.3333125rem); // 21.333px
+	border-radius : max(12.267px, 1.3333125rem)!important; // 21.333px
 	border        : 2px solid #F4F4F4;
 
 	@include mobile {
