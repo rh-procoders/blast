@@ -19,6 +19,7 @@ $event_is_completed = get_field( 'epo__event-completed' ) ?? FALSE;
 // Form
 $event_form_title     = get_field( 'epo__form-title' ) ?? null;
 $event_form_shortcode = get_field( 'epo__form-shortcode' ) ?? null;
+$event_form_redirect  = get_field( 'epo__form-redirect' ) ?? null;
 
 // Custom Fields if event is over
 $event_over_message      = get_field( 'epo__event-completed-message' ) ?? null;
@@ -354,7 +355,15 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
 
                 if (formContainer) {
                     setTimeout( () => {
-                        location = '<?= esc_url( home_url( '/thank-you/' ) ) ?>';
+                        <?php
+                        // Use custom redirect URL if set, otherwise fallback to /thank-you/
+                        if ( $event_form_redirect && ! empty( $event_form_redirect['url'] ) ) {
+                            $redirect_url = esc_url( $event_form_redirect['url'] );
+                        } else {
+                            $redirect_url = esc_url( home_url( '/thank-you/' ) );
+                        }
+                        ?>
+                        location = '<?= $redirect_url ?>';
                     }, 0 );
                 }
             }, false );
