@@ -53,6 +53,22 @@ function blast_filter_posts(): void
         $args['s'] = $search;
     }
 
+    // Exclude unlisted events (only for events post type)
+    if ($post_type === 'events') {
+        $args['meta_query'] = [
+            'relation' => 'OR',
+            [
+                'key'     => 'epo__event-unlisted',
+                'compare' => 'NOT EXISTS',
+            ],
+            [
+                'key'     => 'epo__event-unlisted',
+                'value'   => '1',
+                'compare' => '!=',
+            ],
+        ];
+    }
+
     // Exclude "Uncategorized" category (only for category taxonomy)
     // To disable this exclusion, comment out the lines below
     if ($taxonomy === 'category') {

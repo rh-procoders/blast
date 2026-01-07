@@ -17,8 +17,8 @@
 	  }
 	}
 
-	// event ongoing - both event types have same layout
-	&--event-ongoing {
+	// event listed - both event types have same layout
+	&--event-listed {
 	  --bs-event-grid-content-w : minmax(auto, 850px);
 	  --bs-event-grid-form-w    : max(375px, 30rem); // 480px
 	  --bs-grid-gap             : 3.75rem; // 60px
@@ -259,8 +259,9 @@
 
 
 	&--event-completed {
-	  // event completed && type="event"
-	  &.entry-content--type-event {
+	  // event completed && type="event" || "webinar"
+	  &.entry-content--type-event,
+	  &.entry-content--type-webinar {
 		--bs-event-grid-content-w : minmax(auto, 850px);
 		--bs-event-grid-form-w    : max(375px, 30rem); // 480px
 		--bs-grid-gap             : 3.75rem; // 60px
@@ -358,8 +359,11 @@
 		  }
 		}
 	  }
+	}
 
-	  // event completed && type="webinar"
+	&--event-unlisted {
+
+	  // event unlisted && type="webinar"
 	  &.entry-content--type-webinar {
 		--bs-event-grid-content-w : minmax(auto, 1370px);
 		--bs-grid-gap             : 3.75rem; // 60px

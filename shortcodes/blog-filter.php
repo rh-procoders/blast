@@ -160,6 +160,22 @@ function blast_blog_filter_shortcode( array $atts ): string
                 $args['s'] = $current_search;
             }
 
+            // Exclude unlisted events (only for events post type)
+            if ( $post_type === 'events' ) {
+                $args['meta_query'] = [
+                    'relation' => 'OR',
+                    [
+                        'key'     => 'epo__event-unlisted',
+                        'compare' => 'NOT EXISTS',
+                    ],
+                    [
+                        'key'     => 'epo__event-unlisted',
+                        'value'   => '1',
+                        'compare' => '!=',
+                    ],
+                ];
+            }
+
             // Exclude Uncategorized (only for category taxonomy)
             if ( $taxonomy === 'category' ) {
                 $uncategorized = get_category_by_slug( 'uncategorized' );

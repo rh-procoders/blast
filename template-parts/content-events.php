@@ -7,6 +7,9 @@
  * @package blast-2025
  */
 
+// Unlist Flag
+$event_unlisted = get_field( 'epo__event-unlisted' ) ?? null;
+
 // Date & Location
 $event_start_date = get_field( 'epo__start-date' ) ?? null;
 $event_end_date   = get_field( 'epo__end-date' ) ?? null;
@@ -19,6 +22,7 @@ $event_is_completed = get_field( 'epo__event-completed' ) ?? FALSE;
 // Form
 $event_form_title     = get_field( 'epo__form-title' ) ?? null;
 $event_form_shortcode = get_field( 'epo__form-shortcode' ) ?? null;
+$event_form_redirect  = get_field( 'epo__form-redirect' ) ?? null;
 
 // Custom Fields if event is over
 $event_over_message      = get_field( 'epo__event-completed-message' ) ?? null;
@@ -30,7 +34,8 @@ $webinar_related         = get_field( 'epo__related-webinars' ) ?? null;
 // Build entry-content class with status and type modifiers
 $status_modifier     = $event_is_completed ? 'event-completed' : 'event-ongoing';
 $type_modifier       = 'type-' . $event_type;
-$entry_content_class = 'entry-content entry-content--' . $status_modifier . ' entry-content--' . $type_modifier;
+$unlisted_modifier   = $event_unlisted ? 'event-unlisted' : 'event-listed';
+$entry_content_class = 'entry-content entry-content--' . $status_modifier . ' entry-content--' . $type_modifier . ' entry-content--' . $unlisted_modifier;
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -49,8 +54,8 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
 
             <div class="entry-content__wrapper">
                 <?php
-                // Only show date & location if event is ongoing
-                if ( ! $event_is_completed && ($event_start_date || $event_end_date || $event_location) ) : ?>
+                // Only show date & location if event is ongoing && listed
+                if ( ! $event_is_completed && ($event_start_date || $event_end_date || $event_location) && ! $event_unlisted ) : ?>
                     <div class="entry-content__meta">
                         <?= blast_format_event_meta(
                                 $event_start_date,
@@ -66,8 +71,8 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
                 ?>
 
                 <?php
-                // Show video preview for completed webinars, regular thumbnail otherwise
-                if ( $event_is_completed && $event_type === 'webinar' && $webinar_video_source && $webinar_video_id ) : ?>
+                // Show video preview for unlisted webinars, regular thumbnail otherwise
+                if ( $event_unlisted && $event_type === 'webinar' && $webinar_video_source && $webinar_video_id ) : ?>
                     <div class="entry-content__video-preview"
                          data-video-source="<?= esc_attr( $webinar_video_source ) ?>"
                          data-video-id="<?= esc_attr( $webinar_video_id ) ?>">
@@ -83,7 +88,7 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
                         </button>
                         <div class="entry-content__video-container"></div>
                     </div>
-                <?php elseif ( ! ($event_is_completed && $event_type === 'webinar') ) : ?>
+                <?php elseif ( ! ($event_unlisted && $event_type === 'webinar' && $webinar_video_source && $webinar_video_id) ) : ?>
                     <figure class="entry-content__thumbnail">
                         <?php
                         the_post_thumbnail( 'full', [ 'class' => '', 'title' => get_the_title() ] );
@@ -111,8 +116,8 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
             </div>
 
             <?php
-            // Related webinars section - show only if event is completed AND type is webinar AND manually selected
-            if ( $event_is_completed && $event_type === 'webinar' && ! empty( $webinar_related ) && is_array( $webinar_related ) ) :
+            // Related webinars section - show only if event is unlisted AND type is webinar AND manually selected
+            if ( $event_unlisted && $event_type === 'webinar' && ! empty( $webinar_related ) && is_array( $webinar_related ) ) :
                 // Limit to first 3 post IDs
                 $related_ids = array_slice( $webinar_related, 0, 3 );
 
@@ -156,8 +161,8 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
         </div><!-- .entry-content__the-content -->
 
         <?php
-        // Hide form area if event is completed AND type is webinar
-        if ( $event_form_shortcode && ! ($event_is_completed && $event_type === 'webinar') ) : ?>
+        // Hide form area if event is NOT unlisted
+        if ( ! $event_unlisted ) : ?>
             <div class="entry-content__the-form">
                 <div class="sticky-sidebar">
                     <?php
@@ -166,15 +171,21 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
                     <?php
                     endif; ?>
 
-                    <?php if ( ! $event_is_completed ) : ?>
+                    <?php // Event Ongoing || Webinar => show form
+                    if ( ($event_type === 'event' && ! $event_is_completed)
+                            || $event_type === 'webinar' ) : ?>
                         <?= do_shortcode( $event_form_shortcode ); ?>
-                    <?php else : ?>
-                        <?php if ( $event_over_message ) : ?>
+                    <?php
+                    else : ?>
+                        <?php
+                        if ( $event_over_message ) : ?>
                             <div class="event-over-message">
                                 <?= wp_kses_post( $event_over_message ) ?>
                             </div>
-                        <?php endif; ?>
-                    <?php endif; ?>
+                        <?php
+                        endif; ?>
+                    <?php
+                    endif; ?>
                 </div>
             </div>
         <?php endif; ?>
@@ -207,9 +218,9 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
     endif; ?>
 
     <?php
-    // Add error state handling for events form when form is displayed (only for ongoing events/webinars)
-    if ( $event_form_shortcode && ! $event_is_completed ) : ?>
-        <script>
+    // Add error state handling for events form when form is displayed (only for listed events: ongoing events || webinars)
+    if ( ! $event_unlisted && (($event_type === 'event' && ! $event_is_completed) || $event_type === 'webinar') ) : ?>
+        <script id="events-cf7-error-state">
             (function () {
                 'use strict';
 
@@ -347,14 +358,22 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
             })();
         </script>
 
-        <script id="lp-cf7-redirect">
+        <script id="events-cf7-redirect">
             document.addEventListener( 'wpcf7mailsent', function ( event ) {
                 // Only redirect if the submitted form is inside .entry-content__the-form
                 const formContainer = event.target.closest( '.entry-content__the-form' );
 
                 if (formContainer) {
                     setTimeout( () => {
-                        location = '<?= esc_url( home_url( '/thank-you/' ) ) ?>';
+                        <?php
+                        // Use custom redirect URL if set, otherwise fallback to /thank-you/
+                        if ( $event_form_redirect && ! empty( $event_form_redirect['url'] ) ) {
+                            $redirect_url = esc_url( $event_form_redirect['url'] );
+                        } else {
+                            $redirect_url = esc_url( home_url( '/thank-you/' ) );
+                        }
+                        ?>
+                        location = '<?= $redirect_url ?>';
                     }, 0 );
                 }
             }, false );
@@ -362,9 +381,9 @@ $entry_content_class = 'entry-content entry-content--' . $status_modifier . ' en
     <?php endif; ?>
 
     <?php
-    // Add video embed functionality for completed webinars
-    if ( $event_is_completed && $event_type === 'webinar' && $webinar_video_source && $webinar_video_id ) : ?>
-        <script>
+    // Add video embed functionality for unlisted webinars
+    if ( $event_unlisted && $event_type === 'webinar' && $webinar_video_source && $webinar_video_id ) : ?>
+        <script id="events-video-handler">
             (function () {
                 'use strict';
 

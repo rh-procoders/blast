@@ -3,6 +3,27 @@
     "title": "CPT Events - Post Options",
     "fields": [
         {
+            "key": "field_695ce0067a83b",
+            "label": "Unlist",
+            "name": "epo__event-unlisted",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "(unlisted events do not show in the filter or hero area)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
             "key": "field_69539277e8667",
             "label": "Event Type",
             "name": "epo__event-type",
@@ -39,7 +60,15 @@
             "type": "true_false",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_695ce0067a83b",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -114,6 +143,79 @@
             "append": ""
         },
         {
+            "key": "field_695ce6bb50bb2",
+            "label": "Event - Hero Label",
+            "name": "epo__hero-label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_695d02614fc37",
+            "label": "Event Banner - Hero",
+            "name": "epo__banner-hero",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_695d02704fc38",
+            "label": "Event Banner - Listing",
+            "name": "epo__banner-listing",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
             "key": "field_69528473f4f9a",
             "label": "Form Title",
             "name": "epo__form-title",
@@ -145,7 +247,24 @@
             "conditional_logic": [
                 [
                     {
+                        "field": "field_69539277e8667",
+                        "operator": "==",
+                        "value": "event"
+                    },
+                    {
                         "field": "field_69539cc250503",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_69539277e8667",
+                        "operator": "==",
+                        "value": "webinar"
+                    },
+                    {
+                        "field": "field_695ce0067a83b",
                         "operator": "!=",
                         "value": "1"
                     }
@@ -162,6 +281,48 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_695ce9e70e88f",
+            "label": "Form Redirect",
+            "name": "epo__form-redirect",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69539277e8667",
+                        "operator": "==",
+                        "value": "event"
+                    },
+                    {
+                        "field": "field_69539cc250503",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_69539277e8667",
+                        "operator": "==",
+                        "value": "webinar"
+                    },
+                    {
+                        "field": "field_695ce0067a83b",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0
         },
         {
             "key": "field_69528486f4f9b",
@@ -213,7 +374,7 @@
                         "value": "webinar"
                     },
                     {
-                        "field": "field_69539cc250503",
+                        "field": "field_695ce0067a83b",
                         "operator": "==",
                         "value": "1"
                     }
@@ -255,7 +416,7 @@
                         "value": "webinar"
                     },
                     {
-                        "field": "field_69539cc250503",
+                        "field": "field_695ce0067a83b",
                         "operator": "==",
                         "value": "1"
                     }
@@ -289,7 +450,7 @@
                         "value": "webinar"
                     },
                     {
-                        "field": "field_69539cc250503",
+                        "field": "field_695ce0067a83b",
                         "operator": "==",
                         "value": "1"
                     }
@@ -328,7 +489,7 @@
                         "value": "webinar"
                     },
                     {
-                        "field": "field_69539cc250503",
+                        "field": "field_695ce0067a83b",
                         "operator": "==",
                         "value": "1"
                     }
@@ -376,5 +537,5 @@
     "description": "",
     "show_in_rest": 1,
     "display_title": "",
-    "modified": 1767177623
+    "modified": 1767703186
 }

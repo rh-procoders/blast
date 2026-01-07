@@ -23,6 +23,18 @@ function blast_events_hero_shortcode( array $atts ): string
             'orderby'        => 'date',
             'order'          => 'DESC',
             'posts_per_page' => 1,
+            'meta_query'     => [
+                    'relation' => 'OR',
+                    [
+                            'key'     => 'epo__event-unlisted',
+                            'compare' => 'NOT EXISTS',
+                    ],
+                    [
+                            'key'     => 'epo__event-unlisted',
+                            'value'   => '1',
+                            'compare' => '!=',
+                    ],
+            ],
     ];
 
     $events_query = new WP_Query( $args );
@@ -41,13 +53,24 @@ function blast_events_hero_shortcode( array $atts ): string
     $post_title     = get_the_title();
     $post_excerpt   = get_the_excerpt();
     $post_permalink = get_permalink();
-    $post_thumbnail = get_the_post_thumbnail( $post_id, 'large', [
+
+    $event_banner_hero = get_field( 'epo__banner-hero' ) ?? null;
+
+    // Priority: Custom ACF banner image > Featured image
+    if ( $event_banner_hero && ! empty( $event_banner_hero['ID'] ) ) {
+        $post_thumbnail = wp_get_attachment_image( $event_banner_hero['ID'], 'large', false, [
             'class' => 'archive-hero__thumbnail-image',
-    ] );
+        ] );
+    } else {
+        $post_thumbnail = get_the_post_thumbnail( $post_id, 'large', [
+            'class' => 'archive-hero__thumbnail-image',
+        ] );
+    }
 
     $event_start_date = get_field( 'epo__start-date' ) ?? null;
     $event_end_date   = get_field( 'epo__end-date' ) ?? null;
     $event_location   = get_field( 'epo__location' ) ?? null;
+    $event_hero_label = get_field( 'epo__hero-label' ) ?? null;
     ?>
 
     <div class="archive-hero">
@@ -60,7 +83,11 @@ function blast_events_hero_shortcode( array $atts ): string
                         <div class="archive-hero__featured-badge">
                             <?php sprite_svg( 'icon-calendar-1', 16, 16 ); ?>
                             <span>
-                                <?= esc_html( __( 'Latest', 'blast-2025' ) ); ?>
+                                <?php if ( $event_hero_label ) {
+                                    echo wp_kses_post( $event_hero_label );
+                                } else {
+                                    echo esc_html( __( 'Latest', 'blast-2025' ) );
+                                } ?>
                             </span>
                         </div>
 
