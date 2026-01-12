@@ -26,10 +26,13 @@
         let base_url = '<?php echo home_url(); ?>';
         let ajax_url = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
     </script>
+    <script type="text/javascript"> _linkedin_partner_id = "9168985"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id); </script>
+    <script type="text/javascript"> (function(l) { if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])}; window.lintrk.q=[]} var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})(window.lintrk); </script> 
 	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
+<noscript> <img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=9168985&fmt=gif" /> </noscript>
 
 <?php wp_body_open(); ?>
 <?php 
