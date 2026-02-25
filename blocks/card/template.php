@@ -49,14 +49,9 @@ $wrapper_attributes = get_block_wrapper_attributes([
 	?>
 <?php else: ?>
 
-<?php if ($card_link): ?>
-<a href="<?php echo esc_url($card_link['url']); ?>" 
-   <?php echo $wrapper_attributes; ?>
-   <?php if ($card_link['target']): ?>target="<?php echo esc_attr($card_link['target']); ?>"<?php endif; ?>
-   <?php if ($card_link['title']): ?>aria-label="<?php echo esc_attr($card_link['title']); ?>"<?php endif; ?>>
-<?php else: ?>
+
 <div <?php echo $wrapper_attributes; ?>>
-<?php endif; ?>
+
     
     <!-- Card Image -->
     <?php if ($card_image): ?>
@@ -85,9 +80,13 @@ $wrapper_attributes = get_block_wrapper_attributes([
         <?php endif; ?>
         
         <!-- Card Heading -->
-        <h3 class="h4 card-block__heading">
+   
+        <a href="<?php echo esc_url($card_link['url']); ?>" 
+           <?php if ($card_link['target']): ?>target="<?php echo esc_attr($card_link['target']); ?>"<?php endif; ?>
+           <?php if ($card_link['title']): ?>aria-label="<?php echo esc_attr($card_link['title']); ?>"<?php endif; ?>
+           class="h4 card-block__heading">
             <?php echo $card_heading; ?>
-        </h3>
+        </a>
         
         <!-- Card Description -->
         <?php if ($card_description): ?>
@@ -134,10 +133,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
         
     </div>
     
-<?php if ($card_link): ?>
-</a>
-<?php else: ?>
+
 </div>
-<?php endif; ?>
 
 <?php endif; ?>

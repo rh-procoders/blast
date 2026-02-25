@@ -362,6 +362,43 @@ function blast_preload_hero_home_images() {
 add_action('wp_head', 'blast_preload_hero_home_images');
 
 /**
+ * Output self-referencing canonical URLs for paginated pages
+ * 
+ * For SEO crawlers that don't support JavaScript:
+ * - Page 1: canonical is the base URL without page parameter
+ * - Page 2+: canonical is the self-referencing paginated URL
+ * 
+ * This prevents duplicate content issues while allowing crawlers to index all pages
+ */
+function blast_add_canonical_urls() {
+	// Only on archive/search pages with pagination
+	if ( ! is_archive() && ! is_search() && ! is_home() ) {
+		return;
+	}
+
+	$paged = get_query_var( 'paged' );
+	$page = get_query_var( 'page' );
+	$current_page = max( 1, (int) ( $paged ? $paged : $page ) );
+
+	// Build the canonical URL
+	$canonical_url = get_pagenum_link( $current_page );
+
+	// For page 1, use the base URL without page parameter
+	if ( $current_page === 1 ) {
+		$canonical_url = get_pagenum_link( 1 );
+		
+		// Remove 'page' parameter if it exists
+		$canonical_url = remove_query_arg( 'page', $canonical_url );
+	}
+
+	// Output canonical tag
+	if ( ! empty( $canonical_url ) ) {
+		echo '<link rel="canonical" href="' . esc_url( $canonical_url ) . '" />' . "\n";
+	}
+}
+add_action( 'wp_head', 'blast_add_canonical_urls', 5 );
+
+/**
  * Add custom body class for Events page template
  */
 function blast_add_events_body_class( $classes ) {

@@ -109,6 +109,10 @@
         letter-spacing: -0.68px;
         margin: 0; // 0 0 16px 0
         max-width: 460px;
+        text-decoration: none;
+        &:hover {
+            text-decoration: none;
+        }
     }
     
     // Description

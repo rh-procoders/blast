@@ -257,7 +257,7 @@ function blast_blog_filter_shortcode( array $atts ): string
             ?>
         </div><!-- /.blog-filter__grid -->
 
-        <!-- Load More Button -->
+        <!-- Load More Button (JavaScript enabled) -->
         <div class="blog-filter__load-more wp-block-button is-style-outline is-style-outline--1"
              style="<?= ! $has_more_posts ? 'display: none;' : '' ?>">
             <button class="blog-filter__load-more-btn btn has-arrow-icon" data-page="2">
@@ -271,6 +271,97 @@ function blast_blog_filter_shortcode( array $atts ): string
                 </span>
             </button>
         </div>
+
+        <!-- Traditional Pagination (No JavaScript fallback) -->
+        <noscript>
+            <?php
+            // Calculate total pages
+            $total_pages = ceil( $initial_query->found_posts / intval( $atts['posts_per_page'] ) );
+            $current_page_url = get_pagenum_link( 1 );
+
+            if ( $total_pages > 1 ):
+                // Build pagination URL helper
+                $build_page_url = function( $page_num ) use ( $taxonomy_param, $current_term, $current_search ) {
+                    $url = new stdClass();
+                    $url = get_pagenum_link( $page_num );
+                    
+                    // Add taxonomy filter if active
+                    if ( $current_term && $current_term !== 'all' ) {
+                        $url = add_query_arg( $taxonomy_param, $current_term, $url );
+                    }
+                    
+                    // Add search if active
+                    if ( $current_search ) {
+                        $url = add_query_arg( 'search', $current_search, $url );
+                    }
+                    
+                    return $url;
+                };
+                ?>
+                <div class="blog-filter__pagination" style="display: flex; justify-content: center; align-items: center; margin-top: 60px; gap: 10px; flex-wrap: wrap;">
+                    
+                    <!-- Previous Page Link -->
+                    <?php if ( 1 < $total_pages ): ?>
+                        <a href="<?= esc_url( $build_page_url( max( 1, 1 - 1 ) ) ) ?>" class="pagination__link pagination__prev" rel="prev">
+                            <?= esc_html__( '← Previous', 'blast-2025' ) ?>
+                        </a>
+                    <?php endif; ?>
+                    
+                    <!-- Page Numbers -->
+                    <?php
+                    // Show page numbers (max 5 links)
+                    $left_pad = 2;
+                    $right_pad = 2;
+                    $show_left_dots = false;
+                    $show_right_dots = false;
+                    $pages_to_show = [];
+
+                    if ( $total_pages <= 5 ) {
+                        $pages_to_show = range( 1, $total_pages );
+                    } else {
+                        $pages_to_show = range( max( 1, 1 - $left_pad ), min( $total_pages, 1 + $right_pad ) );
+                        
+                        if ( min( $pages_to_show ) > 1 ) {
+                            $show_left_dots = true;
+                        }
+                        if ( max( $pages_to_show ) < $total_pages ) {
+                            $show_right_dots = true;
+                        }
+                    }
+
+                    // Add first page if not shown and left dots exist
+                    if ( $show_left_dots ) {
+                        echo '<a href="' . esc_url( $build_page_url( 1 ) ) . '" class="pagination__link pagination__number">1</a>';
+                        echo '<span class="pagination__dots">...</span>';
+                    }
+
+                    // Current page number
+                    $current_paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+
+                    foreach ( $pages_to_show as $page ):
+                        if ( $page === $current_paged ):
+                            echo '<span class="pagination__link pagination__number pagination__current" aria-current="page">' . esc_html( $page ) . '</span>';
+                        else:
+                            echo '<a href="' . esc_url( $build_page_url( $page ) ) . '" class="pagination__link pagination__number">' . esc_html( $page ) . '</a>';
+                        endif;
+                    endforeach;
+
+                    // Add last page if not shown and right dots exist
+                    if ( $show_right_dots ) {
+                        echo '<span class="pagination__dots">...</span>';
+                        echo '<a href="' . esc_url( $build_page_url( $total_pages ) ) . '" class="pagination__link pagination__number">' . esc_html( $total_pages ) . '</a>';
+                    }
+                    ?>
+                    
+                    <!-- Next Page Link -->
+                    <?php if ( 1 < $total_pages ): ?>
+                        <a href="<?= esc_url( $build_page_url( min( $total_pages, 1 + 1 ) ) ) ?>" class="pagination__link pagination__next" rel="next">
+                            <?= esc_html__( 'Next →', 'blast-2025' ) ?>
+                        </a>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        </noscript>
 
     </div><!-- /.blog-filter -->
 

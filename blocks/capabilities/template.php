@@ -52,7 +52,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
                 <?php if (!empty($features)) : ?>
                     <div class="cap-features">
                         <?php if (!empty($features_label)) : ?>
-                            <h3 class="cap-features-label"><?php echo esc_html($features_label); ?></h3>
+                            <div class="cap-features-label"><?php echo esc_html($features_label); ?></div>
                         <?php endif; ?>
                         <div class="cap-features-grid">
                             <?php foreach ($features as $index => $feature) : ?>

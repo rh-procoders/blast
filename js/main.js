@@ -158,4 +158,17 @@
     }
 
     window.addEventListener('scroll', handleHeaderScroll);
+
+
+    document.querySelectorAll('.card-block').forEach(card => {
+        card.addEventListener('click', (e) => {
+            const link = card.querySelector('.card-block__heading');
+            if (link && e.target.closest('a') === null) {
+                // Only navigate if not clicking on an interactive element
+                link.click();
+            }
+        });
+        card.style.cursor = 'pointer';
+    });
+
 })();

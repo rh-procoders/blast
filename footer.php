@@ -54,9 +54,9 @@
                     <?php
                     $company_links = get_field('company_links', 'option');
                     if ($company_links): ?>
-                    <h4 class="footer-column__title">
+                    <div class="footer-column__title h4">
                         <?php echo get_field('company_column_title', 'option') ?: 'Company'; ?>
-                    </h4>
+                    </div>
                         <ul class="footer-column__links">
                             <?php foreach ($company_links as $link): ?>
                                 <li>
@@ -117,9 +117,9 @@
             <!-- Newsletter Signup -->
             <div class="main-footer__newsletter">
                 <div class="footer-newsletter">
-                    <h4 class="footer-newsletter__title">
+                    <div class="footer-newsletter__title h4">
                         <?php echo get_field('newsletter_title', 'option') ?: 'Stay Updated'; ?>
-                    </h4>
+                    </div>
                     <p class="footer-newsletter__description">
                         <?php echo get_field('newsletter_description', 'option') ?: 'Get Updates on Preemptive Cloud Defense'; ?>
                     </p>
@@ -217,7 +217,7 @@
             <span class="popup-modal__close-button popup-modal__close-button-js-toggle">&times;</span>
             <div class="popup-modal__body">
                 <?php if ($popup_title): ?>
-                    <h3 class="popup-modal__title"><?php echo esc_html($popup_title); ?></h3>
+                    <div class="popup-modal__title h3"><?php echo esc_html($popup_title); ?></div>
                 <?php endif; ?>
                 <?php if ($popup_text): ?>
                     <p class="popup-modal__text"><?php echo esc_html($popup_text); ?></p>

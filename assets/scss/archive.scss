@@ -522,6 +522,7 @@
 
   // Grid Item
   &-item {
+	
 	--bs-filter-item-pt : max(20px, 2.5rem); // 40px
 	--bs-filter-item-pr : max(20px, 2.5rem); // 40px
 	--bs-filter-item-pb : max(30px, 2.5rem); // 40px
@@ -544,8 +545,6 @@
 
 	  border-radius       : 20px;
 	}
-
-	transition          : box-shadow ease .3s;
 
 	&:hover,
 	&:focus {
@@ -745,5 +744,70 @@
   100% {
 	box-shadow : 20px 0 rgba(0, 11, 64, 0.13), -20px 0 #000B40;
 	background : var(--wp--preset--color--dark-blue);
+  }
+}
+/**
+ * Pagination Styles (No JavaScript Fallback)
+ * Used by search engines and JavaScript-disabled users
+ */
+.blog-filter__pagination {
+  .pagination__link {
+	background-color: #fff;
+	border: 1px solid var(--global-color-main);
+	color: var(--global-color-main);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 5px;
+	padding: 8px 12px;
+	text-decoration: none;
+	border-radius: 4px;
+	font-size: 14px;
+	transition: all 0.3s ease;
+	min-width: 40px;
+	height: 40px;
+
+	&:hover {
+	  background-color: var(--global-color-main);
+	  color: #fff;
+	}
+
+	&.pagination__current {
+	  background-color: var(--global-color-main);
+	  color: #fff;
+	  cursor: default;
+
+	  &:hover {
+		background-color: var(--global-color-main);
+	  }
+	}
+
+	&.pagination__dots {
+	  border: none;
+	  cursor: default;
+	  padding: 0;
+	  margin: 0 3px;
+
+	  &:hover {
+		background-color: transparent;
+		color: var(--global-color-main);
+	  }
+	}
+
+	&.pagination__prev,
+	&.pagination__next {
+	  padding: 8px 16px;
+	  min-width: auto;
+	}
+  }
+
+  @media only screen and (max-width: 768px) {
+	.pagination__link {
+	  font-size: 12px;
+	  padding: 6px 10px;
+	  margin: 0 3px;
+	  min-width: 36px;
+	  height: 36px;
+	}
   }
 }
