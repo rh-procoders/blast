@@ -106,7 +106,7 @@ $inner_blocks = '<InnerBlocks template="' . esc_attr( wp_json_encode( $allowed_b
     <!-- Background Gradient Overlay -->
     <div class="hero-home__gradient-overlay">
         <img src="<?php echo esc_url(THEME_URI); ?>/blocks/hero-home/img/hero-home-bg-desktop.webp" alt="hero-home-bg-desktop" class="desktop-only">
-        <img src="<?php echo esc_url(THEME_URI); ?>/blocks/hero-home/img/home-hero-mobile-bg.webp" alt="home-hero-mobile" class="mobile-only">
+        <img src="<?php echo esc_url(THEME_URI); ?>/blocks/hero-home/img/home-hero-mobile-bg.webp" alt="home-hero-mobile" class="mobile-only" fetchpriority="high">
     </div>
     
     <!-- Container -->
