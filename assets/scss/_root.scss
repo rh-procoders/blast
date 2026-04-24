@@ -102,9 +102,8 @@
     --wp--style--global--content-size: 1689px;
     
     @include desktop-lg {
-        --wp--preset--container-xl: 1280px;
-        --wp--style--global--content-size: 1280px;
-
+        --wp--preset--container-xl: 1120px;
+        --wp--style--global--content-size: 1120px;
     }
 
     @include mobile {

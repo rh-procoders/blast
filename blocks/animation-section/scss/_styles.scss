@@ -125,8 +125,13 @@
         z-index: 3; // Ensure text content is above everything
         width: 100%;
         .paragraph-section{
+            @include desktop-lg {
+                max-width: 600px;
+                font-size: 18px;
+            }
             @include mobile{
                 font-size: 16px;
+                max-width: 100%;
             }
         }
     }

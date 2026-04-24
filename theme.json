@@ -75,6 +75,7 @@
 		},
 		"typography": {
 			"defaultFontSizes": false,
+            "lineHeight": true,
 			"fontFamilies": [
 				{
 					"slug": "neue-plak",

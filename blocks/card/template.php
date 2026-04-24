@@ -30,7 +30,7 @@ $card_image = get_field('card_image');
 $card_tag = get_field('card_tag') ?: '';
 $card_heading = get_field('card_heading') ?: 'Card Heading';
 $card_description = get_field('card_description') ?: '';
-$card_link = get_field('card_link') ?: '';
+$card_link = get_field('card_link') ?: array();
 
 $button_label = get_field('button_label') ?: null;
 $author_image = get_field('author_image') ?: null;
@@ -81,12 +81,18 @@ $wrapper_attributes = get_block_wrapper_attributes([
         
         <!-- Card Heading -->
    
-        <a href="<?php echo esc_url($card_link['url']); ?>" 
-           <?php if ($card_link['target']): ?>target="<?php echo esc_attr($card_link['target']); ?>"<?php endif; ?>
-           <?php if ($card_link['title']): ?>aria-label="<?php echo esc_attr($card_link['title']); ?>"<?php endif; ?>
-           class="h4 card-block__heading">
-            <?php echo $card_heading; ?>
-        </a>
+        <?php if (is_array($card_link) && !empty($card_link['url'])): ?>
+            <a href="<?php echo esc_url($card_link['url']); ?>" 
+               <?php if (!empty($card_link['target'])): ?>target="<?php echo esc_attr($card_link['target']); ?>"<?php endif; ?>
+               <?php if (!empty($card_link['title'])): ?>aria-label="<?php echo esc_attr($card_link['title']); ?>"<?php endif; ?>
+               class="h4 card-block__heading">
+                <?php echo $card_heading; ?>
+            </a>
+        <?php else: ?>
+            <h4 class="card-block__heading">
+                <?php echo $card_heading; ?>
+            </h4>
+        <?php endif; ?>
         
         <!-- Card Description -->
         <?php if ($card_description): ?>
