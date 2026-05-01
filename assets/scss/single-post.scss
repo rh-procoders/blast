@@ -79,6 +79,10 @@ html {
 		font-family : $font-family-secondary;
 		font-size   : font-size('xl'); // 18px, does not change
 		line-height : 2;
+		@include mobile {
+		  font-size : 16px;
+		  line-height : 1.6;
+		}
 
 		a {
 		  color           : #FF654A;
@@ -351,7 +355,8 @@ html {
 	  padding          : max(40px, 3.75rem); // 60px
 
 	  @include mobile {
-		padding : 40px; // 60px
+		padding : 40px 00px; // 60px
+		background-color: #f4f4f4;
 
 	  }
 	}
@@ -660,17 +665,15 @@ html {
 	background-color    : #FFFFFF;
 
 	padding             : var(--bs-filter-item-pt) var(--bs-filter-item-pr) var(--bs-filter-item-pb) var(--bs-filter-item-pl);
+	transition          : all ease .3s;
 
 	@include mobile {
 	  --bs-filter-item-pt : 20px;
 	  --bs-filter-item-pr : 20px;
 	  --bs-filter-item-pb : 30px;
 	  --bs-filter-item-pl : 20px;
-
 	  border-radius       : 20px;
 	}
-
-	transition          : box-shadow ease .3s;
 
 	&:hover,
 	&:focus {
@@ -806,4 +809,16 @@ html {
 	  }
 	}
   }
+}
+
+
+.single-post{
+	.entry-content__wrapper{
+		.wp-block-group.alignwide{
+			@include mobile{
+				padding-left: 0px;
+				padding-right: 0px;
+			}
+		}
+	}
 }

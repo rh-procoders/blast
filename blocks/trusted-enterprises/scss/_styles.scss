@@ -26,8 +26,8 @@
     
     .te-content-wrapper {
         display: grid;
-        grid-template-columns: 1fr 1.1fr;
-        gap: 60px;
+        grid-template-columns: 1fr;
+        gap: 50px;
         align-items: flex-start;
         padding: 100px 90px 110px;
         position: relative;
@@ -56,10 +56,14 @@
 
     .te-heading {
         color: #000B40;
-        font-size: var(--wp--preset--font-size--fs-2-extra-large);
+        font-size: var(--wp--preset--font-size--fs-extra-large);
         font-style: normal;
         font-weight: 400;
         line-height: 112%;
+
+        br{
+            display: none;
+        }
 
         // Styling for specific words
         strong {
@@ -101,7 +105,7 @@
 
             .te-feature-title {
                 color: #000B40;
-                font-size: var(--wp--preset--font-size--fs-medium-large);
+                font-size: var(--wp--preset--font-size--fs-medium);
                 font-style: normal;
                 font-weight: 400;
                 line-height: 100%; /* 40px */
@@ -124,7 +128,7 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        background-color: #fff;
+        background-color: transparent;
         border-radius: 70px;
         @media (max-width: 768px) {
             justify-content: center;
