@@ -22,6 +22,27 @@
             "ui_on_text": "",
             "ui_off_text": "",
             "ui": 1
+        },
+        {
+            "key": "field_da709e11adebc",
+            "label": "Unlisted",
+            "name": "bs-post__is-unlisted",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "(Unlisted posts stay published and reachable by direct link, but are hidden from the blog archive, homepage, search results, RSS feed, and related posts)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
         }
     ],
     "location": [
@@ -43,5 +64,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762768373
+    "modified": 1786720652
 }

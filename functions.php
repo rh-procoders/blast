@@ -188,6 +188,11 @@ require get_template_directory() . '/inc/acf.php';
  */
 require get_template_directory() . '/inc/megamenu-walker.php';
 
+/**
+ * Post Visibility (unlisted posts)
+ */
+require get_template_directory() . '/inc/post-visibility.php';
+
 
 /**
  * Enable JSON file uploads for Lottie animations
