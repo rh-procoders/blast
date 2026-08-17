@@ -8,19 +8,28 @@
     aspect-ratio: 1920 / 680;
     border-radius: 70px;
 
+    // At the narrow end of the 768-1600px range the 2.82:1 ratio alone isn't
+    // tall enough to hold the heading + paragraph (with the desktop-lg
+    // padding below) without clipping against `overflow: hidden` above.
+    @include desktop-lg {
+        min-height: 360px;
+    }
 
-    @include mobile{
+    // Below 768px only - the desktop/tablet ratio above must stay in effect
+    // AT 768px itself (see "show on tablets and up (768px+)" below), so this
+    // can't use the shared `mobile` mixin, which triggers at max-width:768px.
+    @media (max-width: 767px) {
         aspect-ratio: 375 / 726; // Adjust aspect ratio for mobile
         border-radius: 50px;
     }
-    
+
     // Fallback for browsers that don't support aspect-ratio
     @supports not (aspect-ratio: 1920 / 680) {
         &::before {
             content: '';
             display: block;
             padding-top: calc(680 / 1920 * 100%); // 35.42%
-            @include mobile{
+            @media (max-width: 767px) {
                 padding-top: calc(726 / 375 * 100%); // Adjust padding for mobile
             }
         }
@@ -82,16 +91,16 @@
         .spline-desktop {
             display: block;
 
-            @include mobile{
+            @media (max-width: 767px) {
                 display: none;
             }
         }
-        
+
         // Mobile Animation - show on mobile only (below 768px)
         .lottie-mobile,
         .spline-mobile {
             display: none;
-            @include mobile{
+            @media (max-width: 767px) {
                 display: block;
             }
         }
@@ -113,7 +122,7 @@
         @include desktop-lg{
             padding: 80px 30px 40px!important; // Adjust padding for mobile
         }
-        @include mobile {
+        @media (max-width: 767px) {
             padding: 60px 20px 30px!important; // Adjust padding for mobile
             min-height: 300px;
         }
@@ -129,7 +138,7 @@
                 max-width: 600px;
                 font-size: 18px;
             }
-            @include mobile{
+            @media (max-width: 767px) {
                 font-size: 16px;
                 max-width: 100%;
             }

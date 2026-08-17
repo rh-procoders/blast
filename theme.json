@@ -96,33 +96,33 @@
 			"fontSizes": [
 				{
 					"slug": "fs-small-medium",
-					"size": "1.875rem",
-					"name": "H5 - 30px"
+					"size": "clamp(1.25rem, calc(1.125rem + 0.5vw), 1.625rem)",
+					"name": "H5 - 20-26px"
 				},
 				{
 					"slug": "fs-medium",
-					"size": "max(24px, 2.125rem)",
-					"name": "H4 - 34px"
+					"size": "clamp(1.25rem, calc(1.0833rem + 0.6667vw), 1.75rem)",
+					"name": "H4 - 20-28px"
 				},
                 {
 					"slug": "fs-medium-large",
-					"size": "max(26px, 2.5rem)",
-					"name": "Custom Size - 40px"
+					"size": "clamp(1.375rem, calc(1.1667rem + 0.8333vw), 2rem)",
+					"name": "Custom Size - 22-32px"
 				},
 				{
 					"slug": "fs-large",
-					"size": "max(28px, 3.5rem)",
-					"name": "H3 - 56px"
+					"size": "clamp(1.625rem, calc(1.3333rem + 1.1667vw), 2.5rem)",
+					"name": "H3 - 26-40px"
 				},
 				{
 					"slug": "fs-extra-large",
-					"size": "max(34px, 3.75rem)",
-					"name": "H2 - 60px"
+					"size": "clamp(2.125rem, calc(1.75rem + 1.5vw), 3.25rem)",
+					"name": "H2 - 34-52px"
 				},
 				{
 					"slug": "fs-2extra-large",
-					"size": "max(56px, 5rem)",
-					"name": "H1 - 80px"
+					"size": "clamp(2.5rem, calc(2rem + 2vw), 4rem)",
+					"name": "H1 - 40-64px"
 				},
 				{
 					"slug": "fs-extra-small-paragraph",
@@ -198,7 +198,7 @@
         "elements": {
             "p": {
                 "typography": {
-                    "fontSize": "1rem",
+                    "fontSize": "1.125rem",
                     "fontWeight": "400",
                     "lineHeight": "1.5",
                     "letterSpacing": "0%"
@@ -206,28 +206,30 @@
             },
             "h1": {
                 "typography": {
-                    "fontSize": "3.75rem",
-                    "fontWeight": "600",
-                    "lineHeight": "1.1"
+                    "fontSize": "clamp(2.125rem, calc(1.75rem + 1.5vw), 3.25rem)",
+                    "fontWeight": "400",
+                    "lineHeight": "1.1",
+                    "letterSpacing": "-0.02em"
                 }
             },
             "h2": {
                 "typography": {
-                    "fontSize": "3.125rem",
+                    "fontSize": "clamp(1.625rem, calc(1.3333rem + 1.1667vw), 2.5rem)",
                     "fontWeight": "400",
-                    "lineHeight": "1.1"
+                    "lineHeight": "1.1",
+                    "letterSpacing": "-0.02em"
                 }
             },
             "h3": {
                 "typography": {
-                    "fontSize": "2.5rem",
+                    "fontSize": "clamp(1.375rem, calc(1.1667rem + 0.8333vw), 2rem)",
                     "fontWeight": "400",
                     "lineHeight": "1.1"
                 }
             },
             "h4": {
                 "typography": {
-                    "fontSize": "2.125rem",
+                    "fontSize": "clamp(1.25rem, calc(1.0833rem + 0.6667vw), 1.75rem)",
                     "fontWeight": "400",
                     "lineHeight": "1.1"
                 }

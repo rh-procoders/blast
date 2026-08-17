@@ -3,21 +3,16 @@
 
 h1, .h1 {
   font-size: var(--wp--preset--font-size--fs-2-extra-large);
+  letter-spacing: -0.02em;
   line-height: 110%;
   font-weight: $font-weight-regular;
-  @include mobile-sm {
-    font-size: 56px;
-  }
 }
 
 h2, .h2 {
   font-size: var(--wp--preset--font-size--fs-extra-large);
-  letter-spacing: 0px;
+  letter-spacing: -0.02em;
   line-height: 110%;
   font-weight: $font-weight-regular;
-  @include mobile-sm {
-    font-size: 34px;
-  }
 }
 
 h3, .h3 {
@@ -25,9 +20,6 @@ h3, .h3 {
   letter-spacing: -0.04em;
   line-height: 110%;
   font-weight: $font-weight-regular;
-  @include mobile-sm {
-    font-size: 28px;
-  }
 }
 
 h4, .h4 {
@@ -66,7 +58,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 p, .p {
     --wp--preset--font-size--large: 25px;
     font-weight: $font-weight-regular;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 150%;
     color: inherit;
     letter-spacing: 0px;
